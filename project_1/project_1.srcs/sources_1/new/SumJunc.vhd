@@ -20,9 +20,9 @@ begin
     adderProc: process (input)
         variable intermediate : UNSIGNED (precision - 1 downto 0);
     begin
-        first: intermediate := input(0);
+        intermediate := (others => '0');
         
-        subsequent: for input_num in 1 to numInputs - 1 loop
+        for input_num in 0 to numInputs - 1 loop
             intermediate := intermediate + input(input_num);
         end loop;
         

@@ -2,11 +2,12 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
+use work.Constants.all;
 use work.AdderInputType.all;
 
 entity SumJuncTB is
     generic (
-        tbPrecision : INTEGER := 8;
+        tbPrecision : INTEGER := precisionConst;
         tbNumInputs : INTEGER := 4
     );
 end SumJuncTB;
