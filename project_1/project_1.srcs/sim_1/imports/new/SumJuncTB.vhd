@@ -13,6 +13,8 @@ entity SumJuncTB is
 end SumJuncTB;
 
 architecture Behavioral of SumJuncTB is
+    
+
     signal sigInput : AdderInput (tbNumInputs - 1 downto 0);
     signal sigOutput : UNSIGNED (tbPrecision - 1 downto 0);
     
@@ -40,5 +42,6 @@ begin
     process begin
         sigInput <= ("00000001", "00000010", "00000011", "00000100");
         wait for 100ns;
+        assert sigOutput = "00001010" report "Test failed: Sum should be 00001010";
     end process;
 end Behavioral;

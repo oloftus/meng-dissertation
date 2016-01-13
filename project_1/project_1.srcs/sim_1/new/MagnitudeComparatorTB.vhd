@@ -29,37 +29,45 @@ begin
     );
     
     process begin
-        -- Vectors came from amin1997piecewise paper
-        sigInput <= "1111"&"111"; -- 15.9: |X| >= 5
-        -- assert Z4
-        wait for 100ns;
-
-        sigInput <= "0101"&"000"; -- 5: |X| >= 5
-        -- assert Z4
-        wait for 100ns;
+        -- Test vectors came from amin1997piecewise paper
         
-        sigInput <= "0100"&"111"; -- 4.9:  2.375 <= |X| < 5
-        -- assert Z3
+        -- |X| >= 5
+        sigInput <= "1111"&"111"; -- 15.9
         wait for 100ns;
+        assert sigOutput = "1000" report "Test failed: Z4 should be 1";
+
+        sigInput <= "0101"&"000"; -- 5
+        wait for 100ns;
+        assert sigOutput = "1000" report "Test failed: Z4 should be 1";
         
-        sigInput <= "0010"&"011"; -- 2.375:  2.375 <= |X| < 5
-        -- assert Z3
+        
+        -- 2.375 <= |X| < 5
+        sigInput <= "0100"&"111"; -- 4.9
         wait for 100ns;
+        assert sigOutput = "0100" report "Test failed: Z3 should be 1";
+        
+        sigInput <= "0010"&"011"; -- 2.375
+        wait for 100ns;
+        assert sigOutput = "0100" report "Test failed: Z3 should be 1";
 
-        sigInput <= "0010"&"010"; -- 2.3749: 1 <= |X| < 2.375
-        -- assert Z2
-        wait for 100ns;
 
-        sigInput <= "0001"&"000"; -- 1: 1 <= |X| < 2.375
-        -- assert Z2
+        -- 1 <= |X| < 2.375
+        sigInput <= "0010"&"010"; -- 2.3749
         wait for 100ns;
+        assert sigOutput = "0010" report "Test failed: Z2 should be 1";
 
-        sigInput <= "0000"&"111"; -- 0.99: 0 <= |X| < 1
-        -- assert Z1
+        sigInput <= "0001"&"000"; -- 1
         wait for 100ns;
+        assert sigOutput = "0010" report "Test failed: Z2 should be 1";
 
-        sigInput <= "0000"&"000"; -- 0: 0 <= |X| < 1
-        -- assert Z1
+
+        -- 0 <= |X| < 1
+        sigInput <= "0000"&"111"; -- 0.99
         wait for 100ns;
+        assert sigOutput = "0001" report "Test failed: Z1 should be 1";
+
+        sigInput <= "0000"&"000"; -- 0
+        wait for 100ns;
+        assert sigOutput = "0001" report "Test failed: Z1 should be 1";
     end process;
 end Behavioral;
