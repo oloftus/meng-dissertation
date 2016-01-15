@@ -17,16 +17,16 @@ architecture Behavioral of MagnitudeComparatorTB is
     end component;
 begin
     uut: MagnitudeComparator
-    port map (
-        A => sigInput(6),
-        B => sigInput(5),
-        C => sigInput(4),
-        D => sigInput(3),
-        E => sigInput(2),
-        F => sigInput(1),
-        G => sigInput(0),
-        Z => sigOutput
-    );
+        port map (
+            A => sigInput(6),
+            B => sigInput(5),
+            C => sigInput(4),
+            D => sigInput(3),
+            E => sigInput(2),
+            F => sigInput(1),
+            G => sigInput(0),
+            Z => sigOutput
+        );
     
     process begin
         -- Test vectors came from amin1997piecewise paper
