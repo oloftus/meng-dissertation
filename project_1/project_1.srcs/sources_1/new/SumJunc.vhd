@@ -22,7 +22,7 @@ begin
     begin
         intermediate := (others => '0');
         
-        for input_num in 0 to numInputs - 1 loop
+        for input_num in input'reverse_range loop
             intermediate := intermediate + input(input_num);
         end loop;
         

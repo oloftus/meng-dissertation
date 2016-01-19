@@ -18,7 +18,7 @@ begin
     process (X, Z) begin
         case Z is
             when "1000" => -- Z4
-                Y <= one;
+                Y <= "1"&"000000";
         
             when "0100" => -- Z3
                 Y <= Shift_Right(X, 2) + ("0"&"110110");

@@ -2,19 +2,16 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-use work.Constants.all;
 use work.AdderInputType.all;
 
 entity SumJuncTB is
     generic (
-        tbPrecision : INTEGER := precisionConst;
+        tbPrecision : INTEGER := 8;
         tbNumInputs : INTEGER := 4
     );
 end SumJuncTB;
 
 architecture Behavioral of SumJuncTB is
-    
-
     signal sigInput : AdderInput (tbNumInputs - 1 downto 0);
     signal sigOutput : UNSIGNED (tbPrecision - 1 downto 0);
     
