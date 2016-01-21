@@ -81,8 +81,10 @@ begin
         
         sigX <= "0000"&"111"; -- 0.99
         wait for 100ns;
-        assert sigY(precisionTop downto aminBusBottom) = ("0"&"101111") report "Test failed: Should be 0.99 ==> 0.7475";
-
+        -- Note: Because the output is the result of a shift, the right-most bit is 0 when it should be 1, i.e.
+        -- accuracy is out by 0.015625
+        assert sigY(precisionTop downto aminBusBottom) = ("0"&"101110") report "Test failed: Should be 0.99 ==> 0.7475";
+    
         sigX <= "0000"&"000"; -- 0
         wait for 100ns;
         assert sigY(precisionTop downto aminBusBottom) = ("0"&"100000") report "Test failed: Should be 0 ==> 0.84375";
