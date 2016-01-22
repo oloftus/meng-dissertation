@@ -19,43 +19,43 @@
   <FileSets Version="1" Minor="31">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
       <Filter Type="Srcs"/>
-      <File Path="$PPRDIR/../sources/design/sumjunc/SumJunc.vhd">
+      <File Path="$PPRDIR/../sources/src/sumjunc/SumJunc.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../sources/design/shared/Constants.vhd">
+      <File Path="$PPRDIR/../sources/src/shared/Constants.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../sources/design/plan/Plan.vhd">
+      <File Path="$PPRDIR/../sources/src/plan/Plan.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../sources/design/plan/MagnitudeComparator.vhd">
+      <File Path="$PPRDIR/../sources/src/plan/MagnitudeComparator.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../sources/design/plan/Dtxy.vhd">
+      <File Path="$PPRDIR/../sources/src/plan/Dtxy.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../sources/design/plan/Complements2To1.vhd">
+      <File Path="$PPRDIR/../sources/src/plan/Complements2To1.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../sources/design/plan/AdderInput.vhd">
+      <File Path="$PPRDIR/../sources/src/plan/AdderInput.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -65,6 +65,7 @@
         <Option Name="DesignMode" Val="RTL"/>
         <Option Name="TopModule" Val="Plan"/>
         <Option Name="TopAutoSet" Val="TRUE"/>
+        <Option Name="IPRepoPath" Val="$PPRDIR/../../../../users/administrator/xilinx/sources/design/plan"/>
       </Config>
     </FileSet>
     <FileSet Name="constrs_1" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
@@ -75,31 +76,31 @@
     </FileSet>
     <FileSet Name="sim_1" Type="SimulationSrcs" RelSrcDir="$PSRCDIR/sim_1">
       <Filter Type="Srcs"/>
-      <File Path="$PPRDIR/../sources/simulation/sumjunc/SumJuncTB.vhd">
+      <File Path="$PPRDIR/../sources/test/sumjunc/SumJuncTB.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../sources/simulation/plan/PlanTB.vhd">
+      <File Path="$PPRDIR/../sources/test/plan/PlanTB.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../sources/simulation/plan/MagnitudeComparatorTB.vhd">
+      <File Path="$PPRDIR/../sources/test/plan/MagnitudeComparatorTB.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../sources/simulation/plan/DtxyTB.vhd">
+      <File Path="$PPRDIR/../sources/test/plan/DtxyTB.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../sources/simulation/plan/Complements2To1TB.vhd">
+      <File Path="$PPRDIR/../sources/test/plan/Complements2To1TB.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -109,6 +110,7 @@
         <Option Name="DesignMode" Val="RTL"/>
         <Option Name="TopModule" Val="PlanTB"/>
         <Option Name="TopLib" Val="xil_defaultlib"/>
+        <Option Name="SimMode" Val="post-implementation"/>
         <Option Name="SrcSet" Val="sources_1"/>
       </Config>
     </FileSet>
