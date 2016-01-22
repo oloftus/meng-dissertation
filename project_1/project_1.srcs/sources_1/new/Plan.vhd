@@ -17,6 +17,7 @@ architecture Behavioral of Plan is
     constant precisionTop : INTEGER := planPrecision - 1;
     
     constant dtxySliceLow : INTEGER := fixedPointLoc - 3;
+    -- fixedPointLoc + 3 because the DTXY shifts the decimal point by 3
     constant one : UNSIGNED (precisionTop downto 0) := (fixedPointLoc + 3 => '1', others => '0');
     
     signal sigIn : SIGNED (planPrecision downto 0);
