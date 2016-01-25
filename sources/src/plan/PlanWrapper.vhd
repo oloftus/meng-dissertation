@@ -1,5 +1,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 entity PlanWrapper is
     generic (
@@ -13,7 +14,7 @@ entity PlanWrapper is
 end PlanWrapper;
 
 architecture Behavioral of PlanWrapper is
-    signal sigX : UNSIGNED (integerPrecision + fractionPrecision downto 0);
+    signal sigX : SIGNED (integerPrecision + fractionPrecision downto 0);
     signal sigY : UNSIGNED (integerPrecision + fractionPrecision - 1 downto 0);
 
     component Plan is
@@ -27,8 +28,8 @@ architecture Behavioral of PlanWrapper is
         );
     end component;
 begin
-    sigX <= UNSIGNED(X);
-    Y <= UNSIGNED(sigY);
+    sigX <= SIGNED(X);
+    Y <= STD_LOGIC_VECTOR(sigY);
 
     planComp: Plan
         generic map (
