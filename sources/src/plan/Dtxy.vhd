@@ -21,12 +21,7 @@ architecture Behavioral of Dtxy is
     constant newFixedPointLoc : INTEGER := inputFractionPrecision + implicitPointShift;
     constant offsetFractionWidth : INTEGER := 5;
     
---    function Align_Offset return UNSIGNED (6 downto 0) is
---    begin
---        return "1000000";
---    end;
-    
-    constant z4Offset : UNSIGNED (inputTotalPrecision - 1 downto 0) := Shift_Left(Resize("1"&"00000", inputTotalPrecision), newFixedPointLoc - offsetFractionWidth); -- Align_Offset
+    constant z4Offset : UNSIGNED (inputTotalPrecision - 1 downto 0) := Shift_Left(Resize("1"&"00000", inputTotalPrecision), newFixedPointLoc - offsetFractionWidth);
     constant z3Offset : UNSIGNED (inputTotalPrecision - 1 downto 0) := Shift_Left(Resize("0"&"11011", inputTotalPrecision), newFixedPointLoc - offsetFractionWidth);
     constant z2Offset : UNSIGNED (inputTotalPrecision - 1 downto 0) := Shift_Left(Resize("0"&"10100", inputTotalPrecision), newFixedPointLoc - offsetFractionWidth);
     constant z1Offset : UNSIGNED (inputTotalPrecision - 1 downto 0) := Shift_Left(Resize("0"&"10000", inputTotalPrecision), newFixedPointLoc - offsetFractionWidth);
