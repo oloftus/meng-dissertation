@@ -22,7 +22,7 @@ begin
     pulse: process (CLK) begin
         if Rising_Edge(CLK) and RST = '1' then
             sigCnt <= (0 => '1', others => '0'); -- Reset count
-        elsif Rising_Edge(CLK) and sigCnt = multipleUnsigned - 1 then
+        elsif Rising_Edge(CLK) and sigCnt = multipleUnsigned then
             P_OUT <= '1';
             sigCnt <= (others => '0'); -- Reset count
         elsif Rising_Edge(CLK) then

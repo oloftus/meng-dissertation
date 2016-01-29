@@ -3,7 +3,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity PulseTB is
     generic (
-        tbMultiple : INTEGER := 4;
+        tbMultiple : INTEGER := 3;
         tbMultipleWidth : INTEGER := 3
     );
 end PulseTB;
