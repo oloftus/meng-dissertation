@@ -1,0 +1,443 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Sat Jan 30 13:43:58 2016" VIVADOVERSION="2014.2">
+
+  <SYSTEMINFO ARCH="zynq" BOARD="em.avnet.com:microzed:part0:1.0" DEVICE="7z010" NAME="Neuron0_imp" PACKAGE="clg400" SPEEDGRADE="-1"/>
+
+  <EXTERNALPORTS>
+    <PORT DIR="I" NAME="RST" SIGIS="rst" SIGNAME="External_Ports_RST">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="Synapse_Latch_Syn_1" PORT="RST"/>
+        <CONNECTION INSTANCE="Synapse_Latch_Syn_2" PORT="RST"/>
+        <CONNECTION INSTANCE="Valid_Setter_Adder" PORT="RST"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT CLKFREQUENCY="100000000" DIR="I" NAME="CLK" SIGIS="clk" SIGNAME="External_Ports_CLK">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="Synapse_Latch_Syn_1" PORT="CLK"/>
+        <CONNECTION INSTANCE="Synapse_Latch_Syn_2" PORT="CLK"/>
+        <CONNECTION INSTANCE="Multiplier_Syn_2" PORT="CLK"/>
+        <CONNECTION INSTANCE="Multiplier_Syn_1" PORT="CLK"/>
+        <CONNECTION INSTANCE="Valid_Setter_Adder" PORT="CLK"/>
+        <CONNECTION INSTANCE="Sum_Junction" PORT="CLK"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="SYN_1_DIN" SIGIS="data" SIGNAME="External_Ports_SYN_1_DIN">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="Synapse_Latch_Syn_1" PORT="DIN"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="SYN_1_VALID" SIGIS="undef" SIGNAME="External_Ports_SYN_1_VALID">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="Synapse_Latch_Syn_1" PORT="SET"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="SYN_2_DIN" SIGIS="undef" SIGNAME="External_Ports_SYN_2_DIN">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="Synapse_Latch_Syn_2" PORT="DIN"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="SYN_2_VALID" SIGIS="undef" SIGNAME="External_Ports_SYN_2_VALID">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="Synapse_Latch_Syn_2" PORT="SET"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="SYN_OUT_VALID" SIGIS="undef" SIGNAME="Valid_Setter_Adder_P_OUT">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="Valid_Setter_Adder" PORT="P_OUT"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="SYN_OUT" SIGIS="undef" SIGNAME="Activation_Function_Y">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="Activation_Function" PORT="Y"/>
+      </CONNECTIONS>
+    </PORT>
+  </EXTERNALPORTS>
+
+  <MODULES>
+    <MODULE FULLNAME="/Activation_Function" HWVERSION="1.0" INSTANCE="Activation_Function" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="PlanWrapper" VLNV="oloftus.com:prif:PlanWrapper:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="integerPrecision" VALUE="6"/>
+        <PARAMETER NAME="fractionPrecision" VALUE="6"/>
+        <PARAMETER NAME="Component_Name" VALUE="Neuron0_PlanWrapper_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="X" SIGIS="undef" SIGNAME="Sum_Junction_S">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Sum_Junction" PORT="S"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="Y" SIGIS="undef" SIGNAME="Activation_Function_Y">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="SYN_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Multiplier_Syn_1" HWVERSION="12.0" INSTANCE="Multiplier_Syn_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="mult_gen" VLNV="xilinx.com:ip:mult_gen:12.0">
+      <DOCUMENTS>
+        <DOCUMENT SOURCE="http://www.xilinx.com/cgi-bin/docs/ipdoc?c=mult_gen;v=v12_0;d=pg108-mult-gen.pdf"/>
+      </DOCUMENTS>
+      <PARAMETERS>
+        <PARAMETER NAME="C_VERBOSITY" VALUE="0"/>
+        <PARAMETER NAME="C_MODEL_TYPE" VALUE="0"/>
+        <PARAMETER NAME="C_OPTIMIZE_GOAL" VALUE="1"/>
+        <PARAMETER NAME="C_XDEVICEFAMILY" VALUE="zynq"/>
+        <PARAMETER NAME="C_HAS_CE" VALUE="0"/>
+        <PARAMETER NAME="C_HAS_SCLR" VALUE="0"/>
+        <PARAMETER NAME="C_LATENCY" VALUE="1"/>
+        <PARAMETER NAME="C_A_WIDTH" VALUE="13"/>
+        <PARAMETER NAME="C_A_TYPE" VALUE="0"/>
+        <PARAMETER NAME="C_B_WIDTH" VALUE="13"/>
+        <PARAMETER NAME="C_B_TYPE" VALUE="0"/>
+        <PARAMETER NAME="C_OUT_HIGH" VALUE="12"/>
+        <PARAMETER NAME="C_OUT_LOW" VALUE="0"/>
+        <PARAMETER NAME="C_MULT_TYPE" VALUE="0"/>
+        <PARAMETER NAME="C_CE_OVERRIDES_SCLR" VALUE="0"/>
+        <PARAMETER NAME="C_CCM_IMP" VALUE="0"/>
+        <PARAMETER NAME="C_B_VALUE" VALUE="10000001"/>
+        <PARAMETER NAME="C_HAS_ZERO_DETECT" VALUE="0"/>
+        <PARAMETER NAME="C_ROUND_OUTPUT" VALUE="0"/>
+        <PARAMETER NAME="C_ROUND_PT" VALUE="0"/>
+        <PARAMETER NAME="InternalUser" VALUE="0"/>
+        <PARAMETER NAME="Component_Name" VALUE="Neuron0_mult_gen_0_0"/>
+        <PARAMETER NAME="MultType" VALUE="Parallel_Multiplier"/>
+        <PARAMETER NAME="PortAType" VALUE="Signed"/>
+        <PARAMETER NAME="PortAWidth" VALUE="13"/>
+        <PARAMETER NAME="PortBType" VALUE="Signed"/>
+        <PARAMETER NAME="PortBWidth" VALUE="13"/>
+        <PARAMETER NAME="ConstValue" VALUE="129"/>
+        <PARAMETER NAME="CcmImp" VALUE="Distributed_Memory"/>
+        <PARAMETER NAME="Multiplier_Construction" VALUE="Use_LUTs"/>
+        <PARAMETER NAME="OptGoal" VALUE="Speed"/>
+        <PARAMETER NAME="Use_Custom_Output_Width" VALUE="true"/>
+        <PARAMETER NAME="OutputWidthHigh" VALUE="12"/>
+        <PARAMETER NAME="OutputWidthLow" VALUE="0"/>
+        <PARAMETER NAME="UseRounding" VALUE="false"/>
+        <PARAMETER NAME="RoundPoint" VALUE="0"/>
+        <PARAMETER NAME="PipeStages" VALUE="1"/>
+        <PARAMETER NAME="ClockEnable" VALUE="false"/>
+        <PARAMETER NAME="SyncClear" VALUE="false"/>
+        <PARAMETER NAME="SclrCePriority" VALUE="SCLR_Overrides_CE"/>
+        <PARAMETER NAME="ZeroDetect" VALUE="false"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="CLK" SIGIS="clk" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="A" SIGIS="data" SIGNAME="Synapse_Latch_Syn_1_DOUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Synapse_Latch_Syn_1" PORT="DOUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="B" SIGIS="data" SIGNAME="Weight_Syn_1_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Weight_Syn_1" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="P" SIGIS="data" SIGNAME="Multiplier_Syn_1_P">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Sum_Junction" PORT="A"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Multiplier_Syn_2" HWVERSION="12.0" INSTANCE="Multiplier_Syn_2" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="mult_gen" VLNV="xilinx.com:ip:mult_gen:12.0">
+      <DOCUMENTS>
+        <DOCUMENT SOURCE="http://www.xilinx.com/cgi-bin/docs/ipdoc?c=mult_gen;v=v12_0;d=pg108-mult-gen.pdf"/>
+      </DOCUMENTS>
+      <PARAMETERS>
+        <PARAMETER NAME="C_VERBOSITY" VALUE="0"/>
+        <PARAMETER NAME="C_MODEL_TYPE" VALUE="0"/>
+        <PARAMETER NAME="C_OPTIMIZE_GOAL" VALUE="1"/>
+        <PARAMETER NAME="C_XDEVICEFAMILY" VALUE="zynq"/>
+        <PARAMETER NAME="C_HAS_CE" VALUE="0"/>
+        <PARAMETER NAME="C_HAS_SCLR" VALUE="0"/>
+        <PARAMETER NAME="C_LATENCY" VALUE="1"/>
+        <PARAMETER NAME="C_A_WIDTH" VALUE="13"/>
+        <PARAMETER NAME="C_A_TYPE" VALUE="0"/>
+        <PARAMETER NAME="C_B_WIDTH" VALUE="13"/>
+        <PARAMETER NAME="C_B_TYPE" VALUE="0"/>
+        <PARAMETER NAME="C_OUT_HIGH" VALUE="12"/>
+        <PARAMETER NAME="C_OUT_LOW" VALUE="0"/>
+        <PARAMETER NAME="C_MULT_TYPE" VALUE="0"/>
+        <PARAMETER NAME="C_CE_OVERRIDES_SCLR" VALUE="0"/>
+        <PARAMETER NAME="C_CCM_IMP" VALUE="0"/>
+        <PARAMETER NAME="C_B_VALUE" VALUE="10000001"/>
+        <PARAMETER NAME="C_HAS_ZERO_DETECT" VALUE="0"/>
+        <PARAMETER NAME="C_ROUND_OUTPUT" VALUE="0"/>
+        <PARAMETER NAME="C_ROUND_PT" VALUE="0"/>
+        <PARAMETER NAME="InternalUser" VALUE="0"/>
+        <PARAMETER NAME="Component_Name" VALUE="Neuron0_Multiplier_1_0"/>
+        <PARAMETER NAME="MultType" VALUE="Parallel_Multiplier"/>
+        <PARAMETER NAME="PortAType" VALUE="Signed"/>
+        <PARAMETER NAME="PortAWidth" VALUE="13"/>
+        <PARAMETER NAME="PortBType" VALUE="Signed"/>
+        <PARAMETER NAME="PortBWidth" VALUE="13"/>
+        <PARAMETER NAME="ConstValue" VALUE="129"/>
+        <PARAMETER NAME="CcmImp" VALUE="Distributed_Memory"/>
+        <PARAMETER NAME="Multiplier_Construction" VALUE="Use_LUTs"/>
+        <PARAMETER NAME="OptGoal" VALUE="Speed"/>
+        <PARAMETER NAME="Use_Custom_Output_Width" VALUE="true"/>
+        <PARAMETER NAME="OutputWidthHigh" VALUE="12"/>
+        <PARAMETER NAME="OutputWidthLow" VALUE="0"/>
+        <PARAMETER NAME="UseRounding" VALUE="false"/>
+        <PARAMETER NAME="RoundPoint" VALUE="0"/>
+        <PARAMETER NAME="PipeStages" VALUE="1"/>
+        <PARAMETER NAME="ClockEnable" VALUE="false"/>
+        <PARAMETER NAME="SyncClear" VALUE="false"/>
+        <PARAMETER NAME="SclrCePriority" VALUE="SCLR_Overrides_CE"/>
+        <PARAMETER NAME="ZeroDetect" VALUE="false"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="CLK" SIGIS="clk" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="A" SIGIS="data" SIGNAME="Synapse_Latch_Syn_2_DOUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Synapse_Latch_Syn_2" PORT="DOUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="B" SIGIS="data" SIGNAME="Weight_Syn_2_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Weight_Syn_2" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="P" SIGIS="data" SIGNAME="Multiplier_Syn_2_P">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Sum_Junction" PORT="B"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Sum_Junction" HWVERSION="12.0" INSTANCE="Sum_Junction" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="c_addsub" VLNV="xilinx.com:ip:c_addsub:12.0">
+      <DOCUMENTS>
+        <DOCUMENT SOURCE="http://www.xilinx.com/cgi-bin/docs/ipdoc?c=c_addsub;v=v12_0;d=pg120-c-addsub.pdf"/>
+      </DOCUMENTS>
+      <PARAMETERS>
+        <PARAMETER NAME="C_VERBOSITY" VALUE="0"/>
+        <PARAMETER NAME="C_XDEVICEFAMILY" VALUE="zynq"/>
+        <PARAMETER NAME="C_IMPLEMENTATION" VALUE="0"/>
+        <PARAMETER NAME="C_A_WIDTH" VALUE="13"/>
+        <PARAMETER NAME="C_B_WIDTH" VALUE="13"/>
+        <PARAMETER NAME="C_OUT_WIDTH" VALUE="13"/>
+        <PARAMETER NAME="C_CE_OVERRIDES_SCLR" VALUE="0"/>
+        <PARAMETER NAME="C_A_TYPE" VALUE="0"/>
+        <PARAMETER NAME="C_B_TYPE" VALUE="0"/>
+        <PARAMETER NAME="C_LATENCY" VALUE="1"/>
+        <PARAMETER NAME="C_ADD_MODE" VALUE="0"/>
+        <PARAMETER NAME="C_B_CONSTANT" VALUE="0"/>
+        <PARAMETER NAME="C_B_VALUE" VALUE="0000000000000"/>
+        <PARAMETER NAME="C_AINIT_VAL" VALUE="0"/>
+        <PARAMETER NAME="C_SINIT_VAL" VALUE="0"/>
+        <PARAMETER NAME="C_CE_OVERRIDES_BYPASS" VALUE="1"/>
+        <PARAMETER NAME="C_BYPASS_LOW" VALUE="0"/>
+        <PARAMETER NAME="C_SCLR_OVERRIDES_SSET" VALUE="1"/>
+        <PARAMETER NAME="C_HAS_C_IN" VALUE="0"/>
+        <PARAMETER NAME="C_HAS_C_OUT" VALUE="0"/>
+        <PARAMETER NAME="C_BORROW_LOW" VALUE="1"/>
+        <PARAMETER NAME="C_HAS_CE" VALUE="0"/>
+        <PARAMETER NAME="C_HAS_BYPASS" VALUE="0"/>
+        <PARAMETER NAME="C_HAS_SCLR" VALUE="0"/>
+        <PARAMETER NAME="C_HAS_SSET" VALUE="0"/>
+        <PARAMETER NAME="C_HAS_SINIT" VALUE="0"/>
+        <PARAMETER NAME="Component_Name" VALUE="Neuron0_c_addsub_0_0"/>
+        <PARAMETER NAME="Implementation" VALUE="Fabric"/>
+        <PARAMETER NAME="A_Type" VALUE="Signed"/>
+        <PARAMETER NAME="B_Type" VALUE="Signed"/>
+        <PARAMETER NAME="A_Width" VALUE="13"/>
+        <PARAMETER NAME="B_Width" VALUE="13"/>
+        <PARAMETER NAME="Add_Mode" VALUE="Add"/>
+        <PARAMETER NAME="Out_Width" VALUE="13"/>
+        <PARAMETER NAME="Latency_Configuration" VALUE="Manual"/>
+        <PARAMETER NAME="Latency" VALUE="1"/>
+        <PARAMETER NAME="B_Constant" VALUE="false"/>
+        <PARAMETER NAME="B_Value" VALUE="0000000000000"/>
+        <PARAMETER NAME="CE" VALUE="false"/>
+        <PARAMETER NAME="C_In" VALUE="false"/>
+        <PARAMETER NAME="C_Out" VALUE="false"/>
+        <PARAMETER NAME="Borrow_Sense" VALUE="Active_Low"/>
+        <PARAMETER NAME="SCLR" VALUE="false"/>
+        <PARAMETER NAME="SSET" VALUE="false"/>
+        <PARAMETER NAME="SINIT" VALUE="false"/>
+        <PARAMETER NAME="SINIT_Value" VALUE="0"/>
+        <PARAMETER NAME="Bypass" VALUE="false"/>
+        <PARAMETER NAME="Bypass_Sense" VALUE="Active_High"/>
+        <PARAMETER NAME="Sync_Ctrl_Priority" VALUE="Reset_Overrides_Set"/>
+        <PARAMETER NAME="Sync_CE_Priority" VALUE="Sync_Overrides_CE"/>
+        <PARAMETER NAME="Bypass_CE_Priority" VALUE="CE_Overrides_Bypass"/>
+        <PARAMETER NAME="AINIT_Value" VALUE="0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="A" SIGIS="data" SIGNAME="Multiplier_Syn_1_P">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Multiplier_Syn_1" PORT="P"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="B" SIGIS="data" SIGNAME="Multiplier_Syn_2_P">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Multiplier_Syn_2" PORT="P"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="CLK" SIGIS="clk" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="S" SIGIS="data" SIGNAME="Sum_Junction_S">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Activation_Function" PORT="X"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Synapse_Latch_Syn_1" HWVERSION="1.0" INSTANCE="Synapse_Latch_Syn_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Latch" VLNV="oloftus.com:prif:Latch:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="size" VALUE="13"/>
+        <PARAMETER NAME="Component_Name" VALUE="Neuron0_Latch_0_2"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SET" SIGIS="undef" SIGNAME="External_Ports_SYN_1_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="SYN_1_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="DIN" SIGIS="undef" SIGNAME="External_Ports_SYN_1_DIN">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="SYN_1_DIN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DOUT" SIGIS="undef" SIGNAME="Synapse_Latch_Syn_1_DOUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Multiplier_Syn_1" PORT="A"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Synapse_Latch_Syn_2" HWVERSION="1.0" INSTANCE="Synapse_Latch_Syn_2" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Latch" VLNV="oloftus.com:prif:Latch:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="size" VALUE="13"/>
+        <PARAMETER NAME="Component_Name" VALUE="Neuron0_Synapse_Latch_1_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SET" SIGIS="undef" SIGNAME="External_Ports_SYN_2_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="SYN_2_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="DIN" SIGIS="undef" SIGNAME="External_Ports_SYN_2_DIN">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="SYN_2_DIN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DOUT" SIGIS="undef" SIGNAME="Synapse_Latch_Syn_2_DOUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Multiplier_Syn_2" PORT="A"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Valid_Setter_Adder" HWVERSION="1.0" INSTANCE="Valid_Setter_Adder" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Pulse" VLNV="oloftus.com:prif:Pulse:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="multiple" VALUE="3"/>
+        <PARAMETER NAME="multipleWidth" VALUE="2"/>
+        <PARAMETER NAME="Component_Name" VALUE="Neuron0_Valid_Setter_2_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="P_OUT" SIGIS="undef" SIGNAME="Valid_Setter_Adder_P_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="SYN_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Weight_Syn_1" HWVERSION="1.1" INSTANCE="Weight_Syn_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_VAL" VALUE="1"/>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="13"/>
+        <PARAMETER NAME="Component_Name" VALUE="Neuron0_xlconstant_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" NAME="dout" SIGIS="undef" SIGNAME="Weight_Syn_1_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Multiplier_Syn_1" PORT="B"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Weight_Syn_2" HWVERSION="1.1" INSTANCE="Weight_Syn_2" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_VAL" VALUE="1"/>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="13"/>
+        <PARAMETER NAME="Component_Name" VALUE="Neuron0_Weight_1_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" NAME="dout" SIGIS="undef" SIGNAME="Weight_Syn_2_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Multiplier_Syn_2" PORT="B"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+  </MODULES>
+
+  <REPOSITORIES/>
+
+</EDKSYSTEM>
