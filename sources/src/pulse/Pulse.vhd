@@ -2,6 +2,8 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
+-- Generates a clock pulse every [multiple] clock pulses
+
 entity Pulse is
     generic (
         multiple : INTEGER;
