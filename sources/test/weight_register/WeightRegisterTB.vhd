@@ -57,57 +57,46 @@ begin
     end process;
     
     tb: process is
-        constant zeroAddr : STD_LOGIC_VECTOR (tbAddrSize - 1 downto 0) := (others => '0');
+        constant zeroAddr : STD_LOGIC_VECTOR (1 downto 0) := "00";
+        constant correctAddr : STD_LOGIC_VECTOR (1 downto 0) := "01";
+        constant incorrectAddr : STD_LOGIC_VECTOR (1 downto 0) := "10";
 
         constant weight0 : STD_LOGIC_VECTOR (tbDataSize - 1 downto 0) := (others => '0');
         constant weight1 : STD_LOGIC_VECTOR (tbDataSize - 1 downto 0) := "00000001";
         constant weight2 : STD_LOGIC_VECTOR (tbDataSize - 1 downto 0) := "00000010";
     begin
-        sigAddr <= "01";
-        sigRst <= '0';
-
-        sigWValid <= '0';
-        sigWAddr <= zeroAddr;
-        sigWIn <= weight0;
+        sigAddr <= correctAddr;
 
         -- Test that the synchronous reset line works
-        wait for 50ns;
         sigRst <= '1';
-        wait for 100ns;
+        wait for 200ns;
         sigRst <= '0';
-        wait for 50ns;
         
         assert sigWOut = weight0 report "Test failed : 1";
 
         -- Test that latching in occurs correctly and on the clock rising edge
-        wait for 50ns;
-        sigWAddr <= "01";
+        sigWAddr <= correctAddr;
         sigWIn <= weight1;
         sigWValid <= '1';
+        wait for 200ns;
+        assert sigWOut = weight1 report "Test failed : 2";
         
-        assert sigWOut = weight0 report "Test failed : 2";
-        wait for 100ns;
-        assert sigWOut = weight1 report "Test failed : 3";
-        
-        sigWValid <= '0';
         sigWAddr <= zeroAddr;
         sigWIn <= weight0;
-
-        wait for 100ns;
+        sigWValid <= '0';
+        wait for 200ns;
         
         -- Test that latching does not occur if the address doesn't match
-        sigWAddr <= "10";
+        sigWAddr <= incorrectAddr;
         sigWIn <= weight2;
         sigWValid <= '1';
-        
-        assert sigWOut = weight1 report "Test failed : 4";
-        wait for 100ns;
-        assert sigWOut = weight1 report "Test failed : 5";
-        
-        sigWValid <= '0';
+        wait for 200ns;
+        assert sigWOut = weight1 report "Test failed : 3";
+
         sigWAddr <= zeroAddr;
         sigWIn <= weight0;
-        
+        sigWValid <= '0';
+
         wait;
     end process;
 
