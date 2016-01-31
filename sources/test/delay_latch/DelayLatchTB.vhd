@@ -43,25 +43,23 @@ begin
     end process;
 
     tb: process begin
-        wait for 100ns;
         sigRst <= '1';
-        wait for 100ns;
+        wait for 200ns;
         sigRst <= '0';
         
-        wait for 100ns;
         sigSet <= '1';
-        wait for 100ns;
+        wait for 200ns;
         sigSet <= '0';
         
-        wait for 500ns;
-        sigClr <= '1';
-        wait for 100ns;
-        sigClr <= '0';
+--        wait for 500ns;
+--        sigClr <= '1';
+--        wait for 100ns;
+--        sigClr <= '0';
         
-        wait for 100ns;
-        sigSet <= '1';
-        wait for 100ns;
-        sigSet <= '0';
+--        wait for 100ns;
+--        sigSet <= '1';
+--        wait for 100ns;
+--        sigSet <= '0';
 
         wait;
     end process;

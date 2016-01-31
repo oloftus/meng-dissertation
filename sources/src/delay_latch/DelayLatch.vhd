@@ -28,7 +28,7 @@ begin
             sigDelayCntr <= one;
         elsif Rising_Edge(CLK) and sigDelayCntr /= delay and sigDelayCntr > 0 then
             sigDelayCntr <= sigDelayCntr + 1;
-        elsif Rising_Edge(CLK) and sigDelayCntr = delay then
+        elsif Falling_Edge(CLK) and sigDelayCntr = delay then
             sigDelayCntr <= zero;
             Q <= '1';
         end if;
