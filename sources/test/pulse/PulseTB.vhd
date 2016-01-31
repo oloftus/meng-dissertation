@@ -37,15 +37,15 @@ begin
         sigRst <= '0';
         
         sigSet <= '1';
-        wait for 210ns;
+        
+        wait for 200ns;
+        sigSet <= '0';
+        wait for 10ns;
         assert sigP = '1' report "Test failed: 1";
         wait for 200ns;
         assert sigP = '0' report "Test failed: 2";
         wait for 190ns;
-        sigSet <= '0';
-        
-        wait for 200ns;
-        
+                
         sigSet <= '1';
         wait for 210ns;
         assert sigP = '1' report "Test failed: 3";
@@ -53,7 +53,7 @@ begin
         assert sigP = '0' report "Test failed: 4";
         wait for 190ns;
         sigSet <= '0';
-
+        
         wait;
     end process;
     

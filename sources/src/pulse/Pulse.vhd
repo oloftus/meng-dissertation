@@ -11,25 +11,35 @@ entity Pulse is
 end Pulse;
 
 architecture Behavioral of Pulse is
-    signal sigCnt : STD_LOGIC_VECTOR (1 downto 0);
+    signal sigCurrState : STD_LOGIC_VECTOR (1 downto 0);
 begin
     process (CLK)
         constant zero : STD_LOGIC_VECTOR (1 downto 0) := "00";
         constant one : STD_LOGIC_VECTOR (1 downto 0) := "01";
         constant two : STD_LOGIC_VECTOR (1 downto 0) := "10";
+        constant three : STD_LOGIC_VECTOR (1 downto 0) := "11";
     begin
         if Rising_Edge(CLK) and RST = '1' then
             P <= '0';
-            sigCnt <= zero;
-        elsif Rising_Edge(CLK) and SET = '1' and sigCnt = zero then
-            sigCnt <= one;
-        elsif Falling_Edge(CLK) and sigCnt = one then
+            sigCurrState <= zero;
+            
+        elsif Rising_Edge(CLK) and SET = '1' and sigCurrState = zero then
+            sigCurrState <= one;
+            
+        elsif Falling_Edge(CLK) and sigCurrState = one then
             P <= '1';
-            sigCnt <= two;
-        elsif Falling_Edge(CLK) and sigCnt = two then
+            sigCurrState <= two;
+            
+        elsif Falling_Edge(CLK) and SET = '1' and sigCurrState = two then
             P <= '0';
-        elsif Rising_Edge(CLK) and SET = '0' and sigCnt = two then
-            sigCnt <= zero;
+            sigCurrState <= three;
+        
+        elsif Falling_Edge(CLK) and SET = '0' and sigCurrState = two then
+            P <= '0';
+            sigCurrState <= zero;
+
+        elsif Falling_Edge(CLK) and SET = '0' and sigCurrState = three then
+            sigCurrState <= zero;
         end if;
     end process;
 end Behavioral;
