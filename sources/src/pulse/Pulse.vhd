@@ -1,36 +1,35 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.NUMERIC_STD.ALL;
-
--- Generates a clock pulse every [multiple] clock pulses
 
 entity Pulse is
-    generic (
-        multiple : INTEGER;
-        multipleWidth : INTEGER
-    );
     port (
         CLK : in STD_LOGIC;
+        SET : in STD_LOGIC;
         RST : in STD_LOGIC;
-        P_OUT : out STD_LOGIC
+        P : out STD_LOGIC
     );
 end Pulse;
 
 architecture Behavioral of Pulse is
-    constant multipleUnsigned : UNSIGNED (multipleWidth - 1 downto 0) := To_Unsigned(multiple, multipleWidth);
-    
-    signal sigCnt : UNSIGNED (multipleWidth - 1 downto 0);
+    signal sigCnt : STD_LOGIC_VECTOR (1 downto 0);
 begin
-    pulse: process (CLK) begin
+    process (CLK)
+        constant zero : STD_LOGIC_VECTOR (1 downto 0) := "00";
+        constant one : STD_LOGIC_VECTOR (1 downto 0) := "01";
+        constant two : STD_LOGIC_VECTOR (1 downto 0) := "10";
+    begin
         if Rising_Edge(CLK) and RST = '1' then
-            sigCnt <= (0 => '1', others => '0'); -- Reset count
-        elsif Rising_Edge(CLK) and sigCnt = multipleUnsigned then
-            P_OUT <= '1';
-            sigCnt <= (others => '0'); -- Reset count
-        elsif Rising_Edge(CLK) then
-            sigCnt <= sigCnt + 1; -- Increment count
-        else
-            P_OUT <= '0'; -- Reset pulse when clock is on falling edge
+            P <= '0';
+            sigCnt <= zero;
+        elsif Rising_Edge(CLK) and SET = '1' and sigCnt = zero then
+            sigCnt <= one;
+        elsif Falling_Edge(CLK) and sigCnt = one then
+            P <= '1';
+            sigCnt <= two;
+        elsif Falling_Edge(CLK) and sigCnt = two then
+            P <= '0';
+        elsif Rising_Edge(CLK) and SET = '0' and sigCnt = two then
+            sigCnt <= zero;
         end if;
     end process;
 end Behavioral;

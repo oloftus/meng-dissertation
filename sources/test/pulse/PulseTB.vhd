@@ -2,36 +2,26 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 entity PulseTB is
-    generic (
-        tbMultiple : INTEGER := 3;
-        tbMultipleWidth : INTEGER := 3
-    );
 end PulseTB;
 
 architecture Behavioral of PulseTB is
-    signal sigClk, sigRst, sigPOut : STD_LOGIC;
+    signal sigClk, sigSet, sigRst, sigP : STD_LOGIC;
     
     component Pulse is
-        generic (
-            multiple : INTEGER;
-            multipleWidth : INTEGER
-        );
         port (
             CLK : in STD_LOGIC;
+            SET : in STD_LOGIC;
             RST : in STD_LOGIC;
-            P_OUT : out STD_LOGIC
+            P : out STD_LOGIC
         );
     end component;
 begin
     uut: Pulse
-        generic map (
-            multiple => tbMultiple,
-            multipleWidth => tbMultipleWidth
-        )
         port map (
             CLK => sigClk,
+            SET => sigSet,
             RST => sigRst,
-            P_OUT => sigPOut
+            P => sigP
         );
         
     clock: process begin
@@ -42,26 +32,27 @@ begin
     end process;
 
     tb: process begin
-        sigRst <= '0';
-        wait for 100ns;
         sigRst <= '1';
-        assert sigPOut = '0' report "Test failed: 1";
-        wait for 100ns;
+        wait for 200ns;
         sigRst <= '0';
-        wait for 100ns;
         
-        wait for 10ns; -- Wait until stable before asserting
-        
-        assert sigPOut = '0' report "Test failed: 2";
+        sigSet <= '1';
+        wait for 210ns;
+        assert sigP = '1' report "Test failed: 1";
         wait for 200ns;
-
-        assert sigPOut = '0' report "Test failed: 3";
-        wait for 200ns;
-
-        assert sigPOut = '1' report "Test failed: 4";
-        wait for 100ns;
+        assert sigP = '0' report "Test failed: 2";
+        wait for 190ns;
+        sigSet <= '0';
         
-        assert sigPOut = '0' report "Test failed: 5";
+        wait for 200ns;
+        
+        sigSet <= '1';
+        wait for 210ns;
+        assert sigP = '1' report "Test failed: 3";
+        wait for 200ns;
+        assert sigP = '0' report "Test failed: 4";
+        wait for 190ns;
+        sigSet <= '0';
 
         wait;
     end process;
