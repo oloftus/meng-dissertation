@@ -46,98 +46,40 @@
 -- 
 -- DO NOT MODIFY THIS FILE.
 
--- IP VLNV: xilinx.com:ip:mult_gen:12.0
--- IP Revision: 5
+-- IP VLNV: oloftus.com:prif:Pulse:1.0
+-- IP Revision: 1
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-LIBRARY mult_gen_v12_0;
-USE mult_gen_v12_0.mult_gen_v12_0;
-
-ENTITY Neuron0_mult_gen_0_0 IS
+ENTITY Neuron0_Pulse_0_2 IS
   PORT (
     CLK : IN STD_LOGIC;
-    A : IN STD_LOGIC_VECTOR(12 DOWNTO 0);
-    B : IN STD_LOGIC_VECTOR(12 DOWNTO 0);
-    CE : IN STD_LOGIC;
-    P : OUT STD_LOGIC_VECTOR(12 DOWNTO 0)
+    SET : IN STD_LOGIC;
+    RST : IN STD_LOGIC;
+    P : OUT STD_LOGIC
   );
-END Neuron0_mult_gen_0_0;
+END Neuron0_Pulse_0_2;
 
-ARCHITECTURE Neuron0_mult_gen_0_0_arch OF Neuron0_mult_gen_0_0 IS
+ARCHITECTURE Neuron0_Pulse_0_2_arch OF Neuron0_Pulse_0_2 IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings : string;
-  ATTRIBUTE DowngradeIPIdentifiedWarnings OF Neuron0_mult_gen_0_0_arch: ARCHITECTURE IS "yes";
+  ATTRIBUTE DowngradeIPIdentifiedWarnings OF Neuron0_Pulse_0_2_arch: ARCHITECTURE IS "yes";
 
-  COMPONENT mult_gen_v12_0 IS
-    GENERIC (
-      C_VERBOSITY : INTEGER;
-      C_MODEL_TYPE : INTEGER;
-      C_OPTIMIZE_GOAL : INTEGER;
-      C_XDEVICEFAMILY : STRING;
-      C_HAS_CE : INTEGER;
-      C_HAS_SCLR : INTEGER;
-      C_LATENCY : INTEGER;
-      C_A_WIDTH : INTEGER;
-      C_A_TYPE : INTEGER;
-      C_B_WIDTH : INTEGER;
-      C_B_TYPE : INTEGER;
-      C_OUT_HIGH : INTEGER;
-      C_OUT_LOW : INTEGER;
-      C_MULT_TYPE : INTEGER;
-      C_CE_OVERRIDES_SCLR : INTEGER;
-      C_CCM_IMP : INTEGER;
-      C_B_VALUE : STRING;
-      C_HAS_ZERO_DETECT : INTEGER;
-      C_ROUND_OUTPUT : INTEGER;
-      C_ROUND_PT : INTEGER
-    );
+  COMPONENT Pulse IS
     PORT (
       CLK : IN STD_LOGIC;
-      A : IN STD_LOGIC_VECTOR(12 DOWNTO 0);
-      B : IN STD_LOGIC_VECTOR(12 DOWNTO 0);
-      CE : IN STD_LOGIC;
-      SCLR : IN STD_LOGIC;
-      P : OUT STD_LOGIC_VECTOR(12 DOWNTO 0)
+      SET : IN STD_LOGIC;
+      RST : IN STD_LOGIC;
+      P : OUT STD_LOGIC
     );
-  END COMPONENT mult_gen_v12_0;
-  ATTRIBUTE X_INTERFACE_INFO : STRING;
-  ATTRIBUTE X_INTERFACE_INFO OF CLK: SIGNAL IS "xilinx.com:signal:clock:1.0 clk_intf CLK";
-  ATTRIBUTE X_INTERFACE_INFO OF A: SIGNAL IS "xilinx.com:signal:data:1.0 a_intf DATA";
-  ATTRIBUTE X_INTERFACE_INFO OF B: SIGNAL IS "xilinx.com:signal:data:1.0 b_intf DATA";
-  ATTRIBUTE X_INTERFACE_INFO OF CE: SIGNAL IS "xilinx.com:signal:clockenable:1.0 ce_intf CE";
-  ATTRIBUTE X_INTERFACE_INFO OF P: SIGNAL IS "xilinx.com:signal:data:1.0 p_intf DATA";
+  END COMPONENT Pulse;
 BEGIN
-  U0 : mult_gen_v12_0
-    GENERIC MAP (
-      C_VERBOSITY => 0,
-      C_MODEL_TYPE => 0,
-      C_OPTIMIZE_GOAL => 1,
-      C_XDEVICEFAMILY => "zynq",
-      C_HAS_CE => 1,
-      C_HAS_SCLR => 0,
-      C_LATENCY => 1,
-      C_A_WIDTH => 13,
-      C_A_TYPE => 0,
-      C_B_WIDTH => 13,
-      C_B_TYPE => 0,
-      C_OUT_HIGH => 12,
-      C_OUT_LOW => 0,
-      C_MULT_TYPE => 0,
-      C_CE_OVERRIDES_SCLR => 0,
-      C_CCM_IMP => 0,
-      C_B_VALUE => "10000001",
-      C_HAS_ZERO_DETECT => 0,
-      C_ROUND_OUTPUT => 0,
-      C_ROUND_PT => 0
-    )
+  U0 : Pulse
     PORT MAP (
       CLK => CLK,
-      A => A,
-      B => B,
-      CE => CE,
-      SCLR => '0',
+      SET => SET,
+      RST => RST,
       P => P
     );
-END Neuron0_mult_gen_0_0_arch;
+END Neuron0_Pulse_0_2_arch;

@@ -61,6 +61,7 @@ ENTITY Neuron0_Multiplier_1_0 IS
     CLK : IN STD_LOGIC;
     A : IN STD_LOGIC_VECTOR(12 DOWNTO 0);
     B : IN STD_LOGIC_VECTOR(12 DOWNTO 0);
+    CE : IN STD_LOGIC;
     P : OUT STD_LOGIC_VECTOR(12 DOWNTO 0)
   );
 END Neuron0_Multiplier_1_0;
@@ -105,6 +106,7 @@ ARCHITECTURE Neuron0_Multiplier_1_0_arch OF Neuron0_Multiplier_1_0 IS
   ATTRIBUTE X_INTERFACE_INFO OF CLK: SIGNAL IS "xilinx.com:signal:clock:1.0 clk_intf CLK";
   ATTRIBUTE X_INTERFACE_INFO OF A: SIGNAL IS "xilinx.com:signal:data:1.0 a_intf DATA";
   ATTRIBUTE X_INTERFACE_INFO OF B: SIGNAL IS "xilinx.com:signal:data:1.0 b_intf DATA";
+  ATTRIBUTE X_INTERFACE_INFO OF CE: SIGNAL IS "xilinx.com:signal:clockenable:1.0 ce_intf CE";
   ATTRIBUTE X_INTERFACE_INFO OF P: SIGNAL IS "xilinx.com:signal:data:1.0 p_intf DATA";
 BEGIN
   U0 : mult_gen_v12_0
@@ -113,7 +115,7 @@ BEGIN
       C_MODEL_TYPE => 0,
       C_OPTIMIZE_GOAL => 1,
       C_XDEVICEFAMILY => "zynq",
-      C_HAS_CE => 0,
+      C_HAS_CE => 1,
       C_HAS_SCLR => 0,
       C_LATENCY => 1,
       C_A_WIDTH => 13,
@@ -134,7 +136,7 @@ BEGIN
       CLK => CLK,
       A => A,
       B => B,
-      CE => '1',
+      CE => CE,
       SCLR => '0',
       P => P
     );

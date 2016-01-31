@@ -1,54 +1,60 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Sat Jan 30 13:43:58 2016" VIVADOVERSION="2014.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Sun Jan 31 22:39:38 2016" VIVADOVERSION="2014.2">
 
   <SYSTEMINFO ARCH="zynq" BOARD="em.avnet.com:microzed:part0:1.0" DEVICE="7z010" NAME="Neuron0_imp" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
   <EXTERNALPORTS>
     <PORT DIR="I" NAME="RST" SIGIS="rst" SIGNAME="External_Ports_RST">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="Synapse_Latch_Syn_1" PORT="RST"/>
-        <CONNECTION INSTANCE="Synapse_Latch_Syn_2" PORT="RST"/>
-        <CONNECTION INSTANCE="Valid_Setter_Adder" PORT="RST"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT CLKFREQUENCY="100000000" DIR="I" NAME="CLK" SIGIS="clk" SIGNAME="External_Ports_CLK">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="Synapse_Latch_Syn_1" PORT="CLK"/>
-        <CONNECTION INSTANCE="Synapse_Latch_Syn_2" PORT="CLK"/>
-        <CONNECTION INSTANCE="Multiplier_Syn_2" PORT="CLK"/>
-        <CONNECTION INSTANCE="Multiplier_Syn_1" PORT="CLK"/>
-        <CONNECTION INSTANCE="Valid_Setter_Adder" PORT="CLK"/>
-        <CONNECTION INSTANCE="Sum_Junction" PORT="CLK"/>
+        <CONNECTION INSTANCE="Synapse_1" PORT="RST"/>
+        <CONNECTION INSTANCE="Synapse_2" PORT="RST"/>
+        <CONNECTION INSTANCE="DelayLatch_0" PORT="RST"/>
+        <CONNECTION INSTANCE="Pulse_2" PORT="RST"/>
+        <CONNECTION INSTANCE="Pulse_4" PORT="RST"/>
+        <CONNECTION INSTANCE="Pulse_3" PORT="RST"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="I" NAME="SYN_1_DIN" SIGIS="data" SIGNAME="External_Ports_SYN_1_DIN">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="Synapse_Latch_Syn_1" PORT="DIN"/>
+        <CONNECTION INSTANCE="Synapse_1" PORT="SYN_IN"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="I" NAME="SYN_1_VALID" SIGIS="undef" SIGNAME="External_Ports_SYN_1_VALID">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="Synapse_Latch_Syn_1" PORT="SET"/>
+        <CONNECTION INSTANCE="Synapse_1" PORT="SYN_IN_VALID"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="I" NAME="SYN_2_DIN" SIGIS="undef" SIGNAME="External_Ports_SYN_2_DIN">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="Synapse_Latch_Syn_2" PORT="DIN"/>
+        <CONNECTION INSTANCE="Synapse_2" PORT="SYN_IN"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="I" NAME="SYN_2_VALID" SIGIS="undef" SIGNAME="External_Ports_SYN_2_VALID">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="Synapse_Latch_Syn_2" PORT="SET"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="O" NAME="SYN_OUT_VALID" SIGIS="undef" SIGNAME="Valid_Setter_Adder_P_OUT">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="Valid_Setter_Adder" PORT="P_OUT"/>
+        <CONNECTION INSTANCE="Synapse_2" PORT="SYN_IN_VALID"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="O" NAME="SYN_OUT" SIGIS="undef" SIGNAME="Activation_Function_Y">
       <CONNECTIONS>
         <CONNECTION INSTANCE="Activation_Function" PORT="Y"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT CLKFREQUENCY="100000000" DIR="I" NAME="CLK" SIGIS="clk" SIGNAME="External_Ports_CLK">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="Multiplier_Syn_2" PORT="CLK"/>
+        <CONNECTION INSTANCE="Multiplier_Syn_1" PORT="CLK"/>
+        <CONNECTION INSTANCE="Sum_Junction" PORT="CLK"/>
+        <CONNECTION INSTANCE="Synapse_1" PORT="CLK"/>
+        <CONNECTION INSTANCE="Synapse_2" PORT="CLK"/>
+        <CONNECTION INSTANCE="DelayLatch_0" PORT="CLK"/>
+        <CONNECTION INSTANCE="Pulse_2" PORT="CLK"/>
+        <CONNECTION INSTANCE="Pulse_4" PORT="CLK"/>
+        <CONNECTION INSTANCE="Pulse_3" PORT="CLK"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="SYN_OUT_VALID" SIGIS="undef" SIGNAME="DelayLatch_0_Q">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="DelayLatch_0" PORT="Q"/>
       </CONNECTIONS>
     </PORT>
   </EXTERNALPORTS>
@@ -76,6 +82,92 @@
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>
+    <MODULE FULLNAME="/And2_0" HWVERSION="1.0" INSTANCE="And2_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="And2" VLNV="oloftus.com:prif:And2:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="Neuron0_And2_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="A" SIGIS="undef" SIGNAME="Synapse_1_SYN_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Synapse_1" PORT="SYN_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="B" SIGIS="undef" SIGNAME="Synapse_2_SYN_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Synapse_2" PORT="SYN_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="O" SIGIS="undef" SIGNAME="And2_0_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Inverter_0" PORT="i"/>
+            <CONNECTION INSTANCE="Multiplier_Syn_1" PORT="CE"/>
+            <CONNECTION INSTANCE="Multiplier_Syn_2" PORT="CE"/>
+            <CONNECTION INSTANCE="Pulse_2" PORT="SET"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/DelayLatch_0" HWVERSION="1.0" INSTANCE="DelayLatch_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="DelayLatch" VLNV="oloftus.com:prif:DelayLatch:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="delay" VALUE="1"/>
+        <PARAMETER NAME="delayWidth" VALUE="1"/>
+        <PARAMETER NAME="Component_Name" VALUE="Neuron0_DelayLatch_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="CLR" SIGIS="undef" SIGNAME="Pulse_4_P">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Pulse_4" PORT="P"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SET" SIGIS="undef" SIGNAME="Pulse_2_P">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Pulse_2" PORT="P"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="Q" SIGIS="undef" SIGNAME="DelayLatch_0_Q">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="SYN_OUT_VALID"/>
+            <CONNECTION INSTANCE="Pulse_3" PORT="SET"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Inverter_0" HWVERSION="1.0" INSTANCE="Inverter_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Inverter" VLNV="oloftus.com:prif:Inverter:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="Neuron0_Inverter_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="i" SIGIS="undef" SIGNAME="And2_0_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="And2_0" PORT="O"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="o" SIGIS="undef" SIGNAME="Inverter_0_o">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Pulse_4" PORT="SET"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
     <MODULE FULLNAME="/Multiplier_Syn_1" HWVERSION="12.0" INSTANCE="Multiplier_Syn_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="mult_gen" VLNV="xilinx.com:ip:mult_gen:12.0">
       <DOCUMENTS>
         <DOCUMENT SOURCE="http://www.xilinx.com/cgi-bin/docs/ipdoc?c=mult_gen;v=v12_0;d=pg108-mult-gen.pdf"/>
@@ -85,7 +177,7 @@
         <PARAMETER NAME="C_MODEL_TYPE" VALUE="0"/>
         <PARAMETER NAME="C_OPTIMIZE_GOAL" VALUE="1"/>
         <PARAMETER NAME="C_XDEVICEFAMILY" VALUE="zynq"/>
-        <PARAMETER NAME="C_HAS_CE" VALUE="0"/>
+        <PARAMETER NAME="C_HAS_CE" VALUE="1"/>
         <PARAMETER NAME="C_HAS_SCLR" VALUE="0"/>
         <PARAMETER NAME="C_LATENCY" VALUE="1"/>
         <PARAMETER NAME="C_A_WIDTH" VALUE="13"/>
@@ -118,7 +210,7 @@
         <PARAMETER NAME="UseRounding" VALUE="false"/>
         <PARAMETER NAME="RoundPoint" VALUE="0"/>
         <PARAMETER NAME="PipeStages" VALUE="1"/>
-        <PARAMETER NAME="ClockEnable" VALUE="false"/>
+        <PARAMETER NAME="ClockEnable" VALUE="true"/>
         <PARAMETER NAME="SyncClear" VALUE="false"/>
         <PARAMETER NAME="SclrCePriority" VALUE="SCLR_Overrides_CE"/>
         <PARAMETER NAME="ZeroDetect" VALUE="false"/>
@@ -130,14 +222,19 @@
             <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="A" SIGIS="data" SIGNAME="Synapse_Latch_Syn_1_DOUT">
+        <PORT DIR="I" NAME="A" SIGIS="data" SIGNAME="Synapse_1_SYN_OUT">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="Synapse_Latch_Syn_1" PORT="DOUT"/>
+            <CONNECTION INSTANCE="Synapse_1" PORT="SYN_OUT"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" NAME="B" SIGIS="data" SIGNAME="Weight_Syn_1_dout">
           <CONNECTIONS>
             <CONNECTION INSTANCE="Weight_Syn_1" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="CE" SIGIS="ce" SIGNAME="And2_0_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="And2_0" PORT="O"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="P" SIGIS="data" SIGNAME="Multiplier_Syn_1_P">
@@ -157,7 +254,7 @@
         <PARAMETER NAME="C_MODEL_TYPE" VALUE="0"/>
         <PARAMETER NAME="C_OPTIMIZE_GOAL" VALUE="1"/>
         <PARAMETER NAME="C_XDEVICEFAMILY" VALUE="zynq"/>
-        <PARAMETER NAME="C_HAS_CE" VALUE="0"/>
+        <PARAMETER NAME="C_HAS_CE" VALUE="1"/>
         <PARAMETER NAME="C_HAS_SCLR" VALUE="0"/>
         <PARAMETER NAME="C_LATENCY" VALUE="1"/>
         <PARAMETER NAME="C_A_WIDTH" VALUE="13"/>
@@ -190,7 +287,7 @@
         <PARAMETER NAME="UseRounding" VALUE="false"/>
         <PARAMETER NAME="RoundPoint" VALUE="0"/>
         <PARAMETER NAME="PipeStages" VALUE="1"/>
-        <PARAMETER NAME="ClockEnable" VALUE="false"/>
+        <PARAMETER NAME="ClockEnable" VALUE="true"/>
         <PARAMETER NAME="SyncClear" VALUE="false"/>
         <PARAMETER NAME="SclrCePriority" VALUE="SCLR_Overrides_CE"/>
         <PARAMETER NAME="ZeroDetect" VALUE="false"/>
@@ -202,9 +299,9 @@
             <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="A" SIGIS="data" SIGNAME="Synapse_Latch_Syn_2_DOUT">
+        <PORT DIR="I" NAME="A" SIGIS="data" SIGNAME="Synapse_2_SYN_OUT">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="Synapse_Latch_Syn_2" PORT="DOUT"/>
+            <CONNECTION INSTANCE="Synapse_2" PORT="SYN_OUT"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" NAME="B" SIGIS="data" SIGNAME="Weight_Syn_2_dout">
@@ -212,9 +309,105 @@
             <CONNECTION INSTANCE="Weight_Syn_2" PORT="dout"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="I" NAME="CE" SIGIS="ce" SIGNAME="And2_0_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="And2_0" PORT="O"/>
+          </CONNECTIONS>
+        </PORT>
         <PORT DIR="O" NAME="P" SIGIS="data" SIGNAME="Multiplier_Syn_2_P">
           <CONNECTIONS>
             <CONNECTION INSTANCE="Sum_Junction" PORT="B"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Pulse_2" HWVERSION="1.0" INSTANCE="Pulse_2" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Pulse" VLNV="oloftus.com:prif:Pulse:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="Neuron0_Pulse_0_2"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SET" SIGIS="undef" SIGNAME="And2_0_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="And2_0" PORT="O"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="P" SIGIS="undef" SIGNAME="Pulse_2_P">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="DelayLatch_0" PORT="SET"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Pulse_3" HWVERSION="1.0" INSTANCE="Pulse_3" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Pulse" VLNV="oloftus.com:prif:Pulse:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="Neuron0_Pulse_2_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SET" SIGIS="undef" SIGNAME="DelayLatch_0_Q">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="DelayLatch_0" PORT="Q"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="P" SIGIS="undef" SIGNAME="Pulse_3_P">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Synapse_1" PORT="CLR"/>
+            <CONNECTION INSTANCE="Synapse_2" PORT="CLR"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Pulse_4" HWVERSION="1.0" INSTANCE="Pulse_4" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Pulse" VLNV="oloftus.com:prif:Pulse:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="Neuron0_Pulse_3_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SET" SIGIS="undef" SIGNAME="Inverter_0_o">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Inverter_0" PORT="o"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="P" SIGIS="undef" SIGNAME="Pulse_4_P">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="DelayLatch_0" PORT="CLR"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -303,11 +496,11 @@
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>
-    <MODULE FULLNAME="/Synapse_Latch_Syn_1" HWVERSION="1.0" INSTANCE="Synapse_Latch_Syn_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Latch" VLNV="oloftus.com:prif:Latch:1.0">
+    <MODULE FULLNAME="/Synapse_1" HWVERSION="1.0" INSTANCE="Synapse_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Synapse" VLNV="oloftus.com:prif:Synapse:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
         <PARAMETER NAME="size" VALUE="13"/>
-        <PARAMETER NAME="Component_Name" VALUE="Neuron0_Latch_0_2"/>
+        <PARAMETER NAME="Component_Name" VALUE="Neuron0_Synapse_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -316,9 +509,9 @@
             <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="SET" SIGIS="undef" SIGNAME="External_Ports_SYN_1_VALID">
+        <PORT DIR="I" NAME="CLR" SIGIS="undef" SIGNAME="Pulse_3_P">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="SYN_1_VALID"/>
+            <CONNECTION INSTANCE="Pulse_3" PORT="P"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
@@ -326,12 +519,22 @@
             <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="DIN" SIGIS="undef" SIGNAME="External_Ports_SYN_1_DIN">
+        <PORT DIR="I" NAME="SYN_IN_VALID" SIGIS="undef" SIGNAME="External_Ports_SYN_1_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="SYN_1_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SYN_IN" SIGIS="undef" SIGNAME="External_Ports_SYN_1_DIN">
           <CONNECTIONS>
             <CONNECTION INSTANCE="External_Ports" PORT="SYN_1_DIN"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="DOUT" SIGIS="undef" SIGNAME="Synapse_Latch_Syn_1_DOUT">
+        <PORT DIR="O" NAME="SYN_OUT_VALID" SIGIS="undef" SIGNAME="Synapse_1_SYN_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="And2_0" PORT="A"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="SYN_OUT" SIGIS="undef" SIGNAME="Synapse_1_SYN_OUT">
           <CONNECTIONS>
             <CONNECTION INSTANCE="Multiplier_Syn_1" PORT="A"/>
           </CONNECTIONS>
@@ -339,11 +542,11 @@
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>
-    <MODULE FULLNAME="/Synapse_Latch_Syn_2" HWVERSION="1.0" INSTANCE="Synapse_Latch_Syn_2" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Latch" VLNV="oloftus.com:prif:Latch:1.0">
+    <MODULE FULLNAME="/Synapse_2" HWVERSION="1.0" INSTANCE="Synapse_2" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Synapse" VLNV="oloftus.com:prif:Synapse:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
         <PARAMETER NAME="size" VALUE="13"/>
-        <PARAMETER NAME="Component_Name" VALUE="Neuron0_Synapse_Latch_1_0"/>
+        <PARAMETER NAME="Component_Name" VALUE="Neuron0_Synapse_0_1"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -352,51 +555,34 @@
             <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="SET" SIGIS="undef" SIGNAME="External_Ports_SYN_2_VALID">
+        <PORT DIR="I" NAME="CLR" SIGIS="undef" SIGNAME="Pulse_3_P">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Pulse_3" PORT="P"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SYN_IN_VALID" SIGIS="undef" SIGNAME="External_Ports_SYN_2_VALID">
           <CONNECTIONS>
             <CONNECTION INSTANCE="External_Ports" PORT="SYN_2_VALID"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" NAME="DIN" SIGIS="undef" SIGNAME="External_Ports_SYN_2_DIN">
+        <PORT DIR="I" NAME="SYN_IN" SIGIS="undef" SIGNAME="External_Ports_SYN_2_DIN">
           <CONNECTIONS>
             <CONNECTION INSTANCE="External_Ports" PORT="SYN_2_DIN"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="DOUT" SIGIS="undef" SIGNAME="Synapse_Latch_Syn_2_DOUT">
+        <PORT DIR="O" NAME="SYN_OUT_VALID" SIGIS="undef" SIGNAME="Synapse_2_SYN_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="And2_0" PORT="B"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="SYN_OUT" SIGIS="undef" SIGNAME="Synapse_2_SYN_OUT">
           <CONNECTIONS>
             <CONNECTION INSTANCE="Multiplier_Syn_2" PORT="A"/>
-          </CONNECTIONS>
-        </PORT>
-      </PORTS>
-      <BUSINTERFACES/>
-    </MODULE>
-    <MODULE FULLNAME="/Valid_Setter_Adder" HWVERSION="1.0" INSTANCE="Valid_Setter_Adder" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Pulse" VLNV="oloftus.com:prif:Pulse:1.0">
-      <DOCUMENTS/>
-      <PARAMETERS>
-        <PARAMETER NAME="multiple" VALUE="3"/>
-        <PARAMETER NAME="multipleWidth" VALUE="2"/>
-        <PARAMETER NAME="Component_Name" VALUE="Neuron0_Valid_Setter_2_0"/>
-        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
-      </PARAMETERS>
-      <PORTS>
-        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="P_OUT" SIGIS="undef" SIGNAME="Valid_Setter_Adder_P_OUT">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="SYN_OUT_VALID"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>

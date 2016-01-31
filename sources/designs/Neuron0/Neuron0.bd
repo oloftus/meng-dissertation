@@ -33,25 +33,6 @@
         <spirit:parameters/>
       </spirit:busInterface>
       <spirit:busInterface>
-        <spirit:name>CLK.CLK</spirit:name>
-        <spirit:displayName>Clk</spirit:displayName>
-        <spirit:description>Clock</spirit:description>
-        <spirit:busType spirit:library="signal" spirit:name="clock" spirit:vendor="xilinx.com" spirit:version="1.0"/>
-        <spirit:abstractionType spirit:library="signal" spirit:name="clock_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
-        <spirit:slave/>
-        <spirit:portMaps>
-          <spirit:portMap>
-            <spirit:logicalPort>
-              <spirit:name>CLK</spirit:name>
-            </spirit:logicalPort>
-            <spirit:physicalPort>
-              <spirit:name>CLK</spirit:name>
-            </spirit:physicalPort>
-          </spirit:portMap>
-        </spirit:portMaps>
-        <spirit:parameters/>
-      </spirit:busInterface>
-      <spirit:busInterface>
         <spirit:name>DATA.SYN_1_DIN</spirit:name>
         <spirit:displayName>Data</spirit:displayName>
         <spirit:description>Data</spirit:description>
@@ -70,6 +51,25 @@
         </spirit:portMaps>
         <spirit:parameters/>
       </spirit:busInterface>
+      <spirit:busInterface>
+        <spirit:name>CLK.CLK</spirit:name>
+        <spirit:displayName>Clk</spirit:displayName>
+        <spirit:description>Clock</spirit:description>
+        <spirit:busType spirit:library="signal" spirit:name="clock" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+        <spirit:abstractionType spirit:library="signal" spirit:name="clock_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+        <spirit:slave/>
+        <spirit:portMaps>
+          <spirit:portMap>
+            <spirit:logicalPort>
+              <spirit:name>CLK</spirit:name>
+            </spirit:logicalPort>
+            <spirit:physicalPort>
+              <spirit:name>CLK</spirit:name>
+            </spirit:physicalPort>
+          </spirit:portMap>
+        </spirit:portMaps>
+        <spirit:parameters/>
+      </spirit:busInterface>
     </spirit:busInterfaces>
     <spirit:model>
       <spirit:views>
@@ -82,12 +82,6 @@
       <spirit:ports>
         <spirit:port>
           <spirit:name>RST</spirit:name>
-          <spirit:wire>
-            <spirit:direction>in</spirit:direction>
-          </spirit:wire>
-        </spirit:port>
-        <spirit:port>
-          <spirit:name>CLK</spirit:name>
           <spirit:wire>
             <spirit:direction>in</spirit:direction>
           </spirit:wire>
@@ -125,12 +119,6 @@
           </spirit:wire>
         </spirit:port>
         <spirit:port>
-          <spirit:name>SYN_OUT_VALID</spirit:name>
-          <spirit:wire>
-            <spirit:direction>out</spirit:direction>
-          </spirit:wire>
-        </spirit:port>
-        <spirit:port>
           <spirit:name>SYN_OUT</spirit:name>
           <spirit:wire>
             <spirit:direction>out</spirit:direction>
@@ -138,6 +126,18 @@
               <spirit:left>11</spirit:left>
               <spirit:right>0</spirit:right>
             </spirit:vector>
+          </spirit:wire>
+        </spirit:port>
+        <spirit:port>
+          <spirit:name>CLK</spirit:name>
+          <spirit:wire>
+            <spirit:direction>in</spirit:direction>
+          </spirit:wire>
+        </spirit:port>
+        <spirit:port>
+          <spirit:name>SYN_OUT_VALID</spirit:name>
+          <spirit:wire>
+            <spirit:direction>out</spirit:direction>
           </spirit:wire>
         </spirit:port>
       </spirit:ports>
@@ -163,6 +163,7 @@
           <spirit:configurableElementValue spirit:referenceId="Multiplier_Construction">Use_LUTs</spirit:configurableElementValue>
           <spirit:configurableElementValue spirit:referenceId="Use_Custom_Output_Width">true</spirit:configurableElementValue>
           <spirit:configurableElementValue spirit:referenceId="OutputWidthHigh">12</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="ClockEnable">true</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
@@ -195,14 +196,6 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>Synapse_Latch_Syn_1</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="Latch" spirit:vendor="oloftus.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_Latch_0_2</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="size">13</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
         <spirit:instanceName>Multiplier_Syn_2</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="mult_gen" spirit:vendor="xilinx.com" spirit:version="12.0"/>
         <spirit:configurableElementValues>
@@ -215,14 +208,7 @@
           <spirit:configurableElementValue spirit:referenceId="Multiplier_Construction">Use_LUTs</spirit:configurableElementValue>
           <spirit:configurableElementValue spirit:referenceId="Use_Custom_Output_Width">true</spirit:configurableElementValue>
           <spirit:configurableElementValue spirit:referenceId="OutputWidthHigh">12</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>Synapse_Latch_Syn_2</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="Latch" spirit:vendor="oloftus.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_Synapse_Latch_1_0</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="size">13</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="ClockEnable">true</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
@@ -234,12 +220,63 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>Valid_Setter</spirit:instanceName>
+        <spirit:instanceName>Synapse_1</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="Synapse" spirit:vendor="oloftus.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_Synapse_0_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="size">13</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>Synapse_2</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="Synapse" spirit:vendor="oloftus.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_Synapse_0_1</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="size">13</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>And2_0</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="And2" spirit:vendor="oloftus.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_And2_0_0</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>DelayLatch_0</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="DelayLatch" spirit:vendor="oloftus.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_DelayLatch_0_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="delayWidth">1</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="delay">1</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>Inverter_0</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="Inverter" spirit:vendor="oloftus.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_Inverter_0_0</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>Pulse_2</spirit:instanceName>
         <spirit:componentRef spirit:library="prif" spirit:name="Pulse" spirit:vendor="oloftus.com" spirit:version="1.0"/>
         <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_Valid_Setter_2_0</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="multipleWidth">2</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="multiple">3</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_Pulse_0_2</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>Pulse_3</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="Pulse" spirit:vendor="oloftus.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_Pulse_2_0</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>Pulse_4</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="Pulse" spirit:vendor="oloftus.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_Pulse_3_0</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
     </spirit:componentInstances>
@@ -252,24 +289,12 @@
       <spirit:adHocConnection>
         <spirit:name>RST_1</spirit:name>
         <spirit:externalPortReference spirit:portRef="RST"/>
-        <spirit:internalPortReference spirit:componentRef="Synapse_Latch_Syn_1" spirit:portRef="RST"/>
-        <spirit:internalPortReference spirit:componentRef="Synapse_Latch_Syn_2" spirit:portRef="RST"/>
-        <spirit:internalPortReference spirit:componentRef="Valid_Setter" spirit:portRef="RST"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>SYN_2_DIN_1</spirit:name>
-        <spirit:externalPortReference spirit:portRef="SYN_1_DIN"/>
-        <spirit:internalPortReference spirit:componentRef="Synapse_Latch_Syn_1" spirit:portRef="DIN"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>Synapse_Latch_1_DOUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="Synapse_Latch_Syn_1" spirit:portRef="DOUT"/>
-        <spirit:internalPortReference spirit:componentRef="Multiplier_Syn_1" spirit:portRef="A"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>SYN_1_VALID_1</spirit:name>
-        <spirit:externalPortReference spirit:portRef="SYN_1_VALID"/>
-        <spirit:internalPortReference spirit:componentRef="Synapse_Latch_Syn_1" spirit:portRef="SET"/>
+        <spirit:internalPortReference spirit:componentRef="Synapse_1" spirit:portRef="RST"/>
+        <spirit:internalPortReference spirit:componentRef="Synapse_2" spirit:portRef="RST"/>
+        <spirit:internalPortReference spirit:componentRef="DelayLatch_0" spirit:portRef="RST"/>
+        <spirit:internalPortReference spirit:componentRef="Pulse_2" spirit:portRef="RST"/>
+        <spirit:internalPortReference spirit:componentRef="Pulse_4" spirit:portRef="RST"/>
+        <spirit:internalPortReference spirit:componentRef="Pulse_3" spirit:portRef="RST"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>Multiplier_1_P</spirit:name>
@@ -277,19 +302,9 @@
         <spirit:internalPortReference spirit:componentRef="Sum_Junction" spirit:portRef="A"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
-        <spirit:name>SYN_1_DIN_1</spirit:name>
-        <spirit:externalPortReference spirit:portRef="SYN_2_DIN"/>
-        <spirit:internalPortReference spirit:componentRef="Synapse_Latch_Syn_2" spirit:portRef="DIN"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
         <spirit:name>Weight_2_dout</spirit:name>
         <spirit:internalPortReference spirit:componentRef="Weight_Syn_2" spirit:portRef="dout"/>
         <spirit:internalPortReference spirit:componentRef="Multiplier_Syn_2" spirit:portRef="B"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>Synapse_Latch_2_DOUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="Synapse_Latch_Syn_2" spirit:portRef="DOUT"/>
-        <spirit:internalPortReference spirit:componentRef="Multiplier_Syn_2" spirit:portRef="A"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>Multiplier_2_P</spirit:name>
@@ -302,11 +317,6 @@
         <spirit:internalPortReference spirit:componentRef="Activation_Function" spirit:portRef="X"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
-        <spirit:name>SYN_2_VALID_1</spirit:name>
-        <spirit:externalPortReference spirit:portRef="SYN_2_VALID"/>
-        <spirit:internalPortReference spirit:componentRef="Synapse_Latch_Syn_2" spirit:portRef="SET"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
         <spirit:name>PlanWrapper_0_Y</spirit:name>
         <spirit:internalPortReference spirit:componentRef="Activation_Function" spirit:portRef="Y"/>
         <spirit:externalPortReference spirit:portRef="SYN_OUT"/>
@@ -314,17 +324,90 @@
       <spirit:adHocConnection>
         <spirit:name>CLK_1</spirit:name>
         <spirit:externalPortReference spirit:portRef="CLK"/>
-        <spirit:internalPortReference spirit:componentRef="Synapse_Latch_Syn_1" spirit:portRef="CLK"/>
-        <spirit:internalPortReference spirit:componentRef="Synapse_Latch_Syn_2" spirit:portRef="CLK"/>
         <spirit:internalPortReference spirit:componentRef="Multiplier_Syn_2" spirit:portRef="CLK"/>
         <spirit:internalPortReference spirit:componentRef="Multiplier_Syn_1" spirit:portRef="CLK"/>
-        <spirit:internalPortReference spirit:componentRef="Valid_Setter" spirit:portRef="CLK"/>
         <spirit:internalPortReference spirit:componentRef="Sum_Junction" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="Synapse_1" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="Synapse_2" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="DelayLatch_0" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="Pulse_2" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="Pulse_4" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="Pulse_3" spirit:portRef="CLK"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
-        <spirit:name>Valid_Setter_Adder_P_OUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="Valid_Setter" spirit:portRef="P_OUT"/>
+        <spirit:name>SYN_1_DIN_1</spirit:name>
+        <spirit:externalPortReference spirit:portRef="SYN_1_DIN"/>
+        <spirit:internalPortReference spirit:componentRef="Synapse_1" spirit:portRef="SYN_IN"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>SYN_1_VALID_1</spirit:name>
+        <spirit:externalPortReference spirit:portRef="SYN_1_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="Synapse_1" spirit:portRef="SYN_IN_VALID"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>SYN_2_DIN_1</spirit:name>
+        <spirit:externalPortReference spirit:portRef="SYN_2_DIN"/>
+        <spirit:internalPortReference spirit:componentRef="Synapse_2" spirit:portRef="SYN_IN"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>SYN_2_VALID_1</spirit:name>
+        <spirit:externalPortReference spirit:portRef="SYN_2_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="Synapse_2" spirit:portRef="SYN_IN_VALID"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>Synapse_1_SYN_OUT_VALID</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="Synapse_1" spirit:portRef="SYN_OUT_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="And2_0" spirit:portRef="A"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>Synapse_2_SYN_OUT_VALID</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="Synapse_2" spirit:portRef="SYN_OUT_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="And2_0" spirit:portRef="B"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>DelayLatch_0_Q</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="DelayLatch_0" spirit:portRef="Q"/>
         <spirit:externalPortReference spirit:portRef="SYN_OUT_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="Pulse_3" spirit:portRef="SET"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>Pulse_1_P</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="Pulse_3" spirit:portRef="P"/>
+        <spirit:internalPortReference spirit:componentRef="Synapse_1" spirit:portRef="CLR"/>
+        <spirit:internalPortReference spirit:componentRef="Synapse_2" spirit:portRef="CLR"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>Synapse_1_SYN_OUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="Synapse_1" spirit:portRef="SYN_OUT"/>
+        <spirit:internalPortReference spirit:componentRef="Multiplier_Syn_1" spirit:portRef="A"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>Synapse_2_SYN_OUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="Synapse_2" spirit:portRef="SYN_OUT"/>
+        <spirit:internalPortReference spirit:componentRef="Multiplier_Syn_2" spirit:portRef="A"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>And2_0_O</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="And2_0" spirit:portRef="O"/>
+        <spirit:internalPortReference spirit:componentRef="Inverter_0" spirit:portRef="i"/>
+        <spirit:internalPortReference spirit:componentRef="Multiplier_Syn_1" spirit:portRef="CE"/>
+        <spirit:internalPortReference spirit:componentRef="Multiplier_Syn_2" spirit:portRef="CE"/>
+        <spirit:internalPortReference spirit:componentRef="Pulse_2" spirit:portRef="SET"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>Pulse_2_P</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="Pulse_2" spirit:portRef="P"/>
+        <spirit:internalPortReference spirit:componentRef="DelayLatch_0" spirit:portRef="SET"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>Inverter_0_o</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="Inverter_0" spirit:portRef="o"/>
+        <spirit:internalPortReference spirit:componentRef="Pulse_4" spirit:portRef="SET"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>Pulse_4_P</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="Pulse_4" spirit:portRef="P"/>
+        <spirit:internalPortReference spirit:componentRef="DelayLatch_0" spirit:portRef="CLR"/>
       </spirit:adHocConnection>
     </spirit:adHocConnections>
   </spirit:design>
