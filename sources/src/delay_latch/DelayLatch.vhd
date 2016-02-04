@@ -21,14 +21,18 @@ architecture Behavioural of DelayLatch is
     signal sigDelayCntr : UNSIGNED (delayWidth - 1 downto 0);
 begin
     process (CLK) begin
-        if Rising_Edge(CLK) and (RST ='1' or CLR = '1') then
-            Q <= '0';
-            sigDelayCntr <= zero;
-        elsif Rising_Edge(CLK) and SET = '1' and sigDelayCntr = zero then
-            sigDelayCntr <= one;
-        elsif Rising_Edge(CLK) and sigDelayCntr /= delay and sigDelayCntr > 0 then
-            sigDelayCntr <= sigDelayCntr + 1;
-        elsif Falling_Edge(CLK) and sigDelayCntr = delay then
+        if Rising_Edge(CLK) then
+            if RST ='1' or CLR = '1' then
+                Q <= '0';
+                sigDelayCntr <= zero;
+            elsif SET = '1' and sigDelayCntr = zero then
+                sigDelayCntr <= one;
+            elsif sigDelayCntr /= delay and sigDelayCntr > 0 then
+                sigDelayCntr <= sigDelayCntr + 1;
+            end if;
+        end if;
+        
+        if Falling_Edge(CLK) and sigDelayCntr = delay then
             sigDelayCntr <= zero;
             Q <= '1';
         end if;

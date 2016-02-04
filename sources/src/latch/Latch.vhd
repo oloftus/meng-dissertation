@@ -17,10 +17,12 @@ end Latch;
 architecture Behavioral of Latch is
 begin
     latch: process (CLK) begin
-        if Rising_Edge(CLK) and SET = '1' then
-            DOUT <= DIN;
-        elsif Rising_Edge(CLK) and RST = '1' then
-            DOUT <= (others => '0');
+        if Rising_Edge(CLK) then
+            if SET = '1' then
+                DOUT <= DIN;
+            elsif RST = '1' then
+                DOUT <= (others => '0');
+            end if;
         end if;
     end process;
 end Behavioral;

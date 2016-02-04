@@ -11,35 +11,36 @@ entity Pulse is
 end Pulse;
 
 architecture Behavioral of Pulse is
+    constant zero : STD_LOGIC_VECTOR (1 downto 0) := "00";
+    constant one : STD_LOGIC_VECTOR (1 downto 0) := "01";
+    constant two : STD_LOGIC_VECTOR (1 downto 0) := "10";
+    constant three : STD_LOGIC_VECTOR (1 downto 0) := "11";
+
     signal sigCurrState : STD_LOGIC_VECTOR (1 downto 0);
 begin
-    process (CLK)
-        constant zero : STD_LOGIC_VECTOR (1 downto 0) := "00";
-        constant one : STD_LOGIC_VECTOR (1 downto 0) := "01";
-        constant two : STD_LOGIC_VECTOR (1 downto 0) := "10";
-        constant three : STD_LOGIC_VECTOR (1 downto 0) := "11";
-    begin
-        if Rising_Edge(CLK) and RST = '1' then
-            P <= '0';
-            sigCurrState <= zero;
+    process (CLK) begin
+        if Rising_Edge(CLK) then
+            if RST = '1' then
+                P <= '0';
+                sigCurrState <= zero;
+            elsif SET = '1' and sigCurrState = zero then
+                sigCurrState <= one;
+            end if;
+        end if;
             
-        elsif Rising_Edge(CLK) and SET = '1' and sigCurrState = zero then
-            sigCurrState <= one;
-            
-        elsif Falling_Edge(CLK) and sigCurrState = one then
-            P <= '1';
-            sigCurrState <= two;
-            
-        elsif Falling_Edge(CLK) and SET = '1' and sigCurrState = two then
-            P <= '0';
-            sigCurrState <= three;
-        
-        elsif Falling_Edge(CLK) and SET = '0' and sigCurrState = two then
-            P <= '0';
-            sigCurrState <= zero;
-
-        elsif Falling_Edge(CLK) and SET = '0' and sigCurrState = three then
-            sigCurrState <= zero;
+        if Falling_Edge(CLK) then
+            if sigCurrState = one then
+                P <= '1';
+                sigCurrState <= two;
+            elsif SET = '1' and sigCurrState = two then
+                P <= '0';
+                sigCurrState <= three;
+            elsif SET = '0' and sigCurrState = two then
+                P <= '0';
+                sigCurrState <= zero;
+            elsif SET = '0' and sigCurrState = three then
+                sigCurrState <= zero;
+            end if;
         end if;
     end process;
 end Behavioral;
