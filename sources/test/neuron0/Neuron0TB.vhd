@@ -45,10 +45,8 @@ begin
     end process;
     
     tb: process begin
-        sigRst <= '0';
-        wait for 100ns;
         sigRst <= '1';
-        wait for 100ns;
+        wait for 200ns;
         sigRst <= '0';
         
         sigSyn1Din <= "0"&"000000"&"100000"; -- 0.5
