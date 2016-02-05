@@ -1,57 +1,44 @@
 {
-   Display-PortTypeClock: "true",
-   Display-PortTypeOthers: "true",
-   Display-PortTypeReset: "true",
-   HideNet: "/CLK_1|/RST_1|",
-   comment_0: "Replace with WeightRegister",
-   commentid: "comment_0|",
-   font_comment_0: "12",
    guistr: "# # String gsaved with Nlview version 6.4-r1  2014-02-28 bk=1.3047 VDI=34 GEI=35 GUI=JA:1.6
 #  -string -flagsOSRD
-preplace port SYN_OUT_VALID -pg 1 -y 210 -defaultsOSRD
-preplace port CLK -pg 1 -y 210 -defaultsOSRD
-preplace port RST -pg 1 -y 290 -defaultsOSRD
-preplace port SYN_2_VALID -pg 1 -y 480 -defaultsOSRD
-preplace port SYN_1_VALID -pg 1 -y 310 -defaultsOSRD
-preplace portBus SYN_OUT -pg 1 -y 420 -defaultsOSRD
-preplace portBus SYN_2_DIN -pg 1 -y 500 -defaultsOSRD
-preplace portBus SYN_1_DIN -pg 1 -y 330 -defaultsOSRD
-preplace inst Pulse_3 -pg 1 -lvl 5 -y 70 -defaultsOSRD -orient R180
-preplace inst DelayLatch_0 -pg 1 -lvl 5 -y 250 -defaultsOSRD
-preplace inst Pulse_4 -pg 1 -lvl 4 -y 130 -defaultsOSRD
-preplace inst Weight_Syn_1 -pg 1 -lvl 4 -y 420 -defaultsOSRD
-preplace inst Synapse_1 -pg 1 -lvl 1 -y 290 -defaultsOSRD
-preplace inst Weight_Syn_2 -pg 1 -lvl 4 -y 560 -defaultsOSRD
-preplace inst Synapse_2 -pg 1 -lvl 1 -y 460 -defaultsOSRD
-preplace inst And2_0 -pg 1 -lvl 2 -y 260 -defaultsOSRD
-preplace inst Inverter_0 -pg 1 -lvl 3 -y 200 -defaultsOSRD
-preplace inst Sum_Junction -pg 1 -lvl 6 -y 420 -defaultsOSRD
-preplace inst Activation_Function -pg 1 -lvl 7 -y 420 -defaultsOSRD
-preplace inst Multiplier_Syn_1 -pg 1 -lvl 5 -y 400 -defaultsOSRD
-preplace inst Multiplier_Syn_2 -pg 1 -lvl 5 -y 550 -defaultsOSRD
-preplace inst Pulse_2 -pg 1 -lvl 4 -y 280 -defaultsOSRD
-preplace netloc Synapse_2_SYN_OUT 1 1 4 NJ 470 NJ 470 NJ 370 880
-preplace netloc Synapse_1_SYN_OUT 1 1 4 NJ 200 NJ 260 NJ 210 900
-preplace netloc Adder_1_S 1 6 1 N
-preplace netloc Multiplier_2_P 1 5 1 1080
-preplace netloc Inverter_0_o 1 3 1 710
-preplace netloc Pulse_2_P 1 4 1 N
-preplace netloc SYN_2_DIN_1 1 0 1 N
-preplace netloc PlanWrapper_0_Y 1 7 1 N
-preplace netloc Pulse_4_P 1 4 1 910
-preplace netloc Pulse_1_P 1 0 5 170 60 NJ 60 NJ 60 NJ 60 NJ
-preplace netloc Synapse_1_SYN_OUT_VALID 1 1 1 420
-preplace netloc Synapse_2_SYN_OUT_VALID 1 1 1 430
-preplace netloc Weight_2_dout 1 4 1 N
-preplace netloc Multiplier_1_P 1 5 1 N
-preplace netloc xlconstant_0_dout 1 4 1 910
-preplace netloc And2_0_O 1 2 3 570 280 710 360 890
-preplace netloc SYN_2_VALID_1 1 0 1 N
-preplace netloc SYN_1_DIN_1 1 0 1 N
+preplace port SYN_OUT_VALID -pg 1 -y 60 -defaultsOSRD
+preplace port RST -pg 1 -y 190 -defaultsOSRD
+preplace port CLK -pg 1 -y 170 -defaultsOSRD
+preplace port SYN_0_VALID -pg 1 -y 290 -defaultsOSRD
+preplace port SYN_1_VALID -pg 1 -y 360 -defaultsOSRD
+preplace portBus SYN_0_DIN -pg 1 -y 210 -defaultsOSRD
+preplace portBus SYN_OUT -pg 1 -y 130 -defaultsOSRD
+preplace portBus SYN_1_DIN -pg 1 -y 270 -defaultsOSRD
+preplace inst xlconstant_0 -pg 1 -lvl 2 -y 260 -defaultsOSRD
+preplace inst xlconstant_1 -pg 1 -lvl 2 -y 400 -defaultsOSRD
+preplace inst PlanWrapper_0 -pg 1 -lvl 5 -y 130 -defaultsOSRD
+preplace inst Synapse_0 -pg 1 -lvl 1 -y 170 -defaultsOSRD
+preplace inst Synapse_1 -pg 1 -lvl 1 -y 340 -defaultsOSRD
+preplace inst c_addsub_0 -pg 1 -lvl 4 -y 130 -defaultsOSRD
+preplace inst mult_gen_0 -pg 1 -lvl 3 -y 240 -defaultsOSRD
+preplace inst mult_gen_1 -pg 1 -lvl 3 -y 390 -defaultsOSRD
+preplace inst And2_0 -pg 1 -lvl 2 -y 140 -defaultsOSRD
+preplace inst ValidSetter_0 -pg 1 -lvl 3 -y 70 -defaultsOSRD
+preplace netloc mult_gen_1_P 1 3 1 920
+preplace netloc xlconstant_1_dout 1 2 1 N
+preplace netloc CLK_1 1 0 4 180 60 NJ 60 650 150 N
+preplace netloc Synapse_1_SYN_OUT 1 1 2 NJ 350 620
+preplace netloc ValidSetter_0_SYN_IN_CLR 1 0 4 210 80 NJ 210 NJ 160 900
+preplace netloc PlanWrapper_0_Y 1 5 1 N
+preplace netloc SYN_0_DIN_1 1 0 1 N
+preplace netloc Synapse_1_SYN_OUT_VALID 1 1 1 480
+preplace netloc SYN_0_VALID_1 1 0 1 200
+preplace netloc Synapse_0_SYN_OUT_VALID 1 1 1 470
+preplace netloc xlconstant_0_dout 1 2 1 660
+preplace netloc SYN_1_DIN_1 1 0 1 170
+preplace netloc And2_0_O 1 2 1 630
 preplace netloc SYN_1_VALID_1 1 0 1 N
-preplace netloc DelayLatch_0_Q 1 5 3 1080 210 NJ 210 NJ
-preplace cgraphic comment_0 place abs 89 -160 textcolor 4 linecolor 3 linewidth 2
-levelinfo -pg 1 150 290 500 640 810 1000 1170 1340 1450
+preplace netloc mult_gen_0_P 1 3 1 910
+preplace netloc ValidSetter_0_SYN_OUT_VALID 1 3 3 NJ 60 NJ 60 N
+preplace netloc RST_1 1 0 3 190 70 NJ 70 NJ
+preplace netloc Synapse_0_SYN_OUT 1 1 2 NJ 80 640
+preplace netloc c_addsub_0_S 1 4 1 N
+levelinfo -pg 1 150 330 550 780 1000 1170 1280
 ",
 }
 0

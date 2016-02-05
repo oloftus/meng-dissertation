@@ -12,14 +12,9 @@ architecture Behavioral of Neuron0TB is
     
     component Neuron0_wrapper is
       port (
-        CLK : in STD_LOGIC;
-        RST : in STD_LOGIC;
-        
-        SYN_1_DIN : in STD_LOGIC_VECTOR ( 12 downto 0 );
-        SYN_1_VALID : in STD_LOGIC;
-        SYN_2_DIN : in STD_LOGIC_VECTOR ( 12 downto 0 );
-        SYN_2_VALID : in STD_LOGIC;
-        
+        CLK, RST : in STD_LOGIC;
+        SYN_0_DIN, SYN_1_DIN : in STD_LOGIC_VECTOR ( 12 downto 0 );
+        SYN_0_VALID, SYN_1_VALID : in STD_LOGIC;
         SYN_OUT : out STD_LOGIC_VECTOR ( 11 downto 0 );
         SYN_OUT_VALID : out STD_LOGIC
       );
@@ -31,8 +26,8 @@ begin
         RST => sigRst,
         SYN_1_DIN => sigSyn1Din, 
         SYN_1_VALID => sigSyn1Valid, 
-        SYN_2_DIN => sigSyn2Din,
-        SYN_2_VALID => sigSyn2Valid,
+        SYN_0_DIN => sigSyn2Din,
+        SYN_0_VALID => sigSyn2Valid,
         SYN_OUT => sigSynOut,
         SYN_OUT_VALID => sigSynOutValid
       );
