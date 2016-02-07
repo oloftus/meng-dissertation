@@ -1,36 +1,31 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity DelayLatchTB is
-    generic (
-        tbDelay : INTEGER := 2;
-        tbDelayWidth : INTEGER := 2
-    );
-end DelayLatchTB;
+entity DelayedLatchTB is
+end DelayedLatchTB;
 
-architecture Behavioral of DelayLatchTB is
-    signal sigClk, sigRst, sigClr, sigSet, sigQ : STD_LOGIC;
+architecture Behavioral of DelayedLatchTB is
+    signal sigClk, sigRst, sigSet, sigQ : STD_LOGIC;
     
-    component DelayLatch is
+    component DelayedLatch is
         generic (
-            delay : INTEGER;
+            delayVal : INTEGER;
             delayWidth : INTEGER
         );
         port (
-            CLK, RST, CLR, SET : in STD_LOGIC;
+            CLK, RST, SET : in STD_LOGIC;
             Q : out STD_LOGIC
         );
     end component;
 begin
-    uut: DelayLatch
+    uut: DelayedLatch
         generic map (
-            delay => tbDelay,
-            delayWidth => tbDelayWidth
+            delayVal => 2,
+            delayWidth => 2
         )
         port map (
             CLK => sigClk,
             RST => sigRst,
-            CLR => sigClr,
             SET => sigSet,
             Q => sigQ
         );
@@ -50,16 +45,6 @@ begin
         sigSet <= '1';
         wait for 200ns;
         sigSet <= '0';
-        
---        wait for 500ns;
---        sigClr <= '1';
---        wait for 100ns;
---        sigClr <= '0';
-        
---        wait for 100ns;
---        sigSet <= '1';
---        wait for 100ns;
---        sigSet <= '0';
 
         wait;
     end process;

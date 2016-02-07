@@ -39,6 +39,8 @@ begin
     end process;
 
     tb: process begin
+        sigSynInValid <= '0';
+        
         sigRst <= '1';
         wait for 200ns;
         sigRst <= '0';

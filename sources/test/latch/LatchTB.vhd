@@ -19,8 +19,8 @@ architecture Behavioral of LatchTB is
             clk : in STD_LOGIC;
             set : in STD_LOGIC;
             RST : in STD_LOGIC;
-            din : in STD_LOGIC_VECTOR (size - 1 downto 0);
-            dout : out STD_LOGIC_VECTOR (size - 1 downto 0) 
+            din : in STD_LOGIC_VECTOR (11 downto 0);
+            dout : out STD_LOGIC_VECTOR (11 downto 0)
         );
     end component;
 begin

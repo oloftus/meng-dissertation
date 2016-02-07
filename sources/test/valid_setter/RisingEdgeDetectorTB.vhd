@@ -1,26 +1,24 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity PulseTB is
-end PulseTB;
+entity RisingEdgeDetectorTB is
+end RisingEdgeDetectorTB;
 
-architecture Behavioral of PulseTB is
-    signal sigClk, sigSet, sigRst, sigP : STD_LOGIC;
+architecture Behavioral of RisingEdgeDetectorTB is
+    signal sigClk, sigSet, sigP : STD_LOGIC;
     
-    component Pulse is
+    component RisingEdgeDetector is
         port (
             CLK : in STD_LOGIC;
             SET : in STD_LOGIC;
-            RST : in STD_LOGIC;
             P : out STD_LOGIC
         );
     end component;
 begin
-    uut: Pulse
+    uut: RisingEdgeDetector
         port map (
             CLK => sigClk,
             SET => sigSet,
-            RST => sigRst,
             P => sigP
         );
         
@@ -32,26 +30,13 @@ begin
     end process;
 
     tb: process begin
-        sigRst <= '1';
-        wait for 200ns;
-        sigRst <= '0';
-        
         sigSet <= '1';
-        
-        wait for 200ns;
-        sigSet <= '0';
+        wait for 100ns;
         wait for 10ns;
         assert sigP = '1' report "Test failed: 1";
-        wait for 200ns;
+        wait for 400ns;
         assert sigP = '0' report "Test failed: 2";
-        wait for 190ns;
-                
-        sigSet <= '1';
-        wait for 210ns;
-        assert sigP = '1' report "Test failed: 3";
-        wait for 200ns;
-        assert sigP = '0' report "Test failed: 4";
-        wait for 190ns;
+        wait for 90ns;
         sigSet <= '0';
         
         wait;
