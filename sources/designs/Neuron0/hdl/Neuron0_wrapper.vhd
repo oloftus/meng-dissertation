@@ -1,7 +1,7 @@
 --Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2014.2 (win32) Build 932637 Wed Jun 11 13:24:38 MDT 2014
---Date        : Fri Feb 05 19:02:03 2016
+--Date        : Sun Feb 07 01:54:02 2016
 --Host        : Oli-Windows7VM running 32-bit Service Pack 1  (build 7601)
 --Command     : generate_target Neuron0_wrapper.bd
 --Design      : Neuron0_wrapper

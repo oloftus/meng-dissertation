@@ -40,6 +40,9 @@ begin
     end process;
     
     tb: process begin
+        sigSyn1Valid <= '0';
+        sigSyn2Valid <= '0';
+
         sigRst <= '1';
         wait for 200ns;
         sigRst <= '0';

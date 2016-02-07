@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Fri Feb 05 19:02:03 2016" VIVADOVERSION="2014.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Sun Feb 07 01:54:02 2016" VIVADOVERSION="2014.2">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z010" NAME="Neuron0_imp" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
   <EXTERNALPORTS>
     <PORT CLKFREQUENCY="100000000" DIR="I" NAME="CLK" SIGIS="clk" SIGNAME="External_Ports_CLK">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="Synapse_0" PORT="CLK"/>
-        <CONNECTION INSTANCE="Synapse_1" PORT="CLK"/>
-        <CONNECTION INSTANCE="ValidSetter_0" PORT="CLK"/>
         <CONNECTION INSTANCE="mult_gen_0" PORT="CLK"/>
         <CONNECTION INSTANCE="mult_gen_1" PORT="CLK"/>
         <CONNECTION INSTANCE="c_addsub_0" PORT="CLK"/>
+        <CONNECTION INSTANCE="Synapse_0" PORT="CLK"/>
+        <CONNECTION INSTANCE="Synapse_1" PORT="CLK"/>
+        <CONNECTION INSTANCE="ValidSetter_0" PORT="CLK"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="I" NAME="RST" SIGIS="rst" SIGNAME="External_Ports_RST">
@@ -73,9 +73,9 @@
         </PORT>
         <PORT DIR="O" NAME="O" SIGIS="undef" SIGNAME="And2_0_O">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="ValidSetter_0" PORT="SYN_IN_VALID"/>
             <CONNECTION INSTANCE="mult_gen_0" PORT="CE"/>
             <CONNECTION INSTANCE="mult_gen_1" PORT="CE"/>
+            <CONNECTION INSTANCE="ValidSetter_0" PORT="SYN_IN_VALID"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -198,8 +198,8 @@
     <MODULE FULLNAME="/ValidSetter_0" HWVERSION="1.0" INSTANCE="ValidSetter_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="ValidSetter" VLNV="oloftus.com:prif:ValidSetter:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
-        <PARAMETER NAME="latency" VALUE="1"/>
-        <PARAMETER NAME="latencyWidth" VALUE="1"/>
+        <PARAMETER NAME="latency" VALUE="2"/>
+        <PARAMETER NAME="latencyWidth" VALUE="2"/>
         <PARAMETER NAME="Component_Name" VALUE="Neuron0_ValidSetter_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>

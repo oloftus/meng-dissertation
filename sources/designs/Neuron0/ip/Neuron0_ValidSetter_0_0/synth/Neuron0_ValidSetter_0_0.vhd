@@ -46,55 +46,55 @@
 -- 
 -- DO NOT MODIFY THIS FILE.
 
--- IP VLNV: oloftus.com:prif:Synapse:1.0
+-- IP VLNV: oloftus.com:prif:ValidSetter:1.0
 -- IP Revision: 2
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY Neuron0_Synapse_0_1 IS
+ENTITY Neuron0_ValidSetter_0_0 IS
   PORT (
     CLK : IN STD_LOGIC;
-    CLR : IN STD_LOGIC;
     RST : IN STD_LOGIC;
     SYN_IN_VALID : IN STD_LOGIC;
-    SYN_IN : IN STD_LOGIC_VECTOR(12 DOWNTO 0);
     SYN_OUT_VALID : OUT STD_LOGIC;
-    SYN_OUT : OUT STD_LOGIC_VECTOR(12 DOWNTO 0)
+    SYN_IN_CLR : OUT STD_LOGIC
   );
-END Neuron0_Synapse_0_1;
+END Neuron0_ValidSetter_0_0;
 
-ARCHITECTURE Neuron0_Synapse_0_1_arch OF Neuron0_Synapse_0_1 IS
+ARCHITECTURE Neuron0_ValidSetter_0_0_arch OF Neuron0_ValidSetter_0_0 IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings : string;
-  ATTRIBUTE DowngradeIPIdentifiedWarnings OF Neuron0_Synapse_0_1_arch: ARCHITECTURE IS "yes";
+  ATTRIBUTE DowngradeIPIdentifiedWarnings OF Neuron0_ValidSetter_0_0_arch: ARCHITECTURE IS "yes";
 
-  COMPONENT Synapse IS
+  COMPONENT ValidSetter IS
     GENERIC (
-      size : INTEGER
+      latency : INTEGER;
+      latencyWidth : INTEGER
     );
     PORT (
       CLK : IN STD_LOGIC;
-      CLR : IN STD_LOGIC;
       RST : IN STD_LOGIC;
       SYN_IN_VALID : IN STD_LOGIC;
-      SYN_IN : IN STD_LOGIC_VECTOR(12 DOWNTO 0);
       SYN_OUT_VALID : OUT STD_LOGIC;
-      SYN_OUT : OUT STD_LOGIC_VECTOR(12 DOWNTO 0)
+      SYN_IN_CLR : OUT STD_LOGIC
     );
-  END COMPONENT Synapse;
+  END COMPONENT ValidSetter;
+  ATTRIBUTE X_CORE_INFO : STRING;
+  ATTRIBUTE X_CORE_INFO OF Neuron0_ValidSetter_0_0_arch: ARCHITECTURE IS "ValidSetter,Vivado 2014.2";
+  ATTRIBUTE CHECK_LICENSE_TYPE : STRING;
+  ATTRIBUTE CHECK_LICENSE_TYPE OF Neuron0_ValidSetter_0_0_arch : ARCHITECTURE IS "Neuron0_ValidSetter_0_0,ValidSetter,{}";
 BEGIN
-  U0 : Synapse
+  U0 : ValidSetter
     GENERIC MAP (
-      size => 13
+      latency => 2,
+      latencyWidth => 2
     )
     PORT MAP (
       CLK => CLK,
-      CLR => CLR,
       RST => RST,
       SYN_IN_VALID => SYN_IN_VALID,
-      SYN_IN => SYN_IN,
       SYN_OUT_VALID => SYN_OUT_VALID,
-      SYN_OUT => SYN_OUT
+      SYN_IN_CLR => SYN_IN_CLR
     );
-END Neuron0_Synapse_0_1_arch;
+END Neuron0_ValidSetter_0_0_arch;

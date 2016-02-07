@@ -46,55 +46,46 @@
 -- 
 -- DO NOT MODIFY THIS FILE.
 
--- IP VLNV: oloftus.com:prif:Synapse:1.0
+-- IP VLNV: oloftus.com:prif:PlanWrapper:1.0
 -- IP Revision: 2
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY Neuron0_Synapse_0_1 IS
+ENTITY Neuron0_PlanWrapper_0_0 IS
   PORT (
-    CLK : IN STD_LOGIC;
-    CLR : IN STD_LOGIC;
-    RST : IN STD_LOGIC;
-    SYN_IN_VALID : IN STD_LOGIC;
-    SYN_IN : IN STD_LOGIC_VECTOR(12 DOWNTO 0);
-    SYN_OUT_VALID : OUT STD_LOGIC;
-    SYN_OUT : OUT STD_LOGIC_VECTOR(12 DOWNTO 0)
+    X : IN STD_LOGIC_VECTOR(12 DOWNTO 0);
+    Y : OUT STD_LOGIC_VECTOR(11 DOWNTO 0)
   );
-END Neuron0_Synapse_0_1;
+END Neuron0_PlanWrapper_0_0;
 
-ARCHITECTURE Neuron0_Synapse_0_1_arch OF Neuron0_Synapse_0_1 IS
+ARCHITECTURE Neuron0_PlanWrapper_0_0_arch OF Neuron0_PlanWrapper_0_0 IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings : string;
-  ATTRIBUTE DowngradeIPIdentifiedWarnings OF Neuron0_Synapse_0_1_arch: ARCHITECTURE IS "yes";
+  ATTRIBUTE DowngradeIPIdentifiedWarnings OF Neuron0_PlanWrapper_0_0_arch: ARCHITECTURE IS "yes";
 
-  COMPONENT Synapse IS
+  COMPONENT PlanWrapper IS
     GENERIC (
-      size : INTEGER
+      integerPrecision : INTEGER;
+      fractionPrecision : INTEGER
     );
     PORT (
-      CLK : IN STD_LOGIC;
-      CLR : IN STD_LOGIC;
-      RST : IN STD_LOGIC;
-      SYN_IN_VALID : IN STD_LOGIC;
-      SYN_IN : IN STD_LOGIC_VECTOR(12 DOWNTO 0);
-      SYN_OUT_VALID : OUT STD_LOGIC;
-      SYN_OUT : OUT STD_LOGIC_VECTOR(12 DOWNTO 0)
+      X : IN STD_LOGIC_VECTOR(12 DOWNTO 0);
+      Y : OUT STD_LOGIC_VECTOR(11 DOWNTO 0)
     );
-  END COMPONENT Synapse;
+  END COMPONENT PlanWrapper;
+  ATTRIBUTE X_CORE_INFO : STRING;
+  ATTRIBUTE X_CORE_INFO OF Neuron0_PlanWrapper_0_0_arch: ARCHITECTURE IS "PlanWrapper,Vivado 2014.2";
+  ATTRIBUTE CHECK_LICENSE_TYPE : STRING;
+  ATTRIBUTE CHECK_LICENSE_TYPE OF Neuron0_PlanWrapper_0_0_arch : ARCHITECTURE IS "Neuron0_PlanWrapper_0_0,PlanWrapper,{}";
 BEGIN
-  U0 : Synapse
+  U0 : PlanWrapper
     GENERIC MAP (
-      size => 13
+      integerPrecision => 6,
+      fractionPrecision => 6
     )
     PORT MAP (
-      CLK => CLK,
-      CLR => CLR,
-      RST => RST,
-      SYN_IN_VALID => SYN_IN_VALID,
-      SYN_IN => SYN_IN,
-      SYN_OUT_VALID => SYN_OUT_VALID,
-      SYN_OUT => SYN_OUT
+      X => X,
+      Y => Y
     );
-END Neuron0_Synapse_0_1_arch;
+END Neuron0_PlanWrapper_0_0_arch;

@@ -4,73 +4,40 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity Synapse is
     generic (
-        size : INTEGER
+        size : INTEGER := 4
     );
     port (
-        CLK : in STD_LOGIC;
-        CLR : in STD_LOGIC;
-        RST : in STD_LOGIC;
-        
+        CLK, CLR, RST : in STD_LOGIC;
         SYN_IN_VALID : in STD_LOGIC;
         SYN_IN : in STD_LOGIC_VECTOR (size - 1 downto 0);
-        
         SYN_OUT_VALID : out STD_LOGIC;
         SYN_OUT : out STD_LOGIC_VECTOR (size - 1 downto 0)
     );
 end Synapse;
 
 architecture Behavioral of Synapse is
-    signal sigAndOut, sigSynOutValid : STD_LOGIC;
-    
-    component Latch is
-        generic (
-            size : INTEGER
-        );
-        port (
-            CLK : in STD_LOGIC;
-            SET : in STD_LOGIC;
-            RST : in STD_LOGIC;
-            DIN : in STD_LOGIC_VECTOR (size - 1 downto 0);
-            DOUT : out STD_LOGIC_VECTOR (size - 1 downto 0) 
-        );
-    end component;
-    
-    component DelayLatch is
-        generic (
-            delay : INTEGER;
-            delayWidth : INTEGER
-        );
-        port (
-            CLK, RST, CLR, SET : in STD_LOGIC;
-            Q : out STD_LOGIC
-        );
-    end component;
+    signal sigRegSet, sigSynOutValid : STD_LOGIC;
 begin
     SYN_OUT_VALID <= sigSynOutValid;
-    sigAndOut <= SYN_IN_VALID and not sigSynOutValid;
+    sigRegSet <= SYN_IN_VALID and not sigSynOutValid;
+
+    valid_proc: process (CLK) begin
+        if Rising_Edge(CLK) then
+            if SYN_IN_VALID = '1' then
+                sigSynOutValid <= '1';
+            elsif RST = '1' or CLR = '1' then
+                sigSynOutValid <= '0';
+            end if;
+        end if;
+    end process;
     
-    memory_latch_inst: Latch
-        generic map (
-            size => size
-        )
-        port map (
-            CLK => CLK,
-            SET => sigAndOut,
-            RST => RST,
-            DIN => SYN_IN,
-            DOUT => SYN_OUT
-        );
-    
-    delay_latch_inst: DelayLatch
-        generic map (
-            delay => 1,
-            delayWidth => 1
-        )
-        port map (
-            CLK => CLK,
-            RST => RST,
-            CLR => CLR,
-            SET => sigAndOut,
-            Q => sigSynOutValid
-        );
+    register_proc: process (CLK) begin
+        if Rising_Edge(CLK) then
+            if sigRegSet = '1' then
+                SYN_OUT <= SYN_IN;
+            elsif RST = '1' then
+                SYN_OUT <= (others => '0');
+            end if;
+        end if;
+    end process;
 end Behavioral;

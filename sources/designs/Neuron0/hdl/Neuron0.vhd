@@ -1,7 +1,7 @@
 --Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2014.2 (win32) Build 932637 Wed Jun 11 13:24:38 MDT 2014
---Date        : Fri Feb 05 19:02:03 2016
+--Date        : Sun Feb 07 01:54:02 2016
 --Host        : Oli-Windows7VM running 32-bit Service Pack 1  (build 7601)
 --Command     : generate_target Neuron0.bd
 --Design      : Neuron0
@@ -27,17 +27,6 @@ entity Neuron0 is
 end Neuron0;
 
 architecture STRUCTURE of Neuron0 is
-  component Neuron0_Synapse_0_0 is
-  port (
-    CLK : in STD_LOGIC;
-    CLR : in STD_LOGIC;
-    RST : in STD_LOGIC;
-    SYN_IN_VALID : in STD_LOGIC;
-    SYN_IN : in STD_LOGIC_VECTOR ( 12 downto 0 );
-    SYN_OUT_VALID : out STD_LOGIC;
-    SYN_OUT : out STD_LOGIC_VECTOR ( 12 downto 0 )
-  );
-  end component Neuron0_Synapse_0_0;
   component Neuron0_mult_gen_0_0 is
   port (
     CLK : in STD_LOGIC;
@@ -66,26 +55,6 @@ architecture STRUCTURE of Neuron0 is
     dout : out STD_LOGIC_VECTOR ( 12 downto 0 )
   );
   end component Neuron0_xlconstant_0_0;
-  component Neuron0_ValidSetter_0_0 is
-  port (
-    CLK : in STD_LOGIC;
-    RST : in STD_LOGIC;
-    SYN_IN_VALID : in STD_LOGIC;
-    SYN_OUT_VALID : out STD_LOGIC;
-    SYN_IN_CLR : out STD_LOGIC
-  );
-  end component Neuron0_ValidSetter_0_0;
-  component Neuron0_Synapse_0_1 is
-  port (
-    CLK : in STD_LOGIC;
-    CLR : in STD_LOGIC;
-    RST : in STD_LOGIC;
-    SYN_IN_VALID : in STD_LOGIC;
-    SYN_IN : in STD_LOGIC_VECTOR ( 12 downto 0 );
-    SYN_OUT_VALID : out STD_LOGIC;
-    SYN_OUT : out STD_LOGIC_VECTOR ( 12 downto 0 )
-  );
-  end component Neuron0_Synapse_0_1;
   component Neuron0_And2_0_0 is
   port (
     A : in STD_LOGIC;
@@ -107,6 +76,37 @@ architecture STRUCTURE of Neuron0 is
     dout : out STD_LOGIC_VECTOR ( 12 downto 0 )
   );
   end component Neuron0_xlconstant_0_1;
+  component Neuron0_Synapse_0_0 is
+  port (
+    CLK : in STD_LOGIC;
+    CLR : in STD_LOGIC;
+    RST : in STD_LOGIC;
+    SYN_IN_VALID : in STD_LOGIC;
+    SYN_IN : in STD_LOGIC_VECTOR ( 12 downto 0 );
+    SYN_OUT_VALID : out STD_LOGIC;
+    SYN_OUT : out STD_LOGIC_VECTOR ( 12 downto 0 )
+  );
+  end component Neuron0_Synapse_0_0;
+  component Neuron0_Synapse_0_1 is
+  port (
+    CLK : in STD_LOGIC;
+    CLR : in STD_LOGIC;
+    RST : in STD_LOGIC;
+    SYN_IN_VALID : in STD_LOGIC;
+    SYN_IN : in STD_LOGIC_VECTOR ( 12 downto 0 );
+    SYN_OUT_VALID : out STD_LOGIC;
+    SYN_OUT : out STD_LOGIC_VECTOR ( 12 downto 0 )
+  );
+  end component Neuron0_Synapse_0_1;
+  component Neuron0_ValidSetter_0_0 is
+  port (
+    CLK : in STD_LOGIC;
+    RST : in STD_LOGIC;
+    SYN_IN_VALID : in STD_LOGIC;
+    SYN_OUT_VALID : out STD_LOGIC;
+    SYN_IN_CLR : out STD_LOGIC
+  );
+  end component Neuron0_ValidSetter_0_0;
   signal And2_0_O : STD_LOGIC;
   signal CLK_1 : STD_LOGIC;
   signal PlanWrapper_0_Y : STD_LOGIC_VECTOR ( 11 downto 0 );

@@ -47,7 +47,7 @@
 -- DO NOT MODIFY THIS FILE.
 
 -- IP VLNV: oloftus.com:prif:ValidSetter:1.0
--- IP Revision: 1
+-- IP Revision: 2
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
@@ -83,8 +83,8 @@ ARCHITECTURE Neuron0_ValidSetter_0_0_arch OF Neuron0_ValidSetter_0_0 IS
 BEGIN
   U0 : ValidSetter
     GENERIC MAP (
-      latency => 1,
-      latencyWidth => 1
+      latency => 2,
+      latencyWidth => 2
     )
     PORT MAP (
       CLK => CLK,

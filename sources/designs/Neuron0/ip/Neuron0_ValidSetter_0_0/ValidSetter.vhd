@@ -3,8 +3,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity ValidSetter is
     generic (
-        latency : INTEGER;
-        latencyWidth : INTEGER
+        latency : INTEGER := 2;
+        latencyWidth : INTEGER := 2
     );
     port (
         CLK, RST, SYN_IN_VALID : in STD_LOGIC;
@@ -13,64 +13,60 @@ entity ValidSetter is
 end ValidSetter;
 
 architecture Behavioral of ValidSetter is
-    signal sigQ, sigSet, sigClr, sigNotSynInValid : STD_LOGIC;
+    signal sigQ, sigRst, sigSet, sigClr, sigNotSynInsValid : STD_LOGIC;
     
-    component Pulse is
+    component RisingEdgeDetector is
         port (
             CLK : in STD_LOGIC;
             SET : in STD_LOGIC;
-            RST : in STD_LOGIC;
             P : out STD_LOGIC
         );
     end component;
     
-    component DelayLatch is
+    component DelayedLatch is
         generic (
-            delay : INTEGER;
+            delayVal : INTEGER;
             delayWidth : INTEGER
         );
         port (
-            CLK, RST, CLR, SET : in STD_LOGIC;
+            CLK, RST, SET : in STD_LOGIC;
             Q : out STD_LOGIC
         );
     end component;
 begin
     SYN_OUT_VALID <= sigQ;
-    sigNotSynInValid <= not SYN_IN_VALID; 
+    sigNotSynInsValid <= not SYN_IN_VALID; 
+    sigRst <= RST or sigClr;
     
-    clr_pulse_comp: Pulse
+    dl_clr_red_inst: RisingEdgeDetector
         port map (
             CLK => CLK,
-            SET => sigNotSynInValid,
-            RST => RST,
+            SET => sigNotSynInsValid,
             P => sigClr
         );
     
-    set_pulse_comp: Pulse
+    dl_set_red_inst: RisingEdgeDetector
         port map (
             CLK => CLK,
             SET => SYN_IN_VALID,
-            RST => RST,
             P => sigSet
         );
         
-    syn_in_clr_pulse_comp: Pulse
+    syn_in_clr_red_inst: RisingEdgeDetector
         port map (
             CLK => CLK,
             SET => sigQ,
-            RST => RST,
             P => SYN_IN_CLR
         );
     
-    delay_latch_comp: DelayLatch
+    delay_latch_comp: DelayedLatch
         generic map (
-            delay => latency,
+            delayVal => latency,
             delayWidth => latencyWidth
         )
         port map (
             CLK => CLK,
-            RST => RST,
-            CLR => sigClr,
+            RST => sigRst,
             SET => sigSet,
             Q => sigQ
         );

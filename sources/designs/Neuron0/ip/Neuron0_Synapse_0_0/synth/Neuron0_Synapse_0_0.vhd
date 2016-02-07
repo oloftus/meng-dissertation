@@ -53,7 +53,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY Neuron0_Synapse_0_1 IS
+ENTITY Neuron0_Synapse_0_0 IS
   PORT (
     CLK : IN STD_LOGIC;
     CLR : IN STD_LOGIC;
@@ -63,11 +63,11 @@ ENTITY Neuron0_Synapse_0_1 IS
     SYN_OUT_VALID : OUT STD_LOGIC;
     SYN_OUT : OUT STD_LOGIC_VECTOR(12 DOWNTO 0)
   );
-END Neuron0_Synapse_0_1;
+END Neuron0_Synapse_0_0;
 
-ARCHITECTURE Neuron0_Synapse_0_1_arch OF Neuron0_Synapse_0_1 IS
+ARCHITECTURE Neuron0_Synapse_0_0_arch OF Neuron0_Synapse_0_0 IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings : string;
-  ATTRIBUTE DowngradeIPIdentifiedWarnings OF Neuron0_Synapse_0_1_arch: ARCHITECTURE IS "yes";
+  ATTRIBUTE DowngradeIPIdentifiedWarnings OF Neuron0_Synapse_0_0_arch: ARCHITECTURE IS "yes";
 
   COMPONENT Synapse IS
     GENERIC (
@@ -83,6 +83,10 @@ ARCHITECTURE Neuron0_Synapse_0_1_arch OF Neuron0_Synapse_0_1 IS
       SYN_OUT : OUT STD_LOGIC_VECTOR(12 DOWNTO 0)
     );
   END COMPONENT Synapse;
+  ATTRIBUTE X_CORE_INFO : STRING;
+  ATTRIBUTE X_CORE_INFO OF Neuron0_Synapse_0_0_arch: ARCHITECTURE IS "Synapse,Vivado 2014.2";
+  ATTRIBUTE CHECK_LICENSE_TYPE : STRING;
+  ATTRIBUTE CHECK_LICENSE_TYPE OF Neuron0_Synapse_0_0_arch : ARCHITECTURE IS "Neuron0_Synapse_0_0,Synapse,{}";
 BEGIN
   U0 : Synapse
     GENERIC MAP (
@@ -97,4 +101,4 @@ BEGIN
       SYN_OUT_VALID => SYN_OUT_VALID,
       SYN_OUT => SYN_OUT
     );
-END Neuron0_Synapse_0_1_arch;
+END Neuron0_Synapse_0_0_arch;

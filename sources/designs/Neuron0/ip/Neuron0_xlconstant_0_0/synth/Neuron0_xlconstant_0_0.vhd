@@ -46,55 +46,48 @@
 -- 
 -- DO NOT MODIFY THIS FILE.
 
--- IP VLNV: oloftus.com:prif:Synapse:1.0
--- IP Revision: 2
+-- IP VLNV: xilinx.com:ip:xlconstant:1.1
+-- IP Revision: 0
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY Neuron0_Synapse_0_1 IS
+LIBRARY work;
+USE work.xlconstant;
+
+ENTITY Neuron0_xlconstant_0_0 IS
   PORT (
-    CLK : IN STD_LOGIC;
-    CLR : IN STD_LOGIC;
-    RST : IN STD_LOGIC;
-    SYN_IN_VALID : IN STD_LOGIC;
-    SYN_IN : IN STD_LOGIC_VECTOR(12 DOWNTO 0);
-    SYN_OUT_VALID : OUT STD_LOGIC;
-    SYN_OUT : OUT STD_LOGIC_VECTOR(12 DOWNTO 0)
+    dout : OUT STD_LOGIC_VECTOR(12 DOWNTO 0)
   );
-END Neuron0_Synapse_0_1;
+END Neuron0_xlconstant_0_0;
 
-ARCHITECTURE Neuron0_Synapse_0_1_arch OF Neuron0_Synapse_0_1 IS
+ARCHITECTURE Neuron0_xlconstant_0_0_arch OF Neuron0_xlconstant_0_0 IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings : string;
-  ATTRIBUTE DowngradeIPIdentifiedWarnings OF Neuron0_Synapse_0_1_arch: ARCHITECTURE IS "yes";
+  ATTRIBUTE DowngradeIPIdentifiedWarnings OF Neuron0_xlconstant_0_0_arch: ARCHITECTURE IS "yes";
 
-  COMPONENT Synapse IS
+  COMPONENT xlconstant IS
     GENERIC (
-      size : INTEGER
+      CONST_VAL : INTEGER;
+      CONST_WIDTH : INTEGER
     );
     PORT (
-      CLK : IN STD_LOGIC;
-      CLR : IN STD_LOGIC;
-      RST : IN STD_LOGIC;
-      SYN_IN_VALID : IN STD_LOGIC;
-      SYN_IN : IN STD_LOGIC_VECTOR(12 DOWNTO 0);
-      SYN_OUT_VALID : OUT STD_LOGIC;
-      SYN_OUT : OUT STD_LOGIC_VECTOR(12 DOWNTO 0)
+      dout : OUT STD_LOGIC_VECTOR(12 DOWNTO 0)
     );
-  END COMPONENT Synapse;
+  END COMPONENT xlconstant;
+  ATTRIBUTE X_CORE_INFO : STRING;
+  ATTRIBUTE X_CORE_INFO OF Neuron0_xlconstant_0_0_arch: ARCHITECTURE IS "xlconstant,Vivado 2014.2";
+  ATTRIBUTE CHECK_LICENSE_TYPE : STRING;
+  ATTRIBUTE CHECK_LICENSE_TYPE OF Neuron0_xlconstant_0_0_arch : ARCHITECTURE IS "Neuron0_xlconstant_0_0,xlconstant,{}";
+  ATTRIBUTE CORE_GENERATION_INFO : STRING;
+  ATTRIBUTE CORE_GENERATION_INFO OF Neuron0_xlconstant_0_0_arch: ARCHITECTURE IS "Neuron0_xlconstant_0_0,xlconstant,{x_ipProduct=Vivado 2014.2,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=xlconstant,x_ipVersion=1.1,x_ipCoreRevision=0,x_ipLanguage=VHDL,CONST_VAL=1,CONST_WIDTH=13}";
 BEGIN
-  U0 : Synapse
+  U0 : xlconstant
     GENERIC MAP (
-      size => 13
+      CONST_VAL => 1,
+      CONST_WIDTH => 13
     )
     PORT MAP (
-      CLK => CLK,
-      CLR => CLR,
-      RST => RST,
-      SYN_IN_VALID => SYN_IN_VALID,
-      SYN_IN => SYN_IN,
-      SYN_OUT_VALID => SYN_OUT_VALID,
-      SYN_OUT => SYN_OUT
+      dout => dout
     );
-END Neuron0_Synapse_0_1_arch;
+END Neuron0_xlconstant_0_0_arch;

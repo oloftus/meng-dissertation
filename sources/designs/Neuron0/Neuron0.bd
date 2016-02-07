@@ -189,14 +189,6 @@
     <spirit:version>1.00.a</spirit:version>
     <spirit:componentInstances>
       <spirit:componentInstance>
-        <spirit:instanceName>Synapse_0</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="Synapse" spirit:vendor="oloftus.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_Synapse_0_0</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="size">13</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
         <spirit:instanceName>mult_gen_0</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="mult_gen" spirit:vendor="xilinx.com" spirit:version="12.0"/>
         <spirit:configurableElementValues>
@@ -241,23 +233,6 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>ValidSetter_0</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="ValidSetter" spirit:vendor="oloftus.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_ValidSetter_0_0</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="latencyWidth">1</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="latency">1</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>Synapse_1</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="Synapse" spirit:vendor="oloftus.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_Synapse_0_1</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="size">13</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
         <spirit:instanceName>And2_0</spirit:instanceName>
         <spirit:componentRef spirit:library="prif" spirit:name="And2" spirit:vendor="oloftus.com" spirit:version="1.0"/>
         <spirit:configurableElementValues>
@@ -285,6 +260,31 @@
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_xlconstant_0_1</spirit:configurableElementValue>
           <spirit:configurableElementValue spirit:referenceId="CONST_WIDTH">13</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>Synapse_0</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="Synapse" spirit:vendor="oloftus.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_Synapse_0_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="size">13</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>Synapse_1</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="Synapse" spirit:vendor="oloftus.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_Synapse_0_1</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="size">13</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>ValidSetter_0</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="ValidSetter" spirit:vendor="oloftus.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_ValidSetter_0_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="latencyWidth">2</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="latency">2</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
     </spirit:componentInstances>
@@ -322,9 +322,9 @@
       <spirit:adHocConnection>
         <spirit:name>And2_0_O</spirit:name>
         <spirit:internalPortReference spirit:componentRef="And2_0" spirit:portRef="O"/>
-        <spirit:internalPortReference spirit:componentRef="ValidSetter_0" spirit:portRef="SYN_IN_VALID"/>
         <spirit:internalPortReference spirit:componentRef="mult_gen_0" spirit:portRef="CE"/>
         <spirit:internalPortReference spirit:componentRef="mult_gen_1" spirit:portRef="CE"/>
+        <spirit:internalPortReference spirit:componentRef="ValidSetter_0" spirit:portRef="SYN_IN_VALID"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>mult_gen_0_P</spirit:name>
@@ -344,12 +344,12 @@
       <spirit:adHocConnection>
         <spirit:name>CLK_1</spirit:name>
         <spirit:externalPortReference spirit:portRef="CLK"/>
-        <spirit:internalPortReference spirit:componentRef="Synapse_0" spirit:portRef="CLK"/>
-        <spirit:internalPortReference spirit:componentRef="Synapse_1" spirit:portRef="CLK"/>
-        <spirit:internalPortReference spirit:componentRef="ValidSetter_0" spirit:portRef="CLK"/>
         <spirit:internalPortReference spirit:componentRef="mult_gen_0" spirit:portRef="CLK"/>
         <spirit:internalPortReference spirit:componentRef="mult_gen_1" spirit:portRef="CLK"/>
         <spirit:internalPortReference spirit:componentRef="c_addsub_0" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="Synapse_0" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="Synapse_1" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="ValidSetter_0" spirit:portRef="CLK"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>RST_1</spirit:name>

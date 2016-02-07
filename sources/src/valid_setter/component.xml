@@ -209,11 +209,11 @@
         <xilinx:taxonomy>/BaseIP</xilinx:taxonomy>
       </xilinx:taxonomies>
       <xilinx:displayName>ValidSetter_v1_0</xilinx:displayName>
-      <xilinx:coreRevision>1</xilinx:coreRevision>
+      <xilinx:coreRevision>2</xilinx:coreRevision>
       <xilinx:upgrades>
         <xilinx:canUpgradeFrom>xilinx.com:ip:ValidSetter:1.0</xilinx:canUpgradeFrom>
       </xilinx:upgrades>
-      <xilinx:coreCreationDateTime>2016-02-07T01:31:52Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2016-02-07T01:53:23Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="nopcore"/>
         <xilinx:tag xilinx:name="xilinx.com:ip:ValidSetter:1.0_ARCHIVE_LOCATION">C:/Users/Administrator/Xilinx/sources/src/valid_setter</xilinx:tag>
