@@ -20,7 +20,7 @@ architecture Behavioral of ValidSetterTB is
 begin
     uut: ValidSetter
         generic map (
-            latency => 3,
+            latency => 2,
             latencyWidth => 2
         )
         port map (
