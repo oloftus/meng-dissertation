@@ -39,6 +39,18 @@ begin
         wait for 90ns;
         sigSet <= '0';
         
+        wait for 400ns; -- 2 clock periods
+        
+        -- Repeat from above
+        sigSet <= '1';
+        wait for 100ns;
+        wait for 10ns;
+        assert sigP = '1' report "Test failed: 3";
+        wait for 400ns;
+        assert sigP = '0' report "Test failed: 4";
+        wait for 90ns;
+        sigSet <= '0';
+        
         wait;
     end process;
     
