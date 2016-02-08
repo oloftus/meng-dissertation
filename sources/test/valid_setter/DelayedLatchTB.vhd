@@ -9,8 +9,7 @@ architecture Behavioral of DelayedLatchTB is
     
     component DelayedLatch is
         generic (
-            delayVal : INTEGER;
-            delayWidth : INTEGER
+            delay : INTEGER
         );
         port (
             CLK, RST, SET : in STD_LOGIC;
@@ -20,8 +19,7 @@ architecture Behavioral of DelayedLatchTB is
 begin
     uut: DelayedLatch
         generic map (
-            delayVal => 2,
-            delayWidth => 2
+            delay => 2
         )
         port map (
             CLK => sigClk,
@@ -38,6 +36,8 @@ begin
     end process;
 
     tb: process begin
+        sigSet <= '0';
+        
         sigRst <= '1';
         wait for 200ns;
         sigRst <= '0';
@@ -45,6 +45,31 @@ begin
         sigSet <= '1';
         wait for 200ns;
         sigSet <= '0';
+        
+        wait for 290ns;
+        assert sigQ = '0' report "Test failed: 1";
+        wait for 20ns;
+        assert sigQ = '1' report "Test failed: 2";
+
+        wait for 490ns;
+        
+        sigRst <= '1';
+        wait for 90ns;
+        assert sigQ = '1' report "Test failed: 3";
+        wait for 20ns;
+        assert sigQ = '0' report "Test failed: 4";
+        wait for 90ns;
+        sigRst <= '0';
+
+        -- Repeat from above
+        sigSet <= '1';
+        wait for 200ns;
+        sigSet <= '0';
+        
+        wait for 290ns;
+        assert sigQ = '0' report "Test failed: 5";
+        wait for 20ns;
+        assert sigQ = '1' report "Test failed: 6";
 
         wait;
     end process;

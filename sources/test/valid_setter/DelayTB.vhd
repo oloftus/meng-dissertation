@@ -2,10 +2,6 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 entity DelayTB is
-    generic (
-        tbDelay : INTEGER := 2;
-        tbDelayWidth : INTEGER := 2
-    );
 end DelayTB;
 
 architecture Behavioral of DelayTB is
@@ -24,8 +20,8 @@ architecture Behavioral of DelayTB is
 begin
     uut: Delay
         generic map (
-            delay => tbDelay,
-            delayWidth => tbDelayWidth
+            delay => 2,
+            delayWidth => 2
         )
         port map (
             CLK => sigClk,
@@ -42,6 +38,8 @@ begin
     end process;
 
     tb: process begin
+        sigSet <= '0';
+        
         sigRst <= '1';
         wait for 200ns;
         sigRst <= '0';
@@ -49,6 +47,15 @@ begin
         sigSet <= '1';
         wait for 200ns;
         sigSet <= '0';
+        
+        wait for 290ns;
+        assert sigQ = '0' report "Test failed: 1";
+        wait for 20ns;
+        assert sigQ = '1' report "Test failed: 2";
+        wait for 180ns;
+        assert sigQ = '1' report "Test failed: 3";
+        wait for 20ns;
+        assert sigQ = '0' report "Test failed: 4";
 
         wait;
     end process;

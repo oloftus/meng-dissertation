@@ -4,8 +4,7 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity DelayedLatch is
     generic (
-        delayVal : INTEGER;
-        delayWidth : INTEGER
+        delay : INTEGER -- range 1 to 15
     );
     port (
         CLK, RST, SET : in STD_LOGIC;
@@ -14,37 +13,28 @@ entity DelayedLatch is
 end DelayedLatch;
 
 architecture Behavioral of DelayedLatch is
-    component Delay is
-        generic (
-            delay : INTEGER;
-            delayWidth : INTEGER
-        );
-        port (
-            CLK, RST, SET : in STD_LOGIC;
-            Q : out STD_LOGIC
-        );
-    end component;
-    
-    signal sigQ, sigRst : STD_LOGIC;
+    constant delayUnsigned : UNSIGNED (2 downto 0) := To_Unsigned(delay, 3);
+    constant zero : UNSIGNED (2 downto 0) := (others => '0');
+    constant one : UNSIGNED (2 downto 0) := (0 => '1', others => '0');
+
+    signal sigDelayCntr : UNSIGNED (2 downto 0) := zero;
 begin
-    delay_inst: Delay
-        generic map (
-            delay => delayVal,
-            delayWidth => delayWidth
-        )
-        port map (
-            CLK => CLK,
-            RST => RST,
-            SET => SET,
-            Q => sigQ
-        );
-    
     process (CLK) begin
         if Rising_Edge(CLK) then
-            if sigQ = '1' then
-                Q <= '1';
-            elsif RST = '1' then
+            if RST = '1' then
                 Q <= '0';
+                sigDelayCntr <= zero;
+            else
+                case sigDelayCntr is
+                    when zero =>
+                        if SET = '1' then
+                            sigDelayCntr <= one;
+                        end if;
+                    when delayUnsigned =>
+                        Q <= '1';
+                    when others =>
+                        sigDelayCntr <= sigDelayCntr + 1;
+                end case;
             end if;
         end if;
     end process;

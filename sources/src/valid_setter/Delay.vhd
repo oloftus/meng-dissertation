@@ -14,11 +14,12 @@ entity Delay is
 end Delay;
 
 architecture Behavioural of Delay is
-    constant delayUnsigned : UNSIGNED (delayWidth - 1 downto 0) := To_Unsigned(delay, delayWidth);
-    constant zero : UNSIGNED (delayWidth - 1 downto 0) := (others => '0');
-    constant one : UNSIGNED (delayWidth - 1 downto 0) := (0 => '1', others => '0');
+    -- Need extra bit for the possibility of overflowing with + 1
+    constant delayUnsigned : UNSIGNED (delayWidth downto 0) := To_Unsigned(delay, delayWidth + 1);
+    constant zero : UNSIGNED (delayWidth downto 0) := (others => '0');
+    constant one : UNSIGNED (delayWidth downto 0) := (0 => '1', others => '0');
     
-    signal sigDelayCntr : UNSIGNED (delayWidth - 1 downto 0) := zero;
+    signal sigDelayCntr : UNSIGNED (delayWidth downto 0) := Resize(zero, delayWidth + 1);
 begin
     process (CLK) begin
         if Rising_Edge(CLK) then
@@ -31,10 +32,10 @@ begin
                         if SET = '1' then
                             sigDelayCntr <= one;
                         end if;
-                    when delayUnsigned - 1 =>
+                    when delayUnsigned =>
                         Q <= '1';
                         sigDelayCntr <= sigDelayCntr + 1;
-                    when delayUnsigned =>
+                    when delayUnsigned + 1 =>
                         Q <= '0';
                         sigDelayCntr <= zero;
                     when others =>
