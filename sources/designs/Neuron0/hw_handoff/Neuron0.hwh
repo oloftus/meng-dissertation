@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Sun Feb 07 01:54:02 2016" VIVADOVERSION="2014.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Mon Feb 08 15:49:25 2016" VIVADOVERSION="2014.2">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z010" NAME="Neuron0_imp" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -199,7 +199,6 @@
       <DOCUMENTS/>
       <PARAMETERS>
         <PARAMETER NAME="latency" VALUE="2"/>
-        <PARAMETER NAME="latencyWidth" VALUE="2"/>
         <PARAMETER NAME="Component_Name" VALUE="Neuron0_ValidSetter_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
