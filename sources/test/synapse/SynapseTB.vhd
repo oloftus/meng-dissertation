@@ -12,9 +12,9 @@ architecture Behavioral of SynapseTB is
     signal sigSynIn, sigSynOut : STD_LOGIC_VECTOR (size - 1 downto 0);
 
     component Synapse is
---        generic (
---            size : INTEGER
---        );
+        generic (
+            size : INTEGER
+        );
         port (
             CLK, CLR, RST : in STD_LOGIC;
             SYN_IN_VALID : in STD_LOGIC;
@@ -25,9 +25,9 @@ architecture Behavioral of SynapseTB is
     end component;
 begin
     uut: Synapse
---        generic map (
---            size => size
---        )
+        generic map (
+            size => size
+        )
         port map (
             CLK => sigClk,
             CLR => sigClr,

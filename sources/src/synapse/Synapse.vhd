@@ -4,7 +4,7 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity Synapse is
     generic (
-        size : INTEGER := 4
+        size : INTEGER
     );
     port (
         CLK, CLR, RST : in STD_LOGIC;
@@ -24,7 +24,7 @@ begin
     valid_proc: process (CLK) begin
         if Rising_Edge(CLK) then
             if SYN_IN_VALID = '1' then
-                sigSynOutValid <= '1';
+                sigSynOutValid <= SYN_IN_VALID;
             elsif RST = '1' or CLR = '1' then
                 sigSynOutValid <= '0';
             end if;
