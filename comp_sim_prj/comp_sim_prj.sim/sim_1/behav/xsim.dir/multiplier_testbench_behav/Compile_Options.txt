@@ -1,1 +1,0 @@
---debug "typical" --relax -L "xbip_utils_v3_0" -L "xbip_pipe_v3_0" -L "xbip_bram18k_v3_0" -L "mult_gen_v12_0" -L "xil_defaultlib" -L "secureip" --snapshot "multiplier_testbench_behav" --prj "C:/Users/Administrator/Xilinx/comp_sim_prj/comp_sim_prj.sim/sim_1/behav/multiplier_testbench.prj" "xil_defaultlib.multiplier_testbench" 
