@@ -1,0 +1,1195 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Feb 10 21:33:34 2016" VIVADOVERSION="2014.2">
+
+  <SYSTEMINFO ARCH="zynq" DEVICE="7z010" NAME="ValueRouterNetworkTest_imp" PACKAGE="clg400" SPEEDGRADE="-1"/>
+
+  <EXTERNALPORTS>
+    <PORT CLKFREQUENCY="100000000" DIR="I" NAME="CLK" SIGIS="clk" SIGNAME="External_Ports_CLK">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="TypeRouter0" PORT="CLK"/>
+        <CONNECTION INSTANCE="TypeRouter1" PORT="CLK"/>
+        <CONNECTION INSTANCE="LayerRouter0" PORT="CLK"/>
+        <CONNECTION INSTANCE="NeuronRouter2" PORT="CLK"/>
+        <CONNECTION INSTANCE="NeuronRouter0" PORT="CLK"/>
+        <CONNECTION INSTANCE="NeuronRouter1" PORT="CLK"/>
+        <CONNECTION INSTANCE="NeuronRouter3" PORT="CLK"/>
+        <CONNECTION INSTANCE="AddressableRegister_0" PORT="CLK"/>
+        <CONNECTION INSTANCE="AddressableRegister_1" PORT="CLK"/>
+        <CONNECTION INSTANCE="AddressableRegister_2" PORT="CLK"/>
+        <CONNECTION INSTANCE="AddressableRegister_3" PORT="CLK"/>
+        <CONNECTION INSTANCE="AddressableRegister_4" PORT="CLK"/>
+        <CONNECTION INSTANCE="AddressableRegister_5" PORT="CLK"/>
+        <CONNECTION INSTANCE="AddressableRegister_6" PORT="CLK"/>
+        <CONNECTION INSTANCE="AddressableRegister_7" PORT="CLK"/>
+        <CONNECTION INSTANCE="AddressableRegister_9" PORT="CLK"/>
+        <CONNECTION INSTANCE="AddressableRegister_8" PORT="CLK"/>
+        <CONNECTION INSTANCE="LayerRouter1" PORT="CLK"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="External_Ports_PKT_IN_VALID">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="TypeRouter0" PORT="PKT_IN_VALID"/>
+        <CONNECTION INSTANCE="TypeRouter1" PORT="PKT_IN_VALID"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="PKT_IN" SIGIS="data" SIGNAME="External_Ports_PKT_IN">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="TypeRouter0" PORT="PKT_IN"/>
+        <CONNECTION INSTANCE="TypeRouter1" PORT="PKT_IN"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="RST" SIGIS="rst" SIGNAME="External_Ports_RST">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="AddressableRegister_2" PORT="RST"/>
+        <CONNECTION INSTANCE="AddressableRegister_3" PORT="RST"/>
+        <CONNECTION INSTANCE="AddressableRegister_4" PORT="RST"/>
+        <CONNECTION INSTANCE="AddressableRegister_5" PORT="RST"/>
+        <CONNECTION INSTANCE="AddressableRegister_6" PORT="RST"/>
+        <CONNECTION INSTANCE="AddressableRegister_7" PORT="RST"/>
+        <CONNECTION INSTANCE="AddressableRegister_9" PORT="RST"/>
+        <CONNECTION INSTANCE="AddressableRegister_0" PORT="RST"/>
+        <CONNECTION INSTANCE="AddressableRegister_1" PORT="RST"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="WEIGHT_0_DATA" SIGIS="data" SIGNAME="AddressableRegister_2_VAL_OUT">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="AddressableRegister_2" PORT="VAL_OUT"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="WEIGHT_1_DATA" SIGIS="data" SIGNAME="AddressableRegister_3_VAL_OUT">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="AddressableRegister_3" PORT="VAL_OUT"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="WEIGHT_2_DATA" SIGIS="data" SIGNAME="AddressableRegister_4_VAL_OUT">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="AddressableRegister_4" PORT="VAL_OUT"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="WEIGHT_3_DATA" SIGIS="data" SIGNAME="AddressableRegister_5_VAL_OUT">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="AddressableRegister_5" PORT="VAL_OUT"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="WEIGHT_4_DATA" SIGIS="data" SIGNAME="AddressableRegister_6_VAL_OUT">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="AddressableRegister_6" PORT="VAL_OUT"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="WEIGHT_5_DATA" SIGIS="data" SIGNAME="AddressableRegister_7_VAL_OUT">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="AddressableRegister_7" PORT="VAL_OUT"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="WEIGHT_6_DATA" SIGIS="data" SIGNAME="AddressableRegister_8_VAL_OUT">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="AddressableRegister_8" PORT="VAL_OUT"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="WEIGHT_7_DATA" SIGIS="data" SIGNAME="AddressableRegister_9_VAL_OUT">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="AddressableRegister_9" PORT="VAL_OUT"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="SYN_0_DATA" SIGIS="data" SIGNAME="AddressableRegister_0_VAL_OUT">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="AddressableRegister_0" PORT="VAL_OUT"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="SYN_1_DATA" SIGIS="data" SIGNAME="AddressableRegister_1_VAL_OUT">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="AddressableRegister_1" PORT="VAL_OUT"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="SYN_0_VALID" SIGIS="undef" SIGNAME="AddressableRegister_0_VAL_OUT_VALID">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="AddressableRegister_0" PORT="VAL_OUT_VALID"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="SYN_1_VALID" SIGIS="undef" SIGNAME="AddressableRegister_1_VAL_OUT_VALID">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="AddressableRegister_1" PORT="VAL_OUT_VALID"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="DONE" SIGIS="undef" SIGNAME="Or2_4_O">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="Or2_4" PORT="O"/>
+      </CONNECTIONS>
+    </PORT>
+  </EXTERNALPORTS>
+
+  <MODULES>
+    <MODULE FULLNAME="/AddressableRegister_0" HWVERSION="1.0" INSTANCE="AddressableRegister_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="AddressableRegister" VLNV="oloftus.com:prif:AddressableRegister:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="dataWidth" VALUE="16"/>
+        <PARAMETER NAME="addressWidth" VALUE="15"/>
+        <PARAMETER NAME="address" VALUE="32768"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_AddressableRegister_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="TypeRouter1_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter1" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="TypeRouter1_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter1" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT" SIGIS="undef" SIGNAME="AddressableRegister_0_VAL_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="SYN_0_DATA"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT_VALID" SIGIS="undef" SIGNAME="AddressableRegister_0_VAL_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="SYN_0_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="AddressableRegister_0_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_3" PORT="B"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/AddressableRegister_1" HWVERSION="1.0" INSTANCE="AddressableRegister_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="AddressableRegister" VLNV="oloftus.com:prif:AddressableRegister:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="dataWidth" VALUE="16"/>
+        <PARAMETER NAME="addressWidth" VALUE="15"/>
+        <PARAMETER NAME="address" VALUE="32769"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_AddressableRegister_0_1"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="TypeRouter1_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter1" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="TypeRouter1_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter1" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT" SIGIS="undef" SIGNAME="AddressableRegister_1_VAL_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="SYN_1_DATA"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT_VALID" SIGIS="undef" SIGNAME="AddressableRegister_1_VAL_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="SYN_1_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="AddressableRegister_1_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_3" PORT="A"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/AddressableRegister_2" HWVERSION="1.0" INSTANCE="AddressableRegister_2" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="AddressableRegister" VLNV="oloftus.com:prif:AddressableRegister:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="dataWidth" VALUE="16"/>
+        <PARAMETER NAME="addressWidth" VALUE="4"/>
+        <PARAMETER NAME="address" VALUE="11"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_AddressableRegister_0_2"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="NeuronRouter2_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter2" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="NeuronRouter2_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter2" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT" SIGIS="undef" SIGNAME="AddressableRegister_2_VAL_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="WEIGHT_0_DATA"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT_VALID" SIGIS="undef"/>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="AddressableRegister_2_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_6" PORT="A"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/AddressableRegister_3" HWVERSION="1.0" INSTANCE="AddressableRegister_3" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="AddressableRegister" VLNV="oloftus.com:prif:AddressableRegister:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="dataWidth" VALUE="16"/>
+        <PARAMETER NAME="addressWidth" VALUE="4"/>
+        <PARAMETER NAME="address" VALUE="10"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_AddressableRegister_0_3"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="NeuronRouter2_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter2" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="NeuronRouter2_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter2" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT" SIGIS="undef" SIGNAME="AddressableRegister_3_VAL_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="WEIGHT_1_DATA"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT_VALID" SIGIS="undef"/>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="AddressableRegister_3_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_6" PORT="B"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/AddressableRegister_4" HWVERSION="1.0" INSTANCE="AddressableRegister_4" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="AddressableRegister" VLNV="oloftus.com:prif:AddressableRegister:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="dataWidth" VALUE="16"/>
+        <PARAMETER NAME="addressWidth" VALUE="4"/>
+        <PARAMETER NAME="address" VALUE="8"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_AddressableRegister_0_4"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="NeuronRouter0_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter0" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="NeuronRouter0_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter0" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT" SIGIS="undef" SIGNAME="AddressableRegister_4_VAL_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="WEIGHT_2_DATA"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT_VALID" SIGIS="undef"/>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="AddressableRegister_4_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_7" PORT="B"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/AddressableRegister_5" HWVERSION="1.0" INSTANCE="AddressableRegister_5" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="AddressableRegister" VLNV="oloftus.com:prif:AddressableRegister:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="dataWidth" VALUE="16"/>
+        <PARAMETER NAME="addressWidth" VALUE="4"/>
+        <PARAMETER NAME="address" VALUE="9"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_AddressableRegister_0_5"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="NeuronRouter0_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter0" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="NeuronRouter0_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter0" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT" SIGIS="undef" SIGNAME="AddressableRegister_5_VAL_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="WEIGHT_3_DATA"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT_VALID" SIGIS="undef"/>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="AddressableRegister_5_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_7" PORT="A"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/AddressableRegister_6" HWVERSION="1.0" INSTANCE="AddressableRegister_6" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="AddressableRegister" VLNV="oloftus.com:prif:AddressableRegister:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="dataWidth" VALUE="16"/>
+        <PARAMETER NAME="addressWidth" VALUE="4"/>
+        <PARAMETER NAME="address" VALUE="15"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_AddressableRegister_0_6"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="NeuronRouter1_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter1" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="NeuronRouter1_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter1" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT" SIGIS="undef" SIGNAME="AddressableRegister_6_VAL_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="WEIGHT_4_DATA"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT_VALID" SIGIS="undef"/>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="AddressableRegister_6_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_8" PORT="A"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/AddressableRegister_7" HWVERSION="1.0" INSTANCE="AddressableRegister_7" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="AddressableRegister" VLNV="oloftus.com:prif:AddressableRegister:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="dataWidth" VALUE="16"/>
+        <PARAMETER NAME="addressWidth" VALUE="4"/>
+        <PARAMETER NAME="address" VALUE="14"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_AddressableRegister_0_7"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="NeuronRouter1_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter1" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="NeuronRouter1_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter1" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT" SIGIS="undef" SIGNAME="AddressableRegister_7_VAL_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="WEIGHT_5_DATA"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT_VALID" SIGIS="undef"/>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="AddressableRegister_7_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_8" PORT="B"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/AddressableRegister_8" HWVERSION="1.0" INSTANCE="AddressableRegister_8" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="AddressableRegister" VLNV="oloftus.com:prif:AddressableRegister:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="dataWidth" VALUE="16"/>
+        <PARAMETER NAME="addressWidth" VALUE="4"/>
+        <PARAMETER NAME="address" VALUE="12"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_AddressableRegister_0_8"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef"/>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="NeuronRouter3_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter3" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="NeuronRouter3_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter3" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT" SIGIS="undef" SIGNAME="AddressableRegister_8_VAL_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="WEIGHT_6_DATA"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT_VALID" SIGIS="undef"/>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="AddressableRegister_8_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_5" PORT="B"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/AddressableRegister_9" HWVERSION="1.0" INSTANCE="AddressableRegister_9" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="AddressableRegister" VLNV="oloftus.com:prif:AddressableRegister:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="dataWidth" VALUE="16"/>
+        <PARAMETER NAME="addressWidth" VALUE="4"/>
+        <PARAMETER NAME="address" VALUE="13"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_AddressableRegister_0_9"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="NeuronRouter3_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter3" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="NeuronRouter3_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter3" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT" SIGIS="undef" SIGNAME="AddressableRegister_9_VAL_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="WEIGHT_7_DATA"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT_VALID" SIGIS="undef"/>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="AddressableRegister_9_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_5" PORT="A"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/LayerRouter0" HWVERSION="1.0" INSTANCE="LayerRouter0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="ValueRouter" VLNV="oloftus.com:prif:ValueRouter:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="packetInWidth" VALUE="31"/>
+        <PARAMETER NAME="packetOutWidth" VALUE="26"/>
+        <PARAMETER NAME="address" VALUE="16"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_TypeRouter0_1"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="TypeRouter0_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter0" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="TypeRouter0_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter0" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT_VALID" SIGIS="undef" SIGNAME="LayerRouter0_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter2" PORT="PKT_IN_VALID"/>
+            <CONNECTION INSTANCE="NeuronRouter0" PORT="PKT_IN_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT" SIGIS="undef" SIGNAME="LayerRouter0_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter2" PORT="PKT_IN"/>
+            <CONNECTION INSTANCE="NeuronRouter0" PORT="PKT_IN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="DONE_IN" SIGIS="undef" SIGNAME="Or2_1_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_1" PORT="O"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="LayerRouter0_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_0" PORT="B"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/LayerRouter1" HWVERSION="1.0" INSTANCE="LayerRouter1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="ValueRouter" VLNV="oloftus.com:prif:ValueRouter:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="packetInWidth" VALUE="31"/>
+        <PARAMETER NAME="packetOutWidth" VALUE="26"/>
+        <PARAMETER NAME="address" VALUE="17"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_LayerRouter0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="TypeRouter0_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter0" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="TypeRouter0_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter0" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT_VALID" SIGIS="undef" SIGNAME="LayerRouter1_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter1" PORT="PKT_IN_VALID"/>
+            <CONNECTION INSTANCE="NeuronRouter3" PORT="PKT_IN_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT" SIGIS="undef" SIGNAME="LayerRouter1_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter1" PORT="PKT_IN"/>
+            <CONNECTION INSTANCE="NeuronRouter3" PORT="PKT_IN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="DONE_IN" SIGIS="undef" SIGNAME="Or2_2_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_2" PORT="O"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="LayerRouter1_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_0" PORT="A"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/NeuronRouter0" HWVERSION="1.0" INSTANCE="NeuronRouter0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="ValueRouter" VLNV="oloftus.com:prif:ValueRouter:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="packetInWidth" VALUE="26"/>
+        <PARAMETER NAME="packetOutWidth" VALUE="20"/>
+        <PARAMETER NAME="address" VALUE="32"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_LayerRouter0_1"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="LayerRouter0_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter0" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="LayerRouter0_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter0" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT_VALID" SIGIS="undef" SIGNAME="NeuronRouter0_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AddressableRegister_4" PORT="PKT_IN_VALID"/>
+            <CONNECTION INSTANCE="AddressableRegister_5" PORT="PKT_IN_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT" SIGIS="undef" SIGNAME="NeuronRouter0_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AddressableRegister_5" PORT="PKT_IN"/>
+            <CONNECTION INSTANCE="AddressableRegister_4" PORT="PKT_IN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="DONE_IN" SIGIS="undef" SIGNAME="Or2_7_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_7" PORT="O"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="NeuronRouter0_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_1" PORT="A"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/NeuronRouter1" HWVERSION="1.0" INSTANCE="NeuronRouter1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="ValueRouter" VLNV="oloftus.com:prif:ValueRouter:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="packetInWidth" VALUE="26"/>
+        <PARAMETER NAME="packetOutWidth" VALUE="20"/>
+        <PARAMETER NAME="address" VALUE="35"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_NeuronRouter0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="LayerRouter1_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter1" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="LayerRouter1_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter1" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT_VALID" SIGIS="undef" SIGNAME="NeuronRouter1_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AddressableRegister_6" PORT="PKT_IN_VALID"/>
+            <CONNECTION INSTANCE="AddressableRegister_7" PORT="PKT_IN_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT" SIGIS="undef" SIGNAME="NeuronRouter1_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AddressableRegister_6" PORT="PKT_IN"/>
+            <CONNECTION INSTANCE="AddressableRegister_7" PORT="PKT_IN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="DONE_IN" SIGIS="undef" SIGNAME="Or2_8_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_8" PORT="O"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="NeuronRouter1_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_2" PORT="B"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/NeuronRouter2" HWVERSION="1.0" INSTANCE="NeuronRouter2" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="ValueRouter" VLNV="oloftus.com:prif:ValueRouter:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="packetInWidth" VALUE="26"/>
+        <PARAMETER NAME="packetOutWidth" VALUE="20"/>
+        <PARAMETER NAME="address" VALUE="33"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_NeuronRouter0_1"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="LayerRouter0_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter0" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="LayerRouter0_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter0" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT_VALID" SIGIS="undef" SIGNAME="NeuronRouter2_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AddressableRegister_2" PORT="PKT_IN_VALID"/>
+            <CONNECTION INSTANCE="AddressableRegister_3" PORT="PKT_IN_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT" SIGIS="undef" SIGNAME="NeuronRouter2_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AddressableRegister_3" PORT="PKT_IN"/>
+            <CONNECTION INSTANCE="AddressableRegister_2" PORT="PKT_IN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="DONE_IN" SIGIS="undef" SIGNAME="Or2_6_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_6" PORT="O"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="NeuronRouter2_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_1" PORT="B"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/NeuronRouter3" HWVERSION="1.0" INSTANCE="NeuronRouter3" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="ValueRouter" VLNV="oloftus.com:prif:ValueRouter:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="packetInWidth" VALUE="26"/>
+        <PARAMETER NAME="packetOutWidth" VALUE="20"/>
+        <PARAMETER NAME="address" VALUE="34"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_NeuronRouter0_2"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="LayerRouter1_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter1" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="LayerRouter1_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter1" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT_VALID" SIGIS="undef" SIGNAME="NeuronRouter3_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AddressableRegister_8" PORT="PKT_IN_VALID"/>
+            <CONNECTION INSTANCE="AddressableRegister_9" PORT="PKT_IN_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT" SIGIS="undef" SIGNAME="NeuronRouter3_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AddressableRegister_9" PORT="PKT_IN"/>
+            <CONNECTION INSTANCE="AddressableRegister_8" PORT="PKT_IN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="DONE_IN" SIGIS="undef" SIGNAME="Or2_5_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_5" PORT="O"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="NeuronRouter3_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_2" PORT="A"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Or2_0" HWVERSION="1.0" INSTANCE="Or2_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Or2" VLNV="xilinx.com:ip:Or2:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_Or2_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="A" SIGIS="undef" SIGNAME="LayerRouter1_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter1" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="B" SIGIS="undef" SIGNAME="LayerRouter0_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter0" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="O" SIGIS="undef" SIGNAME="Or2_0_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter0" PORT="DONE_IN"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Or2_1" HWVERSION="1.0" INSTANCE="Or2_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Or2" VLNV="xilinx.com:ip:Or2:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_Or2_0_1"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="A" SIGIS="undef" SIGNAME="NeuronRouter0_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter0" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="B" SIGIS="undef" SIGNAME="NeuronRouter2_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter2" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="O" SIGIS="undef" SIGNAME="Or2_1_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter0" PORT="DONE_IN"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Or2_2" HWVERSION="1.0" INSTANCE="Or2_2" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Or2" VLNV="xilinx.com:ip:Or2:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_Or2_1_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="A" SIGIS="undef" SIGNAME="NeuronRouter3_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter3" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="B" SIGIS="undef" SIGNAME="NeuronRouter1_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter1" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="O" SIGIS="undef" SIGNAME="Or2_2_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter1" PORT="DONE_IN"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Or2_3" HWVERSION="1.0" INSTANCE="Or2_3" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Or2" VLNV="xilinx.com:ip:Or2:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_Or2_2_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="A" SIGIS="undef" SIGNAME="AddressableRegister_1_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AddressableRegister_1" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="B" SIGIS="undef" SIGNAME="AddressableRegister_0_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AddressableRegister_0" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="O" SIGIS="undef" SIGNAME="Or2_3_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter1" PORT="DONE_IN"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Or2_4" HWVERSION="1.0" INSTANCE="Or2_4" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Or2" VLNV="xilinx.com:ip:Or2:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_Or2_2_1"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="A" SIGIS="undef" SIGNAME="TypeRouter0_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter0" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="B" SIGIS="undef" SIGNAME="TypeRouter1_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter1" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="O" SIGIS="undef" SIGNAME="Or2_4_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="DONE"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Or2_5" HWVERSION="1.0" INSTANCE="Or2_5" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Or2" VLNV="xilinx.com:ip:Or2:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_Or2_2_2"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="A" SIGIS="undef" SIGNAME="AddressableRegister_9_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AddressableRegister_9" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="B" SIGIS="undef" SIGNAME="AddressableRegister_8_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AddressableRegister_8" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="O" SIGIS="undef" SIGNAME="Or2_5_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter3" PORT="DONE_IN"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Or2_6" HWVERSION="1.0" INSTANCE="Or2_6" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Or2" VLNV="xilinx.com:ip:Or2:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_Or2_5_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="A" SIGIS="undef" SIGNAME="AddressableRegister_2_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AddressableRegister_2" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="B" SIGIS="undef" SIGNAME="AddressableRegister_3_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AddressableRegister_3" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="O" SIGIS="undef" SIGNAME="Or2_6_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter2" PORT="DONE_IN"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Or2_7" HWVERSION="1.0" INSTANCE="Or2_7" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Or2" VLNV="xilinx.com:ip:Or2:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_Or2_5_1"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="A" SIGIS="undef" SIGNAME="AddressableRegister_5_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AddressableRegister_5" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="B" SIGIS="undef" SIGNAME="AddressableRegister_4_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AddressableRegister_4" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="O" SIGIS="undef" SIGNAME="Or2_7_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter0" PORT="DONE_IN"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Or2_8" HWVERSION="1.0" INSTANCE="Or2_8" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Or2" VLNV="xilinx.com:ip:Or2:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_Or2_5_2"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="A" SIGIS="undef" SIGNAME="AddressableRegister_6_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AddressableRegister_6" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="B" SIGIS="undef" SIGNAME="AddressableRegister_7_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AddressableRegister_7" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="O" SIGIS="undef" SIGNAME="Or2_8_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter1" PORT="DONE_IN"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/TypeRouter0" HWVERSION="1.0" INSTANCE="TypeRouter0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="ValueRouter" VLNV="oloftus.com:prif:ValueRouter:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="packetInWidth" VALUE="32"/>
+        <PARAMETER NAME="packetOutWidth" VALUE="31"/>
+        <PARAMETER NAME="address" VALUE="0"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_ValueRouter_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="External_Ports_PKT_IN_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="PKT_IN_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="External_Ports_PKT_IN">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="PKT_IN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT_VALID" SIGIS="undef" SIGNAME="TypeRouter0_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter0" PORT="PKT_IN_VALID"/>
+            <CONNECTION INSTANCE="LayerRouter1" PORT="PKT_IN_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT" SIGIS="undef" SIGNAME="TypeRouter0_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter0" PORT="PKT_IN"/>
+            <CONNECTION INSTANCE="LayerRouter1" PORT="PKT_IN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="DONE_IN" SIGIS="undef" SIGNAME="Or2_0_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_0" PORT="O"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="TypeRouter0_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_4" PORT="A"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/TypeRouter1" HWVERSION="1.0" INSTANCE="TypeRouter1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="ValueRouter" VLNV="oloftus.com:prif:ValueRouter:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="packetInWidth" VALUE="32"/>
+        <PARAMETER NAME="packetOutWidth" VALUE="31"/>
+        <PARAMETER NAME="address" VALUE="1"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_TypeRouter0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="External_Ports_PKT_IN_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="PKT_IN_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="External_Ports_PKT_IN">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="PKT_IN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT_VALID" SIGIS="undef" SIGNAME="TypeRouter1_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AddressableRegister_0" PORT="PKT_IN_VALID"/>
+            <CONNECTION INSTANCE="AddressableRegister_1" PORT="PKT_IN_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT" SIGIS="undef" SIGNAME="TypeRouter1_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AddressableRegister_0" PORT="PKT_IN"/>
+            <CONNECTION INSTANCE="AddressableRegister_1" PORT="PKT_IN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="DONE_IN" SIGIS="undef" SIGNAME="Or2_3_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_3" PORT="O"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="TypeRouter1_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Or2_4" PORT="B"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+  </MODULES>
+
+  <REPOSITORIES/>
+
+</EDKSYSTEM>

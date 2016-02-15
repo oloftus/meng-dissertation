@@ -1,0 +1,112 @@
+{
+   Display-PortTypeClock: "false",
+   Display-PortTypeData: "true",
+   Display-PortTypeOthers: "true",
+   Display-PortTypeReset: "false",
+   guistr: "# # String gsaved with Nlview version 6.4-r1  2014-02-28 bk=1.3047 VDI=34 GEI=35 GUI=JA:1.6
+#  -string -flagsOSRD
+preplace port SYN_1_VALID -pg 1 -y 1750 -defaultsOSRD
+preplace port PKT_IN_VALID -pg 1 -y 1300 -defaultsOSRD
+preplace port RST -pg 1 -y 40 -defaultsOSRD
+preplace port SYN_0_VALID -pg 1 -y 1580 -defaultsOSRD
+preplace port DONE -pg 1 -y 1430 -defaultsOSRD
+preplace port CLK -pg 1 -y 20 -defaultsOSRD
+preplace portBus WEIGHT_2_DATA -pg 1 -y 70 -defaultsOSRD
+preplace portBus WEIGHT_4_DATA -pg 1 -y 1250 -defaultsOSRD
+preplace portBus WEIGHT_3_DATA -pg 1 -y 240 -defaultsOSRD
+preplace portBus WEIGHT_6_DATA -pg 1 -y 730 -defaultsOSRD
+preplace portBus WEIGHT_0_DATA -pg 1 -y 560 -defaultsOSRD
+preplace portBus SYN_1_DATA -pg 1 -y 1730 -defaultsOSRD
+preplace portBus PKT_IN -pg 1 -y 1320 -defaultsOSRD
+preplace portBus SYN_0_DATA -pg 1 -y 1560 -defaultsOSRD
+preplace portBus WEIGHT_1_DATA -pg 1 -y 390 -defaultsOSRD
+preplace portBus WEIGHT_7_DATA -pg 1 -y 910 -defaultsOSRD
+preplace portBus WEIGHT_5_DATA -pg 1 -y 1080 -defaultsOSRD
+preplace inst AddressableRegister_3 -pg 1 -lvl 4 -y 410 -defaultsOSRD
+preplace inst NeuronRouter3 -pg 1 -lvl 3 -y 900 -defaultsOSRD
+preplace inst AddressableRegister_4 -pg 1 -lvl 4 -y 90 -defaultsOSRD
+preplace inst AddressableRegister_5 -pg 1 -lvl 4 -y 260 -defaultsOSRD
+preplace inst LayerRouter0 -pg 1 -lvl 2 -y 840 -defaultsOSRD
+preplace inst AddressableRegister_6 -pg 1 -lvl 4 -y 1270 -defaultsOSRD
+preplace inst LayerRouter1 -pg 1 -lvl 2 -y 1010 -defaultsOSRD
+preplace inst TypeRouter0 -pg 1 -lvl 1 -y 1320 -defaultsOSRD
+preplace inst AddressableRegister_7 -pg 1 -lvl 4 -y 1100 -defaultsOSRD
+preplace inst Or2_0 -pg 1 -lvl 1 -y 1090 -defaultsOSRD -orient R180
+preplace inst TypeRouter1 -pg 1 -lvl 3 -y 1420 -defaultsOSRD
+preplace inst AddressableRegister_8 -pg 1 -lvl 4 -y 750 -defaultsOSRD
+preplace inst Or2_1 -pg 1 -lvl 2 -y 440 -defaultsOSRD -orient R180
+preplace inst AddressableRegister_9 -pg 1 -lvl 4 -y 930 -defaultsOSRD
+preplace inst Or2_2 -pg 1 -lvl 2 -y 1170 -defaultsOSRD -orient R180
+preplace inst Or2_3 -pg 1 -lvl 3 -y 1550 -defaultsOSRD -orient R180
+preplace inst Or2_4 -pg 1 -lvl 4 -y 1430 -defaultsOSRD
+preplace inst Or2_5 -pg 1 -lvl 3 -y 780 -defaultsOSRD -orient R180
+preplace inst Or2_6 -pg 1 -lvl 3 -y 660 -defaultsOSRD -orient R180
+preplace inst AddressableRegister_0 -pg 1 -lvl 4 -y 1580 -defaultsOSRD
+preplace inst NeuronRouter0 -pg 1 -lvl 3 -y 310 -defaultsOSRD
+preplace inst Or2_7 -pg 1 -lvl 3 -y 170 -defaultsOSRD -orient R180
+preplace inst AddressableRegister_1 -pg 1 -lvl 4 -y 1750 -defaultsOSRD
+preplace inst NeuronRouter1 -pg 1 -lvl 3 -y 1090 -defaultsOSRD
+preplace inst Or2_8 -pg 1 -lvl 3 -y 1220 -defaultsOSRD -orient R180
+preplace inst AddressableRegister_2 -pg 1 -lvl 4 -y 580 -defaultsOSRD
+preplace inst NeuronRouter2 -pg 1 -lvl 3 -y 530 -defaultsOSRD
+preplace netloc AddressableRegister_8_VAL_OUT 1 4 1 N
+preplace netloc AddressableRegister_4_VAL_OUT 1 4 1 N
+preplace netloc NeuronRouter0_PKT_OUT 1 3 1 1010
+preplace netloc NeuronRouter3_PKT_OUT_VALID 1 3 1 1020
+preplace netloc Or2_3_O 1 2 1 740
+preplace netloc NeuronRouter0_DONE_OUT 1 2 2 720 400 1010
+preplace netloc AddressableRegister_6_VAL_OUT 1 4 1 N
+preplace netloc PKT_IN_1 1 0 3 150 1410 NJ 1330 700
+preplace netloc TypeRouter1_PKT_OUT_VALID 1 3 1 1010
+preplace netloc NeuronRouter2_DONE_OUT 1 2 2 NJ 430 980
+preplace netloc LayerRouter0_PKT_OUT 1 2 1 730
+preplace netloc PKT_IN_VALID_1 1 0 3 150 1240 NJ 1240 730
+preplace netloc AddressableRegister_9_DONE_OUT 1 3 2 NJ 850 1280
+preplace netloc NeuronRouter0_PKT_OUT_VALID 1 3 1 1020
+preplace netloc Or2_7_O 1 2 1 740
+preplace netloc AddressableRegister_1_VAL_OUT_VALID 1 4 1 N
+preplace netloc AddressableRegister_0_VAL_OUT_VALID 1 4 1 N
+preplace netloc NeuronRouter3_PKT_OUT 1 3 1 1010
+preplace netloc TypeRouter1_DONE_OUT 1 3 1 N
+preplace netloc LayerRouter1_PKT_OUT 1 2 1 720
+preplace netloc Or2_0_O 1 0 1 160
+preplace netloc Or2_4_O 1 4 1 N
+preplace netloc AddressableRegister_2_DONE_OUT 1 3 2 NJ 670 1280
+preplace netloc AddressableRegister_5_DONE_OUT 1 3 2 NJ 180 1280
+preplace netloc AddressableRegister_7_VAL_OUT 1 4 1 N
+preplace netloc AddressableRegister_0_DONE_OUT 1 3 2 NJ 1500 1280
+preplace netloc AddressableRegister_0_VAL_OUT 1 4 1 N
+preplace netloc NeuronRouter2_PKT_OUT 1 3 1 1010
+preplace netloc AddressableRegister_7_DONE_OUT 1 3 2 1010 1020 1280
+preplace netloc AddressableRegister_1_VAL_OUT 1 4 1 N
+preplace netloc Or2_1_O 1 1 1 430
+preplace netloc LayerRouter0_PKT_OUT_VALID 1 2 1 700
+preplace netloc LayerRouter1_DONE_OUT 1 1 2 N 1100 700
+preplace netloc LayerRouter0_DONE_OUT 1 1 2 400 760 690
+preplace netloc Or2_5_O 1 2 1 740
+preplace netloc NeuronRouter1_PKT_OUT 1 3 1 990
+preplace netloc AddressableRegister_4_DONE_OUT 1 3 2 980 10 1280
+preplace netloc AddressableRegister_6_DONE_OUT 1 3 2 NJ 1190 1280
+preplace netloc Or2_8_O 1 2 1 740
+preplace netloc AddressableRegister_5_VAL_OUT 1 4 1 N
+preplace netloc NeuronRouter2_PKT_OUT_VALID 1 3 1 1020
+preplace netloc NeuronRouter3_DONE_OUT 1 2 2 710 990 980
+preplace netloc AddressableRegister_9_VAL_OUT 1 4 1 N
+preplace netloc AddressableRegister_3_VAL_OUT 1 4 1 N
+preplace netloc AddressableRegister_3_DONE_OUT 1 3 2 990 500 1280
+preplace netloc AddressableRegister_2_VAL_OUT 1 4 1 N
+preplace netloc AddressableRegister_1_DONE_OUT 1 3 2 NJ 1670 1280
+preplace netloc NeuronRouter1_DONE_OUT 1 2 2 730 1010 980
+preplace netloc Or2_2_O 1 1 1 430
+preplace netloc LayerRouter1_PKT_OUT_VALID 1 2 1 690
+preplace netloc TypeRouter0_PKT_OUT_VALID 1 1 1 410
+preplace netloc Or2_6_O 1 2 1 740
+preplace netloc AddressableRegister_8_DONE_OUT 1 3 2 NJ 840 1280
+preplace netloc NeuronRouter1_PKT_OUT_VALID 1 3 1 1000
+preplace netloc TypeRouter0_DONE_OUT 1 1 3 N 1340 NJ 1340 NJ
+preplace netloc TypeRouter1_PKT_OUT 1 3 1 1000
+preplace netloc TypeRouter0_PKT_OUT 1 1 1 420
+levelinfo -pg 1 130 280 570 860 1160 1300
+",
+}
+0
