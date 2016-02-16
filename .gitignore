@@ -3,5 +3,5 @@ comp_sim_prj/
 sources_proj/
 top_proj
 network_prj/
-xsdk_wrkspc/
+xsdk_workspace/
 *.lnk
