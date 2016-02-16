@@ -427,89 +427,10 @@
     <spirit:version>1.00.a</spirit:version>
     <spirit:componentInstances>
       <spirit:componentInstance>
-        <spirit:instanceName>TypeRouter0</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">ValueRouterNetworkTest_ValueRouter_0_0</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">31</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetInWidth">32</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>TypeRouter1</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">ValueRouterNetworkTest_TypeRouter0_0</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">31</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetInWidth">32</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="address">1</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>LayerRouter0</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">ValueRouterNetworkTest_TypeRouter0_1</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">26</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetInWidth">31</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="address">16</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>LayerRouter1</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">ValueRouterNetworkTest_LayerRouter0_0</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">26</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetInWidth">31</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="address">17</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
         <spirit:instanceName>Or2_0</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="Or2" spirit:vendor="xilinx.com" spirit:version="1.0"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">ValueRouterNetworkTest_Or2_0_0</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>NeuronRouter0</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">ValueRouterNetworkTest_LayerRouter0_1</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">20</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetInWidth">26</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="address">32</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>NeuronRouter1</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">ValueRouterNetworkTest_NeuronRouter0_0</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">20</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetInWidth">26</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="address">35</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>NeuronRouter2</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">ValueRouterNetworkTest_NeuronRouter0_1</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">20</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetInWidth">26</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="address">33</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>NeuronRouter3</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">ValueRouterNetworkTest_NeuronRouter0_2</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">20</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetInWidth">26</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="address">34</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
@@ -668,18 +589,90 @@
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">ValueRouterNetworkTest_Or2_5_2</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>LayerRouter0</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="2.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">ValueRouterNetworkTest_TypeRouter0_1</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">26</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetInWidth">31</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="address">16</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>LayerRouter1</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="2.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">ValueRouterNetworkTest_LayerRouter0_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">26</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetInWidth">31</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="address">17</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>NeuronRouter0</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="2.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">ValueRouterNetworkTest_LayerRouter0_1</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">20</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetInWidth">26</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="address">32</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>NeuronRouter1</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="2.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">ValueRouterNetworkTest_NeuronRouter0_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">20</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetInWidth">26</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="address">35</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>NeuronRouter2</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="2.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">ValueRouterNetworkTest_NeuronRouter0_1</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">20</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetInWidth">26</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="address">33</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>NeuronRouter3</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="2.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">ValueRouterNetworkTest_NeuronRouter0_2</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">20</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetInWidth">26</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="address">34</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>TypeRouter0</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="2.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">ValueRouterNetworkTest_ValueRouter_0_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">31</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetInWidth">32</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>TypeRouter1</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="2.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">ValueRouterNetworkTest_TypeRouter0_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">31</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetInWidth">32</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="address">1</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
     </spirit:componentInstances>
     <spirit:adHocConnections>
       <spirit:adHocConnection>
         <spirit:name>CLK_1</spirit:name>
         <spirit:externalPortReference spirit:portRef="CLK"/>
-        <spirit:internalPortReference spirit:componentRef="TypeRouter0" spirit:portRef="CLK"/>
-        <spirit:internalPortReference spirit:componentRef="TypeRouter1" spirit:portRef="CLK"/>
-        <spirit:internalPortReference spirit:componentRef="LayerRouter0" spirit:portRef="CLK"/>
-        <spirit:internalPortReference spirit:componentRef="NeuronRouter2" spirit:portRef="CLK"/>
-        <spirit:internalPortReference spirit:componentRef="NeuronRouter0" spirit:portRef="CLK"/>
-        <spirit:internalPortReference spirit:componentRef="NeuronRouter1" spirit:portRef="CLK"/>
-        <spirit:internalPortReference spirit:componentRef="NeuronRouter3" spirit:portRef="CLK"/>
         <spirit:internalPortReference spirit:componentRef="AddressableRegister_0" spirit:portRef="CLK"/>
         <spirit:internalPortReference spirit:componentRef="AddressableRegister_1" spirit:portRef="CLK"/>
         <spirit:internalPortReference spirit:componentRef="AddressableRegister_2" spirit:portRef="CLK"/>
@@ -690,7 +683,14 @@
         <spirit:internalPortReference spirit:componentRef="AddressableRegister_7" spirit:portRef="CLK"/>
         <spirit:internalPortReference spirit:componentRef="AddressableRegister_9" spirit:portRef="CLK"/>
         <spirit:internalPortReference spirit:componentRef="AddressableRegister_8" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="LayerRouter0" spirit:portRef="CLK"/>
         <spirit:internalPortReference spirit:componentRef="LayerRouter1" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="NeuronRouter0" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="NeuronRouter1" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="NeuronRouter2" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="NeuronRouter3" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="TypeRouter0" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="TypeRouter1" spirit:portRef="CLK"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>PKT_IN_VALID_1</spirit:name>
@@ -728,8 +728,8 @@
       <spirit:adHocConnection>
         <spirit:name>LayerRouter0_PKT_OUT_VALID</spirit:name>
         <spirit:internalPortReference spirit:componentRef="LayerRouter0" spirit:portRef="PKT_OUT_VALID"/>
-        <spirit:internalPortReference spirit:componentRef="NeuronRouter2" spirit:portRef="PKT_IN_VALID"/>
         <spirit:internalPortReference spirit:componentRef="NeuronRouter0" spirit:portRef="PKT_IN_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="NeuronRouter2" spirit:portRef="PKT_IN_VALID"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>LayerRouter1_PKT_OUT_VALID</spirit:name>
@@ -740,8 +740,8 @@
       <spirit:adHocConnection>
         <spirit:name>LayerRouter0_PKT_OUT</spirit:name>
         <spirit:internalPortReference spirit:componentRef="LayerRouter0" spirit:portRef="PKT_OUT"/>
-        <spirit:internalPortReference spirit:componentRef="NeuronRouter2" spirit:portRef="PKT_IN"/>
         <spirit:internalPortReference spirit:componentRef="NeuronRouter0" spirit:portRef="PKT_IN"/>
+        <spirit:internalPortReference spirit:componentRef="NeuronRouter2" spirit:portRef="PKT_IN"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>LayerRouter1_PKT_OUT</spirit:name>
