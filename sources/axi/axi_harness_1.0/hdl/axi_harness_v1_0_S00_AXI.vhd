@@ -19,7 +19,6 @@ entity axi_harness_v1_0_S00_AXI is
 		-- Users to add ports here
         din0, din1, din2, din3 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH - 1 downto 0);
         dout0, dout1, dout2, dout3 : out STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH - 1 downto 0);
-        latched_waddr, latched_addr : out STD_LOGIC_VECTOR (C_S_AXI_ADDR_WIDTH - 1 downto 0);
 		-- User ports ends
 		-- Do not modify the ports beyond this line
 
@@ -125,8 +124,6 @@ begin
     dout1 <= slv_reg1;
     dout2 <= slv_reg2;
     dout3 <= slv_reg3;
-    latched_waddr <= axi_awaddr;
-    latched_addr <= axi_araddr;
 
 	-- I/O Connections assignments
 
