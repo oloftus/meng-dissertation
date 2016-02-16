@@ -21,8 +21,10 @@ end ValueRouter;
 
 architecture Behavioral of ValueRouter is
     signal sigPacketOutValid : STD_LOGIC := '0';
+    signal sigDoneOut : STD_LOGIC := '0';
 begin
     PKT_OUT_VALID <= sigPacketOutValid;
+    DONE_OUT <= sigDoneOut;
     
     process (CLK) is
         variable addressWidth : INTEGER := packetInWidth - packetOutWidth;
@@ -31,13 +33,16 @@ begin
         if Rising_Edge(CLK) then
             packetDestAddr := PKT_IN(packetInWidth - 1 downto packetInWidth - addressWidth);
             
+            if sigDoneOut = '1' then
+                sigDoneOut <= '0';
+            end if;
+            
             if PKT_IN_VALID = '1' and sigPacketOutValid = '0' and packetDestAddr = STD_LOGIC_VECTOR(To_Unsigned(address, addressWidth)) then
                 PKT_OUT <= PKT_IN (packetOutWidth - 1 downto 0);
                 sigPacketOutValid <= '1';
-                DONE_OUT <= '0';
             elsif DONE_IN = '1' then
                 sigPacketOutValid <= '0';
-                DONE_OUT <= '1';
+                sigDoneOut <= '1';
             end if;
         end if;
     end process;

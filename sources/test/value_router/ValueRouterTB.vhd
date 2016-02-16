@@ -64,6 +64,7 @@ begin
     begin
         sigDoneIn <= '0';
         
+        -- Verify packets with the correct address are forwarded
         sigPktInValid <= '1';
         sigPktIn <= addrBits & pktOut1;
         wait for 110ns;
@@ -71,6 +72,7 @@ begin
         assert sigPktOutValid = '1' report "Test failed: 2";
         wait for 90ns;
         
+        -- Verify packets with an incorrect address are ignored
         sigPktInValid <= '1';
         sigPktIn <= wrongAddrBits & pktOut2;
         wait for 110ns;
@@ -81,12 +83,14 @@ begin
         sigPktInValid <= '0';
         wait for 200ns;
         
+        -- Verify the done signal is forwarded
         sigDoneIn <= '1';
         wait for 110ns;
         assert sigPktOutValid = '0' report "Test failed: 5";
         assert sigDoneOut = '1' report "Test failed: 6";
         wait for 90ns;
         
+        -- Verify packets sent after forwarding the done signal are correctly handled
         sigDoneIn <= '0';
         sigPktInValid <= '1';
         sigPktIn <= addrBits & pktOut2;
@@ -94,7 +98,17 @@ begin
         assert sigPktOut = pktOut2 report "Test failed: 7";
         assert sigPktOutValid = '1' report "Test failed: 8";
         assert sigDoneOut = '0' report "Test failed: 9";
---        wait for 90ns;
+        wait for 90ns;
+        
+        sigPktInValid <= '0';
+        wait for 200ns;
+        
+        -- Verify the done signal is high for only one clock cycle
+        sigDoneIn <= '1';
+        wait for 200ns;
+        sigDoneIn <= '0';
+        wait for 110ns;
+        assert sigDoneOut = '0' report "Test failed: 10"; 
         
         wait;
     end process;
