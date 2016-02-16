@@ -20,20 +20,19 @@ entity ValueRouter is
 end ValueRouter;
 
 architecture Behavioral of ValueRouter is
-    signal sigPacketOutValid : STD_LOGIC;
+    signal sigPacketOutValid : STD_LOGIC := '0';
 begin
     PKT_OUT_VALID <= sigPacketOutValid;
     
     process (CLK) is
         variable addressWidth : INTEGER := packetInWidth - packetOutWidth;
-        variable addressHigh : INTEGER := packetInWidth - 1;
         variable packetDestAddr : STD_LOGIC_VECTOR (addressWidth - 1 downto 0);
     begin
         if Rising_Edge(CLK) then
-            packetDestAddr := PKT_IN(addressHigh downto addressHigh - addressWidth + 1);
+            packetDestAddr := PKT_IN(packetInWidth - 1 downto packetInWidth - addressWidth);
             
             if PKT_IN_VALID = '1' and sigPacketOutValid = '0' and packetDestAddr = STD_LOGIC_VECTOR(To_Unsigned(address, addressWidth)) then
-                PKT_OUT <= PKT_IN (packetOutWidth downto 0);
+                PKT_OUT <= PKT_IN (packetOutWidth - 1 downto 0);
                 sigPacketOutValid <= '1';
                 DONE_OUT <= '0';
             elsif DONE_IN = '1' then
