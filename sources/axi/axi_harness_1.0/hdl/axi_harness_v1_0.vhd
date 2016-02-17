@@ -17,8 +17,10 @@ entity axi_harness_v1_0 is
 	);
 	port (
 		-- Users to add ports here
---        din0, din1, din2, din3 : in STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0);
---        dout0, dout1, dout2, dout3 : out STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0);
+        data_out : in STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0); -- From network to PS
+        done_out : in STD_LOGIC; -- From SWRN to PS
+        data_in : out STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0); -- From PS to SWRN
+        data_in_valid : out STD_LOGIC; -- From PS to SWRN
 		-- User ports ends
 		-- Do not modify the ports beyond this line
 
@@ -85,11 +87,7 @@ architecture arch_imp of axi_harness_v1_0 is
 
     signal din0, din1, din2, din3 : STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0);
     signal dout0, dout1, dout2, dout3 : STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0);
-
-    signal sig_s00_axi_wready : STD_LOGIC;
-    signal sigInter : STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0);
 begin
-    s00_axi_wready <= sig_s00_axi_wready;
 
 -- Instantiation of Axi Bus Interface S00_AXI
 axi_harness_v1_0_S00_AXI_inst : axi_harness_v1_0_S00_AXI
@@ -116,7 +114,7 @@ axi_harness_v1_0_S00_AXI_inst : axi_harness_v1_0_S00_AXI
 		S_AXI_WDATA	=> s00_axi_wdata,
 		S_AXI_WSTRB	=> s00_axi_wstrb,
 		S_AXI_WVALID	=> s00_axi_wvalid,
-		S_AXI_WREADY	=> sig_s00_axi_wready,
+        S_AXI_WREADY    => s00_axi_wready,
 		S_AXI_BRESP	=> s00_axi_bresp,
 		S_AXI_BVALID	=> s00_axi_bvalid,
 		S_AXI_BREADY	=> s00_axi_bready,
@@ -131,15 +129,10 @@ axi_harness_v1_0_S00_AXI_inst : axi_harness_v1_0_S00_AXI
 	);
 
 	-- Add user logic here
-	process (sig_s00_axi_wready) begin
-       if sig_s00_axi_wready = '1' then
-           sigInter <= dout0;
-       end if;
-	end process;
-	
-	process (sigInter) begin
-	   din1 <= sigInter;
-	end process;
+    data_in <= dout0;
+    data_in_valid <= dout1(0);
+    din2 <= data_out;
+    din3 <= (0 => done_out, others => '0');
 	-- User logic ends
 
 end arch_imp;
