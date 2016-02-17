@@ -7,11 +7,22 @@ int main()
 {
     init_platform();
 
-    Xil_Out32(XPAR_AXI_HARNESS_0_S00_AXI_BASEADDR + 0x0, 0xff00ff); // 00000000111111110000000011111111
-    int i; for (i = 0; i < 100000; i++){};
-    u32 a = Xil_In32(XPAR_AXI_HARNESS_0_S00_AXI_BASEADDR + 0x4);
+//        data_in 0x0
+//        data_in_valid 0x4
+//        data_out 0x8
+//        done_out 0xC
 
-    xil_printf("Val is: %0X\r\n", a);
+
+    Xil_Out32(XPAR_AXI_HARNESS_0_S00_AXI_BASEADDR + 0x0, 0x40); // 0 000001 000000
+    Xil_Out32(XPAR_AXI_HARNESS_0_S00_AXI_BASEADDR + 0x4, 0x1);
+    u32 cnt = 0;
+    while (Xil_In32(XPAR_AXI_HARNESS_0_S00_AXI_BASEADDR + 0xC) != 0x1) {
+    	cnt++;
+    	if (cnt == 1000) break;
+    }
+    u32 ret = Xil_In32(XPAR_AXI_HARNESS_0_S00_AXI_BASEADDR + 0x8);
+
+    xil_printf("Ret is: %0X\r\n", ret);
 
 //    print("Hello World\n\r");
 
