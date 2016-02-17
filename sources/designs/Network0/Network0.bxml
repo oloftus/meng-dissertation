@@ -4,9 +4,15 @@
     <Description>Composite Fileset</Description>
     <Generation Name="SYNTHESIS" State="GENERATED"/>
     <Generation Name="IMPLEMENTATION" State="GENERATED"/>
-    <Generation Name="SIMULATION" State="STALE"/>
+    <Generation Name="SIMULATION" State="GENERATED"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
-      <File Name="ip\Network0_processing_system7_0_0\Network0_processing_system7_0_0.xci" Type="IP">
+      <File Name="hdl\Network0.vhd" Type="VHDL">
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Network0_processing_system7_0_1\Network0_processing_system7_0_1.xci" Type="IP">
         <Instance HierarchyPath="processing_system7_0"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
         <Library Name="xil_defaultlib"/>
@@ -14,7 +20,7 @@
         <UsedIn Val="IMPLEMENTATION"/>
         <UsedIn Val="SIMULATION"/>
       </File>
-      <File Name="ip\Network0_axi_harness_0_0\Network0_axi_harness_0_0.xci" Type="IP">
+      <File Name="ip\Network0_axi_harness_0_1\Network0_axi_harness_0_1.xci" Type="IP">
         <Instance HierarchyPath="axi_harness_0"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
         <Library Name="xil_defaultlib"/>
@@ -30,18 +36,52 @@
         <UsedIn Val="IMPLEMENTATION"/>
         <UsedIn Val="SIMULATION"/>
       </File>
-      <File Name="ip\Network0_rst_processing_system7_0_50M_0\Network0_rst_processing_system7_0_50M_0.xci" Type="IP">
-        <Instance HierarchyPath="rst_processing_system7_0_50M"/>
+      <File Name="ip\Network0_rst_processing_system7_0_100M_0\Network0_rst_processing_system7_0_100M_0.xci" Type="IP">
+        <Instance HierarchyPath="rst_processing_system7_0_100M"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
         <UsedIn Val="IMPLEMENTATION"/>
         <UsedIn Val="SIMULATION"/>
       </File>
-      <File Name="hdl\Network0.vhd" Type="VHDL">
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false"/>
+      <File Name="ip\Network0_Neuron0_0_0\Network0_Neuron0_0_0.xci" Type="IP">
+        <Instance HierarchyPath="Neuron0_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Network0_AddressableRegister_0_0\Network0_AddressableRegister_0_0.xci" Type="IP">
+        <Instance HierarchyPath="AddressableRegister_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Network0_AddressableRegister_1_0\Network0_AddressableRegister_1_0.xci" Type="IP">
+        <Instance HierarchyPath="AddressableRegister_1"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Network0_Or2_0_0\Network0_Or2_0_0.xci" Type="IP">
+        <Instance HierarchyPath="Or2_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Network0_BusWidthConverter_0_0\Network0_BusWidthConverter_0_0.xci" Type="IP">
+        <Instance HierarchyPath="BusWidthConverter_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
         <UsedIn Val="SIMULATION"/>
       </File>
       <File Name="ip\Network0_auto_pc_0\Network0_auto_pc_0.xci" Type="IP">

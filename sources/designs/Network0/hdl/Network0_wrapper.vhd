@@ -1,7 +1,7 @@
 --Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2014.2 (win32) Build 932637 Wed Jun 11 13:24:38 MDT 2014
---Date        : Mon Feb 08 16:57:20 2016
+--Date        : Wed Feb 17 17:54:49 2016
 --Host        : Oli-Windows7VM running 32-bit Service Pack 1  (build 7601)
 --Command     : generate_target Network0_wrapper.bd
 --Design      : Network0_wrapper

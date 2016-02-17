@@ -2,9 +2,9 @@
 <Root MajorVersion="0" MinorVersion="29">
   <CompositeFile CompositeFileTopName="Neuron0" CanBeSetAsTop="true" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="GENERATED"/>
-    <Generation Name="IMPLEMENTATION" State="GENERATED"/>
-    <Generation Name="SIMULATION" State="GENERATED"/>
+    <Generation Name="SYNTHESIS" State="STALE"/>
+    <Generation Name="IMPLEMENTATION" State="STALE"/>
+    <Generation Name="SIMULATION" State="STALE"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="ip\Neuron0_Synapse_0_0\Neuron0_Synapse_0_0.xci" Type="IP">
         <Instance HierarchyPath="Synapse_0"/>

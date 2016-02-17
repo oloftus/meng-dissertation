@@ -1,7 +1,7 @@
 --Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2014.2 (win32) Build 932637 Wed Jun 11 13:24:38 MDT 2014
---Date        : Mon Feb 08 16:57:20 2016
+--Date        : Wed Feb 17 17:54:49 2016
 --Host        : Oli-Windows7VM running 32-bit Service Pack 1  (build 7601)
 --Command     : generate_target Network0.bd
 --Design      : Network0
@@ -613,12 +613,18 @@ entity Network0 is
     FIXED_IO_ps_srstb : inout STD_LOGIC
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of Network0 : entity is "Network0,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLanguage=VHDL,numBlks=6,numReposBlks=4,numNonXlnxBlks=1,numHierBlks=2,maxHierDepth=0,da_axi4_cnt=1,da_ps7_cnt=1}";
+  attribute CORE_GENERATION_INFO of Network0 : entity is "Network0,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLanguage=VHDL,numBlks=11,numReposBlks=9,numNonXlnxBlks=4,numHierBlks=2,maxHierDepth=0,da_axi4_cnt=4,da_board_cnt=1,da_ps7_cnt=3}";
 end Network0;
 
 architecture STRUCTURE of Network0 is
-  component Network0_processing_system7_0_0 is
+  component Network0_processing_system7_0_1 is
   port (
+    TTC0_WAVE0_OUT : out STD_LOGIC;
+    TTC0_WAVE1_OUT : out STD_LOGIC;
+    TTC0_WAVE2_OUT : out STD_LOGIC;
+    USB0_PORT_INDCTL : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    USB0_VBUS_PWRSELECT : out STD_LOGIC;
+    USB0_VBUS_PWRFAULT : in STD_LOGIC;
     M_AXI_GP0_ARVALID : out STD_LOGIC;
     M_AXI_GP0_AWVALID : out STD_LOGIC;
     M_AXI_GP0_BREADY : out STD_LOGIC;
@@ -682,8 +688,8 @@ architecture STRUCTURE of Network0 is
     PS_CLK : inout STD_LOGIC;
     PS_PORB : inout STD_LOGIC
   );
-  end component Network0_processing_system7_0_0;
-  component Network0_rst_processing_system7_0_50M_0 is
+  end component Network0_processing_system7_0_1;
+  component Network0_rst_processing_system7_0_100M_0 is
   port (
     slowest_sync_clk : in STD_LOGIC;
     ext_reset_in : in STD_LOGIC;
@@ -696,9 +702,13 @@ architecture STRUCTURE of Network0 is
     interconnect_aresetn : out STD_LOGIC_VECTOR ( 0 to 0 );
     peripheral_aresetn : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  end component Network0_rst_processing_system7_0_50M_0;
-  component Network0_axi_harness_0_0 is
+  end component Network0_rst_processing_system7_0_100M_0;
+  component Network0_axi_harness_0_1 is
   port (
+    data_out : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    done_out : in STD_LOGIC;
+    data_in : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    data_in_valid : out STD_LOGIC;
     s00_axi_awaddr : in STD_LOGIC_VECTOR ( 3 downto 0 );
     s00_axi_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
     s00_axi_awvalid : in STD_LOGIC;
@@ -721,9 +731,67 @@ architecture STRUCTURE of Network0 is
     s00_axi_aclk : in STD_LOGIC;
     s00_axi_aresetn : in STD_LOGIC
   );
-  end component Network0_axi_harness_0_0;
+  end component Network0_axi_harness_0_1;
+  component Network0_AddressableRegister_0_0 is
+  port (
+    CLK : in STD_LOGIC;
+    RST : in STD_LOGIC;
+    PKT_IN : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    PKT_IN_VALID : in STD_LOGIC;
+    VAL_OUT : out STD_LOGIC_VECTOR ( 12 downto 0 );
+    VAL_OUT_VALID : out STD_LOGIC;
+    DONE_OUT : out STD_LOGIC
+  );
+  end component Network0_AddressableRegister_0_0;
+  component Network0_AddressableRegister_1_0 is
+  port (
+    CLK : in STD_LOGIC;
+    RST : in STD_LOGIC;
+    PKT_IN : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    PKT_IN_VALID : in STD_LOGIC;
+    VAL_OUT : out STD_LOGIC_VECTOR ( 12 downto 0 );
+    VAL_OUT_VALID : out STD_LOGIC;
+    DONE_OUT : out STD_LOGIC
+  );
+  end component Network0_AddressableRegister_1_0;
+  component Network0_Or2_0_0 is
+  port (
+    A : in STD_LOGIC;
+    B : in STD_LOGIC;
+    O : out STD_LOGIC
+  );
+  end component Network0_Or2_0_0;
+  component Network0_BusWidthConverter_0_0 is
+  port (
+    DIN : in STD_LOGIC_VECTOR ( 11 downto 0 );
+    DOUT : out STD_LOGIC_VECTOR ( 31 downto 0 )
+  );
+  end component Network0_BusWidthConverter_0_0;
+  component Network0_Neuron0_0_0 is
+  port (
+    CLK : in STD_LOGIC;
+    RST : in STD_LOGIC;
+    SYN_0_DIN : in STD_LOGIC_VECTOR ( 12 downto 0 );
+    SYN_0_VALID : in STD_LOGIC;
+    SYN_1_DIN : in STD_LOGIC_VECTOR ( 12 downto 0 );
+    SYN_1_VALID : in STD_LOGIC;
+    SYN_OUT : out STD_LOGIC_VECTOR ( 11 downto 0 );
+    SYN_OUT_VALID : out STD_LOGIC
+  );
+  end component Network0_Neuron0_0_0;
+  signal AddressableRegister_0_DONE_OUT : STD_LOGIC;
+  signal AddressableRegister_0_VAL_OUT : STD_LOGIC_VECTOR ( 12 downto 0 );
+  signal AddressableRegister_0_VAL_OUT_VALID : STD_LOGIC;
+  signal AddressableRegister_1_DONE_OUT : STD_LOGIC;
+  signal AddressableRegister_1_VAL_OUT : STD_LOGIC_VECTOR ( 12 downto 0 );
+  signal AddressableRegister_1_VAL_OUT_VALID : STD_LOGIC;
+  signal BusWidthConverter_0_DOUT : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal GND_1 : STD_LOGIC;
+  signal Neuron0_0_SYN_OUT : STD_LOGIC_VECTOR ( 11 downto 0 );
+  signal Or2_0_O : STD_LOGIC;
   signal VCC_1 : STD_LOGIC;
+  signal axi_harness_0_data_in : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal axi_harness_0_data_in_valid : STD_LOGIC;
   signal processing_system7_0_DDR_ADDR : STD_LOGIC_VECTOR ( 14 downto 0 );
   signal processing_system7_0_DDR_BA : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal processing_system7_0_DDR_CAS_N : STD_LOGIC;
@@ -804,25 +872,77 @@ architecture STRUCTURE of Network0 is
   signal processing_system7_0_axi_periph_M00_AXI_WREADY : STD_LOGIC;
   signal processing_system7_0_axi_periph_M00_AXI_WSTRB : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal processing_system7_0_axi_periph_M00_AXI_WVALID : STD_LOGIC;
-  signal rst_processing_system7_0_50M_interconnect_aresetn : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal rst_processing_system7_0_50M_peripheral_aresetn : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal NLW_rst_processing_system7_0_50M_mb_reset_UNCONNECTED : STD_LOGIC;
-  signal NLW_rst_processing_system7_0_50M_bus_struct_reset_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal NLW_rst_processing_system7_0_50M_peripheral_reset_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal rst_processing_system7_0_100M_interconnect_aresetn : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal rst_processing_system7_0_100M_peripheral_aresetn : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal rst_processing_system7_0_100M_peripheral_reset : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal NLW_Neuron0_0_SYN_OUT_VALID_UNCONNECTED : STD_LOGIC;
+  signal NLW_processing_system7_0_TTC0_WAVE0_OUT_UNCONNECTED : STD_LOGIC;
+  signal NLW_processing_system7_0_TTC0_WAVE1_OUT_UNCONNECTED : STD_LOGIC;
+  signal NLW_processing_system7_0_TTC0_WAVE2_OUT_UNCONNECTED : STD_LOGIC;
+  signal NLW_processing_system7_0_USB0_VBUS_PWRSELECT_UNCONNECTED : STD_LOGIC;
+  signal NLW_processing_system7_0_USB0_PORT_INDCTL_UNCONNECTED : STD_LOGIC_VECTOR ( 1 downto 0 );
+  signal NLW_rst_processing_system7_0_100M_mb_reset_UNCONNECTED : STD_LOGIC;
+  signal NLW_rst_processing_system7_0_100M_bus_struct_reset_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
 begin
+AddressableRegister_0: component Network0_AddressableRegister_0_0
+    port map (
+      CLK => processing_system7_0_FCLK_CLK0,
+      DONE_OUT => AddressableRegister_0_DONE_OUT,
+      PKT_IN(31 downto 0) => axi_harness_0_data_in(31 downto 0),
+      PKT_IN_VALID => axi_harness_0_data_in_valid,
+      RST => rst_processing_system7_0_100M_peripheral_reset(0),
+      VAL_OUT(12 downto 0) => AddressableRegister_0_VAL_OUT(12 downto 0),
+      VAL_OUT_VALID => AddressableRegister_0_VAL_OUT_VALID
+    );
+AddressableRegister_1: component Network0_AddressableRegister_1_0
+    port map (
+      CLK => processing_system7_0_FCLK_CLK0,
+      DONE_OUT => AddressableRegister_1_DONE_OUT,
+      PKT_IN(31 downto 0) => axi_harness_0_data_in(31 downto 0),
+      PKT_IN_VALID => axi_harness_0_data_in_valid,
+      RST => rst_processing_system7_0_100M_peripheral_reset(0),
+      VAL_OUT(12 downto 0) => AddressableRegister_1_VAL_OUT(12 downto 0),
+      VAL_OUT_VALID => AddressableRegister_1_VAL_OUT_VALID
+    );
+BusWidthConverter_0: component Network0_BusWidthConverter_0_0
+    port map (
+      DIN(11 downto 0) => Neuron0_0_SYN_OUT(11 downto 0),
+      DOUT(31 downto 0) => BusWidthConverter_0_DOUT(31 downto 0)
+    );
 GND: unisim.vcomponents.GND
     port map (
       G => GND_1
+    );
+Neuron0_0: component Network0_Neuron0_0_0
+    port map (
+      CLK => processing_system7_0_FCLK_CLK0,
+      RST => rst_processing_system7_0_100M_peripheral_reset(0),
+      SYN_0_DIN(12 downto 0) => AddressableRegister_1_VAL_OUT(12 downto 0),
+      SYN_0_VALID => AddressableRegister_1_VAL_OUT_VALID,
+      SYN_1_DIN(12 downto 0) => AddressableRegister_0_VAL_OUT(12 downto 0),
+      SYN_1_VALID => AddressableRegister_0_VAL_OUT_VALID,
+      SYN_OUT(11 downto 0) => Neuron0_0_SYN_OUT(11 downto 0),
+      SYN_OUT_VALID => NLW_Neuron0_0_SYN_OUT_VALID_UNCONNECTED
+    );
+Or2_0: component Network0_Or2_0_0
+    port map (
+      A => AddressableRegister_0_DONE_OUT,
+      B => AddressableRegister_1_DONE_OUT,
+      O => Or2_0_O
     );
 VCC: unisim.vcomponents.VCC
     port map (
       P => VCC_1
     );
-axi_harness_0: component Network0_axi_harness_0_0
+axi_harness_0: component Network0_axi_harness_0_1
     port map (
+      data_in(31 downto 0) => axi_harness_0_data_in(31 downto 0),
+      data_in_valid => axi_harness_0_data_in_valid,
+      data_out(31 downto 0) => BusWidthConverter_0_DOUT(31 downto 0),
+      done_out => Or2_0_O,
       s00_axi_aclk => processing_system7_0_FCLK_CLK0,
       s00_axi_araddr(3 downto 0) => processing_system7_0_axi_periph_M00_AXI_ARADDR(3 downto 0),
-      s00_axi_aresetn => rst_processing_system7_0_50M_peripheral_aresetn(0),
+      s00_axi_aresetn => rst_processing_system7_0_100M_peripheral_aresetn(0),
       s00_axi_arprot(2 downto 0) => processing_system7_0_axi_periph_M00_AXI_ARPROT(2 downto 0),
       s00_axi_arready => processing_system7_0_axi_periph_M00_AXI_ARREADY,
       s00_axi_arvalid => processing_system7_0_axi_periph_M00_AXI_ARVALID,
@@ -842,7 +962,7 @@ axi_harness_0: component Network0_axi_harness_0_0
       s00_axi_wstrb(3 downto 0) => processing_system7_0_axi_periph_M00_AXI_WSTRB(3 downto 0),
       s00_axi_wvalid => processing_system7_0_axi_periph_M00_AXI_WVALID
     );
-processing_system7_0: component Network0_processing_system7_0_0
+processing_system7_0: component Network0_processing_system7_0_1
     port map (
       DDR_Addr(14 downto 0) => DDR_addr(14 downto 0),
       DDR_BankAddr(2 downto 0) => DDR_ba(2 downto 0),
@@ -905,14 +1025,20 @@ processing_system7_0: component Network0_processing_system7_0_0
       M_AXI_GP0_WVALID => processing_system7_0_M_AXI_GP0_WVALID,
       PS_CLK => FIXED_IO_ps_clk,
       PS_PORB => FIXED_IO_ps_porb,
-      PS_SRSTB => FIXED_IO_ps_srstb
+      PS_SRSTB => FIXED_IO_ps_srstb,
+      TTC0_WAVE0_OUT => NLW_processing_system7_0_TTC0_WAVE0_OUT_UNCONNECTED,
+      TTC0_WAVE1_OUT => NLW_processing_system7_0_TTC0_WAVE1_OUT_UNCONNECTED,
+      TTC0_WAVE2_OUT => NLW_processing_system7_0_TTC0_WAVE2_OUT_UNCONNECTED,
+      USB0_PORT_INDCTL(1 downto 0) => NLW_processing_system7_0_USB0_PORT_INDCTL_UNCONNECTED(1 downto 0),
+      USB0_VBUS_PWRFAULT => GND_1,
+      USB0_VBUS_PWRSELECT => NLW_processing_system7_0_USB0_VBUS_PWRSELECT_UNCONNECTED
     );
 processing_system7_0_axi_periph: entity work.Network0_processing_system7_0_axi_periph_0
     port map (
       ACLK => processing_system7_0_FCLK_CLK0,
-      ARESETN(0) => rst_processing_system7_0_50M_interconnect_aresetn(0),
+      ARESETN(0) => rst_processing_system7_0_100M_interconnect_aresetn(0),
       M00_ACLK => processing_system7_0_FCLK_CLK0,
-      M00_ARESETN(0) => rst_processing_system7_0_50M_peripheral_aresetn(0),
+      M00_ARESETN(0) => rst_processing_system7_0_100M_peripheral_aresetn(0),
       M00_AXI_araddr(3 downto 0) => processing_system7_0_axi_periph_M00_AXI_ARADDR(3 downto 0),
       M00_AXI_arprot(2 downto 0) => processing_system7_0_axi_periph_M00_AXI_ARPROT(2 downto 0),
       M00_AXI_arready => processing_system7_0_axi_periph_M00_AXI_ARREADY,
@@ -933,7 +1059,7 @@ processing_system7_0_axi_periph: entity work.Network0_processing_system7_0_axi_p
       M00_AXI_wstrb(3 downto 0) => processing_system7_0_axi_periph_M00_AXI_WSTRB(3 downto 0),
       M00_AXI_wvalid => processing_system7_0_axi_periph_M00_AXI_WVALID,
       S00_ACLK => processing_system7_0_FCLK_CLK0,
-      S00_ARESETN(0) => rst_processing_system7_0_50M_peripheral_aresetn(0),
+      S00_ARESETN(0) => rst_processing_system7_0_100M_peripheral_aresetn(0),
       S00_AXI_araddr(31 downto 0) => processing_system7_0_M_AXI_GP0_ARADDR(31 downto 0),
       S00_AXI_arburst(1 downto 0) => processing_system7_0_M_AXI_GP0_ARBURST(1 downto 0),
       S00_AXI_arcache(3 downto 0) => processing_system7_0_M_AXI_GP0_ARCACHE(3 downto 0),
@@ -973,17 +1099,17 @@ processing_system7_0_axi_periph: entity work.Network0_processing_system7_0_axi_p
       S00_AXI_wstrb(3 downto 0) => processing_system7_0_M_AXI_GP0_WSTRB(3 downto 0),
       S00_AXI_wvalid => processing_system7_0_M_AXI_GP0_WVALID
     );
-rst_processing_system7_0_50M: component Network0_rst_processing_system7_0_50M_0
+rst_processing_system7_0_100M: component Network0_rst_processing_system7_0_100M_0
     port map (
       aux_reset_in => VCC_1,
-      bus_struct_reset(0) => NLW_rst_processing_system7_0_50M_bus_struct_reset_UNCONNECTED(0),
+      bus_struct_reset(0) => NLW_rst_processing_system7_0_100M_bus_struct_reset_UNCONNECTED(0),
       dcm_locked => VCC_1,
       ext_reset_in => processing_system7_0_FCLK_RESET0_N,
-      interconnect_aresetn(0) => rst_processing_system7_0_50M_interconnect_aresetn(0),
+      interconnect_aresetn(0) => rst_processing_system7_0_100M_interconnect_aresetn(0),
       mb_debug_sys_rst => GND_1,
-      mb_reset => NLW_rst_processing_system7_0_50M_mb_reset_UNCONNECTED,
-      peripheral_aresetn(0) => rst_processing_system7_0_50M_peripheral_aresetn(0),
-      peripheral_reset(0) => NLW_rst_processing_system7_0_50M_peripheral_reset_UNCONNECTED(0),
+      mb_reset => NLW_rst_processing_system7_0_100M_mb_reset_UNCONNECTED,
+      peripheral_aresetn(0) => rst_processing_system7_0_100M_peripheral_aresetn(0),
+      peripheral_reset(0) => rst_processing_system7_0_100M_peripheral_reset(0),
       slowest_sync_clk => processing_system7_0_FCLK_CLK0
     );
 end STRUCTURE;
