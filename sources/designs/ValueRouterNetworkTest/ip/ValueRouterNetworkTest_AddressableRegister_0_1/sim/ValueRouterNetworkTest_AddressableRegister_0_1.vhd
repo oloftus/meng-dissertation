@@ -90,7 +90,7 @@ BEGIN
     GENERIC MAP (
       dataWidth => 16,
       addressWidth => 15,
-      address => 32769
+      address => 16385
     )
     PORT MAP (
       CLK => CLK,
