@@ -1,7 +1,7 @@
 --Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2014.2 (win32) Build 932637 Wed Jun 11 13:24:38 MDT 2014
---Date        : Wed Feb 17 17:54:49 2016
+--Date        : Thu Feb 18 12:05:24 2016
 --Host        : Oli-Windows7VM running 32-bit Service Pack 1  (build 7601)
 --Command     : generate_target Network0.bd
 --Design      : Network0
@@ -613,7 +613,7 @@ entity Network0 is
     FIXED_IO_ps_srstb : inout STD_LOGIC
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of Network0 : entity is "Network0,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLanguage=VHDL,numBlks=11,numReposBlks=9,numNonXlnxBlks=4,numHierBlks=2,maxHierDepth=0,da_axi4_cnt=4,da_board_cnt=1,da_ps7_cnt=3}";
+  attribute CORE_GENERATION_INFO of Network0 : entity is "Network0,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLanguage=VHDL,numBlks=12,numReposBlks=10,numNonXlnxBlks=4,numHierBlks=2,maxHierDepth=0,da_axi4_cnt=4,da_board_cnt=1,da_ps7_cnt=3}";
 end Network0;
 
 architecture STRUCTURE of Network0 is
@@ -703,35 +703,6 @@ architecture STRUCTURE of Network0 is
     peripheral_aresetn : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
   end component Network0_rst_processing_system7_0_100M_0;
-  component Network0_axi_harness_0_1 is
-  port (
-    data_out : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    done_out : in STD_LOGIC;
-    data_in : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    data_in_valid : out STD_LOGIC;
-    s00_axi_awaddr : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    s00_axi_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    s00_axi_awvalid : in STD_LOGIC;
-    s00_axi_awready : out STD_LOGIC;
-    s00_axi_wdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    s00_axi_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    s00_axi_wvalid : in STD_LOGIC;
-    s00_axi_wready : out STD_LOGIC;
-    s00_axi_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    s00_axi_bvalid : out STD_LOGIC;
-    s00_axi_bready : in STD_LOGIC;
-    s00_axi_araddr : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    s00_axi_arprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    s00_axi_arvalid : in STD_LOGIC;
-    s00_axi_arready : out STD_LOGIC;
-    s00_axi_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    s00_axi_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    s00_axi_rvalid : out STD_LOGIC;
-    s00_axi_rready : in STD_LOGIC;
-    s00_axi_aclk : in STD_LOGIC;
-    s00_axi_aresetn : in STD_LOGIC
-  );
-  end component Network0_axi_harness_0_1;
   component Network0_AddressableRegister_0_0 is
   port (
     CLK : in STD_LOGIC;
@@ -767,6 +738,35 @@ architecture STRUCTURE of Network0 is
     DOUT : out STD_LOGIC_VECTOR ( 31 downto 0 )
   );
   end component Network0_BusWidthConverter_0_0;
+  component Network0_axi_harness_0_1 is
+  port (
+    data_out : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    done_out : in STD_LOGIC;
+    data_in : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    data_in_valid : out STD_LOGIC;
+    s00_axi_awaddr : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    s00_axi_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    s00_axi_awvalid : in STD_LOGIC;
+    s00_axi_awready : out STD_LOGIC;
+    s00_axi_wdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    s00_axi_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    s00_axi_wvalid : in STD_LOGIC;
+    s00_axi_wready : out STD_LOGIC;
+    s00_axi_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    s00_axi_bvalid : out STD_LOGIC;
+    s00_axi_bready : in STD_LOGIC;
+    s00_axi_araddr : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    s00_axi_arprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    s00_axi_arvalid : in STD_LOGIC;
+    s00_axi_arready : out STD_LOGIC;
+    s00_axi_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    s00_axi_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    s00_axi_rvalid : out STD_LOGIC;
+    s00_axi_rready : in STD_LOGIC;
+    s00_axi_aclk : in STD_LOGIC;
+    s00_axi_aresetn : in STD_LOGIC
+  );
+  end component Network0_axi_harness_0_1;
   component Network0_Neuron0_0_0 is
   port (
     CLK : in STD_LOGIC;
@@ -779,6 +779,21 @@ architecture STRUCTURE of Network0 is
     SYN_OUT_VALID : out STD_LOGIC
   );
   end component Network0_Neuron0_0_0;
+  component Network0_ila_0_0 is
+  port (
+    clk : in STD_LOGIC;
+    probe1 : in STD_LOGIC_VECTOR ( 0 to 0 );
+    probe7 : in STD_LOGIC_VECTOR ( 0 to 0 );
+    probe0 : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    probe2 : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    probe3 : in STD_LOGIC_VECTOR ( 0 to 0 );
+    probe4 : in STD_LOGIC_VECTOR ( 12 downto 0 );
+    probe5 : in STD_LOGIC_VECTOR ( 0 to 0 );
+    probe6 : in STD_LOGIC_VECTOR ( 12 downto 0 );
+    probe8 : in STD_LOGIC_VECTOR ( 11 downto 0 );
+    probe9 : in STD_LOGIC_VECTOR ( 31 downto 0 )
+  );
+  end component Network0_ila_0_0;
   signal AddressableRegister_0_DONE_OUT : STD_LOGIC;
   signal AddressableRegister_0_VAL_OUT : STD_LOGIC_VECTOR ( 12 downto 0 );
   signal AddressableRegister_0_VAL_OUT_VALID : STD_LOGIC;
@@ -961,6 +976,20 @@ axi_harness_0: component Network0_axi_harness_0_1
       s00_axi_wready => processing_system7_0_axi_periph_M00_AXI_WREADY,
       s00_axi_wstrb(3 downto 0) => processing_system7_0_axi_periph_M00_AXI_WSTRB(3 downto 0),
       s00_axi_wvalid => processing_system7_0_axi_periph_M00_AXI_WVALID
+    );
+ila_0: component Network0_ila_0_0
+    port map (
+      clk => processing_system7_0_FCLK_CLK0,
+      probe0(31 downto 0) => axi_harness_0_data_in(31 downto 0),
+      probe1(0) => axi_harness_0_data_in_valid,
+      probe2(31 downto 0) => axi_harness_0_data_in(31 downto 0),
+      probe3(0) => axi_harness_0_data_in_valid,
+      probe4(12 downto 0) => AddressableRegister_1_VAL_OUT(12 downto 0),
+      probe5(0) => AddressableRegister_1_VAL_OUT_VALID,
+      probe6(12 downto 0) => AddressableRegister_0_VAL_OUT(12 downto 0),
+      probe7(0) => AddressableRegister_0_VAL_OUT_VALID,
+      probe8(11 downto 0) => Neuron0_0_SYN_OUT(11 downto 0),
+      probe9(31 downto 0) => BusWidthConverter_0_DOUT(31 downto 0)
     );
 processing_system7_0: component Network0_processing_system7_0_1
     port map (

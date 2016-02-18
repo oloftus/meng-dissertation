@@ -46,7 +46,7 @@
 -- 
 -- DO NOT MODIFY THIS FILE.
 
--- IP VLNV: oloftus.com:prif:axi_harness:4.0
+-- IP VLNV: oloftus.com:prif:axi_harness:5.0
 -- IP Revision: 1
 
 LIBRARY ieee;

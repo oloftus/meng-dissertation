@@ -85,8 +85,8 @@ architecture arch_imp of axi_harness_v1_0 is
 		);
 	end component axi_harness_v1_0_S00_AXI;
 
-    signal din0, din1, din2, din3 : STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0);
-    signal dout0, dout1, dout2, dout3 : STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0);
+    signal sigDin0, sigDin1, sigDataOut, sigDoneOut : STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0);
+    signal sigDataIn, sigDataInValid, sigDout2, sigDout3 : STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0);
 begin
 
 -- Instantiation of Axi Bus Interface S00_AXI
@@ -96,14 +96,14 @@ axi_harness_v1_0_S00_AXI_inst : axi_harness_v1_0_S00_AXI
 		C_S_AXI_ADDR_WIDTH	=> C_S00_AXI_ADDR_WIDTH
 	)
 	port map (
-        din0 => din0,
-        din1 => din1,
-        din2 => din2,
-        din3 => din3,
-        dout0 => dout0,
-        dout1 => dout1,
-        dout2 => dout2,
-        dout3 => dout3,
+        din0 => sigDin0,
+        din1 => sigDin1,
+        din2 => sigDataOut,
+        din3 => sigDoneOut,
+        dout0 => sigDataIn,
+        dout1 => sigDataInValid,
+        dout2 => sigDout2,
+        dout3 => sigDout3,
 
 		S_AXI_ACLK	=> s00_axi_aclk,
 		S_AXI_ARESETN	=> s00_axi_aresetn,
@@ -129,10 +129,17 @@ axi_harness_v1_0_S00_AXI_inst : axi_harness_v1_0_S00_AXI
 	);
 
 	-- Add user logic here
-    data_in <= dout0;
-    data_in_valid <= dout1(0);
-    din2 <= data_out;
-    din3 <= (0 => done_out, others => '0');
+    data_in <= sigDataIn;
+    data_in_valid <= sigDataInValid(0);
+    sigDataOut <= data_out;
+    
+    process (s00_axi_aclk) begin
+        if Rising_Edge(s00_axi_aclk) then
+            if done_out = '1' then
+                sigDoneOut <= (0 => '1', others => '0');
+            end if;
+        end if;
+    end process;
 	-- User logic ends
 
 end arch_imp;
