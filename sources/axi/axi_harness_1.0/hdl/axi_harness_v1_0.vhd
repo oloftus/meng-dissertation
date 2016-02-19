@@ -18,6 +18,7 @@ entity axi_harness_v1_0 is
 	port (
 		-- Users to add ports here
         data_out : in STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0); -- From network to PS
+        data_out_valid : in STD_LOGIC; -- From network
         done_out : in STD_LOGIC; -- From SWRN to PS
         data_in : out STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0); -- From PS to SWRN
         data_in_valid : out STD_LOGIC; -- From PS to SWRN
@@ -131,7 +132,14 @@ axi_harness_v1_0_S00_AXI_inst : axi_harness_v1_0_S00_AXI
 	-- Add user logic here
     data_in <= sigDataIn;
     data_in_valid <= sigDataInValid(0);
-    sigDataOut <= data_out;
+    
+    process (s00_axi_aclk) begin
+        if Rising_Edge(s00_axi_aclk) then
+            if data_out_valid = '1' then
+                sigDataOut <= data_out;
+            end if;
+        end if;
+    end process;
     
     process (s00_axi_aclk) begin
         if Rising_Edge(s00_axi_aclk) then
