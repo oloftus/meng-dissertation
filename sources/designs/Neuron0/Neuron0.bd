@@ -216,15 +216,6 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>PlanWrapper_0</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="PlanWrapper" spirit:vendor="oloftus.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_PlanWrapper_0_0</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="fractionPrecision">6</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="integerPrecision">6</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
         <spirit:instanceName>xlconstant_0</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="xlconstant" spirit:vendor="xilinx.com" spirit:version="1.1"/>
         <spirit:configurableElementValues>
@@ -284,6 +275,15 @@
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_ValidSetter_0_0</spirit:configurableElementValue>
           <spirit:configurableElementValue spirit:referenceId="latency">2</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>PlanWrapper_0</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="PlanWrapper" spirit:vendor="oloftus.com" spirit:version="2.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_PlanWrapper_0_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="fractionPrecision">6</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="integerPrecision">6</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
     </spirit:componentInstances>

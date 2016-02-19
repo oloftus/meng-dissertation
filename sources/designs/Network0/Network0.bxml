@@ -2,9 +2,9 @@
 <Root MajorVersion="0" MinorVersion="29">
   <CompositeFile CompositeFileTopName="Network0" CanBeSetAsTop="true" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="GENERATED"/>
-    <Generation Name="IMPLEMENTATION" State="GENERATED"/>
-    <Generation Name="SIMULATION" State="GENERATED"/>
+    <Generation Name="SYNTHESIS" State="RESET"/>
+    <Generation Name="IMPLEMENTATION" State="RESET"/>
+    <Generation Name="SIMULATION" State="RESET"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="hdl\Network0.vhd" Type="VHDL">
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false"/>
@@ -85,8 +85,7 @@
         <UsedIn Val="SIMULATION"/>
       </File>
       <File Name="ip\Network0_ila_0_0\Network0_ila_0_0.xci" Type="IP">
-        <Instance HierarchyPath="ila_0"/>
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Properties IsEditable="false" IsVisible="false" Timestamp="0" IsTrackable="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
         <UsedIn Val="IMPLEMENTATION"/>
