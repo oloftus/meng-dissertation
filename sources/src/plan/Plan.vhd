@@ -25,7 +25,8 @@ architecture Behavioral of Plan is
     signal sigSigned : STD_LOGIC;
     signal sigMagCompDtxy : STD_LOGIC_VECTOR (3 downto 0); 
     signal sigDtxyMirror : UNSIGNED (inputTotalPrecision - 1 downto 0);
-    
+    signal sigMirrorShift : UNSIGNED (inputTotalPrecision - 1 downto 0);
+
     component Complements2To1 is
         generic (
             precision : INTEGER
@@ -57,7 +58,8 @@ architecture Behavioral of Plan is
     end component;
 begin
     sigIn <= X;
-    Y <= one - sigDtxyMirror when sigSigned = '1' else sigDtxyMirror;
+    sigMirrorShift <= one - sigDtxyMirror when sigSigned = '1' else sigDtxyMirror;
+    Y <= Shift_Right(sigMirrorShift, dtxyPointShift);
     
     complements2To1Comp: Complements2To1
         generic map (

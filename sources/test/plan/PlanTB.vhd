@@ -5,7 +5,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity PlanTB is
     generic (
         inputIntegerPrecision : INTEGER := 5;
-        inputFractionPrecision : INTEGER := 3
+        inputFractionPrecision : INTEGER := 5
     );
 end PlanTB;
 
@@ -38,42 +38,41 @@ begin
         );
     
     tb: process begin
-        sigIn <= "1"&"11000"&"000"; -- -8
+        sigIn <= "1"&"11000"&"00000"; -- -8
         wait for 100ns;
-        assert sigOut = "0"&"0000"&"000" report "Test failed: 1";
+        assert sigOut = "00000"&"00000" report "Test failed: 1";
         
-        sigIn <= "1"&"11010"&"000"; -- -6
+        sigIn <= "1"&"11010"&"00000"; -- -6
         wait for 100ns;
-        assert sigOut = "0"&"0000"&"000" report "Test failed: 2";
+        assert sigOut = "00000"&"00000" report "Test failed: 2";
 
-        sigIn <= "1"&"11100"&"000"; -- -4
+        sigIn <= "1"&"11100"&"00000"; -- -4
         wait for 100ns;
-        assert sigOut = "0"&"0000"&"010" report "Test failed: 3";
+        assert sigOut = "00000"&"00001" report "Test failed: 3";
 
-        sigIn <= "1"&"11110"&"000"; -- -2
+        sigIn <= "1"&"11110"&"00000"; -- -2
         wait for 100ns;
-        assert sigOut = "0"&"0001"&"000" report "Test failed: 4";
+        assert sigOut = "00000"&"00100" report "Test failed: 4";
 
-        sigIn <= "0"&"00000"&"000"; -- 0
+        sigIn <= "0"&"00000"&"00000"; -- 0
         wait for 100ns;
-        assert sigOut = "0"&"0100"&"000" report "Test failed: 5";
+        assert sigOut = "00000"&"10000" report "Test failed: 5";
 
-        sigIn <= "0"&"00010"&"000"; -- 2
+        sigIn <= "0"&"00010"&"00000"; -- 2
         wait for 100ns;
-        assert sigOut = "0"&"0111"&"000" report "Test failed: 6";
+        assert sigOut = "00000"&"11100" report "Test failed: 6";
 
-        sigIn <= "0"&"00100"&"000"; -- 4
+        sigIn <= "0"&"00100"&"00000"; -- 4
         wait for 100ns;
-        assert sigOut = "0"&"0111"&"110" report "Test failed: 7";
+        assert sigOut = "00000"&"11111" report "Test failed: 7";
 
-        sigIn <= "0"&"00110"&"000"; -- 6
+        sigIn <= "0"&"00110"&"00000"; -- 6
         wait for 100ns;
-        assert sigOut = "0"&"1000"&"000" report "Test failed: 8";
+        assert sigOut = "00001"&"00000" report "Test failed: 8";
 
-        sigIn <= "0"&"01000"&"000"; -- 8
+        sigIn <= "0"&"01000"&"00000"; -- 8
         wait for 100ns;
-        assert sigOut = "0"&"1000"&"000" report "Test failed: 9";
-
+        assert sigOut = "00001"&"00000" report "Test failed: 9";
 
     end process;
 end Behavioral;
