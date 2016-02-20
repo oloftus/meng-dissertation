@@ -3,9 +3,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity ValidSetter is
-    -- Minimum delay between SYN_IN_VALID low to SYN_IN_VALID highL 2 clock periods
+    -- Minimum delay between SYN_IN_VALID low to SYN_IN_VALID high: 2 clock periods
     generic (
-        latency : INTEGER -- range 2 to 16
+        latency : INTEGER -- Range 2..7
     );
     port (
         CLK, RST, SYN_IN_VALID : in STD_LOGIC;
