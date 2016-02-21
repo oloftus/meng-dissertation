@@ -41,7 +41,7 @@ foreach my $id (0..$NUM_SYNAPSES - 1) {
 print $fh <<CMD;
 
 create_bd_port -dir I SYN_${id}_VALID
-create_bd_port -dir I -from $signedWeightPortHigh -to 0 -type data SYN_${id}_DIN
+create_bd_port -dir I -from $signedSynapsePortHigh -to 0 -type data SYN_${id}_DIN
 create_bd_port -dir I SYN_${id}_WVALID
 create_bd_port -dir I -from $signedWeightPortHigh -to 0 -type data SYN_${id}_WIN
 
@@ -76,6 +76,7 @@ print $fh <<CMD;
 
 set_property -dict [list CONFIG.latency {$latency}] [get_bd_cells ValidSetter]
 set_property -dict [list CONFIG.inputWidth {$signedSynapsePortWidth}] [get_bd_cells SumJunction]
+set_property -dict [list CONFIG.numInputs {$NUM_SYNAPSES}] [get_bd_cells SumJunction]
 set_property -dict [list CONFIG.integerPrecision {$SYNAPSE_INTEGER_PRECISION} CONFIG.fractionPrecision {$SYNAPSE_FRACTION_PRECISION}] [get_bd_cells Plan]
 set_property -dict [list CONFIG.n {$NUM_SYNAPSES}] [get_bd_cells MultiplierEnable]
 set_property -dict [list CONFIG.NUM_PORTS {$NUM_SYNAPSES}] [get_bd_cells MultiplierEnableConcat]

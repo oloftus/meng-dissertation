@@ -9,7 +9,7 @@ entity SumJunction is
     );
     port (
         DIN : in STD_LOGIC_VECTOR (numInputs * inputWidth - 1 downto 0);
-        DOUT : out STD_LOGIC_VECTOR (inputWidth downto 0);
+        DOUT : out STD_LOGIC_VECTOR (inputWidth - 1 downto 0);
         CLK : in STD_LOGIC
     );
 end SumJunction;
