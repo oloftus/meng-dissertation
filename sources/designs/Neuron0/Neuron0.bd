@@ -173,7 +173,7 @@
           <spirit:wire>
             <spirit:direction>out</spirit:direction>
             <spirit:vector>
-              <spirit:left>11</spirit:left>
+              <spirit:left>12</spirit:left>
               <spirit:right>0</spirit:right>
             </spirit:vector>
           </spirit:wire>
@@ -278,10 +278,10 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>PlanWrapper_0</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="PlanWrapper" spirit:vendor="oloftus.com" spirit:version="2.0"/>
+        <spirit:instanceName>Plan_0</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="Plan" spirit:vendor="oloftus.com" spirit:version="1.0"/>
         <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_PlanWrapper_0_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Neuron0_Plan_0_0</spirit:configurableElementValue>
           <spirit:configurableElementValue spirit:referenceId="fractionPrecision">6</spirit:configurableElementValue>
           <spirit:configurableElementValue spirit:referenceId="integerPrecision">6</spirit:configurableElementValue>
         </spirit:configurableElementValues>
@@ -336,11 +336,6 @@
         <spirit:internalPortReference spirit:componentRef="c_addsub_0" spirit:portRef="B"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
-        <spirit:name>c_addsub_0_S</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="c_addsub_0" spirit:portRef="S"/>
-        <spirit:internalPortReference spirit:componentRef="PlanWrapper_0" spirit:portRef="X"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
         <spirit:name>CLK_1</spirit:name>
         <spirit:externalPortReference spirit:portRef="CLK"/>
         <spirit:internalPortReference spirit:componentRef="mult_gen_0" spirit:portRef="CLK"/>
@@ -389,8 +384,13 @@
         <spirit:externalPortReference spirit:portRef="SYN_OUT_VALID"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
-        <spirit:name>PlanWrapper_0_Y</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="PlanWrapper_0" spirit:portRef="Y"/>
+        <spirit:name>c_addsub_0_S</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="c_addsub_0" spirit:portRef="S"/>
+        <spirit:internalPortReference spirit:componentRef="Plan_0" spirit:portRef="X"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>Plan_0_Y</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="Plan_0" spirit:portRef="Y"/>
         <spirit:externalPortReference spirit:portRef="SYN_OUT"/>
       </spirit:adHocConnection>
     </spirit:adHocConnections>

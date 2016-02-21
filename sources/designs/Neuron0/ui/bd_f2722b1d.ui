@@ -4,42 +4,42 @@
    HideNet: "/RST_1|",
    guistr: "# # String gsaved with Nlview version 6.4-r1  2014-02-28 bk=1.3047 VDI=34 GEI=35 GUI=JA:1.6
 #  -string -flagsOSRD
-preplace port SYN_OUT_VALID -pg 1 -y 240 -defaultsOSRD
-preplace port RST -pg 1 -y 50 -defaultsOSRD
-preplace port CLK -pg 1 -y 30 -defaultsOSRD
-preplace port SYN_0_VALID -pg 1 -y 120 -defaultsOSRD
-preplace port SYN_1_VALID -pg 1 -y 380 -defaultsOSRD
-preplace portBus SYN_0_DIN -pg 1 -y 140 -defaultsOSRD
-preplace portBus SYN_OUT -pg 1 -y 410 -defaultsOSRD
-preplace portBus SYN_1_DIN -pg 1 -y 400 -defaultsOSRD
-preplace inst xlconstant_0 -pg 1 -lvl 2 -y 270 -defaultsOSRD
-preplace inst PlanWrapper_0 -pg 1 -lvl 5 -y 410 -defaultsOSRD
-preplace inst Synapse_0 -pg 1 -lvl 1 -y 100 -defaultsOSRD
-preplace inst xlconstant_1 -pg 1 -lvl 2 -y 420 -defaultsOSRD
-preplace inst Synapse_1 -pg 1 -lvl 1 -y 360 -defaultsOSRD
-preplace inst c_addsub_0 -pg 1 -lvl 4 -y 410 -defaultsOSRD
-preplace inst mult_gen_0 -pg 1 -lvl 3 -y 230 -defaultsOSRD
-preplace inst mult_gen_1 -pg 1 -lvl 3 -y 410 -defaultsOSRD
-preplace inst And2_0 -pg 1 -lvl 2 -y 140 -defaultsOSRD
-preplace inst ValidSetter_0 -pg 1 -lvl 5 -y 250 -defaultsOSRD
+preplace port SYN_OUT_VALID -pg 1 -y 230 -defaultsOSRD
+preplace port RST -pg 1 -y 40 -defaultsOSRD
+preplace port CLK -pg 1 -y 20 -defaultsOSRD
+preplace port SYN_0_VALID -pg 1 -y 110 -defaultsOSRD
+preplace port SYN_1_VALID -pg 1 -y 370 -defaultsOSRD
+preplace portBus SYN_0_DIN -pg 1 -y 130 -defaultsOSRD
+preplace portBus SYN_OUT -pg 1 -y 400 -defaultsOSRD
+preplace portBus SYN_1_DIN -pg 1 -y 390 -defaultsOSRD
+preplace inst xlconstant_0 -pg 1 -lvl 2 -y 260 -defaultsOSRD
+preplace inst Synapse_0 -pg 1 -lvl 1 -y 90 -defaultsOSRD
+preplace inst xlconstant_1 -pg 1 -lvl 2 -y 410 -defaultsOSRD
+preplace inst Synapse_1 -pg 1 -lvl 1 -y 350 -defaultsOSRD
+preplace inst c_addsub_0 -pg 1 -lvl 4 -y 400 -defaultsOSRD
+preplace inst mult_gen_0 -pg 1 -lvl 3 -y 220 -defaultsOSRD
+preplace inst mult_gen_1 -pg 1 -lvl 3 -y 400 -defaultsOSRD
+preplace inst Plan_0 -pg 1 -lvl 5 -y 400 -defaultsOSRD
+preplace inst And2_0 -pg 1 -lvl 2 -y 160 -defaultsOSRD
+preplace inst ValidSetter_0 -pg 1 -lvl 5 -y 240 -defaultsOSRD
+preplace netloc Plan_0_Y 1 5 1 NJ
 preplace netloc mult_gen_1_P 1 3 1 N
-preplace netloc xlconstant_1_dout 1 2 1 N
-preplace netloc Synapse_1_SYN_OUT 1 1 2 NJ 370 560
-preplace netloc ValidSetter_0_SYN_IN_CLR 1 0 6 170 10 NJ 10 NJ 10 NJ 10 NJ 10 1150
-preplace netloc PlanWrapper_0_Y 1 5 1 N
-preplace netloc SYN_0_DIN_1 1 0 1 N
+preplace netloc xlconstant_1_dout 1 2 1 NJ
+preplace netloc Synapse_1_SYN_OUT 1 1 2 NJ 360 560
+preplace netloc ValidSetter_0_SYN_IN_CLR 1 0 6 170 260 NJ 320 NJ 320 NJ 320 NJ 320 1140
+preplace netloc SYN_0_DIN_1 1 0 1 NJ
 preplace netloc Synapse_1_SYN_OUT_VALID 1 1 1 420
-preplace netloc SYN_0_VALID_1 1 0 1 N
+preplace netloc SYN_0_VALID_1 1 0 1 NJ
 preplace netloc Synapse_0_SYN_OUT_VALID 1 1 1 420
-preplace netloc xlconstant_0_dout 1 2 1 580
-preplace netloc SYN_1_DIN_1 1 0 1 N
-preplace netloc And2_0_O 1 2 3 570 320 NJ 270 N
-preplace netloc SYN_1_VALID_1 1 0 1 N
+preplace netloc xlconstant_0_dout 1 2 1 NJ
+preplace netloc SYN_1_DIN_1 1 0 1 NJ
+preplace netloc And2_0_O 1 2 3 570 310 NJ 310 900
+preplace netloc SYN_1_VALID_1 1 0 1 NJ
 preplace netloc mult_gen_0_P 1 3 1 740
-preplace netloc ValidSetter_0_SYN_OUT_VALID 1 5 1 N
-preplace netloc Synapse_0_SYN_OUT 1 1 2 NJ 220 N
-preplace netloc c_addsub_0_S 1 4 1 N
-levelinfo -pg 1 150 290 490 660 830 1030 1170
+preplace netloc ValidSetter_0_SYN_OUT_VALID 1 5 1 NJ
+preplace netloc Synapse_0_SYN_OUT 1 1 2 NJ 100 580
+preplace netloc c_addsub_0_S 1 4 1 NJ
+levelinfo -pg 1 150 290 490 660 820 1020 1160
 ",
 }
 0
