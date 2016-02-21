@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root MajorVersion="0" MinorVersion="29">
+  <CompositeFile CompositeFileTopName="Neuron_1" CanBeSetAsTop="true" CanDisplayChildGraph="true">
+    <Description>Composite Fileset</Description>
+    <Generation Name="SYNTHESIS" State="STALE"/>
+    <Generation Name="IMPLEMENTATION" State="STALE"/>
+    <Generation Name="SIMULATION" State="STALE"/>
+    <FileCollection Name="SOURCES" Type="SOURCES">
+      <File Name="ip\Neuron_1_Synapse_0_0\Neuron_1_Synapse_0_0.xci" Type="IP">
+        <Instance HierarchyPath="Synapse_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Neuron_1_Synapse_1_0\Neuron_1_Synapse_1_0.xci" Type="IP">
+        <Instance HierarchyPath="Synapse_1"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Neuron_1_AddressableRegister_0_0\Neuron_1_AddressableRegister_0_0.xci" Type="IP">
+        <Instance HierarchyPath="AddressableRegister_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Neuron_1_AddressableRegister_1_0\Neuron_1_AddressableRegister_1_0.xci" Type="IP">
+        <Instance HierarchyPath="AddressableRegister_1"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Neuron_1_mult_gen_0_0\Neuron_1_mult_gen_0_0.xci" Type="IP">
+        <Instance HierarchyPath="mult_gen_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Neuron_1_mult_gen_1_0\Neuron_1_mult_gen_1_0.xci" Type="IP">
+        <Instance HierarchyPath="mult_gen_1"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Neuron_1_AndN_0_0\Neuron_1_AndN_0_0.xci" Type="IP">
+        <Instance HierarchyPath="AndN_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Neuron_1_SumJunction_0_0\Neuron_1_SumJunction_0_0.xci" Type="IP">
+        <Instance HierarchyPath="SumJunction_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Neuron_1_ValidSetter_0_0\Neuron_1_ValidSetter_0_0.xci" Type="IP">
+        <Instance HierarchyPath="ValidSetter_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Neuron_1_Plan_0_0\Neuron_1_Plan_0_0.xci" Type="IP">
+        <Instance HierarchyPath="Plan_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Neuron_1_OrN_0_0\Neuron_1_OrN_0_0.xci" Type="IP">
+        <Instance HierarchyPath="OrN_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Neuron_1_xlconcat_0_0\Neuron_1_xlconcat_0_0.xci" Type="IP">
+        <Instance HierarchyPath="xlconcat_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Neuron_1_xlconcat_1_0\Neuron_1_xlconcat_1_0.xci" Type="IP">
+        <Instance HierarchyPath="xlconcat_1"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Neuron_1_xlconcat_2_0\Neuron_1_xlconcat_2_0.xci" Type="IP">
+        <Instance HierarchyPath="xlconcat_2"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+    </FileCollection>
+  </CompositeFile>
+</Root>
