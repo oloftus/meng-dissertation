@@ -4,29 +4,16 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity Plan is
     generic (
-        planInputIntegerPrecision : INTEGER;
-        planInputFractionPrecision : INTEGER
+        integerPrecision : INTEGER;
+        fractionPrecision : INTEGER
     );
     port (
-        X : in SIGNED (planInputIntegerPrecision + planInputFractionPrecision downto 0);
-        Y : out UNSIGNED (planInputIntegerPrecision + planInputFractionPrecision - 1 downto 0)
+        X : in STD_LOGIC_VECTOR (integerPrecision + fractionPrecision downto 0);
+        Y : out STD_LOGIC_VECTOR (integerPrecision + fractionPrecision downto 0)
     );
 end Plan;
 
 architecture Behavioral of Plan is
-    constant inputTotalPrecision : INTEGER := planInputIntegerPrecision + planInputFractionPrecision;
-
-    constant dtxyPointShift : INTEGER := 3; -- -3 because DTXY format is 0000.000
-    constant dtxySliceLow : INTEGER := planInputFractionPrecision - dtxyPointShift;
-    constant one : UNSIGNED (inputTotalPrecision - 1 downto 0) := (planInputFractionPrecision + dtxyPointShift => '1', others => '0');
-    
-    signal sigIn : SIGNED (inputTotalPrecision downto 0);
-    signal sigInUnsigned : UNSIGNED (inputTotalPrecision - 1 downto 0);
-    signal sigSigned : STD_LOGIC;
-    signal sigMagCompDtxy : STD_LOGIC_VECTOR (3 downto 0); 
-    signal sigDtxyMirror : UNSIGNED (inputTotalPrecision - 1 downto 0);
-    signal sigMirrorShift : UNSIGNED (inputTotalPrecision - 1 downto 0);
-
     component Complements2To1 is
         generic (
             precision : INTEGER
@@ -47,23 +34,37 @@ architecture Behavioral of Plan is
     
     component Dtxy is
         generic (
-            inputIntegerPrecision : INTEGER;
-            inputFractionPrecision : INTEGER
+            integerPrecision : INTEGER;
+            fractionPrecision : INTEGER
         );
         port (
             Z : in STD_LOGIC_VECTOR (3 downto 0);
-            X : in UNSIGNED (inputIntegerPrecision + inputFractionPrecision - 1 downto 0);
-            Y : out UNSIGNED (inputIntegerPrecision + inputFractionPrecision - 1 downto 0)
+            X : in UNSIGNED (integerPrecision + fractionPrecision - 1 downto 0);
+            Y : out UNSIGNED (integerPrecision + fractionPrecision - 1 downto 0)
         );
     end component;
+
+    constant precision : INTEGER := integerPrecision + fractionPrecision;
+
+    constant dtxyPointShift : INTEGER := 3; -- -3 because DTXY format is 0000.000
+    constant dtxySliceLow : INTEGER := fractionPrecision - dtxyPointShift;
+    constant one : UNSIGNED (precision - 1 downto 0) := (fractionPrecision + dtxyPointShift => '1', others => '0');
+    
+    signal sigIn : SIGNED (precision downto 0);
+    signal sigInUnsigned : UNSIGNED (precision - 1 downto 0);
+    signal sigSigned : STD_LOGIC;
+    signal sigMagCompDtxy : STD_LOGIC_VECTOR (3 downto 0); 
+    signal sigDtxyMirror, sigMirrorShift, sigShiftResize : UNSIGNED (precision - 1 downto 0);
 begin
-    sigIn <= X;
+    sigIn <= SIGNED(X);
+    
     sigMirrorShift <= one - sigDtxyMirror when sigSigned = '1' else sigDtxyMirror;
-    Y <= Shift_Right(sigMirrorShift, dtxyPointShift);
+    sigShiftResize <= Shift_Right(sigMirrorShift, dtxyPointShift);
+    Y <= STD_LOGIC_VECTOR("0" & sigShiftResize);
     
     complements2To1Comp: Complements2To1
         generic map (
-            precision => inputTotalPrecision
+            precision => precision
         )
         port map (
             twos => sigIn,
@@ -86,8 +87,8 @@ begin
     
     dtxyComp: Dtxy
         generic map (
-            inputIntegerPrecision => planInputIntegerPrecision,
-            inputFractionPrecision => planInputFractionPrecision
+            integerPrecision => integerPrecision,
+            fractionPrecision => fractionPrecision
         )
         port map (
             X => sigInUnsigned,

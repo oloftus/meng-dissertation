@@ -4,75 +4,74 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity PlanTB is
     generic (
-        inputIntegerPrecision : INTEGER := 5;
-        inputFractionPrecision : INTEGER := 5
+        integerPrecision : INTEGER := 5;
+        fractionPrecision : INTEGER := 5
     );
 end PlanTB;
 
 architecture Behavioral of PlanTB is
-    constant inputTotalPrecision : INTEGER := inputIntegerPrecision + inputFractionPrecision;
-
-    signal sigIn : SIGNED (inputTotalPrecision downto 0);
-    signal sigOut : UNSIGNED (inputTotalPrecision - 1 downto 0);
+    signal sigX : STD_LOGIC_VECTOR (integerPrecision + fractionPrecision downto 0);
+    signal sigY : STD_LOGIC_VECTOR (integerPrecision + fractionPrecision downto 0);
 
     component Plan is
         generic (
-            planInputIntegerPrecision : INTEGER;
-            planInputFractionPrecision : INTEGER
+            integerPrecision : INTEGER;
+            fractionPrecision : INTEGER
         );
         port (
-            X : in SIGNED (planInputIntegerPrecision + planInputFractionPrecision downto 0);
-            Y : out UNSIGNED (planInputIntegerPrecision + planInputFractionPrecision - 1 downto 0)
+            X : in STD_LOGIC_VECTOR (integerPrecision + fractionPrecision downto 0);
+            Y : out STD_LOGIC_VECTOR (integerPrecision + fractionPrecision downto 0)
         );
     end component;
 begin
 
     uut: Plan
         generic map (
-            planInputIntegerPrecision => inputIntegerPrecision,
-            planInputFractionPrecision => inputFractionPrecision
+            integerPrecision => integerPrecision,
+            fractionPrecision => fractionPrecision
         )
         port map (
-            X => sigIn,
-            Y => sigOut
+            X => sigX,
+            Y => sigY
         );
     
     tb: process begin
-        sigIn <= "1"&"11000"&"00000"; -- -8
+        sigX <= "1"&"11000"&"00000"; -- -8
         wait for 100ns;
-        assert sigOut = "00000"&"00000" report "Test failed: 1";
+        assert sigY = "0"&"00000"&"00000" report "Test failed: 1";
         
-        sigIn <= "1"&"11010"&"00000"; -- -6
+        sigX <= "1"&"11010"&"00000"; -- -6
         wait for 100ns;
-        assert sigOut = "00000"&"00000" report "Test failed: 2";
+        assert sigY = "0"&"00000"&"00000" report "Test failed: 2";
 
-        sigIn <= "1"&"11100"&"00000"; -- -4
+        sigX <= "1"&"11100"&"00000"; -- -4
         wait for 100ns;
-        assert sigOut = "00000"&"00001" report "Test failed: 3";
+        assert sigY = "0"&"00000"&"00001" report "Test failed: 3";
 
-        sigIn <= "1"&"11110"&"00000"; -- -2
+        sigX <= "1"&"11110"&"00000"; -- -2
         wait for 100ns;
-        assert sigOut = "00000"&"00100" report "Test failed: 4";
+        assert sigY = "0"&"00000"&"00100" report "Test failed: 4";
 
-        sigIn <= "0"&"00000"&"00000"; -- 0
+        sigX <= "0"&"00000"&"00000"; -- 0
         wait for 100ns;
-        assert sigOut = "00000"&"10000" report "Test failed: 5";
+        assert sigY = "0"&"00000"&"10000" report "Test failed: 5";
 
-        sigIn <= "0"&"00010"&"00000"; -- 2
+        sigX <= "0"&"00010"&"00000"; -- 2
         wait for 100ns;
-        assert sigOut = "00000"&"11100" report "Test failed: 6";
+        assert sigY = "0"&"00000"&"11100" report "Test failed: 6";
 
-        sigIn <= "0"&"00100"&"00000"; -- 4
+        sigX <= "0"&"00100"&"00000"; -- 4
         wait for 100ns;
-        assert sigOut = "00000"&"11111" report "Test failed: 7";
+        assert sigY = "0"&"00000"&"11111" report "Test failed: 7";
 
-        sigIn <= "0"&"00110"&"00000"; -- 6
+        sigX <= "0"&"00110"&"00000"; -- 6
         wait for 100ns;
-        assert sigOut = "00001"&"00000" report "Test failed: 8";
+        assert sigY = "0"&"00001"&"00000" report "Test failed: 8";
 
-        sigIn <= "0"&"01000"&"00000"; -- 8
+        sigX <= "0"&"01000"&"00000"; -- 8
         wait for 100ns;
-        assert sigOut = "00001"&"00000" report "Test failed: 9";
-
+        assert sigY = "0"&"00001"&"00000" report "Test failed: 9";
+        
+        wait;
     end process;
 end Behavioral;

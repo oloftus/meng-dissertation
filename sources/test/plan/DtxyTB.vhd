@@ -4,36 +4,35 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity DtxyTB is
     generic (
-        tbInputIntegerPrecision : INTEGER := 4;
-        tbInputFractionPrecision : INTEGER := 3
+        integerPrecision : INTEGER := 4;
+        fractionPrecision : INTEGER := 3
     );
 end DtxyTB;
 
 architecture Behavioral of DtxyTB is
-    constant busTop : INTEGER := tbInputIntegerPrecision + tbInputFractionPrecision - 1;
-    constant busBottom : INTEGER := tbInputIntegerPrecision + tbInputFractionPrecision - 7;
-
-    signal sigZ : STD_LOGIC_VECTOR (3 downto 0);
-    signal sigX : UNSIGNED (busTop downto 0);
-    signal sigY : UNSIGNED (busTop downto 0);
-            
     component Dtxy is
         generic (
-            inputIntegerPrecision : INTEGER;
-            inputFractionPrecision : INTEGER
+            integerPrecision : INTEGER;
+            fractionPrecision : INTEGER
         );
         port
         (
             Z : in STD_LOGIC_VECTOR (3 downto 0);
-            X : in UNSIGNED (busTop downto 0);
-            Y : out UNSIGNED (busTop downto 0)
+            X : in UNSIGNED (integerPrecision + fractionPrecision - 1 downto 0);
+            Y : out UNSIGNED (integerPrecision + fractionPrecision - 1 downto 0)
         );
     end component;
+
+    constant busTop : INTEGER := integerPrecision + fractionPrecision - 1;
+    constant busBottom : INTEGER := integerPrecision + fractionPrecision - 7;
+    
+    signal sigZ : STD_LOGIC_VECTOR (3 downto 0);
+    signal sigX, sigY : UNSIGNED (busTop downto 0);
 begin
     uut: Dtxy
         generic map (
-            inputIntegerPrecision => tbInputIntegerPrecision,
-            inputFractionPrecision => tbInputFractionPrecision
+            integerPrecision => integerPrecision,
+            fractionPrecision => fractionPrecision
         )
         port map
         (
@@ -91,6 +90,8 @@ begin
         sigX <= "0000"&"000"; -- 0
         wait for 100ns;
         assert sigY(busTop downto busBottom) = ("0"&"100000") report "Test failed: Should be 0 ==> 0.84375";
+        
+        wait;
     end process;
 
 end Behavioral;

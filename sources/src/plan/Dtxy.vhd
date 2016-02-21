@@ -4,27 +4,27 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity Dtxy is
     generic (
-        inputIntegerPrecision : INTEGER;
-        inputFractionPrecision : INTEGER
+        integerPrecision : INTEGER;
+        fractionPrecision : INTEGER
     );
     port (
         Z : in STD_LOGIC_VECTOR (3 downto 0);
-        X : in UNSIGNED (inputIntegerPrecision + inputFractionPrecision - 1 downto 0);
-        Y : out UNSIGNED (inputIntegerPrecision + inputFractionPrecision - 1 downto 0)
+        X : in UNSIGNED (integerPrecision + fractionPrecision - 1 downto 0);
+        Y : out UNSIGNED (integerPrecision + fractionPrecision - 1 downto 0)
     );
 end Dtxy;
 
 architecture Behavioral of Dtxy is
 
-    constant inputTotalPrecision : INTEGER := inputIntegerPrecision + inputFractionPrecision;
+    constant precision : INTEGER := integerPrecision + fractionPrecision;
     constant implicitPointShift : INTEGER := 3;
-    constant newFixedPointLoc : INTEGER := inputFractionPrecision + implicitPointShift;
+    constant newFixedPointLoc : INTEGER := fractionPrecision + implicitPointShift;
     constant offsetFractionWidth : INTEGER := 5;
     
-    constant z4Offset : UNSIGNED (inputTotalPrecision - 1 downto 0) := Shift_Left(Resize("1"&"00000", inputTotalPrecision), newFixedPointLoc - offsetFractionWidth);
-    constant z3Offset : UNSIGNED (inputTotalPrecision - 1 downto 0) := Shift_Left(Resize("0"&"11011", inputTotalPrecision), newFixedPointLoc - offsetFractionWidth);
-    constant z2Offset : UNSIGNED (inputTotalPrecision - 1 downto 0) := Shift_Left(Resize("0"&"10100", inputTotalPrecision), newFixedPointLoc - offsetFractionWidth);
-    constant z1Offset : UNSIGNED (inputTotalPrecision - 1 downto 0) := Shift_Left(Resize("0"&"10000", inputTotalPrecision), newFixedPointLoc - offsetFractionWidth);
+    constant z4Offset : UNSIGNED (precision - 1 downto 0) := Shift_Left(Resize("1"&"00000", precision), newFixedPointLoc - offsetFractionWidth);
+    constant z3Offset : UNSIGNED (precision - 1 downto 0) := Shift_Left(Resize("0"&"11011", precision), newFixedPointLoc - offsetFractionWidth);
+    constant z2Offset : UNSIGNED (precision - 1 downto 0) := Shift_Left(Resize("0"&"10100", precision), newFixedPointLoc - offsetFractionWidth);
+    constant z1Offset : UNSIGNED (precision - 1 downto 0) := Shift_Left(Resize("0"&"10000", precision), newFixedPointLoc - offsetFractionWidth);
 begin
 
     process (X, Z) begin
