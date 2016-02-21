@@ -13,12 +13,12 @@ architecture Behavioral of ValueRouterTB is
     signal sigPktInValid, sigPktOutValid, sigDoneIn, sigDoneOut : STD_LOGIC;
     signal sigPktIn : STD_LOGIC_VECTOR (packetInWidth - 1 downto 0);
     signal sigPktOut : STD_LOGIC_VECTOR (packetOutWidth - 1 downto 0);
+    signal sigAddr : STD_LOGIC_VECTOR (packetInWidth - packetOutWidth - 1 downto 0);
     
     component ValueRouter is
         generic (
             packetInWidth : INTEGER;
-            packetOutWidth : INTEGER;
-            address : INTEGER
+            packetOutWidth : INTEGER
         );
         port (
             CLK : in STD_LOGIC;
@@ -27,7 +27,8 @@ architecture Behavioral of ValueRouterTB is
             PKT_OUT_VALID : out STD_LOGIC;
             PKT_OUT : out STD_LOGIC_VECTOR (packetOutWidth - 1 downto 0);
             DONE_IN : in STD_LOGIC;
-            DONE_OUT : out STD_LOGIC
+            DONE_OUT : out STD_LOGIC;
+            ADDR : in STD_LOGIC_VECTOR (packetInWidth - packetOutWidth - 1 downto 0)
         );
     end component;
     
@@ -37,8 +38,7 @@ begin
     uut: ValueRouter
         generic map (
             packetInWidth => packetInWidth,
-            packetOutWidth => packetOutWidth,
-            address => 8
+            packetOutWidth => packetOutWidth
         )
         port map (
             CLK => sigClk,
@@ -47,7 +47,8 @@ begin
             PKT_OUT_VALID => sigPktOutValid,
             PKT_OUT => sigPktOut,
             DONE_IN => sigDoneIn,
-            DONE_OUT => sigDoneOut
+            DONE_OUT => sigDoneOut,
+            ADDR => sigAddr
         );
 
     clock: process begin
@@ -62,6 +63,7 @@ begin
         constant pktOut1 : STD_LOGIC_VECTOR (packetOutWidth - 1 downto 0) := "11111111"&"00000000";
         constant pktOut2 : STD_LOGIC_VECTOR (packetOutWidth - 1 downto 0) := "00000000"&"11111111";
     begin
+        sigAddr <= addrBits;
         sigDoneIn <= '0';
         
         -- Verify packets with the correct address are forwarded

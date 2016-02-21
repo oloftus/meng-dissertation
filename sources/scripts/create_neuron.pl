@@ -5,6 +5,7 @@ use warnings;
 
 my $NUM_SYNAPSES = 2;
 my $WEIGHT_ADDR_WIDTH = 4;
+my $NEURON_ADDR_WIDTH = 6;
 
 my $SYNAPSE_INTEGER_PRECISION = 6;
 my $SYNAPSE_FRACTION_PRECISION = 6;
@@ -20,8 +21,11 @@ my $signedSynapsePortHigh = $signedSynapsePortWidth - 1;
 
 my $weightPrecision = $WEIGHT_INTEGER_PRECISION + $WEIGHT_FRACTION_PRECISION;
 my $signedWeightWidth = 1 + $weightPrecision;
-my $signedWeightPortWidth = $signedWeightWidth + $WEIGHT_ADDR_WIDTH; # 1 + :Sign bit
-my $signedWeightPortHigh = $signedWeightPortWidth - 1;
+my $swrnSynapsePortWidth = $signedWeightWidth + $WEIGHT_ADDR_WIDTH;
+my $swrnNeuronPortWidth = $swrnSynapsePortWidth + $NEURON_ADDR_WIDTH;
+my $swrnNeuronPortHigh = $swrnNeuronPortWidth - 1;
+my $swrnNeuronAddrPortHigh = $NEURON_ADDR_WIDTH - 1;
+
 
 my $latency = 2; # TODO: CALCULATE
 
@@ -31,8 +35,11 @@ print $fh <<CMD;
 
 create_bd_port -dir I -type clk CLK
 create_bd_port -dir I -type rst RST
-create_bd_port -dir O SYN_OUT_VALID
+create_bd_port -dir I PKT_IN_VALID
+create_bd_port -dir I -from $swrnNeuronPortHigh -to 0 -type data PKT_IN
+create_bd_port -dir I -from $swrnNeuronAddrPortHigh -to 0 -type data NEURON_ADDR
 create_bd_port -dir O -from $signedSynapsePortHigh -to 0 -type data SYN_OUT
+create_bd_port -dir O SYN_OUT_VALID
 create_bd_port -dir O DONE_OUT
 
 CMD
@@ -42,13 +49,12 @@ print $fh <<CMD;
 
 create_bd_port -dir I SYN_${id}_VALID
 create_bd_port -dir I -from $signedSynapsePortHigh -to 0 -type data SYN_${id}_DIN
-create_bd_port -dir I SYN_${id}_WVALID
-create_bd_port -dir I -from $signedWeightPortHigh -to 0 -type data SYN_${id}_WIN
 
 CMD
 }
 
 print $fh <<CMD;
+create_bd_cell -type ip -vlnv oloftus.com:prif:ValueRouter:4.0 NeuronRouter
 create_bd_cell -type ip -vlnv oloftus.com:prif:AndN:1.0 MultiplierEnable
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 MultiplierEnableConcat
 create_bd_cell -type ip -vlnv oloftus.com:prif:OrN:1.0 DoneOut
@@ -74,6 +80,7 @@ for my $id (0..$NUM_SYNAPSES - 1) { push $sumJunctionConcatInputs, "CONFIG.IN${i
 
 print $fh <<CMD;
 
+set_property -dict [list CONFIG.packetInWidth {$swrnNeuronPortWidth} CONFIG.packetOutWidth {$swrnSynapsePortWidth}] [get_bd_cells NeuronRouter]
 set_property -dict [list CONFIG.latency {$latency}] [get_bd_cells ValidSetter]
 set_property -dict [list CONFIG.inputWidth {$signedSynapsePortWidth}] [get_bd_cells SumJunction]
 set_property -dict [list CONFIG.numInputs {$NUM_SYNAPSES}] [get_bd_cells SumJunction]
@@ -100,15 +107,20 @@ print $fh <<CMD;
 
 connect_bd_net [get_bd_ports CLK] [get_bd_pins ValidSetter/CLK]
 connect_bd_net [get_bd_ports CLK] [get_bd_pins SumJunction/CLK]
+connect_bd_net [get_bd_ports CLK] [get_bd_pins NeuronRouter/CLK]
 connect_bd_net [get_bd_ports RST] [get_bd_pins ValidSetter/RST]
 connect_bd_net [get_bd_pins MultiplierEnable/DOUT] [get_bd_pins ValidSetter/SYN_IN_VALID]
 connect_bd_net [get_bd_pins MultiplierEnableConcat/dout] [get_bd_pins MultiplierEnable/DIN]
 connect_bd_net [get_bd_pins DoneOutConcat/dout] [get_bd_pins DoneOut/DIN]
-connect_bd_net [get_bd_ports DONE_OUT] [get_bd_pins DoneOut/DOUT]
+connect_bd_net [get_bd_pins DoneOut/DOUT] [get_bd_pins NeuronRouter/DONE_IN]
+connect_bd_net [get_bd_ports DONE_OUT] [get_bd_pins NeuronRouter/DONE_OUT]
 connect_bd_net [get_bd_pins SumJunctionConcat/dout] [get_bd_pins SumJunction/DIN]
 connect_bd_net [get_bd_pins SumJunction/DOUT] [get_bd_pins Plan/X]
 connect_bd_net [get_bd_ports SYN_OUT] [get_bd_pins Plan/Y]
 connect_bd_net [get_bd_ports SYN_OUT_VALID] [get_bd_pins ValidSetter/SYN_OUT_VALID]
+connect_bd_net [get_bd_ports PKT_IN_VALID] [get_bd_pins NeuronRouter/PKT_IN_VALID]
+connect_bd_net [get_bd_ports PKT_IN] [get_bd_pins NeuronRouter/PKT_IN]
+connect_bd_net [get_bd_ports NEURON_ADDR] [get_bd_pins NeuronRouter/ADDR]
 
 CMD
 
@@ -118,14 +130,14 @@ print $fh <<CMD;
 connect_bd_net [get_bd_ports CLK] [get_bd_pins AddressableRegister_${id}/CLK]
 connect_bd_net [get_bd_ports RST] [get_bd_pins AddressableRegister_${id}/RST]
 connect_bd_net [get_bd_pins DoneOutConcat/In${id}] [get_bd_pins AddressableRegister_${id}/DONE_OUT]
+connect_bd_net [get_bd_pins NeuronRouter/PKT_OUT] [get_bd_pins AddressableRegister_${id}/PKT_IN]
+connect_bd_net [get_bd_pins NeuronRouter/PKT_OUT_VALID] [get_bd_pins AddressableRegister_${id}/PKT_IN_VALID]
 connect_bd_net [get_bd_ports CLK] [get_bd_pins Synapse_${id}/CLK]
 connect_bd_net [get_bd_ports RST] [get_bd_pins Synapse_${id}/RST]
 connect_bd_net [get_bd_pins Synapse_${id}/SYN_OUT_VALID] [get_bd_pins MultiplierEnableConcat/In${id}]
 connect_bd_net [get_bd_ports CLK] [get_bd_pins Multiplier_${id}/CLK]
 connect_bd_net [get_bd_pins Multiplier_${id}/CE] [get_bd_pins MultiplierEnable/DOUT]
 connect_bd_net [get_bd_pins Multiplier_${id}/P] [get_bd_pins SumJunctionConcat/In${id}]
-connect_bd_net [get_bd_ports SYN_${id}_WVALID] [get_bd_pins AddressableRegister_${id}/PKT_IN_VALID]
-connect_bd_net [get_bd_ports SYN_${id}_WIN] [get_bd_pins AddressableRegister_${id}/PKT_IN]
 connect_bd_net [get_bd_ports SYN_${id}_VALID] [get_bd_pins Synapse_${id}/SYN_IN_VALID]
 connect_bd_net [get_bd_ports SYN_${id}_DIN] [get_bd_pins Synapse_${id}/SYN_IN]
 connect_bd_net [get_bd_pins Synapse_${id}/SYN_OUT] [get_bd_pins Multiplier_${id}/A]
