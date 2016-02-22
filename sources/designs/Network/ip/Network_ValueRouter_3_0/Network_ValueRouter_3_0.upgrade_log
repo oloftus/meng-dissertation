@@ -1,0 +1,54 @@
+Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------
+| Tool Version : Vivado v.2014.2 (win32) Build 932637 Wed Jun 11 13:24:38 MDT 2014
+| Date         : Mon Feb 22 00:14:13 2016
+| Host         : Oli-Windows7VM running 32-bit Service Pack 1  (build 7601)
+| Command      : upgrade_ip
+| Device       : xc7z010clg400-1
+-----------------------------------------------------------------------------------
+
+Upgrade Log for IP 'Network_ValueRouter_3_0'
+
+1. Summary
+----------
+
+CAUTION (success, with warnings) in the upgrade of Network_ValueRouter_3_0 (oloftus.com:prif:ValueRouter:4.0) from (Rev. 2) to (Rev. 3)
+
+After upgrade, an IP may have parameter and port differences compared to the original customization. Please review the parameters within the IP customization GUI to ensure proper functionality. Also, please review the updated IP instantiation template to ensure proper connectivity, and update your design if required.
+
+2. Warnings
+-----------
+
+WARNING: The upgraded user parameter set contained parameters that could not be mapped on to the upgraded IP. Note that parameter names and IDs are case sensitive.
+
+
+3. Connection Warnings
+----------------------
+
+Detected external port differences while upgrading IP 'Network_ValueRouter_3_0'. These changes may impact your design.
+
+
+-upgrade has added port 'ADDR'
+
+4. Customization warnings
+-------------------------
+
+WARNING: Upgrade target IP does not have parameter ID for 'address'
+
+
+5. Debug Commands
+-----------------
+
+  The following debug information can be passed to Vivado as Tcl commands,
+in order to validate or debug the output of the upgrade flow.
+  Please consult the warnings from the previous sections, and alter or remove
+the configuration parameter(s) which caused the warning; then execute the Tcl
+commands, and use the IP Customization GUI to verify the IP configuration.
+
+create_ip -vlnv oloftus.com:prif:ValueRouter:4.0 -user_name Network_ValueRouter_3_0
+set_property -dict "\
+  CONFIG.packetOutWidth 0 \
+  CONFIG.packetInWidth 0 \
+  CONFIG.Component_Name Network_ValueRouter_3_0 " [get_ips Network_ValueRouter_3_0]
+
+
