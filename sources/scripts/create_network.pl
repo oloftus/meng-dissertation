@@ -6,7 +6,27 @@ use warnings;
 my $NUM_LAYERS = 2;
 my $NEURONS_PER_LAYER = 2;
 
+my $SYNAPSE_INTEGER_PRECISION = 8;
+my $SYNAPSE_FRACTION_PRECISION = 8;
+
+my $PKT_TYPE_WIDTH = 1;
+my $PKT_LAYER_WIDTH = 5;
+my $PKT_NEURON_WIDTH = 6;
+my $PKT_SYNAPSE_WIDTH = 4;
+
+my $STIMULUS_TYPE = 1;
+my $WEIGHT_TYPE = 0;
+
 ##########################
+
+my $synapsePrecision = $SYNAPSE_INTEGER_PRECISION + $SYNAPSE_FRACTION_PRECISION;
+my $signedSynapsePortWidth = 1 + $synapsePrecision; # Sign bit
+my $signedSynapsePortHigh = $signedSynapsePortWidth - 1;
+my $layerOutPacketWidth $PKT_NEURON_WIDTH + $PKT_SYNAPSE_WIDTH + $synapsePrecision;
+my $typeOutPacketWidth = $PKT_LAYER_WIDTH + layerOutPacketWidth;
+my $packetWidth = $PKT_TYPE_WIDTH + $typeOutPacketWidth;
+my $packetHigh = $packetWidth - 1;
+my $pktStimulusWidth = $packetWidth - $synapsePrecision;
 
 open my $fh, ">", "script.tcl";
 
@@ -14,7 +34,7 @@ print $fh <<CMD;
 
 create_bd_port -dir I -type clk CLK
 create_bd_port -dir I -type rst RST
-create_bd_port -dir I -from 31 -to 0 -type data PKT_IN
+create_bd_port -dir I -from $packetHigh -to 0 -type data PKT_IN
 create_bd_port -dir I PKT_IN_VALID
 create_bd_port -dir O DONE_OUT
 
@@ -23,7 +43,7 @@ CMD
 foreach my $id (0..$NEURONS_PER_LAYER - 1) {
 print $fh <<CMD;
 
-create_bd_port -dir O -from 12 -to 0 -type data SYN_${id}_OUT
+create_bd_port -dir O -from $signedSynapsePortHigh -to 0 -type data SYN_${id}_OUT
 create_bd_port -dir O SYN_${id}_OUT_VALID
 
 CMD
@@ -73,12 +93,12 @@ CMD
 
 print $fh <<CMD;
 
-set_property -dict [list CONFIG.packetOutWidth {31} CONFIG.packetInWidth {32}] [get_bd_cells TypeRouter_Stimulus]
-set_property -dict [list CONFIG.CONST_VAL {1}] [get_bd_cells TypeRouter_Stimulus_Address]
-set_property -dict [list CONFIG.packetOutWidth {31} CONFIG.packetInWidth {32}] [get_bd_cells TypeRouter_Weight]
-set_property -dict [list CONFIG.CONST_VAL {0}] [get_bd_cells TypeRouter_Weight_Address]
-set_property -dict [list CONFIG.n {2}] [get_bd_cells DoneOut_Layers]
-set_property -dict [list CONFIG.n {2}] [get_bd_cells DoneOut_StimulusRegisters]
+set_property -dict [list CONFIG.packetOutWidth {${typeOutPacketWidth}} CONFIG.packetInWidth {${packetWidth}}] [get_bd_cells TypeRouter_Stimulus]
+set_property -dict [list CONFIG.CONST_VAL {${STIMULUS_TYPE}}] [get_bd_cells TypeRouter_Stimulus_Address]
+set_property -dict [list CONFIG.packetOutWidth {${typeOutPacketWidth}} CONFIG.packetInWidth {${packetWidth}}] [get_bd_cells TypeRouter_Weight]
+set_property -dict [list CONFIG.CONST_VAL {$WEIGHT_TYPE}] [get_bd_cells TypeRouter_Weight_Address]
+set_property -dict [list CONFIG.n {${NUM_LAYERS}}] [get_bd_cells DoneOut_Layers]
+set_property -dict [list CONFIG.n {${NEURONS_PER_LAYER}}] [get_bd_cells DoneOut_StimulusRegisters]
 set_property -dict [list CONFIG.n {2}] [get_bd_cells DoneOut]
 
 CMD
@@ -86,16 +106,16 @@ CMD
 foreach my $lid (0..$NUM_LAYERS - 1) {
 print $fh <<CMD;
 
-set_property -dict [list CONFIG.packetOutWidth {26} CONFIG.packetInWidth {31}] [get_bd_cells LayerRouter_${lid}]
-set_property -dict [list CONFIG.CONST_WIDTH {5} CONFIG.CONST_VAL {${lid}}] [get_bd_cells LayerRouter_${lid}_Address]
-set_property -dict [list CONFIG.n {2}] [get_bd_cells DoneOut_Layer_${lid}]
+set_property -dict [list CONFIG.packetOutWidth {${layerOutPacketWidth}} CONFIG.packetInWidth {${typeOutPacketWidth}}] [get_bd_cells LayerRouter_${lid}]
+set_property -dict [list CONFIG.CONST_WIDTH {${PKT_LAYER_WIDTH}} CONFIG.CONST_VAL {${lid}}] [get_bd_cells LayerRouter_${lid}_Address]
+set_property -dict [list CONFIG.n {${NUM_LAYERS}}] [get_bd_cells DoneOut_Layer_${lid}]
 
 CMD
 
 foreach my $nid (0..$NEURONS_PER_LAYER - 1) {
 print $fh <<CMD;
 
-set_property -dict [list CONFIG.CONST_WIDTH {6} CONFIG.CONST_VAL {${nid}}] [get_bd_cells Neuron_${lid}_${nid}_Address]
+set_property -dict [list CONFIG.CONST_WIDTH {${PKT_NEURON_WIDTH}} CONFIG.CONST_VAL {${nid}}] [get_bd_cells Neuron_${lid}_${nid}_Address]
 
 CMD
 }}
@@ -104,7 +124,7 @@ CMD
 foreach my $id (0..$NEURONS_PER_LAYER - 1) {
 print $fh <<CMD;
 
-set_property -dict [list CONFIG.address {${id}} CONFIG.addressWidth {19} CONFIG.dataWidth {13}] [get_bd_cells StimulusRegister_${id}]
+set_property -dict [list CONFIG.address {${id}} CONFIG.addressWidth {${pktStimulusWidth}} CONFIG.dataWidth {${synapsePrecision}}] [get_bd_cells StimulusRegister_${id}]
 
 CMD
 }

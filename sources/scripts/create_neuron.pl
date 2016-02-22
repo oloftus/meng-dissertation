@@ -4,14 +4,15 @@ use warnings;
 ##########################
 
 my $NUM_SYNAPSES = 2;
-my $WEIGHT_ADDR_WIDTH = 4;
-my $NEURON_ADDR_WIDTH = 6;
 
 my $SYNAPSE_INTEGER_PRECISION = 6;
 my $SYNAPSE_FRACTION_PRECISION = 6;
 
 my $WEIGHT_INTEGER_PRECISION = 8;
 my $WEIGHT_FRACTION_PRECISION = 8;
+
+my $PKT_WEIGHT_WIDTH = 4;
+my $PKT_NEURON_WIDTH = 6;
 
 ##########################
 
@@ -21,11 +22,10 @@ my $signedSynapsePortHigh = $signedSynapsePortWidth - 1;
 
 my $weightPrecision = $WEIGHT_INTEGER_PRECISION + $WEIGHT_FRACTION_PRECISION;
 my $signedWeightWidth = 1 + $weightPrecision;
-my $swrnSynapsePortWidth = $signedWeightWidth + $WEIGHT_ADDR_WIDTH;
-my $swrnNeuronPortWidth = $swrnSynapsePortWidth + $NEURON_ADDR_WIDTH;
+my $swrnSynapsePortWidth = $signedWeightWidth + $PKT_WEIGHT_WIDTH;
+my $swrnNeuronPortWidth = $swrnSynapsePortWidth + $PKT_NEURON_WIDTH;
 my $swrnNeuronPortHigh = $swrnNeuronPortWidth - 1;
-my $swrnNeuronAddrPortHigh = $NEURON_ADDR_WIDTH - 1;
-
+my $swrnNeuronAddrPortHigh = $PKT_NEURON_WIDTH - 1;
 
 my $latency = 2; # TODO: CALCULATE
 
@@ -97,7 +97,7 @@ foreach my $id (0..$NUM_SYNAPSES - 1) {
 print $fh <<CMD;
 
 set_property -dict [list CONFIG.size {$signedSynapsePortWidth}] [get_bd_cells Synapse_${id}]
-set_property -dict [list CONFIG.address {@{[${id} + 1]}} CONFIG.addressWidth {$WEIGHT_ADDR_WIDTH} CONFIG.dataWidth {$signedWeightWidth}] [get_bd_cells WeightRegister_${id}]
+set_property -dict [list CONFIG.address {@{[${id} + 1]}} CONFIG.addressWidth {$PKT_WEIGHT_WIDTH} CONFIG.dataWidth {$signedWeightWidth}] [get_bd_cells WeightRegister_${id}]
 set_property -dict [list CONFIG.PortAWidth.VALUE_SRC USER CONFIG.PortBWidth.VALUE_SRC USER CONFIG.PortAWidth {$signedSynapsePortWidth} CONFIG.PortBWidth {$signedWeightWidth} CONFIG.Use_Custom_Output_Width {true} CONFIG.OutputWidthHigh {$signedSynapsePortHigh} CONFIG.ClockEnable {true}] [get_bd_cells Multiplier_${id}]
 
 CMD
