@@ -69,7 +69,7 @@ foreach my $id (0..$NUM_SYNAPSES - 1) {
 print $fh <<CMD;
 
 create_bd_cell -type ip -vlnv oloftus.com:prif:Synapse:1.0 Synapse_${id}
-create_bd_cell -type ip -vlnv oloftus.com:prif:AddressableRegister:1.0 AddressableRegister_${id}
+create_bd_cell -type ip -vlnv oloftus.com:prif:AddressableRegister:1.0 WeightRegister_${id}
 create_bd_cell -type ip -vlnv xilinx.com:ip:mult_gen:12.0 Multiplier_${id}
 
 CMD
@@ -97,7 +97,7 @@ foreach my $id (0..$NUM_SYNAPSES - 1) {
 print $fh <<CMD;
 
 set_property -dict [list CONFIG.size {$signedSynapsePortWidth}] [get_bd_cells Synapse_${id}]
-set_property -dict [list CONFIG.address {@{[${id} + 1]}} CONFIG.addressWidth {$WEIGHT_ADDR_WIDTH} CONFIG.dataWidth {$signedWeightWidth}] [get_bd_cells AddressableRegister_${id}]
+set_property -dict [list CONFIG.address {@{[${id} + 1]}} CONFIG.addressWidth {$WEIGHT_ADDR_WIDTH} CONFIG.dataWidth {$signedWeightWidth}] [get_bd_cells WeightRegister_${id}]
 set_property -dict [list CONFIG.PortAWidth.VALUE_SRC USER CONFIG.PortBWidth.VALUE_SRC USER CONFIG.PortAWidth {$signedSynapsePortWidth} CONFIG.PortBWidth {$signedWeightWidth} CONFIG.Use_Custom_Output_Width {true} CONFIG.OutputWidthHigh {$signedSynapsePortHigh} CONFIG.ClockEnable {true}] [get_bd_cells Multiplier_${id}]
 
 CMD
@@ -127,11 +127,11 @@ CMD
 foreach my $id (0..$NUM_SYNAPSES - 1) {
 print $fh <<CMD;
 
-connect_bd_net [get_bd_ports CLK] [get_bd_pins AddressableRegister_${id}/CLK]
-connect_bd_net [get_bd_ports RST] [get_bd_pins AddressableRegister_${id}/RST]
-connect_bd_net [get_bd_pins DoneOutConcat/In${id}] [get_bd_pins AddressableRegister_${id}/DONE_OUT]
-connect_bd_net [get_bd_pins NeuronRouter/PKT_OUT] [get_bd_pins AddressableRegister_${id}/PKT_IN]
-connect_bd_net [get_bd_pins NeuronRouter/PKT_OUT_VALID] [get_bd_pins AddressableRegister_${id}/PKT_IN_VALID]
+connect_bd_net [get_bd_ports CLK] [get_bd_pins WeightRegister_${id}/CLK]
+connect_bd_net [get_bd_ports RST] [get_bd_pins WeightRegister_${id}/RST]
+connect_bd_net [get_bd_pins DoneOutConcat/In${id}] [get_bd_pins WeightRegister_${id}/DONE_OUT]
+connect_bd_net [get_bd_pins NeuronRouter/PKT_OUT] [get_bd_pins WeightRegister_${id}/PKT_IN]
+connect_bd_net [get_bd_pins NeuronRouter/PKT_OUT_VALID] [get_bd_pins WeightRegister_${id}/PKT_IN_VALID]
 connect_bd_net [get_bd_ports CLK] [get_bd_pins Synapse_${id}/CLK]
 connect_bd_net [get_bd_ports RST] [get_bd_pins Synapse_${id}/RST]
 connect_bd_net [get_bd_pins Synapse_${id}/SYN_OUT_VALID] [get_bd_pins MultiplierEnableConcat/In${id}]
@@ -141,7 +141,7 @@ connect_bd_net [get_bd_pins Multiplier_${id}/P] [get_bd_pins SumJunctionConcat/I
 connect_bd_net [get_bd_ports SYN_${id}_VALID] [get_bd_pins Synapse_${id}/SYN_IN_VALID]
 connect_bd_net [get_bd_ports SYN_${id}_DIN] [get_bd_pins Synapse_${id}/SYN_IN]
 connect_bd_net [get_bd_pins Synapse_${id}/SYN_OUT] [get_bd_pins Multiplier_${id}/A]
-connect_bd_net [get_bd_pins AddressableRegister_${id}/VAL_OUT] [get_bd_pins Multiplier_${id}/B]
+connect_bd_net [get_bd_pins WeightRegister_${id}/VAL_OUT] [get_bd_pins Multiplier_${id}/B]
 connect_bd_net [get_bd_pins ValidSetter/SYN_IN_CLR] [get_bd_pins Synapse_${id}/CLR]
 
 CMD
