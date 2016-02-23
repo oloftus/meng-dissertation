@@ -1,54 +1,55 @@
 use strict;
 use warnings;
 
-##########################
+require "params.pl";
 
-my $NUM_LAYERS = 2;
-my $NEURONS_PER_LAYER = 2;
+our $NUM_LAYERS;
+our $NEURONS_PER_LAYER;
+our $INTEGER_PRECISION;
+our $FRACTION_PRECISION;
+our $AXI_BUS_WIDTH;
+our $PKT_TYPE_ADDR_WIDTH;
+our $PKT_LAYER_ADDR_WIDTH;
+our $PKT_NEURON_ADDR_WIDTH;
+our $PKT_SYNAPSE_ADDR_WIDTH;
+our $STIMULUS_TYPE;
+our $WEIGHT_TYPE;
+our $NEURON_LATENCY;
 
-my $SYNAPSE_INTEGER_PRECISION = 8;
-my $SYNAPSE_FRACTION_PRECISION = 8;
+our $valueWidth;
+our $layerOutPacketWidth;
+our $typeOutPacketWidth;
+our $networkInPacketWidth;
+our $pktStimulusAddrWidth;
 
-my $PKT_TYPE_WIDTH = 1;
-my $PKT_LAYER_WIDTH = 5;
-my $PKT_NEURON_WIDTH = 6;
-my $PKT_SYNAPSE_WIDTH = 4;
+if ($networkInPacketWidth > $AXI_BUS_WIDTH) {
+    die "Packet parameters exceeed AXI bus width";
+}
 
-my $STIMULUS_TYPE = 1;
-my $WEIGHT_TYPE = 0;
+open my $fh, ">", "create_network.tcl";
 
-##########################
-
-my $synapsePrecision = $SYNAPSE_INTEGER_PRECISION + $SYNAPSE_FRACTION_PRECISION;
-my $signedSynapsePortWidth = 1 + $synapsePrecision; # Sign bit
-my $signedSynapsePortHigh = $signedSynapsePortWidth - 1;
-my $layerOutPacketWidth $PKT_NEURON_WIDTH + $PKT_SYNAPSE_WIDTH + $synapsePrecision;
-my $typeOutPacketWidth = $PKT_LAYER_WIDTH + layerOutPacketWidth;
-my $packetWidth = $PKT_TYPE_WIDTH + $typeOutPacketWidth;
-my $packetHigh = $packetWidth - 1;
-my $pktStimulusWidth = $packetWidth - $synapsePrecision;
-
-open my $fh, ">", "script.tcl";
-
+# Create static ports
 print $fh <<CMD;
 
 create_bd_port -dir I -type clk CLK
 create_bd_port -dir I -type rst RST
-create_bd_port -dir I -from $packetHigh -to 0 -type data PKT_IN
+create_bd_port -dir I -from @{[$networkInPacketWidth - 1]} -to 0 -type data PKT_IN
 create_bd_port -dir I PKT_IN_VALID
 create_bd_port -dir O DONE_OUT
 
 CMD
 
+# Create output ports for each neuron in the final layer
 foreach my $id (0..$NEURONS_PER_LAYER - 1) {
 print $fh <<CMD;
 
-create_bd_port -dir O -from $signedSynapsePortHigh -to 0 -type data SYN_${id}_OUT
+create_bd_port -dir O -from @{[$valueWidth - 1]} -to 0 -type data SYN_${id}_OUT
 create_bd_port -dir O SYN_${id}_OUT_VALID
 
 CMD
 }
 
+# Create static components
 print $fh <<CMD;
 
 create_bd_cell -type ip -vlnv oloftus.com:prif:ValueRouter:4.0 TypeRouter_Stimulus
@@ -64,6 +65,7 @@ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 DoneOutConcat
 
 CMD
 
+# Create each layer
 foreach my $lid (0..$NUM_LAYERS - 1) {
 print $fh <<CMD;
 
@@ -74,6 +76,7 @@ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 DoneOutConcat_Layer_${l
 
 CMD
 
+# Create each neuron per layer
 foreach my $nid (0..$NEURONS_PER_LAYER - 1) {
 print $fh <<CMD;
 
@@ -83,6 +86,7 @@ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 Neuron_${lid}_${nid}_
 CMD
 }}
 
+# Create a StimulusRegister for each neuron in the first layer
 foreach my $id (0..$NEURONS_PER_LAYER - 1) {
 print $fh <<CMD;
 
@@ -91,44 +95,51 @@ create_bd_cell -type ip -vlnv oloftus.com:prif:AddressableRegister:1.0 StimulusR
 CMD
 }
 
+# Configure static components
 print $fh <<CMD;
 
-set_property -dict [list CONFIG.packetOutWidth {${typeOutPacketWidth}} CONFIG.packetInWidth {${packetWidth}}] [get_bd_cells TypeRouter_Stimulus]
+set_property -dict [list CONFIG.packetOutWidth {${typeOutPacketWidth}} CONFIG.packetInWidth {${networkInPacketWidth}}] [get_bd_cells TypeRouter_Stimulus]
 set_property -dict [list CONFIG.CONST_VAL {${STIMULUS_TYPE}}] [get_bd_cells TypeRouter_Stimulus_Address]
-set_property -dict [list CONFIG.packetOutWidth {${typeOutPacketWidth}} CONFIG.packetInWidth {${packetWidth}}] [get_bd_cells TypeRouter_Weight]
+set_property -dict [list CONFIG.packetOutWidth {${typeOutPacketWidth}} CONFIG.networkInPacketWidth {${networkInPacketWidth}}] [get_bd_cells TypeRouter_Weight]
 set_property -dict [list CONFIG.CONST_VAL {$WEIGHT_TYPE}] [get_bd_cells TypeRouter_Weight_Address]
 set_property -dict [list CONFIG.n {${NUM_LAYERS}}] [get_bd_cells DoneOut_Layers]
+set_property -dict [list CONFIG.NUM_PORTS {${NUM_LAYERS}}] [get_bd_cells DoneOutConcat_Layers]
 set_property -dict [list CONFIG.n {${NEURONS_PER_LAYER}}] [get_bd_cells DoneOut_StimulusRegisters]
+set_property -dict [list CONFIG.NUM_PORTS {${NEURONS_PER_LAYER}}] [get_bd_cells DoneOutConcat_StimulusRegisters]
 set_property -dict [list CONFIG.n {2}] [get_bd_cells DoneOut]
 
 CMD
 
+# Configure each layer
 foreach my $lid (0..$NUM_LAYERS - 1) {
 print $fh <<CMD;
 
 set_property -dict [list CONFIG.packetOutWidth {${layerOutPacketWidth}} CONFIG.packetInWidth {${typeOutPacketWidth}}] [get_bd_cells LayerRouter_${lid}]
-set_property -dict [list CONFIG.CONST_WIDTH {${PKT_LAYER_WIDTH}} CONFIG.CONST_VAL {${lid}}] [get_bd_cells LayerRouter_${lid}_Address]
+set_property -dict [list CONFIG.CONST_WIDTH {${PKT_LAYER_ADDR_WIDTH}} CONFIG.CONST_VAL {${lid}}] [get_bd_cells LayerRouter_${lid}_Address]
 set_property -dict [list CONFIG.n {${NUM_LAYERS}}] [get_bd_cells DoneOut_Layer_${lid}]
+set_property -dict [list CONFIG.NUM_PORTS {${NEURONS_PER_LAYER}}] [get_bd_cells DoneOutConcat_Layer_${lid}]
 
 CMD
 
+# Configure each neuron per layer
 foreach my $nid (0..$NEURONS_PER_LAYER - 1) {
 print $fh <<CMD;
 
-set_property -dict [list CONFIG.CONST_WIDTH {${PKT_NEURON_WIDTH}} CONFIG.CONST_VAL {${nid}}] [get_bd_cells Neuron_${lid}_${nid}_Address]
+set_property -dict [list CONFIG.CONST_WIDTH {${PKT_NEURON_ADDR_WIDTH}} CONFIG.CONST_VAL {${nid}}] [get_bd_cells Neuron_${lid}_${nid}_Address]
 
 CMD
 }}
 
-
+# Create each StimulusRegister for each neuron in the first layer
 foreach my $id (0..$NEURONS_PER_LAYER - 1) {
 print $fh <<CMD;
 
-set_property -dict [list CONFIG.address {${id}} CONFIG.addressWidth {${pktStimulusWidth}} CONFIG.dataWidth {${synapsePrecision}}] [get_bd_cells StimulusRegister_${id}]
+set_property -dict [list CONFIG.address {${id}} CONFIG.addressWidth {${pktStimulusAddrWidth}} CONFIG.dataWidth {${valueWidth}}] [get_bd_cells StimulusRegister_${id}]
 
 CMD
 }
 
+# Wire up static components
 print $fh <<CMD;
 
 connect_bd_net [get_bd_ports CLK] [get_bd_pins TypeRouter_Weight/CLK]
@@ -152,6 +163,7 @@ connect_bd_net [get_bd_pins DoneOutConcat_StimulusRegisters/dout] [get_bd_pins D
 
 CMD
 
+# Wire up each StimulusRegister for each neuron in the first layer
 foreach my $id (0..$NEURONS_PER_LAYER - 1) {
 print $fh <<CMD;
 
@@ -159,14 +171,15 @@ connect_bd_net [get_bd_ports CLK] [get_bd_pins StimulusRegister_${id}/CLK]
 connect_bd_net [get_bd_ports RST] [get_bd_pins StimulusRegister_${id}/RST]
 connect_bd_net [get_bd_pins TypeRouter_Stimulus/PKT_OUT] [get_bd_pins StimulusRegister_${id}/PKT_IN]
 connect_bd_net [get_bd_pins TypeRouter_Stimulus/PKT_OUT_VALID] [get_bd_pins StimulusRegister_${id}/PKT_IN_VALID]
-connect_bd_net [get_bd_pins StimulusRegister_${id}/DONE_OUT] [get_bd_pins DoneOutConcat_StimulusRegisters/In${id}]
 
 CMD
 }
 
+# Wire up each layer to static components
 foreach my $lid (0..$NUM_LAYERS - 1) {
 print $fh <<CMD;
 
+connect_bd_net [get_bd_pins StimulusRegister_${lid}/DONE_OUT] [get_bd_pins DoneOutConcat_StimulusRegisters/In${lid}]
 connect_bd_net [get_bd_pins TypeRouter_Weight/PKT_OUT_VALID] [get_bd_pins LayerRouter_${lid}/PKT_IN_VALID]
 connect_bd_net [get_bd_pins TypeRouter_Weight/PKT_OUT] [get_bd_pins LayerRouter_${lid}/PKT_IN]
 connect_bd_net [get_bd_ports CLK] [get_bd_pins LayerRouter_${lid}/CLK]
@@ -177,6 +190,7 @@ connect_bd_net [get_bd_pins LayerRouter_${lid}/DONE_OUT] [get_bd_pins DoneOutCon
 
 CMD
 
+# Wire up each neuron per layer to static components
 foreach my $nid (0..$NEURONS_PER_LAYER - 1) {
 print $fh <<CMD;
 
@@ -190,6 +204,7 @@ connect_bd_net [get_bd_pins Neuron_${lid}_${nid}/DONE_OUT] [get_bd_pins DoneOutC
 CMD
 }}
 
+# Wire up each neuron in the first layer to network inputs
 foreach my $nid1 (0..$NEURONS_PER_LAYER - 1) {
 foreach my $nid2 (0..$NEURONS_PER_LAYER - 1) {
 print $fh <<CMD;
@@ -200,6 +215,7 @@ connect_bd_net [get_bd_pins StimulusRegister_${nid1}/VAL_OUT_VALID] [get_bd_pins
 CMD
 }}
 
+# Wire up interconnections between hidden layers of the network
 foreach my $lid (0..$NUM_LAYERS - 2) {
 foreach my $nid1 (0..$NEURONS_PER_LAYER - 1) {
 foreach my $nid2 (0..$NEURONS_PER_LAYER - 1) {
@@ -211,6 +227,7 @@ connect_bd_net [get_bd_pins Neuron_${lid}_${nid1}/SYN_OUT_VALID] [get_bd_pins Ne
 CMD
 }}}
 
+# Wire up each neuron in the last layer to network outputs
 foreach my $nid (0..$NEURONS_PER_LAYER - 1) {
 print $fh <<CMD;
 
@@ -220,6 +237,7 @@ connect_bd_net [get_bd_pins Neuron_@{[$NUM_LAYERS - 1]}_${nid}/SYN_OUT_VALID] [g
 CMD
 }
 
+# Regenerate layout
 print $fh <<CMD;
 
 regenerate_bd_layout
