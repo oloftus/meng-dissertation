@@ -37,7 +37,7 @@ begin
         -- Multiply +ve numbers
         sigA <= "0"&"00001001"&"1100000"; -- +9.75
         sigB <= "0"&"00010000"&"0011100"; -- +16.21875
-        wait for 100ns;
+        wait for 110ns;
         assert sigP = "0"&"10011110"&"0010001" report "Test failed: 1"; -- 158.133
         
         wait for 100ns;
