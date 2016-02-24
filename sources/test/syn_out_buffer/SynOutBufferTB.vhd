@@ -23,15 +23,14 @@ architecture Behavioral of SynOutBufferTB is
             DIN : in STD_LOGIC_VECTOR (dinWidth * numInputs - 1 downto 0);
             DVALID : in STD_LOGIC_VECTOR (numinputs - 1 downto 0);
             NXT : in STD_LOGIC;
-            DOUT : out STD_LOGIC_VECTOR (doutWidth - 1 downto 0)
+            DOUT : out STD_LOGIC_VECTOR (doutWidth - 1 downto 0);
+            READY : out STD_LOGIC
         );
     end component;
     
-    signal sigClk : STD_LOGIC;
-    signal sigRst : STD_LOGIC;
+    signal sigClk, sigRst, sigNext, sigReady : STD_LOGIC;
     signal sigDin : STD_LOGIC_VECTOR (dinWidth * numInputs - 1 downto 0);
     signal sigDValid : STD_LOGIC_VECTOR (numinputs - 1 downto 0);
-    signal sigNext : STD_LOGIC;
     signal sigDout : STD_LOGIC_VECTOR (doutWidth - 1 downto 0);
 begin
     uut: SynOutBuffer
@@ -46,7 +45,8 @@ begin
             DIN => sigDin,
             DVALID => sigDValid,
             NXT => sigNext,
-            DOUT => sigDout
+            DOUT => sigDout,
+            READY => sigReady
         );
 
     clock: process begin
@@ -86,17 +86,19 @@ begin
         loc := 2;
         sigDin(loc * dinWidth + dinWidth - 1 downto loc * dinWidth) <= val3;
         sigDValid(loc) <= '1';
-        wait for 200ns;
+        wait for 110ns;
+        assert sigReady = '1' report "Test failed: 1";
+        wait for 100ns;
         sigDValid(loc) <= '0';
         
         sigNext <= '1';
-        wait for 110ns;
+        wait for 100ns;
         
-        assert sigDout = STD_LOGIC_VECTOR(Resize(UNSIGNED(val1), doutWidth)) report "Test failed: 1";
+        assert sigDout = STD_LOGIC_VECTOR(Resize(UNSIGNED(val1), doutWidth)) report "Test failed: 2";
         wait for 200ns;
-        assert sigDout = STD_LOGIC_VECTOR(Resize(UNSIGNED(val2), doutWidth)) report "Test failed: 2";
+        assert sigDout = STD_LOGIC_VECTOR(Resize(UNSIGNED(val2), doutWidth)) report "Test failed: 3";
         wait for 200ns;
-        assert sigDout = STD_LOGIC_VECTOR(Resize(UNSIGNED(val3), doutWidth)) report "Test failed: 3";
+        assert sigDout = STD_LOGIC_VECTOR(Resize(UNSIGNED(val3), doutWidth)) report "Test failed: 4";
         wait for 200ns;
         sigNext <= '0';
         sigDin <= (others => '0');
@@ -119,17 +121,19 @@ begin
         loc := 2;
         sigDin(loc * dinWidth + dinWidth - 1 downto loc * dinWidth) <= val6;
         sigDValid(loc) <= '1';
-        wait for 200ns;
+        wait for 100ns;
+        assert sigReady = '1' report "Test failed: 5";
+        wait for 100ns;
         sigDValid(loc) <= '0';
         
         sigNext <= '1';
         wait for 100ns;
         
-        assert sigDout = STD_LOGIC_VECTOR(Resize(UNSIGNED(val4), doutWidth)) report "Test failed: 4";
+        assert sigDout = STD_LOGIC_VECTOR(Resize(UNSIGNED(val4), doutWidth)) report "Test failed: 6";
         wait for 200ns;
-        assert sigDout = STD_LOGIC_VECTOR(Resize(UNSIGNED(val5), doutWidth)) report "Test failed: 5";
+        assert sigDout = STD_LOGIC_VECTOR(Resize(UNSIGNED(val5), doutWidth)) report "Test failed: 7";
         wait for 200ns;
-        assert sigDout = STD_LOGIC_VECTOR(Resize(UNSIGNED(val6), doutWidth)) report "Test failed: 6";
+        assert sigDout = STD_LOGIC_VECTOR(Resize(UNSIGNED(val6), doutWidth)) report "Test failed: 8";
         wait for 200ns;
         sigNext <= '0';
         sigDin <= (others => '0');
@@ -149,18 +153,20 @@ begin
         sigDin(loc * dinWidth + dinWidth - 1 downto loc * dinWidth) <= val6;
         sigDValid(1) <= '1';
         sigDValid(2) <= '1';
-        wait for 200ns;
+        wait for 100ns;
+        assert sigReady = '1' report "Test failed: 9";
+        wait for 100ns;
         sigDValid(1) <= '0';
         sigDValid(2) <= '0';
         
         sigNext <= '1';
         wait for 100ns;
         
-        assert sigDout = STD_LOGIC_VECTOR(Resize(UNSIGNED(val4), doutWidth)) report "Test failed: 7";
+        assert sigDout = STD_LOGIC_VECTOR(Resize(UNSIGNED(val4), doutWidth)) report "Test failed: 10";
         wait for 200ns;
-        assert sigDout = STD_LOGIC_VECTOR(Resize(UNSIGNED(val5), doutWidth)) report "Test failed: 8";
+        assert sigDout = STD_LOGIC_VECTOR(Resize(UNSIGNED(val5), doutWidth)) report "Test failed: 11";
         wait for 200ns;
-        assert sigDout = STD_LOGIC_VECTOR(Resize(UNSIGNED(val6), doutWidth)) report "Test failed: 9";
+        assert sigDout = STD_LOGIC_VECTOR(Resize(UNSIGNED(val6), doutWidth)) report "Test failed: 12";
         wait for 200ns;
         sigNext <= '0';
         sigDin <= (others => '0');

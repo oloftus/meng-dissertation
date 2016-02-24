@@ -14,17 +14,21 @@ entity SynOutBuffer is
         DIN : in STD_LOGIC_VECTOR (dinWidth * numInputs - 1 downto 0);
         DVALID : in STD_LOGIC_VECTOR (numinputs - 1 downto 0);
         NXT : in STD_LOGIC;
-        DOUT : out STD_LOGIC_VECTOR (doutWidth - 1 downto 0)
+        DOUT : out STD_LOGIC_VECTOR (doutWidth - 1 downto 0);
+        READY : out STD_LOGIC
     );
 end SynOutBuffer;
 
 architecture Behavioral of SynOutBuffer is
     constant allLatched : STD_LOGIC_VECTOR (numinputs - 1 downto 0) := (others => '1');
+    constant sigOutCntZero : UNSIGNED (5 downto 0) := (others => '0');
     
     signal sigDinLatch : STD_LOGIC_VECTOR (dinWidth * numInputs - 1 downto 0) := (others => '0');
     signal sigDinsLatched : STD_LOGIC_VECTOR (numinputs - 1 downto 0) := (others => '0');
     signal sigOutCnt : UNSIGNED (5 downto 0) := (others => '0');
 begin
+    READY <= '1' when sigDinsLatched = allLatched and sigOutCnt = sigOutCntZero else '0';
+    
     process (CLK) begin
         if Rising_Edge(CLK) then
             if RST = '1' then
