@@ -2,16 +2,16 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-entity SynOutCollectorTB is
+entity SynOutBufferTB is
     generic (
         doutWidth : INTEGER := 8;
         dinWidth : INTEGER := 6;
         numInputs : INTEGER := 3
     );
-end SynOutCollectorTB;
+end SynOutBufferTB;
 
-architecture Behavioral of SynOutCollectorTB is
-    component SynOutCollector is
+architecture Behavioral of SynOutBufferTB is
+    component SynOutBuffer is
         generic (
             doutWidth : INTEGER;
             dinWidth : INTEGER;
@@ -34,7 +34,7 @@ architecture Behavioral of SynOutCollectorTB is
     signal sigNext : STD_LOGIC;
     signal sigDout : STD_LOGIC_VECTOR (doutWidth - 1 downto 0);
 begin
-    uut: SynOutCollector
+    uut: SynOutBuffer
         generic map (
             doutWidth => doutWidth,
             dinWidth => dinWidth,

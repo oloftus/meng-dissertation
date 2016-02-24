@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-entity SynOutCollector is
+entity SynOutBuffer is
     generic (
         doutWidth : INTEGER;
         dinWidth : INTEGER;
@@ -16,9 +16,9 @@ entity SynOutCollector is
         NXT : in STD_LOGIC;
         DOUT : out STD_LOGIC_VECTOR (doutWidth - 1 downto 0)
     );
-end SynOutCollector;
+end SynOutBuffer;
 
-architecture Behavioral of SynOutCollector is
+architecture Behavioral of SynOutBuffer is
     constant allLatched : STD_LOGIC_VECTOR (numinputs - 1 downto 0) := (others => '1');
     
     signal sigDinLatch : STD_LOGIC_VECTOR (dinWidth * numInputs - 1 downto 0) := (others => '0');
