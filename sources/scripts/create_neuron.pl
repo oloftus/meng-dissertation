@@ -97,7 +97,7 @@ foreach my $id (0..$NEURONS_PER_LAYER - 1) {
 print $fh <<CMD;
 
 set_property -dict [list CONFIG.size {$valueWidth}] [get_bd_cells Synapse_${id}]
-set_property -dict [list CONFIG.address {@{[${id} + 1]}} CONFIG.addressWidth {$PKT_SYNAPSE_ADDR_WIDTH} CONFIG.dataWidth {$valueWidth}] [get_bd_cells WeightRegister_${id}]
+set_property -dict [list CONFIG.address {${id}} CONFIG.addressWidth {$PKT_SYNAPSE_ADDR_WIDTH} CONFIG.dataWidth {$valueWidth}] [get_bd_cells WeightRegister_${id}]
 set_property -dict [list CONFIG.PortAWidth.VALUE_SRC USER CONFIG.PortBWidth.VALUE_SRC USER CONFIG.PortAWidth {$valueWidth} CONFIG.PortBWidth {$valueWidth} CONFIG.PortAType.VALUE_SRC USER CONFIG.PortBType.VALUE_SRC USER CONFIG.PortAType {Signed} CONFIG.PortBType {Signed} CONFIG.ClockEnable {true}] [get_bd_cells Multiplier_${id}]
 set_property -dict [list CONFIG.DIN_FROM {@{[$FRACTION_PRECISION + $valueWidth - 1]}} CONFIG.DIN_TO {${FRACTION_PRECISION}}] [get_bd_cells MultiplierSlicer_${id}]
 

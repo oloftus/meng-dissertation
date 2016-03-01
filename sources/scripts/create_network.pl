@@ -110,7 +110,7 @@ set_property -dict [list CONFIG.NUM_PORTS {${NEURONS_PER_LAYER}}] [get_bd_cells 
 set_property -dict [list CONFIG.n {2}] [get_bd_cells PktRcvd]
 set_property -dict [list CONFIG.NUM_PORTS {${NEURONS_PER_LAYER}}] [get_bd_cells SynOutValidConcat]
 set_property -dict [list CONFIG.NUM_PORTS {${NEURONS_PER_LAYER}} @$synOutConcatInputs] [get_bd_cells SynOutConcat]
-set_property -dict [list CONFIG.numInputs {${NEURONS_PER_LAYER}} CONFIG.dinWidth {$valueWidth} CONFIG.doutWidth {@{[$AXI_BUS_WIDTH - 1]}}] [get_bd_cells SynOutBuffer]
+set_property -dict [list CONFIG.numInputs {${NEURONS_PER_LAYER}} CONFIG.dinWidth {$valueWidth} CONFIG.doutWidth {@{[$AXI_BUS_WIDTH]}}] [get_bd_cells SynOutBuffer]
 
 CMD
 
