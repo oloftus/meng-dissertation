@@ -1,3 +1,5 @@
+#!/usr/bin/perl
+
 use strict;
 use warnings;
 
@@ -99,7 +101,7 @@ print $fh <<CMD;
 
 set_property -dict [list CONFIG.packetOutWidth {${typeOutPacketWidth}} CONFIG.packetInWidth {${networkInPacketWidth}}] [get_bd_cells TypeRouter_Stimulus]
 set_property -dict [list CONFIG.CONST_VAL {${STIMULUS_TYPE}}] [get_bd_cells TypeRouter_Stimulus_Address]
-set_property -dict [list CONFIG.packetOutWidth {${typeOutPacketWidth}} CONFIG.networkInPacketWidth {${networkInPacketWidth}}] [get_bd_cells TypeRouter_Weight]
+set_property -dict [list CONFIG.packetOutWidth {${typeOutPacketWidth}} CONFIG.packetInWidth {${networkInPacketWidth}}] [get_bd_cells TypeRouter_Weight]
 set_property -dict [list CONFIG.CONST_VAL {$WEIGHT_TYPE}] [get_bd_cells TypeRouter_Weight_Address]
 set_property -dict [list CONFIG.n {${NUM_LAYERS}}] [get_bd_cells PktRcvd_Layers]
 set_property -dict [list CONFIG.NUM_PORTS {${NUM_LAYERS}}] [get_bd_cells PktRcvdConcat_Layers]

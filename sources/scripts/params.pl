@@ -16,4 +16,4 @@ $neuronOutPacketWidth = $PKT_SYNAPSE_ADDR_WIDTH + $valueWidth;
 $layerOutPacketWidth = $PKT_NEURON_ADDR_WIDTH + $neuronOutPacketWidth;
 $typeOutPacketWidth = $PKT_LAYER_ADDR_WIDTH + $layerOutPacketWidth;
 $networkInPacketWidth = $PKT_TYPE_ADDR_WIDTH + $typeOutPacketWidth;
-$pktStimulusAddrWidth = $AXI_BUS_WIDTH - $valueWidth;
+$pktStimulusAddrWidth = $AXI_BUS_WIDTH - $valueWidth - 1;
