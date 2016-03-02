@@ -99,7 +99,7 @@ begin
         sigSyn0Din <= "0"&"00000000"&"1000000";
         sigSyn0Valid <= '1';
         sigSyn1Din <= "0"&"00000000"&"0100000";
-        sigSyn1Valid <= '1';        
+        sigSyn1Valid <= '1';
         sigSyn2Din <= "0"&"00000000"&"0010000";
         sigSyn2Valid <= '1';        
         wait for 200ns;
