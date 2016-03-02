@@ -16,11 +16,11 @@ our $PKT_NEURON_ADDR_WIDTH;
 our $PKT_SYNAPSE_ADDR_WIDTH;
 our $STIMULUS_TYPE;
 our $WEIGHT_TYPE;
-our $NEURON_LATENCY;
 
 our $valueWidth;
 our $neuronOutPacketWidth;
 our $layerOutPacketWidth;
+our $neuronLatency;
 
 open my $fh, ">", "create_neuron.tcl";
 
@@ -80,7 +80,7 @@ for my $id (0..$NEURONS_PER_LAYER - 1) { push $sumJunctionConcatInputs, "CONFIG.
 print $fh <<CMD;
 
 set_property -dict [list CONFIG.packetInWidth {$layerOutPacketWidth} CONFIG.packetOutWidth {$neuronOutPacketWidth}] [get_bd_cells NeuronRouter]
-set_property -dict [list CONFIG.latency {$NEURON_LATENCY}] [get_bd_cells ValidSetter]
+set_property -dict [list CONFIG.latency {$neuronLatency}] [get_bd_cells ValidSetter]
 set_property -dict [list CONFIG.inputWidth {$valueWidth}] [get_bd_cells SumJunction]
 set_property -dict [list CONFIG.numInputs {$NEURONS_PER_LAYER}] [get_bd_cells SumJunction]
 set_property -dict [list CONFIG.integerPrecision {$INTEGER_PRECISION} CONFIG.fractionPrecision {$FRACTION_PRECISION}] [get_bd_cells Plan]
