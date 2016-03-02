@@ -71,7 +71,7 @@
         <spirit:parameters/>
       </spirit:busInterface>
       <spirit:busInterface>
-        <spirit:name>DATA.SYN_0_OUT</spirit:name>
+        <spirit:name>DATA.SYN_OUTS</spirit:name>
         <spirit:displayName>Data</spirit:displayName>
         <spirit:description>Data</spirit:description>
         <spirit:busType spirit:library="signal" spirit:name="data" spirit:vendor="xilinx.com" spirit:version="1.0"/>
@@ -83,26 +83,7 @@
               <spirit:name>DATA</spirit:name>
             </spirit:logicalPort>
             <spirit:physicalPort>
-              <spirit:name>SYN_0_OUT</spirit:name>
-            </spirit:physicalPort>
-          </spirit:portMap>
-        </spirit:portMaps>
-        <spirit:parameters/>
-      </spirit:busInterface>
-      <spirit:busInterface>
-        <spirit:name>DATA.SYN_1_OUT</spirit:name>
-        <spirit:displayName>Data</spirit:displayName>
-        <spirit:description>Data</spirit:description>
-        <spirit:busType spirit:library="signal" spirit:name="data" spirit:vendor="xilinx.com" spirit:version="1.0"/>
-        <spirit:abstractionType spirit:library="signal" spirit:name="data_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
-        <spirit:slave/>
-        <spirit:portMaps>
-          <spirit:portMap>
-            <spirit:logicalPort>
-              <spirit:name>DATA</spirit:name>
-            </spirit:logicalPort>
-            <spirit:physicalPort>
-              <spirit:name>SYN_1_OUT</spirit:name>
+              <spirit:name>SYN_OUTS</spirit:name>
             </spirit:physicalPort>
           </spirit:portMap>
         </spirit:portMaps>
@@ -147,39 +128,29 @@
           </spirit:wire>
         </spirit:port>
         <spirit:port>
+          <spirit:name>NXT_SYN_OUT</spirit:name>
+          <spirit:wire>
+            <spirit:direction>in</spirit:direction>
+          </spirit:wire>
+        </spirit:port>
+        <spirit:port>
           <spirit:name>DONE_OUT</spirit:name>
           <spirit:wire>
             <spirit:direction>out</spirit:direction>
           </spirit:wire>
         </spirit:port>
         <spirit:port>
-          <spirit:name>SYN_0_OUT</spirit:name>
+          <spirit:name>SYN_OUTS</spirit:name>
           <spirit:wire>
             <spirit:direction>out</spirit:direction>
             <spirit:vector>
-              <spirit:left>12</spirit:left>
+              <spirit:left>31</spirit:left>
               <spirit:right>0</spirit:right>
             </spirit:vector>
           </spirit:wire>
         </spirit:port>
         <spirit:port>
-          <spirit:name>SYN_1_OUT</spirit:name>
-          <spirit:wire>
-            <spirit:direction>out</spirit:direction>
-            <spirit:vector>
-              <spirit:left>12</spirit:left>
-              <spirit:right>0</spirit:right>
-            </spirit:vector>
-          </spirit:wire>
-        </spirit:port>
-        <spirit:port>
-          <spirit:name>SYN_0_OUT_VALID</spirit:name>
-          <spirit:wire>
-            <spirit:direction>out</spirit:direction>
-          </spirit:wire>
-        </spirit:port>
-        <spirit:port>
-          <spirit:name>SYN_1_OUT_VALID</spirit:name>
+          <spirit:name>SYN_OUTS_READY</spirit:name>
           <spirit:wire>
             <spirit:direction>out</spirit:direction>
           </spirit:wire>
@@ -195,230 +166,264 @@
     <spirit:version>1.00.a</spirit:version>
     <spirit:componentInstances>
       <spirit:componentInstance>
+        <spirit:instanceName>TypeRouter_Stimulus</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="4.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_TypeRouter_Stimulus_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">31</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetInWidth">32</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>TypeRouter_Stimulus_Address</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlconstant" spirit:vendor="xilinx.com" spirit:version="1.1"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_TypeRouter_Stimulus_Address_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="CONST_VAL">1</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>TypeRouter_Weight</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="4.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_TypeRouter_Weight_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">31</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetInWidth">32</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>TypeRouter_Weight_Address</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlconstant" spirit:vendor="xilinx.com" spirit:version="1.1"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_TypeRouter_Weight_Address_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="CONST_VAL">0</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>PktRcvd_Layers</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="OrN" spirit:vendor="oloftus.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_PktRcvd_Layers_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="n">2</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>PktRcvdConcat_Layers</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlconcat" spirit:vendor="xilinx.com" spirit:version="2.1"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_PktRcvdConcat_Layers_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="NUM_PORTS">2</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>PktRcvd_StimulusRegisters</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="OrN" spirit:vendor="oloftus.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_PktRcvd_StimulusRegisters_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="n">2</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>PktRcvdConcat_StimulusRegisters</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlconcat" spirit:vendor="xilinx.com" spirit:version="2.1"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_PktRcvdConcat_StimulusRegisters_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="NUM_PORTS">2</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>PktRcvd</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="OrN" spirit:vendor="oloftus.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_PktRcvd_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="n">2</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>PktRcvdConcat</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlconcat" spirit:vendor="xilinx.com" spirit:version="2.1"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_PktRcvdConcat_0</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>SynOutConcat</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlconcat" spirit:vendor="xilinx.com" spirit:version="2.1"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_SynOutConcat_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="NUM_PORTS">2</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="IN0_WIDTH">16</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="IN1_WIDTH">16</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>SynOutValidConcat</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlconcat" spirit:vendor="xilinx.com" spirit:version="2.1"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_SynOutValidConcat_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="NUM_PORTS">2</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>SynOutBuffer</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="SynOutBuffer" spirit:vendor="oloftus.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_SynOutBuffer_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="numInputs">2</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="dinWidth">16</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="doutWidth">32</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>LayerRouter_0</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="4.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_LayerRouter_0_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">26</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetInWidth">31</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>LayerRouter_0_Address</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlconstant" spirit:vendor="xilinx.com" spirit:version="1.1"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_LayerRouter_0_Address_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="CONST_WIDTH">5</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="CONST_VAL">0</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>PktRcvd_Layer_0</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="OrN" spirit:vendor="oloftus.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_PktRcvd_Layer_0_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="n">2</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>PktRcvdConcat_Layer_0</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlconcat" spirit:vendor="xilinx.com" spirit:version="2.1"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_PktRcvdConcat_Layer_0_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="NUM_PORTS">2</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
         <spirit:instanceName>Neuron_0_0</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="Neuron_wrapper" spirit:vendor="xilinx.com" spirit:version="1.0"/>
         <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_Neuron_0_0_2</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_Neuron_0_0_0</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>Neuron_0_0_Address</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlconstant" spirit:vendor="xilinx.com" spirit:version="1.1"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_Neuron_0_0_Address_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="CONST_WIDTH">6</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="CONST_VAL">0</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
         <spirit:instanceName>Neuron_0_1</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="Neuron_wrapper" spirit:vendor="xilinx.com" spirit:version="1.0"/>
         <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_Neuron_0_1_2</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_Neuron_0_1_0</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>Neuron_0_1_Address</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlconstant" spirit:vendor="xilinx.com" spirit:version="1.1"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_Neuron_0_1_Address_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="CONST_WIDTH">6</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="CONST_VAL">1</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>LayerRouter_1</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="4.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_LayerRouter_1_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">26</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="packetInWidth">31</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>LayerRouter_1_Address</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlconstant" spirit:vendor="xilinx.com" spirit:version="1.1"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_LayerRouter_1_Address_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="CONST_WIDTH">5</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="CONST_VAL">1</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>PktRcvd_Layer_1</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="OrN" spirit:vendor="oloftus.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_PktRcvd_Layer_1_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="n">2</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>PktRcvdConcat_Layer_1</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlconcat" spirit:vendor="xilinx.com" spirit:version="2.1"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_PktRcvdConcat_Layer_1_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="NUM_PORTS">2</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
         <spirit:instanceName>Neuron_1_0</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="Neuron_wrapper" spirit:vendor="xilinx.com" spirit:version="1.0"/>
         <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_Neuron_1_0_2</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_Neuron_1_0_0</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>Neuron_1_0_Address</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlconstant" spirit:vendor="xilinx.com" spirit:version="1.1"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_Neuron_1_0_Address_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="CONST_WIDTH">6</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="CONST_VAL">0</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
         <spirit:instanceName>Neuron_1_1</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="Neuron_wrapper" spirit:vendor="xilinx.com" spirit:version="1.0"/>
         <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_Neuron_1_1_2</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_Neuron_1_1_0</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>AddressableRegister_0</spirit:instanceName>
+        <spirit:instanceName>Neuron_1_1_Address</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlconstant" spirit:vendor="xilinx.com" spirit:version="1.1"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_Neuron_1_1_Address_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="CONST_WIDTH">6</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="CONST_VAL">1</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>StimulusRegister_0</spirit:instanceName>
         <spirit:componentRef spirit:library="prif" spirit:name="AddressableRegister" spirit:vendor="oloftus.com" spirit:version="1.0"/>
         <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_AddressableRegister_0_2</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_StimulusRegister_0_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="address">0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="addressWidth">15</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="dataWidth">16</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>StimulusRegister_1</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="AddressableRegister" spirit:vendor="oloftus.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_StimulusRegister_1_0</spirit:configurableElementValue>
           <spirit:configurableElementValue spirit:referenceId="address">1</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="addressWidth">19</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="dataWidth">13</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>AddressableRegister_1</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="AddressableRegister" spirit:vendor="oloftus.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_AddressableRegister_1_2</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="address">2</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="addressWidth">19</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="dataWidth">13</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>ValueRouter_0</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="4.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_ValueRouter_0_2</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">31</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetInWidth">32</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>ValueRouter_3</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="4.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_ValueRouter_3_2</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">31</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetInWidth">32</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>ValueRouter_1</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="4.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_ValueRouter_1_2</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">26</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetInWidth">31</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>ValueRouter_2</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="ValueRouter" spirit:vendor="oloftus.com" spirit:version="4.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_ValueRouter_2_2</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetOutWidth">26</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="packetInWidth">31</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>xlconstant_0</spirit:instanceName>
-        <spirit:componentRef spirit:library="ip" spirit:name="xlconstant" spirit:vendor="xilinx.com" spirit:version="1.1"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_xlconstant_0_2</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="CONST_WIDTH">6</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>xlconstant_1</spirit:instanceName>
-        <spirit:componentRef spirit:library="ip" spirit:name="xlconstant" spirit:vendor="xilinx.com" spirit:version="1.1"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_xlconstant_1_2</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="CONST_WIDTH">6</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="CONST_VAL">2</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>xlconstant_2</spirit:instanceName>
-        <spirit:componentRef spirit:library="ip" spirit:name="xlconstant" spirit:vendor="xilinx.com" spirit:version="1.1"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_xlconstant_2_2</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="CONST_WIDTH">6</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="CONST_VAL">2</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>xlconstant_3</spirit:instanceName>
-        <spirit:componentRef spirit:library="ip" spirit:name="xlconstant" spirit:vendor="xilinx.com" spirit:version="1.1"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_xlconstant_3_2</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="CONST_WIDTH">6</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>OrN_0</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="OrN" spirit:vendor="oloftus.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_OrN_0_2</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="n">2</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>OrN_1</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="OrN" spirit:vendor="oloftus.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_OrN_1_2</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="n">2</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>OrN_2</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="OrN" spirit:vendor="oloftus.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_OrN_2_2</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="n">2</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>OrN_3</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="OrN" spirit:vendor="oloftus.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_OrN_3_2</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="n">2</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>OrN_4</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="OrN" spirit:vendor="oloftus.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_OrN_4_2</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="n">2</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>xlconcat_0</spirit:instanceName>
-        <spirit:componentRef spirit:library="ip" spirit:name="xlconcat" spirit:vendor="xilinx.com" spirit:version="2.1"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_xlconcat_0_2</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>xlconcat_1</spirit:instanceName>
-        <spirit:componentRef spirit:library="ip" spirit:name="xlconcat" spirit:vendor="xilinx.com" spirit:version="2.1"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_xlconcat_1_2</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>xlconcat_2</spirit:instanceName>
-        <spirit:componentRef spirit:library="ip" spirit:name="xlconcat" spirit:vendor="xilinx.com" spirit:version="2.1"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_xlconcat_2_2</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>xlconcat_3</spirit:instanceName>
-        <spirit:componentRef spirit:library="ip" spirit:name="xlconcat" spirit:vendor="xilinx.com" spirit:version="2.1"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_xlconcat_3_2</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>xlconcat_4</spirit:instanceName>
-        <spirit:componentRef spirit:library="ip" spirit:name="xlconcat" spirit:vendor="xilinx.com" spirit:version="2.1"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_xlconcat_4_2</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>xlconstant_4</spirit:instanceName>
-        <spirit:componentRef spirit:library="ip" spirit:name="xlconstant" spirit:vendor="xilinx.com" spirit:version="1.1"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_xlconstant_4_1</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="CONST_VAL">1</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>xlconstant_5</spirit:instanceName>
-        <spirit:componentRef spirit:library="ip" spirit:name="xlconstant" spirit:vendor="xilinx.com" spirit:version="1.1"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_xlconstant_5_1</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="CONST_VAL">0</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>xlconstant_6</spirit:instanceName>
-        <spirit:componentRef spirit:library="ip" spirit:name="xlconstant" spirit:vendor="xilinx.com" spirit:version="1.1"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_xlconstant_6_1</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="CONST_WIDTH">5</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="CONST_VAL">1</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>xlconstant_7</spirit:instanceName>
-        <spirit:componentRef spirit:library="ip" spirit:name="xlconstant" spirit:vendor="xilinx.com" spirit:version="1.1"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">Network_xlconstant_7_1</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="CONST_WIDTH">5</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="CONST_VAL">2</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="addressWidth">15</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="dataWidth">16</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
     </spirit:componentInstances>
@@ -426,130 +431,277 @@
       <spirit:adHocConnection>
         <spirit:name>CLK_1</spirit:name>
         <spirit:externalPortReference spirit:portRef="CLK"/>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_3" spirit:portRef="CLK"/>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_0" spirit:portRef="CLK"/>
-        <spirit:internalPortReference spirit:componentRef="AddressableRegister_0" spirit:portRef="CLK"/>
-        <spirit:internalPortReference spirit:componentRef="AddressableRegister_1" spirit:portRef="CLK"/>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_1" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="TypeRouter_Weight" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="TypeRouter_Stimulus" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="SynOutBuffer" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="StimulusRegister_0" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="StimulusRegister_1" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="LayerRouter_0" spirit:portRef="CLK"/>
         <spirit:internalPortReference spirit:componentRef="Neuron_0_0" spirit:portRef="CLK"/>
         <spirit:internalPortReference spirit:componentRef="Neuron_0_1" spirit:portRef="CLK"/>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_2" spirit:portRef="CLK"/>
+        <spirit:internalPortReference spirit:componentRef="LayerRouter_1" spirit:portRef="CLK"/>
         <spirit:internalPortReference spirit:componentRef="Neuron_1_0" spirit:portRef="CLK"/>
         <spirit:internalPortReference spirit:componentRef="Neuron_1_1" spirit:portRef="CLK"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
+        <spirit:name>PKT_IN_VALID_1</spirit:name>
+        <spirit:externalPortReference spirit:portRef="PKT_IN_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="TypeRouter_Weight" spirit:portRef="PKT_IN_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="TypeRouter_Stimulus" spirit:portRef="PKT_IN_VALID"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>PKT_IN_1</spirit:name>
+        <spirit:externalPortReference spirit:portRef="PKT_IN"/>
+        <spirit:internalPortReference spirit:componentRef="TypeRouter_Weight" spirit:portRef="PKT_IN"/>
+        <spirit:internalPortReference spirit:componentRef="TypeRouter_Stimulus" spirit:portRef="PKT_IN"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>PktRcvd_Layers_DOUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="PktRcvd_Layers" spirit:portRef="DOUT"/>
+        <spirit:internalPortReference spirit:componentRef="TypeRouter_Weight" spirit:portRef="DONE_IN"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>TypeRouter_Weight_DONE_OUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="TypeRouter_Weight" spirit:portRef="DONE_OUT"/>
+        <spirit:internalPortReference spirit:componentRef="PktRcvdConcat" spirit:portRef="In0"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>TypeRouter_Weight_Address_dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="TypeRouter_Weight_Address" spirit:portRef="dout"/>
+        <spirit:internalPortReference spirit:componentRef="TypeRouter_Weight" spirit:portRef="ADDR"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>PktRcvd_StimulusRegisters_DOUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="PktRcvd_StimulusRegisters" spirit:portRef="DOUT"/>
+        <spirit:internalPortReference spirit:componentRef="TypeRouter_Stimulus" spirit:portRef="DONE_IN"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>TypeRouter_Stimulus_DONE_OUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="TypeRouter_Stimulus" spirit:portRef="DONE_OUT"/>
+        <spirit:internalPortReference spirit:componentRef="PktRcvdConcat" spirit:portRef="In1"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>TypeRouter_Stimulus_Address_dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="TypeRouter_Stimulus_Address" spirit:portRef="dout"/>
+        <spirit:internalPortReference spirit:componentRef="TypeRouter_Stimulus" spirit:portRef="ADDR"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>PktRcvd_DOUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="PktRcvd" spirit:portRef="DOUT"/>
+        <spirit:externalPortReference spirit:portRef="DONE_OUT"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>PktRcvdConcat_dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="PktRcvdConcat" spirit:portRef="dout"/>
+        <spirit:internalPortReference spirit:componentRef="PktRcvd" spirit:portRef="DIN"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>PktRcvdConcat_Layers_dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="PktRcvdConcat_Layers" spirit:portRef="dout"/>
+        <spirit:internalPortReference spirit:componentRef="PktRcvd_Layers" spirit:portRef="DIN"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>PktRcvdConcat_StimulusRegisters_dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="PktRcvdConcat_StimulusRegisters" spirit:portRef="dout"/>
+        <spirit:internalPortReference spirit:componentRef="PktRcvd_StimulusRegisters" spirit:portRef="DIN"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
         <spirit:name>RST_1</spirit:name>
         <spirit:externalPortReference spirit:portRef="RST"/>
-        <spirit:internalPortReference spirit:componentRef="AddressableRegister_0" spirit:portRef="RST"/>
-        <spirit:internalPortReference spirit:componentRef="AddressableRegister_1" spirit:portRef="RST"/>
+        <spirit:internalPortReference spirit:componentRef="SynOutBuffer" spirit:portRef="RST"/>
+        <spirit:internalPortReference spirit:componentRef="StimulusRegister_0" spirit:portRef="RST"/>
+        <spirit:internalPortReference spirit:componentRef="StimulusRegister_1" spirit:portRef="RST"/>
         <spirit:internalPortReference spirit:componentRef="Neuron_0_0" spirit:portRef="RST"/>
         <spirit:internalPortReference spirit:componentRef="Neuron_0_1" spirit:portRef="RST"/>
         <spirit:internalPortReference spirit:componentRef="Neuron_1_0" spirit:portRef="RST"/>
         <spirit:internalPortReference spirit:componentRef="Neuron_1_1" spirit:portRef="RST"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
-        <spirit:name>xlconstant_0_dout</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="xlconstant_0" spirit:portRef="dout"/>
+        <spirit:name>SynOutBuffer_DOUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="SynOutBuffer" spirit:portRef="DOUT"/>
+        <spirit:externalPortReference spirit:portRef="SYN_OUTS"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>NXT_SYN_OUT_1</spirit:name>
+        <spirit:externalPortReference spirit:portRef="NXT_SYN_OUT"/>
+        <spirit:internalPortReference spirit:componentRef="SynOutBuffer" spirit:portRef="NXT"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>SynOutBuffer_READY</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="SynOutBuffer" spirit:portRef="READY"/>
+        <spirit:externalPortReference spirit:portRef="SYN_OUTS_READY"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>SynOutConcat_dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="SynOutConcat" spirit:portRef="dout"/>
+        <spirit:internalPortReference spirit:componentRef="SynOutBuffer" spirit:portRef="DIN"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>SynOutValidConcat_dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="SynOutValidConcat" spirit:portRef="dout"/>
+        <spirit:internalPortReference spirit:componentRef="SynOutBuffer" spirit:portRef="DVALID"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>TypeRouter_Stimulus_PKT_OUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="TypeRouter_Stimulus" spirit:portRef="PKT_OUT"/>
+        <spirit:internalPortReference spirit:componentRef="StimulusRegister_0" spirit:portRef="PKT_IN"/>
+        <spirit:internalPortReference spirit:componentRef="StimulusRegister_1" spirit:portRef="PKT_IN"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>TypeRouter_Stimulus_PKT_OUT_VALID</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="TypeRouter_Stimulus" spirit:portRef="PKT_OUT_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="StimulusRegister_0" spirit:portRef="PKT_IN_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="StimulusRegister_1" spirit:portRef="PKT_IN_VALID"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>StimulusRegister_0_DONE_OUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="StimulusRegister_0" spirit:portRef="DONE_OUT"/>
+        <spirit:internalPortReference spirit:componentRef="PktRcvdConcat_StimulusRegisters" spirit:portRef="In0"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>TypeRouter_Weight_PKT_OUT_VALID</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="TypeRouter_Weight" spirit:portRef="PKT_OUT_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="LayerRouter_0" spirit:portRef="PKT_IN_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="LayerRouter_1" spirit:portRef="PKT_IN_VALID"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>TypeRouter_Weight_PKT_OUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="TypeRouter_Weight" spirit:portRef="PKT_OUT"/>
+        <spirit:internalPortReference spirit:componentRef="LayerRouter_0" spirit:portRef="PKT_IN"/>
+        <spirit:internalPortReference spirit:componentRef="LayerRouter_1" spirit:portRef="PKT_IN"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>PktRcvdConcat_Layer_0_dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="PktRcvdConcat_Layer_0" spirit:portRef="dout"/>
+        <spirit:internalPortReference spirit:componentRef="PktRcvd_Layer_0" spirit:portRef="DIN"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>PktRcvd_Layer_0_DOUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="PktRcvd_Layer_0" spirit:portRef="DOUT"/>
+        <spirit:internalPortReference spirit:componentRef="LayerRouter_0" spirit:portRef="DONE_IN"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>LayerRouter_0_Address_dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="LayerRouter_0_Address" spirit:portRef="dout"/>
+        <spirit:internalPortReference spirit:componentRef="LayerRouter_0" spirit:portRef="ADDR"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>LayerRouter_0_DONE_OUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="LayerRouter_0" spirit:portRef="DONE_OUT"/>
+        <spirit:internalPortReference spirit:componentRef="PktRcvdConcat_Layers" spirit:portRef="In0"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>Neuron_0_0_Address_dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="Neuron_0_0_Address" spirit:portRef="dout"/>
         <spirit:internalPortReference spirit:componentRef="Neuron_0_0" spirit:portRef="NEURON_ADDR"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
-        <spirit:name>xlconstant_1_dout</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="xlconstant_1" spirit:portRef="dout"/>
-        <spirit:internalPortReference spirit:componentRef="Neuron_0_1" spirit:portRef="NEURON_ADDR"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>xlconstant_2_dout</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="xlconstant_2" spirit:portRef="dout"/>
-        <spirit:internalPortReference spirit:componentRef="Neuron_1_1" spirit:portRef="NEURON_ADDR"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>xlconstant_3_dout</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="xlconstant_3" spirit:portRef="dout"/>
-        <spirit:internalPortReference spirit:componentRef="Neuron_1_0" spirit:portRef="NEURON_ADDR"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>PKT_IN_VALID_1</spirit:name>
-        <spirit:externalPortReference spirit:portRef="PKT_IN_VALID"/>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_0" spirit:portRef="PKT_IN_VALID"/>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_3" spirit:portRef="PKT_IN_VALID"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>PKT_IN_1</spirit:name>
-        <spirit:externalPortReference spirit:portRef="PKT_IN"/>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_3" spirit:portRef="PKT_IN"/>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_0" spirit:portRef="PKT_IN"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>ValueRouter_0_PKT_OUT_VALID</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_0" spirit:portRef="PKT_OUT_VALID"/>
-        <spirit:internalPortReference spirit:componentRef="AddressableRegister_0" spirit:portRef="PKT_IN_VALID"/>
-        <spirit:internalPortReference spirit:componentRef="AddressableRegister_1" spirit:portRef="PKT_IN_VALID"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>ValueRouter_0_PKT_OUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_0" spirit:portRef="PKT_OUT"/>
-        <spirit:internalPortReference spirit:componentRef="AddressableRegister_1" spirit:portRef="PKT_IN"/>
-        <spirit:internalPortReference spirit:componentRef="AddressableRegister_0" spirit:portRef="PKT_IN"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>ValueRouter_3_PKT_OUT_VALID</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_3" spirit:portRef="PKT_OUT_VALID"/>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_1" spirit:portRef="PKT_IN_VALID"/>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_2" spirit:portRef="PKT_IN_VALID"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>ValueRouter_3_PKT_OUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_3" spirit:portRef="PKT_OUT"/>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_2" spirit:portRef="PKT_IN"/>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_1" spirit:portRef="PKT_IN"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>AddressableRegister_0_VAL_OUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="AddressableRegister_0" spirit:portRef="VAL_OUT"/>
-        <spirit:internalPortReference spirit:componentRef="Neuron_0_0" spirit:portRef="SYN_0_DIN"/>
-        <spirit:internalPortReference spirit:componentRef="Neuron_0_1" spirit:portRef="SYN_0_DIN"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>AddressableRegister_0_VAL_OUT_VALID</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="AddressableRegister_0" spirit:portRef="VAL_OUT_VALID"/>
-        <spirit:internalPortReference spirit:componentRef="Neuron_0_0" spirit:portRef="SYN_0_VALID"/>
-        <spirit:internalPortReference spirit:componentRef="Neuron_0_1" spirit:portRef="SYN_0_VALID"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>AddressableRegister_1_VAL_OUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="AddressableRegister_1" spirit:portRef="VAL_OUT"/>
-        <spirit:internalPortReference spirit:componentRef="Neuron_0_0" spirit:portRef="SYN_1_DIN"/>
-        <spirit:internalPortReference spirit:componentRef="Neuron_0_1" spirit:portRef="SYN_1_DIN"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>AddressableRegister_1_VAL_OUT_VALID</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="AddressableRegister_1" spirit:portRef="VAL_OUT_VALID"/>
-        <spirit:internalPortReference spirit:componentRef="Neuron_0_0" spirit:portRef="SYN_1_VALID"/>
-        <spirit:internalPortReference spirit:componentRef="Neuron_0_1" spirit:portRef="SYN_1_VALID"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>ValueRouter_1_PKT_OUT_VALID</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_1" spirit:portRef="PKT_OUT_VALID"/>
-        <spirit:internalPortReference spirit:componentRef="Neuron_0_0" spirit:portRef="PKT_IN_VALID"/>
-        <spirit:internalPortReference spirit:componentRef="Neuron_0_1" spirit:portRef="PKT_IN_VALID"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>ValueRouter_2_PKT_OUT_VALID</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_2" spirit:portRef="PKT_OUT_VALID"/>
-        <spirit:internalPortReference spirit:componentRef="Neuron_1_0" spirit:portRef="PKT_IN_VALID"/>
-        <spirit:internalPortReference spirit:componentRef="Neuron_1_1" spirit:portRef="PKT_IN_VALID"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>ValueRouter_1_PKT_OUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_1" spirit:portRef="PKT_OUT"/>
+        <spirit:name>LayerRouter_0_PKT_OUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="LayerRouter_0" spirit:portRef="PKT_OUT"/>
         <spirit:internalPortReference spirit:componentRef="Neuron_0_0" spirit:portRef="PKT_IN"/>
         <spirit:internalPortReference spirit:componentRef="Neuron_0_1" spirit:portRef="PKT_IN"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
-        <spirit:name>ValueRouter_2_PKT_OUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_2" spirit:portRef="PKT_OUT"/>
+        <spirit:name>LayerRouter_0_PKT_OUT_VALID</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="LayerRouter_0" spirit:portRef="PKT_OUT_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="Neuron_0_0" spirit:portRef="PKT_IN_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="Neuron_0_1" spirit:portRef="PKT_IN_VALID"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>Neuron_0_0_DONE_OUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="Neuron_0_0" spirit:portRef="DONE_OUT"/>
+        <spirit:internalPortReference spirit:componentRef="PktRcvdConcat_Layer_0" spirit:portRef="In0"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>Neuron_0_1_Address_dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="Neuron_0_1_Address" spirit:portRef="dout"/>
+        <spirit:internalPortReference spirit:componentRef="Neuron_0_1" spirit:portRef="NEURON_ADDR"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>Neuron_0_1_DONE_OUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="Neuron_0_1" spirit:portRef="DONE_OUT"/>
+        <spirit:internalPortReference spirit:componentRef="PktRcvdConcat_Layer_0" spirit:portRef="In1"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>StimulusRegister_1_DONE_OUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="StimulusRegister_1" spirit:portRef="DONE_OUT"/>
+        <spirit:internalPortReference spirit:componentRef="PktRcvdConcat_StimulusRegisters" spirit:portRef="In1"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>PktRcvdConcat_Layer_1_dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="PktRcvdConcat_Layer_1" spirit:portRef="dout"/>
+        <spirit:internalPortReference spirit:componentRef="PktRcvd_Layer_1" spirit:portRef="DIN"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>PktRcvd_Layer_1_DOUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="PktRcvd_Layer_1" spirit:portRef="DOUT"/>
+        <spirit:internalPortReference spirit:componentRef="LayerRouter_1" spirit:portRef="DONE_IN"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>LayerRouter_1_Address_dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="LayerRouter_1_Address" spirit:portRef="dout"/>
+        <spirit:internalPortReference spirit:componentRef="LayerRouter_1" spirit:portRef="ADDR"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>LayerRouter_1_DONE_OUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="LayerRouter_1" spirit:portRef="DONE_OUT"/>
+        <spirit:internalPortReference spirit:componentRef="PktRcvdConcat_Layers" spirit:portRef="In1"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>Neuron_1_0_Address_dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="Neuron_1_0_Address" spirit:portRef="dout"/>
+        <spirit:internalPortReference spirit:componentRef="Neuron_1_0" spirit:portRef="NEURON_ADDR"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>LayerRouter_1_PKT_OUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="LayerRouter_1" spirit:portRef="PKT_OUT"/>
         <spirit:internalPortReference spirit:componentRef="Neuron_1_0" spirit:portRef="PKT_IN"/>
         <spirit:internalPortReference spirit:componentRef="Neuron_1_1" spirit:portRef="PKT_IN"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>LayerRouter_1_PKT_OUT_VALID</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="LayerRouter_1" spirit:portRef="PKT_OUT_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="Neuron_1_0" spirit:portRef="PKT_IN_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="Neuron_1_1" spirit:portRef="PKT_IN_VALID"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>Neuron_1_0_DONE_OUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="Neuron_1_0" spirit:portRef="DONE_OUT"/>
+        <spirit:internalPortReference spirit:componentRef="PktRcvdConcat_Layer_1" spirit:portRef="In0"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>Neuron_1_1_Address_dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="Neuron_1_1_Address" spirit:portRef="dout"/>
+        <spirit:internalPortReference spirit:componentRef="Neuron_1_1" spirit:portRef="NEURON_ADDR"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>Neuron_1_1_DONE_OUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="Neuron_1_1" spirit:portRef="DONE_OUT"/>
+        <spirit:internalPortReference spirit:componentRef="PktRcvdConcat_Layer_1" spirit:portRef="In1"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>StimulusRegister_0_VAL_OUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="StimulusRegister_0" spirit:portRef="VAL_OUT"/>
+        <spirit:internalPortReference spirit:componentRef="Neuron_0_0" spirit:portRef="SYN_0_DIN"/>
+        <spirit:internalPortReference spirit:componentRef="Neuron_0_1" spirit:portRef="SYN_0_DIN"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>StimulusRegister_0_VAL_OUT_VALID</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="StimulusRegister_0" spirit:portRef="VAL_OUT_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="Neuron_0_0" spirit:portRef="SYN_0_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="Neuron_0_1" spirit:portRef="SYN_0_VALID"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>StimulusRegister_1_VAL_OUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="StimulusRegister_1" spirit:portRef="VAL_OUT"/>
+        <spirit:internalPortReference spirit:componentRef="Neuron_0_0" spirit:portRef="SYN_1_DIN"/>
+        <spirit:internalPortReference spirit:componentRef="Neuron_0_1" spirit:portRef="SYN_1_DIN"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>StimulusRegister_1_VAL_OUT_VALID</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="StimulusRegister_1" spirit:portRef="VAL_OUT_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="Neuron_0_0" spirit:portRef="SYN_1_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="Neuron_0_1" spirit:portRef="SYN_1_VALID"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>Neuron_0_0_SYN_OUT</spirit:name>
@@ -576,144 +728,24 @@
         <spirit:internalPortReference spirit:componentRef="Neuron_1_1" spirit:portRef="SYN_1_VALID"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
-        <spirit:name>Neuron_1_0_SYN_OUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="Neuron_1_0" spirit:portRef="SYN_OUT"/>
-        <spirit:externalPortReference spirit:portRef="SYN_0_OUT"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
         <spirit:name>Neuron_1_0_SYN_OUT_VALID</spirit:name>
         <spirit:internalPortReference spirit:componentRef="Neuron_1_0" spirit:portRef="SYN_OUT_VALID"/>
-        <spirit:externalPortReference spirit:portRef="SYN_0_OUT_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="SynOutValidConcat" spirit:portRef="In0"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
-        <spirit:name>Neuron_1_1_SYN_OUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="Neuron_1_1" spirit:portRef="SYN_OUT"/>
-        <spirit:externalPortReference spirit:portRef="SYN_1_OUT"/>
+        <spirit:name>Neuron_1_0_SYN_OUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="Neuron_1_0" spirit:portRef="SYN_OUT"/>
+        <spirit:internalPortReference spirit:componentRef="SynOutConcat" spirit:portRef="In0"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>Neuron_1_1_SYN_OUT_VALID</spirit:name>
         <spirit:internalPortReference spirit:componentRef="Neuron_1_1" spirit:portRef="SYN_OUT_VALID"/>
-        <spirit:externalPortReference spirit:portRef="SYN_1_OUT_VALID"/>
+        <spirit:internalPortReference spirit:componentRef="SynOutValidConcat" spirit:portRef="In1"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
-        <spirit:name>Neuron_0_0_DONE_OUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="Neuron_0_0" spirit:portRef="DONE_OUT"/>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In0"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>Neuron_0_1_DONE_OUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="Neuron_0_1" spirit:portRef="DONE_OUT"/>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In1"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>Neuron_1_0_DONE_OUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="Neuron_1_0" spirit:portRef="DONE_OUT"/>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_1" spirit:portRef="In0"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>Neuron_1_1_DONE_OUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="Neuron_1_1" spirit:portRef="DONE_OUT"/>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_1" spirit:portRef="In1"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>xlconcat_0_dout</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="dout"/>
-        <spirit:internalPortReference spirit:componentRef="OrN_0" spirit:portRef="DIN"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>xlconcat_1_dout</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_1" spirit:portRef="dout"/>
-        <spirit:internalPortReference spirit:componentRef="OrN_1" spirit:portRef="DIN"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>OrN_0_DOUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="OrN_0" spirit:portRef="DOUT"/>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_1" spirit:portRef="DONE_IN"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>OrN_1_DOUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="OrN_1" spirit:portRef="DOUT"/>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_2" spirit:portRef="DONE_IN"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>ValueRouter_1_DONE_OUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_1" spirit:portRef="DONE_OUT"/>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_2" spirit:portRef="In0"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>ValueRouter_2_DONE_OUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_2" spirit:portRef="DONE_OUT"/>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_2" spirit:portRef="In1"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>xlconcat_2_dout</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_2" spirit:portRef="dout"/>
-        <spirit:internalPortReference spirit:componentRef="OrN_2" spirit:portRef="DIN"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>OrN_2_DOUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="OrN_2" spirit:portRef="DOUT"/>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_3" spirit:portRef="DONE_IN"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>AddressableRegister_0_DONE_OUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="AddressableRegister_0" spirit:portRef="DONE_OUT"/>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_3" spirit:portRef="In0"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>AddressableRegister_1_DONE_OUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="AddressableRegister_1" spirit:portRef="DONE_OUT"/>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_3" spirit:portRef="In1"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>xlconcat_3_dout</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_3" spirit:portRef="dout"/>
-        <spirit:internalPortReference spirit:componentRef="OrN_3" spirit:portRef="DIN"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>OrN_3_DOUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="OrN_3" spirit:portRef="DOUT"/>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_0" spirit:portRef="DONE_IN"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>ValueRouter_3_DONE_OUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_3" spirit:portRef="DONE_OUT"/>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_4" spirit:portRef="In0"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>ValueRouter_0_DONE_OUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_0" spirit:portRef="DONE_OUT"/>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_4" spirit:portRef="In1"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>xlconcat_4_dout</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_4" spirit:portRef="dout"/>
-        <spirit:internalPortReference spirit:componentRef="OrN_4" spirit:portRef="DIN"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>OrN_4_DOUT</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="OrN_4" spirit:portRef="DOUT"/>
-        <spirit:externalPortReference spirit:portRef="DONE_OUT"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>xlconstant_4_dout</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="xlconstant_4" spirit:portRef="dout"/>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_0" spirit:portRef="ADDR"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>xlconstant_5_dout</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="xlconstant_5" spirit:portRef="dout"/>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_3" spirit:portRef="ADDR"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>xlconstant_6_dout</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="xlconstant_6" spirit:portRef="dout"/>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_1" spirit:portRef="ADDR"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>xlconstant_7_dout</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="xlconstant_7" spirit:portRef="dout"/>
-        <spirit:internalPortReference spirit:componentRef="ValueRouter_2" spirit:portRef="ADDR"/>
+        <spirit:name>Neuron_1_1_SYN_OUT</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="Neuron_1_1" spirit:portRef="SYN_OUT"/>
+        <spirit:internalPortReference spirit:componentRef="SynOutConcat" spirit:portRef="In1"/>
       </spirit:adHocConnection>
     </spirit:adHocConnections>
   </spirit:design>

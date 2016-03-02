@@ -1,0 +1,968 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Mar 02 22:27:23 2016" VIVADOVERSION="2014.2">
+
+  <SYSTEMINFO ARCH="zynq" BOARD="em.avnet.com:microzed_7010:part0:1.0" DEVICE="7z010" NAME="Network_imp" PACKAGE="clg400" SPEEDGRADE="-1"/>
+
+  <EXTERNALPORTS>
+    <PORT CLKFREQUENCY="100000000" DIR="I" NAME="CLK" SIGIS="clk" SIGNAME="External_Ports_CLK">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="TypeRouter_Weight" PORT="CLK"/>
+        <CONNECTION INSTANCE="TypeRouter_Stimulus" PORT="CLK"/>
+        <CONNECTION INSTANCE="SynOutBuffer" PORT="CLK"/>
+        <CONNECTION INSTANCE="StimulusRegister_0" PORT="CLK"/>
+        <CONNECTION INSTANCE="StimulusRegister_1" PORT="CLK"/>
+        <CONNECTION INSTANCE="LayerRouter_0" PORT="CLK"/>
+        <CONNECTION INSTANCE="Neuron_0_0" PORT="CLK"/>
+        <CONNECTION INSTANCE="Neuron_0_1" PORT="CLK"/>
+        <CONNECTION INSTANCE="LayerRouter_1" PORT="CLK"/>
+        <CONNECTION INSTANCE="Neuron_1_0" PORT="CLK"/>
+        <CONNECTION INSTANCE="Neuron_1_1" PORT="CLK"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="RST" SIGIS="rst" SIGNAME="External_Ports_RST">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="SynOutBuffer" PORT="RST"/>
+        <CONNECTION INSTANCE="StimulusRegister_0" PORT="RST"/>
+        <CONNECTION INSTANCE="StimulusRegister_1" PORT="RST"/>
+        <CONNECTION INSTANCE="Neuron_0_0" PORT="RST"/>
+        <CONNECTION INSTANCE="Neuron_0_1" PORT="RST"/>
+        <CONNECTION INSTANCE="Neuron_1_0" PORT="RST"/>
+        <CONNECTION INSTANCE="Neuron_1_1" PORT="RST"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="PKT_IN" SIGIS="data" SIGNAME="External_Ports_PKT_IN">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="TypeRouter_Weight" PORT="PKT_IN"/>
+        <CONNECTION INSTANCE="TypeRouter_Stimulus" PORT="PKT_IN"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="External_Ports_PKT_IN_VALID">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="TypeRouter_Weight" PORT="PKT_IN_VALID"/>
+        <CONNECTION INSTANCE="TypeRouter_Stimulus" PORT="PKT_IN_VALID"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="NXT_SYN_OUT" SIGIS="undef" SIGNAME="External_Ports_NXT_SYN_OUT">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="SynOutBuffer" PORT="NXT"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="PktRcvd_DOUT">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="PktRcvd" PORT="DOUT"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="SYN_OUTS" SIGIS="data" SIGNAME="SynOutBuffer_DOUT">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="SynOutBuffer" PORT="DOUT"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="SYN_OUTS_READY" SIGIS="undef" SIGNAME="SynOutBuffer_READY">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="SynOutBuffer" PORT="READY"/>
+      </CONNECTIONS>
+    </PORT>
+  </EXTERNALPORTS>
+
+  <MODULES>
+    <MODULE FULLNAME="/LayerRouter_0" HWVERSION="4.0" INSTANCE="LayerRouter_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="ValueRouter" VLNV="oloftus.com:prif:ValueRouter:4.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="packetInWidth" VALUE="31"/>
+        <PARAMETER NAME="packetOutWidth" VALUE="26"/>
+        <PARAMETER NAME="Component_Name" VALUE="Network_LayerRouter_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="TypeRouter_Weight_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter_Weight" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="TypeRouter_Weight_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter_Weight" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT_VALID" SIGIS="undef" SIGNAME="LayerRouter_0_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_0_0" PORT="PKT_IN_VALID"/>
+            <CONNECTION INSTANCE="Neuron_0_1" PORT="PKT_IN_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT" SIGIS="undef" SIGNAME="LayerRouter_0_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_0_0" PORT="PKT_IN"/>
+            <CONNECTION INSTANCE="Neuron_0_1" PORT="PKT_IN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="DONE_IN" SIGIS="undef" SIGNAME="PktRcvd_Layer_0_DOUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="PktRcvd_Layer_0" PORT="DOUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="LayerRouter_0_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="PktRcvd_Layers" PORT="DIN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="ADDR" SIGIS="undef" SIGNAME="LayerRouter_0_Address_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter_0_Address" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/LayerRouter_0_Address" HWVERSION="1.1" INSTANCE="LayerRouter_0_Address" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_VAL" VALUE="0"/>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="5"/>
+        <PARAMETER NAME="Component_Name" VALUE="Network_LayerRouter_0_Address_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" NAME="dout" SIGIS="undef" SIGNAME="LayerRouter_0_Address_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter_0" PORT="ADDR"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/LayerRouter_1" HWVERSION="4.0" INSTANCE="LayerRouter_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="ValueRouter" VLNV="oloftus.com:prif:ValueRouter:4.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="packetInWidth" VALUE="31"/>
+        <PARAMETER NAME="packetOutWidth" VALUE="26"/>
+        <PARAMETER NAME="Component_Name" VALUE="Network_LayerRouter_1_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="TypeRouter_Weight_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter_Weight" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="TypeRouter_Weight_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter_Weight" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT_VALID" SIGIS="undef" SIGNAME="LayerRouter_1_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_1_0" PORT="PKT_IN_VALID"/>
+            <CONNECTION INSTANCE="Neuron_1_1" PORT="PKT_IN_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT" SIGIS="undef" SIGNAME="LayerRouter_1_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_1_0" PORT="PKT_IN"/>
+            <CONNECTION INSTANCE="Neuron_1_1" PORT="PKT_IN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="DONE_IN" SIGIS="undef" SIGNAME="PktRcvd_Layer_1_DOUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="PktRcvd_Layer_1" PORT="DOUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="LayerRouter_1_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="PktRcvd_Layers" PORT="DIN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="ADDR" SIGIS="undef" SIGNAME="LayerRouter_1_Address_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter_1_Address" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/LayerRouter_1_Address" HWVERSION="1.1" INSTANCE="LayerRouter_1_Address" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_VAL" VALUE="1"/>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="5"/>
+        <PARAMETER NAME="Component_Name" VALUE="Network_LayerRouter_1_Address_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" NAME="dout" SIGIS="undef" SIGNAME="LayerRouter_1_Address_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter_1" PORT="ADDR"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Neuron_0_0" HWVERSION="1.0" INSTANCE="Neuron_0_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Neuron_wrapper" VLNV="xilinx.com:ip:Neuron_wrapper:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="Network_Neuron_0_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="Neuron_0_0_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="PktRcvd_Layer_0" PORT="DIN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="NEURON_ADDR" SIGIS="undef" SIGNAME="Neuron_0_0_Address_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_0_0_Address" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="LayerRouter_0_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter_0" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="LayerRouter_0_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter_0" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SYN_0_DIN" SIGIS="undef" SIGNAME="StimulusRegister_0_VAL_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="StimulusRegister_0" PORT="VAL_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SYN_0_VALID" SIGIS="undef" SIGNAME="StimulusRegister_0_VAL_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="StimulusRegister_0" PORT="VAL_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SYN_1_DIN" SIGIS="undef" SIGNAME="StimulusRegister_1_VAL_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="StimulusRegister_1" PORT="VAL_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SYN_1_VALID" SIGIS="undef" SIGNAME="StimulusRegister_1_VAL_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="StimulusRegister_1" PORT="VAL_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="SYN_OUT" SIGIS="undef" SIGNAME="Neuron_0_0_SYN_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_1_0" PORT="SYN_0_DIN"/>
+            <CONNECTION INSTANCE="Neuron_1_1" PORT="SYN_0_DIN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="SYN_OUT_VALID" SIGIS="undef" SIGNAME="Neuron_0_0_SYN_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_1_0" PORT="SYN_0_VALID"/>
+            <CONNECTION INSTANCE="Neuron_1_1" PORT="SYN_0_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Neuron_0_0_Address" HWVERSION="1.1" INSTANCE="Neuron_0_0_Address" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_VAL" VALUE="0"/>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="6"/>
+        <PARAMETER NAME="Component_Name" VALUE="Network_Neuron_0_0_Address_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" NAME="dout" SIGIS="undef" SIGNAME="Neuron_0_0_Address_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_0_0" PORT="NEURON_ADDR"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Neuron_0_1" HWVERSION="1.0" INSTANCE="Neuron_0_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Neuron_wrapper" VLNV="xilinx.com:ip:Neuron_wrapper:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="Network_Neuron_0_1_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="Neuron_0_1_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="PktRcvd_Layer_0" PORT="DIN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="NEURON_ADDR" SIGIS="undef" SIGNAME="Neuron_0_1_Address_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_0_1_Address" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="LayerRouter_0_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter_0" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="LayerRouter_0_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter_0" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SYN_0_DIN" SIGIS="undef" SIGNAME="StimulusRegister_0_VAL_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="StimulusRegister_0" PORT="VAL_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SYN_0_VALID" SIGIS="undef" SIGNAME="StimulusRegister_0_VAL_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="StimulusRegister_0" PORT="VAL_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SYN_1_DIN" SIGIS="undef" SIGNAME="StimulusRegister_1_VAL_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="StimulusRegister_1" PORT="VAL_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SYN_1_VALID" SIGIS="undef" SIGNAME="StimulusRegister_1_VAL_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="StimulusRegister_1" PORT="VAL_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="SYN_OUT" SIGIS="undef" SIGNAME="Neuron_0_1_SYN_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_1_0" PORT="SYN_1_DIN"/>
+            <CONNECTION INSTANCE="Neuron_1_1" PORT="SYN_1_DIN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="SYN_OUT_VALID" SIGIS="undef" SIGNAME="Neuron_0_1_SYN_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_1_0" PORT="SYN_1_VALID"/>
+            <CONNECTION INSTANCE="Neuron_1_1" PORT="SYN_1_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Neuron_0_1_Address" HWVERSION="1.1" INSTANCE="Neuron_0_1_Address" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_VAL" VALUE="1"/>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="6"/>
+        <PARAMETER NAME="Component_Name" VALUE="Network_Neuron_0_1_Address_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" NAME="dout" SIGIS="undef" SIGNAME="Neuron_0_1_Address_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_0_1" PORT="NEURON_ADDR"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Neuron_1_0" HWVERSION="1.0" INSTANCE="Neuron_1_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Neuron_wrapper" VLNV="xilinx.com:ip:Neuron_wrapper:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="Network_Neuron_1_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="Neuron_1_0_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="PktRcvd_Layer_1" PORT="DIN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="NEURON_ADDR" SIGIS="undef" SIGNAME="Neuron_1_0_Address_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_1_0_Address" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="LayerRouter_1_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter_1" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="LayerRouter_1_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter_1" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SYN_0_DIN" SIGIS="undef" SIGNAME="Neuron_0_0_SYN_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_0_0" PORT="SYN_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SYN_0_VALID" SIGIS="undef" SIGNAME="Neuron_0_0_SYN_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_0_0" PORT="SYN_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SYN_1_DIN" SIGIS="undef" SIGNAME="Neuron_0_1_SYN_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_0_1" PORT="SYN_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SYN_1_VALID" SIGIS="undef" SIGNAME="Neuron_0_1_SYN_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_0_1" PORT="SYN_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="SYN_OUT" SIGIS="undef" SIGNAME="Neuron_1_0_SYN_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="SynOutBuffer" PORT="DIN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="SYN_OUT_VALID" SIGIS="undef" SIGNAME="Neuron_1_0_SYN_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="SynOutBuffer" PORT="DVALID"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Neuron_1_0_Address" HWVERSION="1.1" INSTANCE="Neuron_1_0_Address" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_VAL" VALUE="0"/>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="6"/>
+        <PARAMETER NAME="Component_Name" VALUE="Network_Neuron_1_0_Address_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" NAME="dout" SIGIS="undef" SIGNAME="Neuron_1_0_Address_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_1_0" PORT="NEURON_ADDR"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Neuron_1_1" HWVERSION="1.0" INSTANCE="Neuron_1_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Neuron_wrapper" VLNV="xilinx.com:ip:Neuron_wrapper:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="Network_Neuron_1_1_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="Neuron_1_1_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="PktRcvd_Layer_1" PORT="DIN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="NEURON_ADDR" SIGIS="undef" SIGNAME="Neuron_1_1_Address_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_1_1_Address" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="LayerRouter_1_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter_1" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="LayerRouter_1_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter_1" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SYN_0_DIN" SIGIS="undef" SIGNAME="Neuron_0_0_SYN_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_0_0" PORT="SYN_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SYN_0_VALID" SIGIS="undef" SIGNAME="Neuron_0_0_SYN_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_0_0" PORT="SYN_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SYN_1_DIN" SIGIS="undef" SIGNAME="Neuron_0_1_SYN_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_0_1" PORT="SYN_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="SYN_1_VALID" SIGIS="undef" SIGNAME="Neuron_0_1_SYN_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_0_1" PORT="SYN_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="SYN_OUT" SIGIS="undef" SIGNAME="Neuron_1_1_SYN_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="SynOutBuffer" PORT="DIN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="SYN_OUT_VALID" SIGIS="undef" SIGNAME="Neuron_1_1_SYN_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="SynOutBuffer" PORT="DVALID"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Neuron_1_1_Address" HWVERSION="1.1" INSTANCE="Neuron_1_1_Address" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_VAL" VALUE="1"/>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="6"/>
+        <PARAMETER NAME="Component_Name" VALUE="Network_Neuron_1_1_Address_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" NAME="dout" SIGIS="undef" SIGNAME="Neuron_1_1_Address_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_1_1" PORT="NEURON_ADDR"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/PktRcvd" HWVERSION="1.0" INSTANCE="PktRcvd" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="OrN" VLNV="oloftus.com:prif:OrN:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="n" VALUE="2"/>
+        <PARAMETER NAME="Component_Name" VALUE="Network_PktRcvd_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="DIN" SIGIS="undef" SIGNAME="TypeRouter_Stimulus_DONE_OUT &amp; TypeRouter_Weight_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter_Stimulus" PORT="DONE_OUT"/>
+            <CONNECTION INSTANCE="TypeRouter_Weight" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DOUT" SIGIS="undef" SIGNAME="PktRcvd_DOUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/PktRcvd_Layer_0" HWVERSION="1.0" INSTANCE="PktRcvd_Layer_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="OrN" VLNV="oloftus.com:prif:OrN:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="n" VALUE="2"/>
+        <PARAMETER NAME="Component_Name" VALUE="Network_PktRcvd_Layer_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="DIN" SIGIS="undef" SIGNAME="Neuron_0_1_DONE_OUT &amp; Neuron_0_0_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_0_1" PORT="DONE_OUT"/>
+            <CONNECTION INSTANCE="Neuron_0_0" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DOUT" SIGIS="undef" SIGNAME="PktRcvd_Layer_0_DOUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter_0" PORT="DONE_IN"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/PktRcvd_Layer_1" HWVERSION="1.0" INSTANCE="PktRcvd_Layer_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="OrN" VLNV="oloftus.com:prif:OrN:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="n" VALUE="2"/>
+        <PARAMETER NAME="Component_Name" VALUE="Network_PktRcvd_Layer_1_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="DIN" SIGIS="undef" SIGNAME="Neuron_1_1_DONE_OUT &amp; Neuron_1_0_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_1_1" PORT="DONE_OUT"/>
+            <CONNECTION INSTANCE="Neuron_1_0" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DOUT" SIGIS="undef" SIGNAME="PktRcvd_Layer_1_DOUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter_1" PORT="DONE_IN"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/PktRcvd_Layers" HWVERSION="1.0" INSTANCE="PktRcvd_Layers" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="OrN" VLNV="oloftus.com:prif:OrN:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="n" VALUE="2"/>
+        <PARAMETER NAME="Component_Name" VALUE="Network_PktRcvd_Layers_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="DIN" SIGIS="undef" SIGNAME="LayerRouter_1_DONE_OUT &amp; LayerRouter_0_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter_1" PORT="DONE_OUT"/>
+            <CONNECTION INSTANCE="LayerRouter_0" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DOUT" SIGIS="undef" SIGNAME="PktRcvd_Layers_DOUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter_Weight" PORT="DONE_IN"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/PktRcvd_StimulusRegisters" HWVERSION="1.0" INSTANCE="PktRcvd_StimulusRegisters" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="OrN" VLNV="oloftus.com:prif:OrN:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="n" VALUE="2"/>
+        <PARAMETER NAME="Component_Name" VALUE="Network_PktRcvd_StimulusRegisters_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="DIN" SIGIS="undef" SIGNAME="StimulusRegister_1_DONE_OUT &amp; StimulusRegister_0_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="StimulusRegister_1" PORT="DONE_OUT"/>
+            <CONNECTION INSTANCE="StimulusRegister_0" PORT="DONE_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DOUT" SIGIS="undef" SIGNAME="PktRcvd_StimulusRegisters_DOUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter_Stimulus" PORT="DONE_IN"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/StimulusRegister_0" HWVERSION="1.0" INSTANCE="StimulusRegister_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="AddressableRegister" VLNV="oloftus.com:prif:AddressableRegister:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="dataWidth" VALUE="16"/>
+        <PARAMETER NAME="addressWidth" VALUE="15"/>
+        <PARAMETER NAME="address" VALUE="0"/>
+        <PARAMETER NAME="Component_Name" VALUE="Network_StimulusRegister_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="TypeRouter_Stimulus_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter_Stimulus" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="TypeRouter_Stimulus_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter_Stimulus" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT" SIGIS="undef" SIGNAME="StimulusRegister_0_VAL_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_0_0" PORT="SYN_0_DIN"/>
+            <CONNECTION INSTANCE="Neuron_0_1" PORT="SYN_0_DIN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT_VALID" SIGIS="undef" SIGNAME="StimulusRegister_0_VAL_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_0_0" PORT="SYN_0_VALID"/>
+            <CONNECTION INSTANCE="Neuron_0_1" PORT="SYN_0_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="StimulusRegister_0_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="PktRcvd_StimulusRegisters" PORT="DIN"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/StimulusRegister_1" HWVERSION="1.0" INSTANCE="StimulusRegister_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="AddressableRegister" VLNV="oloftus.com:prif:AddressableRegister:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="dataWidth" VALUE="16"/>
+        <PARAMETER NAME="addressWidth" VALUE="15"/>
+        <PARAMETER NAME="address" VALUE="1"/>
+        <PARAMETER NAME="Component_Name" VALUE="Network_StimulusRegister_1_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="TypeRouter_Stimulus_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter_Stimulus" PORT="PKT_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="TypeRouter_Stimulus_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter_Stimulus" PORT="PKT_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT" SIGIS="undef" SIGNAME="StimulusRegister_1_VAL_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_0_0" PORT="SYN_1_DIN"/>
+            <CONNECTION INSTANCE="Neuron_0_1" PORT="SYN_1_DIN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="VAL_OUT_VALID" SIGIS="undef" SIGNAME="StimulusRegister_1_VAL_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_0_0" PORT="SYN_1_VALID"/>
+            <CONNECTION INSTANCE="Neuron_0_1" PORT="SYN_1_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="StimulusRegister_1_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="PktRcvd_StimulusRegisters" PORT="DIN"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/SynOutBuffer" HWVERSION="1.0" INSTANCE="SynOutBuffer" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="SynOutBuffer" VLNV="oloftus.com:prif:SynOutBuffer:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="doutWidth" VALUE="32"/>
+        <PARAMETER NAME="dinWidth" VALUE="16"/>
+        <PARAMETER NAME="numInputs" VALUE="2"/>
+        <PARAMETER NAME="Component_Name" VALUE="Network_SynOutBuffer_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="RST" SIGIS="undef" SIGNAME="External_Ports_RST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RST"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="DIN" SIGIS="undef" SIGNAME="Neuron_1_1_SYN_OUT &amp; Neuron_1_0_SYN_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_1_1" PORT="SYN_OUT"/>
+            <CONNECTION INSTANCE="Neuron_1_0" PORT="SYN_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="DVALID" SIGIS="undef" SIGNAME="Neuron_1_1_SYN_OUT_VALID &amp; Neuron_1_0_SYN_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Neuron_1_1" PORT="SYN_OUT_VALID"/>
+            <CONNECTION INSTANCE="Neuron_1_0" PORT="SYN_OUT_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="NXT" SIGIS="undef" SIGNAME="External_Ports_NXT_SYN_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="NXT_SYN_OUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DOUT" SIGIS="undef" SIGNAME="SynOutBuffer_DOUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="SYN_OUTS"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="READY" SIGIS="undef" SIGNAME="SynOutBuffer_READY">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="SYN_OUTS_READY"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/TypeRouter_Stimulus" HWVERSION="4.0" INSTANCE="TypeRouter_Stimulus" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="ValueRouter" VLNV="oloftus.com:prif:ValueRouter:4.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="packetInWidth" VALUE="32"/>
+        <PARAMETER NAME="packetOutWidth" VALUE="31"/>
+        <PARAMETER NAME="Component_Name" VALUE="Network_TypeRouter_Stimulus_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="External_Ports_PKT_IN_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="PKT_IN_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="External_Ports_PKT_IN">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="PKT_IN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT_VALID" SIGIS="undef" SIGNAME="TypeRouter_Stimulus_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="StimulusRegister_0" PORT="PKT_IN_VALID"/>
+            <CONNECTION INSTANCE="StimulusRegister_1" PORT="PKT_IN_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT" SIGIS="undef" SIGNAME="TypeRouter_Stimulus_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="StimulusRegister_0" PORT="PKT_IN"/>
+            <CONNECTION INSTANCE="StimulusRegister_1" PORT="PKT_IN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="DONE_IN" SIGIS="undef" SIGNAME="PktRcvd_StimulusRegisters_DOUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="PktRcvd_StimulusRegisters" PORT="DOUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="TypeRouter_Stimulus_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="PktRcvd" PORT="DIN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="ADDR" SIGIS="undef" SIGNAME="TypeRouter_Stimulus_Address_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter_Stimulus_Address" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/TypeRouter_Stimulus_Address" HWVERSION="1.1" INSTANCE="TypeRouter_Stimulus_Address" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_VAL" VALUE="1"/>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="Component_Name" VALUE="Network_TypeRouter_Stimulus_Address_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" NAME="dout" SIGIS="undef" SIGNAME="TypeRouter_Stimulus_Address_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter_Stimulus" PORT="ADDR"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/TypeRouter_Weight" HWVERSION="4.0" INSTANCE="TypeRouter_Weight" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="ValueRouter" VLNV="oloftus.com:prif:ValueRouter:4.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="packetInWidth" VALUE="32"/>
+        <PARAMETER NAME="packetOutWidth" VALUE="31"/>
+        <PARAMETER NAME="Component_Name" VALUE="Network_TypeRouter_Weight_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="CLK" SIGIS="undef" SIGNAME="External_Ports_CLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN_VALID" SIGIS="undef" SIGNAME="External_Ports_PKT_IN_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="PKT_IN_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="PKT_IN" SIGIS="undef" SIGNAME="External_Ports_PKT_IN">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="PKT_IN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT_VALID" SIGIS="undef" SIGNAME="TypeRouter_Weight_PKT_OUT_VALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter_0" PORT="PKT_IN_VALID"/>
+            <CONNECTION INSTANCE="LayerRouter_1" PORT="PKT_IN_VALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="PKT_OUT" SIGIS="undef" SIGNAME="TypeRouter_Weight_PKT_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter_0" PORT="PKT_IN"/>
+            <CONNECTION INSTANCE="LayerRouter_1" PORT="PKT_IN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="DONE_IN" SIGIS="undef" SIGNAME="PktRcvd_Layers_DOUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="PktRcvd_Layers" PORT="DOUT"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="TypeRouter_Weight_DONE_OUT">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="PktRcvd" PORT="DIN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="ADDR" SIGIS="undef" SIGNAME="TypeRouter_Weight_Address_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter_Weight_Address" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/TypeRouter_Weight_Address" HWVERSION="1.1" INSTANCE="TypeRouter_Weight_Address" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_VAL" VALUE="0"/>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="Component_Name" VALUE="Network_TypeRouter_Weight_Address_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" NAME="dout" SIGIS="undef" SIGNAME="TypeRouter_Weight_Address_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter_Weight" PORT="ADDR"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+  </MODULES>
+
+  <REPOSITORIES/>
+
+</EDKSYSTEM>
