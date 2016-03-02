@@ -29,7 +29,6 @@
         <UsedIn Val="SIMULATION"/>
       </File>
       <File Name="ip\Network0_processing_system7_0_axi_periph_0\Network0_processing_system7_0_axi_periph_0.xci" Type="IP">
-        <Instance HierarchyPath="processing_system7_0_axi_periph"/>
         <Properties IsEditable="false" IsVisible="false" Timestamp="0" IsTrackable="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
@@ -79,13 +78,6 @@
       <File Name="ip\Network0_BusWidthConverter_0_0\Network0_BusWidthConverter_0_0.xci" Type="IP">
         <Instance HierarchyPath="BusWidthConverter_0"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
-      </File>
-      <File Name="ip\Network0_ila_0_0\Network0_ila_0_0.xci" Type="IP">
-        <Properties IsEditable="false" IsVisible="false" Timestamp="0" IsTrackable="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
         <UsedIn Val="IMPLEMENTATION"/>
