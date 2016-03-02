@@ -4,7 +4,7 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity SumJunction is
     generic (
-        numInputs : INTEGER; -- Range 1..7
+        numInputs : INTEGER; -- Range 1..(2^inputWidth - 1)
         inputWidth : INTEGER
     );
     port (
@@ -16,8 +16,8 @@ end SumJunction;
 
 architecture Behavioral of SumJunction is
     signal sigDin : STD_LOGIC_VECTOR (numInputs * inputWidth - 1 downto 0);
-    signal sigLatch : UNSIGNED (inputWidth downto 0) := (others => '0');
-    signal sigCount : UNSIGNED (2 downto 0) := (others => '0');
+    signal sigLatch : UNSIGNED (inputWidth - 1 downto 0) := (others => '0');
+    signal sigCount : UNSIGNED (inputWidth - 1 downto 0) := (others => '0');
     signal sigStart, sigDone : STD_LOGIC := '0';
 begin
     start_proc: process (DIN, sigDone) begin

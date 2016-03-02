@@ -5,7 +5,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity SumJunctionTB is
     generic (
         numInputs : INTEGER := 3;
-        inputWidth : INTEGER := 6
+        inputWidth : INTEGER := 16
     );
 end SumJunctionTB;
 
@@ -17,13 +17,13 @@ architecture Behavioral of SumJunctionTB is
         );
         port (
             DIN : in STD_LOGIC_VECTOR (numInputs * inputWidth - 1 downto 0);
-            DOUT : out STD_LOGIC_VECTOR (inputWidth downto 0);
+            DOUT : out STD_LOGIC_VECTOR (inputWidth - 1 downto 0);
             CLK : in STD_LOGIC
         );
     end component;
     
     signal sigDin : STD_LOGIC_VECTOR (numInputs * inputWidth - 1 downto 0);
-    signal sigDout : STD_LOGIC_VECTOR (inputWidth downto 0);
+    signal sigDout : STD_LOGIC_VECTOR (inputWidth - 1 downto 0);
     signal sigClk : STD_LOGIC;
 begin
     uut: SumJunction
