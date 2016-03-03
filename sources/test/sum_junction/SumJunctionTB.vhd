@@ -51,39 +51,16 @@ begin
         constant val4 : UNSIGNED (inputWidth - 1 downto 0) := To_Unsigned(20, inputWidth);
         constant val5 : UNSIGNED (inputWidth - 1 downto 0) := To_Unsigned(23, inputWidth);
 
-        constant sum123 : UNSIGNED (inputWidth downto 0) := Resize(val1 + val2 + val3, inputWidth + 1);
-        constant sum345 : UNSIGNED (inputWidth downto 0) := Resize(val3 + val4 + val5, inputWidth + 1);
+        constant sum123 : UNSIGNED (inputWidth - 1 downto 0) := Resize(val1 + val2 + val3, inputWidth);
+        constant sum345 : UNSIGNED (inputWidth - 1 downto 0) := Resize(val3 + val4 + val5, inputWidth);
     begin
-        -- Test adder works
         sigDin <=
             STD_LOGIC_VECTOR(val1) &
             STD_LOGIC_VECTOR(val2) &
             STD_LOGIC_VECTOR(val3);
         wait for 710ns;
         assert sigDout = STD_LOGIC_VECTOR(sum123) report "Test failed: 1"; -- 710ns
-        wait for 100ns;
 
-        -- Test the adder ignores inputs in the transitionary period
-        sigDin <=
-            STD_LOGIC_VECTOR(val2) &
-            STD_LOGIC_VECTOR(val3) &
-            STD_LOGIC_VECTOR(val4);
-        wait for 200ns;
-        assert sigDout = STD_LOGIC_VECTOR(sum123) report "Test failed: 2"; -- 1010ns
-        
-        -- Test the adder runs to completion if input changes prematurely
-        sigDin <=
-            STD_LOGIC_VECTOR(val3) &
-            STD_LOGIC_VECTOR(val4) &
-            STD_LOGIC_VECTOR(val5);
-        wait for 200ns;
-        sigDin <=
-            STD_LOGIC_VECTOR(val1) &
-            STD_LOGIC_VECTOR(val2) &
-            STD_LOGIC_VECTOR(val3);
-        wait for 500ns;
-        assert sigDout = STD_LOGIC_VECTOR(sum345) report "Test failed: 3"; -- 1710ns
-        
         wait;
     end process;
     

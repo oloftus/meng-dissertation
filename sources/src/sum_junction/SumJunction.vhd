@@ -4,8 +4,8 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity SumJunction is
     generic (
-        numInputs : INTEGER; -- Range 1..(2^inputWidth - 1)
-        inputWidth : INTEGER
+        numInputs : INTEGER := 3;
+        inputWidth : INTEGER := 16
     );
     port (
         DIN : in STD_LOGIC_VECTOR (numInputs * inputWidth - 1 downto 0);
@@ -15,39 +15,36 @@ entity SumJunction is
 end SumJunction;
 
 architecture Behavioral of SumJunction is
-    signal sigDin : STD_LOGIC_VECTOR (numInputs * inputWidth - 1 downto 0);
+    signal sigDinLatch : STD_LOGIC_VECTOR (numInputs * inputWidth - 1 downto 0) := (others => '0');
     signal sigLatch : UNSIGNED (inputWidth - 1 downto 0) := (others => '0');
     signal sigCount : UNSIGNED (inputWidth - 1 downto 0) := (others => '0');
-    signal sigStart, sigDone : STD_LOGIC := '0';
+    signal sigStart : STD_LOGIC_VECTOR (1 downto 0) := (others => '0');
 begin
-    start_proc: process (DIN, sigDone) begin
-        if DIN'event and sigStart = '0' and sigDone = '0' then
-            sigStart <= '1';
-            sigDin <= DIN;
-        elsif sigDone = '1' then
-            sigStart <= '0';
-        end if;
-    end process;
-    
-    control_proc: process (CLK) is
-        variable sliceHigh, sliceLow : INTEGER;
+    process (CLK) is
         variable currOperand : UNSIGNED (inputWidth - 1 downto 0);
     begin
         if Rising_Edge(CLK) then
-            if sigStart = '1' then
+            if (DIN /= sigDinLatch and sigStart = "00") or sigStart = "01" then
+                if sigStart = "00" then
+                    sigDinLatch <= DIN;
+                    sigStart <= "01";
+                end if;
+
                 if sigCount = numInputs then
                     DOUT <= STD_LOGIC_VECTOR(sigLatch);
-                    sigDone <= '1';
+                    sigStart <= "10";
                 else
-                    sliceHigh := To_Integer((sigCount + 1) * inputWidth - 1);
-                    sliceLow := To_Integer(sigCount * inputWidth);
-                    currOperand := UNSIGNED(sigDin(sliceHigh downto sliceLow));
-                    
+                    for i in numInputs - 1 downto 0 loop
+                        if sigCount = i then
+                            currOperand := UNSIGNED(DIN((i + 1) * inputWidth - 1 downto i * inputWidth));
+                        end if;
+                    end loop;
+
                     sigLatch <= sigLatch + currOperand;
                     sigCount <= sigCount + 1;
                 end if;
             else
-                sigDone <= '0';
+                sigStart <= "00";
                 sigLatch <= (others => '0');
                 sigCount <= (others => '0');
             end if;
