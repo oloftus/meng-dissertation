@@ -46,43 +46,42 @@
 -- 
 -- DO NOT MODIFY THIS FILE.
 
--- IP VLNV: oloftus.com:prif:AddressableRegister:1.0
--- IP Revision: 1
+-- IP VLNV: xilinx.com:ip:xlconstant:1.1
+-- IP Revision: 0
 
--- The following code must appear in the VHDL architecture header.
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
-------------- Begin Cut here for COMPONENT Declaration ------ COMP_TAG
-COMPONENT ValueRouterNetworkTest_AddressableRegister_0_7
+LIBRARY work;
+USE work.xlconstant;
+
+ENTITY ValueRouterNetworkTest_xlconstant_3_0 IS
   PORT (
-    CLK : IN STD_LOGIC;
-    RST : IN STD_LOGIC;
-    PKT_IN : IN STD_LOGIC_VECTOR(19 DOWNTO 0);
-    PKT_IN_VALID : IN STD_LOGIC;
-    VAL_OUT : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-    VAL_OUT_VALID : OUT STD_LOGIC;
-    DONE_OUT : OUT STD_LOGIC
+    dout : OUT STD_LOGIC_VECTOR(5 DOWNTO 0)
   );
-END COMPONENT;
-ATTRIBUTE SYN_BLACK_BOX : BOOLEAN;
-ATTRIBUTE SYN_BLACK_BOX OF ValueRouterNetworkTest_AddressableRegister_0_7 : COMPONENT IS TRUE;
-ATTRIBUTE BLACK_BOX_PAD_PIN : STRING;
-ATTRIBUTE BLACK_BOX_PAD_PIN OF ValueRouterNetworkTest_AddressableRegister_0_7 : COMPONENT IS "CLK,RST,PKT_IN[19:0],PKT_IN_VALID,VAL_OUT[15:0],VAL_OUT_VALID,DONE_OUT";
+END ValueRouterNetworkTest_xlconstant_3_0;
 
--- COMP_TAG_END ------ End COMPONENT Declaration ------------
+ARCHITECTURE ValueRouterNetworkTest_xlconstant_3_0_arch OF ValueRouterNetworkTest_xlconstant_3_0 IS
+  ATTRIBUTE DowngradeIPIdentifiedWarnings : string;
+  ATTRIBUTE DowngradeIPIdentifiedWarnings OF ValueRouterNetworkTest_xlconstant_3_0_arch: ARCHITECTURE IS "yes";
 
--- The following code must appear in the VHDL architecture
--- body. Substitute your own instance name and net names.
-
-------------- Begin Cut here for INSTANTIATION Template ----- INST_TAG
-your_instance_name : ValueRouterNetworkTest_AddressableRegister_0_7
-  PORT MAP (
-    CLK => CLK,
-    RST => RST,
-    PKT_IN => PKT_IN,
-    PKT_IN_VALID => PKT_IN_VALID,
-    VAL_OUT => VAL_OUT,
-    VAL_OUT_VALID => VAL_OUT_VALID,
-    DONE_OUT => DONE_OUT
-  );
--- INST_TAG_END ------ End INSTANTIATION Template ---------
-
+  COMPONENT xlconstant IS
+    GENERIC (
+      CONST_VAL : INTEGER;
+      CONST_WIDTH : INTEGER
+    );
+    PORT (
+      dout : OUT STD_LOGIC_VECTOR(5 DOWNTO 0)
+    );
+  END COMPONENT xlconstant;
+BEGIN
+  U0 : xlconstant
+    GENERIC MAP (
+      CONST_VAL => 33,
+      CONST_WIDTH => 6
+    )
+    PORT MAP (
+      dout => dout
+    );
+END ValueRouterNetworkTest_xlconstant_3_0_arch;

@@ -1,6 +1,86 @@
 Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------
 | Tool Version : Vivado v.2014.2 (win32) Build 932637 Wed Jun 11 13:24:38 MDT 2014
+| Date         : Thu Mar 03 20:42:40 2016
+| Host         : Oli-Windows7VM running 32-bit Service Pack 1  (build 7601)
+| Command      : upgrade_ip
+| Device       : xc7z010clg400-1
+-----------------------------------------------------------------------------------
+
+Upgrade Log for IP 'ValueRouterNetworkTest_LayerRouter0_1'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of ValueRouterNetworkTest_LayerRouter0_1 (oloftus.com:prif:ValueRouter:4.0) from (Rev. 3) to (Rev. 4)
+
+
+
+
+
+
+Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------
+| Tool Version : Vivado v.2014.2 (win32) Build 932637 Wed Jun 11 13:24:38 MDT 2014
+| Date         : Thu Mar 03 13:47:45 2016
+| Host         : Oli-Windows7VM running 32-bit Service Pack 1  (build 7601)
+| Command      : upgrade_ip
+| Device       : xc7z010clg400-1
+-----------------------------------------------------------------------------------
+
+Upgrade Log for IP 'ValueRouterNetworkTest_LayerRouter0_1'
+
+1. Summary
+----------
+
+CAUTION (success, with warnings) in the upgrade of ValueRouterNetworkTest_LayerRouter0_1 (oloftus.com:prif:ValueRouter:4.0) from (Rev. 2) to (Rev. 3)
+
+After upgrade, an IP may have parameter and port differences compared to the original customization. Please review the parameters within the IP customization GUI to ensure proper functionality. Also, please review the updated IP instantiation template to ensure proper connectivity, and update your design if required.
+
+2. Warnings
+-----------
+
+WARNING: The upgraded user parameter set contained parameters that could not be mapped on to the upgraded IP. Note that parameter names and IDs are case sensitive.
+
+
+3. Connection Warnings
+----------------------
+
+Detected external port differences while upgrading IP 'ValueRouterNetworkTest_LayerRouter0_1'. These changes may impact your design.
+
+
+-upgrade has added port 'ADDR'
+
+4. Customization warnings
+-------------------------
+
+WARNING: Upgrade target IP does not have parameter ID for 'address'
+
+
+5. Debug Commands
+-----------------
+
+  The following debug information can be passed to Vivado as Tcl commands,
+in order to validate or debug the output of the upgrade flow.
+  Please consult the warnings from the previous sections, and alter or remove
+the configuration parameter(s) which caused the warning; then execute the Tcl
+commands, and use the IP Customization GUI to verify the IP configuration.
+
+create_ip -vlnv oloftus.com:prif:ValueRouter:4.0 -user_name ValueRouterNetworkTest_LayerRouter0_1
+set_property -dict "\
+  CONFIG.packetOutWidth 20 \
+  CONFIG.packetInWidth 26 \
+  CONFIG.Component_Name ValueRouterNetworkTest_LayerRouter0_1 " [get_ips ValueRouterNetworkTest_LayerRouter0_1]
+
+
+
+
+
+
+
+Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------
+| Tool Version : Vivado v.2014.2 (win32) Build 932637 Wed Jun 11 13:24:38 MDT 2014
 | Date         : Wed Feb 17 12:07:58 2016
 | Host         : Oli-Windows7VM running 32-bit Service Pack 1  (build 7601)
 | Command      : upgrade_ip

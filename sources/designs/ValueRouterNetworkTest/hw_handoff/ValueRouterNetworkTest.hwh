@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Feb 17 12:08:16 2016" VIVADOVERSION="2014.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Mar 03 21:09:02 2016" VIVADOVERSION="2014.2">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z010" NAME="ValueRouterNetworkTest_imp" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
   <EXTERNALPORTS>
     <PORT CLKFREQUENCY="100000000" DIR="I" NAME="CLK" SIGIS="clk" SIGNAME="External_Ports_CLK">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="AddressableRegister_8" PORT="CLK"/>
-        <CONNECTION INSTANCE="AddressableRegister_9" PORT="CLK"/>
-        <CONNECTION INSTANCE="AddressableRegister_3" PORT="CLK"/>
-        <CONNECTION INSTANCE="AddressableRegister_2" PORT="CLK"/>
-        <CONNECTION INSTANCE="AddressableRegister_0" PORT="CLK"/>
-        <CONNECTION INSTANCE="AddressableRegister_1" PORT="CLK"/>
-        <CONNECTION INSTANCE="AddressableRegister_7" PORT="CLK"/>
-        <CONNECTION INSTANCE="AddressableRegister_6" PORT="CLK"/>
         <CONNECTION INSTANCE="AddressableRegister_5" PORT="CLK"/>
         <CONNECTION INSTANCE="AddressableRegister_4" PORT="CLK"/>
+        <CONNECTION INSTANCE="AddressableRegister_6" PORT="CLK"/>
+        <CONNECTION INSTANCE="AddressableRegister_7" PORT="CLK"/>
+        <CONNECTION INSTANCE="AddressableRegister_1" PORT="CLK"/>
+        <CONNECTION INSTANCE="AddressableRegister_0" PORT="CLK"/>
+        <CONNECTION INSTANCE="AddressableRegister_2" PORT="CLK"/>
+        <CONNECTION INSTANCE="AddressableRegister_3" PORT="CLK"/>
+        <CONNECTION INSTANCE="AddressableRegister_9" PORT="CLK"/>
+        <CONNECTION INSTANCE="AddressableRegister_8" PORT="CLK"/>
         <CONNECTION INSTANCE="LayerRouter0" PORT="CLK"/>
         <CONNECTION INSTANCE="LayerRouter1" PORT="CLK"/>
         <CONNECTION INSTANCE="NeuronRouter0" PORT="CLK"/>
@@ -40,16 +40,16 @@
     </PORT>
     <PORT DIR="I" NAME="RST" SIGIS="rst" SIGNAME="External_Ports_RST">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="AddressableRegister_3" PORT="RST"/>
-        <CONNECTION INSTANCE="AddressableRegister_2" PORT="RST"/>
-        <CONNECTION INSTANCE="AddressableRegister_0" PORT="RST"/>
-        <CONNECTION INSTANCE="AddressableRegister_1" PORT="RST"/>
-        <CONNECTION INSTANCE="AddressableRegister_7" PORT="RST"/>
-        <CONNECTION INSTANCE="AddressableRegister_6" PORT="RST"/>
         <CONNECTION INSTANCE="AddressableRegister_5" PORT="RST"/>
-        <CONNECTION INSTANCE="AddressableRegister_8" PORT="RST"/>
-        <CONNECTION INSTANCE="AddressableRegister_9" PORT="RST"/>
         <CONNECTION INSTANCE="AddressableRegister_4" PORT="RST"/>
+        <CONNECTION INSTANCE="AddressableRegister_6" PORT="RST"/>
+        <CONNECTION INSTANCE="AddressableRegister_7" PORT="RST"/>
+        <CONNECTION INSTANCE="AddressableRegister_1" PORT="RST"/>
+        <CONNECTION INSTANCE="AddressableRegister_0" PORT="RST"/>
+        <CONNECTION INSTANCE="AddressableRegister_2" PORT="RST"/>
+        <CONNECTION INSTANCE="AddressableRegister_3" PORT="RST"/>
+        <CONNECTION INSTANCE="AddressableRegister_9" PORT="RST"/>
+        <CONNECTION INSTANCE="AddressableRegister_8" PORT="RST"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="O" NAME="SYN_0_VALID" SIGIS="undef" SIGNAME="AddressableRegister_8_VAL_OUT_VALID">
@@ -573,7 +573,6 @@
       <PARAMETERS>
         <PARAMETER NAME="packetInWidth" VALUE="31"/>
         <PARAMETER NAME="packetOutWidth" VALUE="26"/>
-        <PARAMETER NAME="address" VALUE="16"/>
         <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_TypeRouter0_1"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
@@ -615,6 +614,11 @@
             <CONNECTION INSTANCE="Or2_0" PORT="B"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="I" NAME="ADDR" SIGIS="undef" SIGNAME="xlconstant_5_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="xlconstant_5" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>
@@ -623,7 +627,6 @@
       <PARAMETERS>
         <PARAMETER NAME="packetInWidth" VALUE="31"/>
         <PARAMETER NAME="packetOutWidth" VALUE="26"/>
-        <PARAMETER NAME="address" VALUE="17"/>
         <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_LayerRouter0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
@@ -665,6 +668,11 @@
             <CONNECTION INSTANCE="Or2_0" PORT="A"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="I" NAME="ADDR" SIGIS="undef" SIGNAME="xlconstant_6_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="xlconstant_6" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>
@@ -673,7 +681,6 @@
       <PARAMETERS>
         <PARAMETER NAME="packetInWidth" VALUE="26"/>
         <PARAMETER NAME="packetOutWidth" VALUE="20"/>
-        <PARAMETER NAME="address" VALUE="32"/>
         <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_LayerRouter0_1"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
@@ -695,8 +702,8 @@
         </PORT>
         <PORT DIR="O" NAME="PKT_OUT_VALID" SIGIS="undef" SIGNAME="NeuronRouter0_PKT_OUT_VALID">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="AddressableRegister_0" PORT="PKT_IN_VALID"/>
             <CONNECTION INSTANCE="AddressableRegister_1" PORT="PKT_IN_VALID"/>
+            <CONNECTION INSTANCE="AddressableRegister_0" PORT="PKT_IN_VALID"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="PKT_OUT" SIGIS="undef" SIGNAME="NeuronRouter0_PKT_OUT">
@@ -715,6 +722,11 @@
             <CONNECTION INSTANCE="Or2_1" PORT="A"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="I" NAME="ADDR" SIGIS="undef" SIGNAME="xlconstant_0_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="xlconstant_0" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>
@@ -723,7 +735,6 @@
       <PARAMETERS>
         <PARAMETER NAME="packetInWidth" VALUE="26"/>
         <PARAMETER NAME="packetOutWidth" VALUE="20"/>
-        <PARAMETER NAME="address" VALUE="33"/>
         <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_NeuronRouter0_1"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
@@ -745,8 +756,8 @@
         </PORT>
         <PORT DIR="O" NAME="PKT_OUT_VALID" SIGIS="undef" SIGNAME="NeuronRouter1_PKT_OUT_VALID">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="AddressableRegister_3" PORT="PKT_IN_VALID"/>
             <CONNECTION INSTANCE="AddressableRegister_2" PORT="PKT_IN_VALID"/>
+            <CONNECTION INSTANCE="AddressableRegister_3" PORT="PKT_IN_VALID"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="PKT_OUT" SIGIS="undef" SIGNAME="NeuronRouter1_PKT_OUT">
@@ -765,6 +776,11 @@
             <CONNECTION INSTANCE="Or2_1" PORT="B"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="I" NAME="ADDR" SIGIS="undef" SIGNAME="xlconstant_1_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="xlconstant_1" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>
@@ -773,7 +789,6 @@
       <PARAMETERS>
         <PARAMETER NAME="packetInWidth" VALUE="26"/>
         <PARAMETER NAME="packetOutWidth" VALUE="20"/>
-        <PARAMETER NAME="address" VALUE="34"/>
         <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_NeuronRouter0_2"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
@@ -795,8 +810,8 @@
         </PORT>
         <PORT DIR="O" NAME="PKT_OUT_VALID" SIGIS="undef" SIGNAME="NeuronRouter2_PKT_OUT_VALID">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="AddressableRegister_4" PORT="PKT_IN_VALID"/>
             <CONNECTION INSTANCE="AddressableRegister_5" PORT="PKT_IN_VALID"/>
+            <CONNECTION INSTANCE="AddressableRegister_4" PORT="PKT_IN_VALID"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="PKT_OUT" SIGIS="undef" SIGNAME="NeuronRouter2_PKT_OUT">
@@ -815,6 +830,11 @@
             <CONNECTION INSTANCE="Or2_2" PORT="A"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="I" NAME="ADDR" SIGIS="undef" SIGNAME="xlconstant_2_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="xlconstant_2" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>
@@ -823,7 +843,6 @@
       <PARAMETERS>
         <PARAMETER NAME="packetInWidth" VALUE="26"/>
         <PARAMETER NAME="packetOutWidth" VALUE="20"/>
-        <PARAMETER NAME="address" VALUE="35"/>
         <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_NeuronRouter0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
@@ -845,14 +864,14 @@
         </PORT>
         <PORT DIR="O" NAME="PKT_OUT_VALID" SIGIS="undef" SIGNAME="NeuronRouter3_PKT_OUT_VALID">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="AddressableRegister_7" PORT="PKT_IN_VALID"/>
             <CONNECTION INSTANCE="AddressableRegister_6" PORT="PKT_IN_VALID"/>
+            <CONNECTION INSTANCE="AddressableRegister_7" PORT="PKT_IN_VALID"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="PKT_OUT" SIGIS="undef" SIGNAME="NeuronRouter3_PKT_OUT">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="AddressableRegister_7" PORT="PKT_IN"/>
             <CONNECTION INSTANCE="AddressableRegister_6" PORT="PKT_IN"/>
+            <CONNECTION INSTANCE="AddressableRegister_7" PORT="PKT_IN"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" NAME="DONE_IN" SIGIS="undef" SIGNAME="Or2_8_O">
@@ -863,6 +882,11 @@
         <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="NeuronRouter3_DONE_OUT">
           <CONNECTIONS>
             <CONNECTION INSTANCE="Or2_2" PORT="B"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="ADDR" SIGIS="undef" SIGNAME="xlconstant_3_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="xlconstant_3" PORT="dout"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -1098,7 +1122,6 @@
       <PARAMETERS>
         <PARAMETER NAME="packetInWidth" VALUE="32"/>
         <PARAMETER NAME="packetOutWidth" VALUE="31"/>
-        <PARAMETER NAME="address" VALUE="0"/>
         <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_ValueRouter_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
@@ -1140,6 +1163,11 @@
             <CONNECTION INSTANCE="Or2_4" PORT="A"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="I" NAME="ADDR" SIGIS="undef" SIGNAME="xlconstant_7_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="xlconstant_7" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>
@@ -1148,7 +1176,6 @@
       <PARAMETERS>
         <PARAMETER NAME="packetInWidth" VALUE="32"/>
         <PARAMETER NAME="packetOutWidth" VALUE="31"/>
-        <PARAMETER NAME="address" VALUE="1"/>
         <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_TypeRouter0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
@@ -1170,14 +1197,14 @@
         </PORT>
         <PORT DIR="O" NAME="PKT_OUT_VALID" SIGIS="undef" SIGNAME="TypeRouter1_PKT_OUT_VALID">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="AddressableRegister_8" PORT="PKT_IN_VALID"/>
             <CONNECTION INSTANCE="AddressableRegister_9" PORT="PKT_IN_VALID"/>
+            <CONNECTION INSTANCE="AddressableRegister_8" PORT="PKT_IN_VALID"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="PKT_OUT" SIGIS="undef" SIGNAME="TypeRouter1_PKT_OUT">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="AddressableRegister_8" PORT="PKT_IN"/>
             <CONNECTION INSTANCE="AddressableRegister_9" PORT="PKT_IN"/>
+            <CONNECTION INSTANCE="AddressableRegister_8" PORT="PKT_IN"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" NAME="DONE_IN" SIGIS="undef" SIGNAME="Or2_3_O">
@@ -1188,6 +1215,147 @@
         <PORT DIR="O" NAME="DONE_OUT" SIGIS="undef" SIGNAME="TypeRouter1_DONE_OUT">
           <CONNECTIONS>
             <CONNECTION INSTANCE="Or2_4" PORT="B"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="ADDR" SIGIS="undef" SIGNAME="xlconstant_4_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="xlconstant_4" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/xlconstant_0" HWVERSION="1.1" INSTANCE="xlconstant_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_VAL" VALUE="33"/>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="6"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_xlconstant_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" NAME="dout" SIGIS="undef" SIGNAME="xlconstant_0_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter0" PORT="ADDR"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/xlconstant_1" HWVERSION="1.1" INSTANCE="xlconstant_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_VAL" VALUE="32"/>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="6"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_xlconstant_1_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" NAME="dout" SIGIS="undef" SIGNAME="xlconstant_1_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter1" PORT="ADDR"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/xlconstant_2" HWVERSION="1.1" INSTANCE="xlconstant_2" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_VAL" VALUE="32"/>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="6"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_xlconstant_2_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" NAME="dout" SIGIS="undef" SIGNAME="xlconstant_2_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter2" PORT="ADDR"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/xlconstant_3" HWVERSION="1.1" INSTANCE="xlconstant_3" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_VAL" VALUE="33"/>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="6"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_xlconstant_3_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" NAME="dout" SIGIS="undef" SIGNAME="xlconstant_3_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="NeuronRouter3" PORT="ADDR"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/xlconstant_4" HWVERSION="1.1" INSTANCE="xlconstant_4" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_VAL" VALUE="1"/>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_xlconstant_4_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" NAME="dout" SIGIS="undef" SIGNAME="xlconstant_4_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter1" PORT="ADDR"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/xlconstant_5" HWVERSION="1.1" INSTANCE="xlconstant_5" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_VAL" VALUE="16"/>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="5"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_xlconstant_5_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" NAME="dout" SIGIS="undef" SIGNAME="xlconstant_5_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter0" PORT="ADDR"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/xlconstant_6" HWVERSION="1.1" INSTANCE="xlconstant_6" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_VAL" VALUE="17"/>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="5"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_xlconstant_6_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" NAME="dout" SIGIS="undef" SIGNAME="xlconstant_6_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="LayerRouter1" PORT="ADDR"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/xlconstant_7" HWVERSION="1.1" INSTANCE="xlconstant_7" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_VAL" VALUE="0"/>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="Component_Name" VALUE="ValueRouterNetworkTest_xlconstant_7_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" NAME="dout" SIGIS="undef" SIGNAME="xlconstant_7_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="TypeRouter0" PORT="ADDR"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>

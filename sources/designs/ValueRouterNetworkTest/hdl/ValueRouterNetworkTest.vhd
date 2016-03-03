@@ -1,7 +1,7 @@
 --Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2014.2 (win32) Build 932637 Wed Jun 11 13:24:38 MDT 2014
---Date        : Wed Feb 17 12:08:16 2016
+--Date        : Thu Mar 03 21:09:02 2016
 --Host        : Oli-Windows7VM running 32-bit Service Pack 1  (build 7601)
 --Command     : generate_target ValueRouterNetworkTest.bd
 --Design      : ValueRouterNetworkTest
@@ -32,7 +32,7 @@ entity ValueRouterNetworkTest is
     WEIGHT_7_DATA : out STD_LOGIC_VECTOR ( 15 downto 0 )
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of ValueRouterNetworkTest : entity is "ValueRouterNetworkTest,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLanguage=VHDL,numBlks=27,numReposBlks=27,numNonXlnxBlks=18,numHierBlks=0,maxHierDepth=0}";
+  attribute CORE_GENERATION_INFO of ValueRouterNetworkTest : entity is "ValueRouterNetworkTest,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLanguage=VHDL,numBlks=35,numReposBlks=35,numNonXlnxBlks=18,numHierBlks=0,maxHierDepth=0}";
 end ValueRouterNetworkTest;
 
 architecture STRUCTURE of ValueRouterNetworkTest is
@@ -57,28 +57,6 @@ architecture STRUCTURE of ValueRouterNetworkTest is
     O : out STD_LOGIC
   );
   end component ValueRouterNetworkTest_Or2_1_0;
-  component ValueRouterNetworkTest_AddressableRegister_0_0 is
-  port (
-    CLK : in STD_LOGIC;
-    RST : in STD_LOGIC;
-    PKT_IN : in STD_LOGIC_VECTOR ( 30 downto 0 );
-    PKT_IN_VALID : in STD_LOGIC;
-    VAL_OUT : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    VAL_OUT_VALID : out STD_LOGIC;
-    DONE_OUT : out STD_LOGIC
-  );
-  end component ValueRouterNetworkTest_AddressableRegister_0_0;
-  component ValueRouterNetworkTest_AddressableRegister_0_1 is
-  port (
-    CLK : in STD_LOGIC;
-    RST : in STD_LOGIC;
-    PKT_IN : in STD_LOGIC_VECTOR ( 30 downto 0 );
-    PKT_IN_VALID : in STD_LOGIC;
-    VAL_OUT : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    VAL_OUT_VALID : out STD_LOGIC;
-    DONE_OUT : out STD_LOGIC
-  );
-  end component ValueRouterNetworkTest_AddressableRegister_0_1;
   component ValueRouterNetworkTest_Or2_2_0 is
   port (
     A : in STD_LOGIC;
@@ -93,94 +71,6 @@ architecture STRUCTURE of ValueRouterNetworkTest is
     O : out STD_LOGIC
   );
   end component ValueRouterNetworkTest_Or2_2_1;
-  component ValueRouterNetworkTest_AddressableRegister_0_2 is
-  port (
-    CLK : in STD_LOGIC;
-    RST : in STD_LOGIC;
-    PKT_IN : in STD_LOGIC_VECTOR ( 19 downto 0 );
-    PKT_IN_VALID : in STD_LOGIC;
-    VAL_OUT : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    VAL_OUT_VALID : out STD_LOGIC;
-    DONE_OUT : out STD_LOGIC
-  );
-  end component ValueRouterNetworkTest_AddressableRegister_0_2;
-  component ValueRouterNetworkTest_AddressableRegister_0_3 is
-  port (
-    CLK : in STD_LOGIC;
-    RST : in STD_LOGIC;
-    PKT_IN : in STD_LOGIC_VECTOR ( 19 downto 0 );
-    PKT_IN_VALID : in STD_LOGIC;
-    VAL_OUT : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    VAL_OUT_VALID : out STD_LOGIC;
-    DONE_OUT : out STD_LOGIC
-  );
-  end component ValueRouterNetworkTest_AddressableRegister_0_3;
-  component ValueRouterNetworkTest_AddressableRegister_0_4 is
-  port (
-    CLK : in STD_LOGIC;
-    RST : in STD_LOGIC;
-    PKT_IN : in STD_LOGIC_VECTOR ( 19 downto 0 );
-    PKT_IN_VALID : in STD_LOGIC;
-    VAL_OUT : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    VAL_OUT_VALID : out STD_LOGIC;
-    DONE_OUT : out STD_LOGIC
-  );
-  end component ValueRouterNetworkTest_AddressableRegister_0_4;
-  component ValueRouterNetworkTest_AddressableRegister_0_5 is
-  port (
-    CLK : in STD_LOGIC;
-    RST : in STD_LOGIC;
-    PKT_IN : in STD_LOGIC_VECTOR ( 19 downto 0 );
-    PKT_IN_VALID : in STD_LOGIC;
-    VAL_OUT : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    VAL_OUT_VALID : out STD_LOGIC;
-    DONE_OUT : out STD_LOGIC
-  );
-  end component ValueRouterNetworkTest_AddressableRegister_0_5;
-  component ValueRouterNetworkTest_AddressableRegister_0_6 is
-  port (
-    CLK : in STD_LOGIC;
-    RST : in STD_LOGIC;
-    PKT_IN : in STD_LOGIC_VECTOR ( 19 downto 0 );
-    PKT_IN_VALID : in STD_LOGIC;
-    VAL_OUT : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    VAL_OUT_VALID : out STD_LOGIC;
-    DONE_OUT : out STD_LOGIC
-  );
-  end component ValueRouterNetworkTest_AddressableRegister_0_6;
-  component ValueRouterNetworkTest_AddressableRegister_0_7 is
-  port (
-    CLK : in STD_LOGIC;
-    RST : in STD_LOGIC;
-    PKT_IN : in STD_LOGIC_VECTOR ( 19 downto 0 );
-    PKT_IN_VALID : in STD_LOGIC;
-    VAL_OUT : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    VAL_OUT_VALID : out STD_LOGIC;
-    DONE_OUT : out STD_LOGIC
-  );
-  end component ValueRouterNetworkTest_AddressableRegister_0_7;
-  component ValueRouterNetworkTest_AddressableRegister_0_8 is
-  port (
-    CLK : in STD_LOGIC;
-    RST : in STD_LOGIC;
-    PKT_IN : in STD_LOGIC_VECTOR ( 19 downto 0 );
-    PKT_IN_VALID : in STD_LOGIC;
-    VAL_OUT : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    VAL_OUT_VALID : out STD_LOGIC;
-    DONE_OUT : out STD_LOGIC
-  );
-  end component ValueRouterNetworkTest_AddressableRegister_0_8;
-  component ValueRouterNetworkTest_AddressableRegister_0_9 is
-  port (
-    CLK : in STD_LOGIC;
-    RST : in STD_LOGIC;
-    PKT_IN : in STD_LOGIC_VECTOR ( 19 downto 0 );
-    PKT_IN_VALID : in STD_LOGIC;
-    VAL_OUT : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    VAL_OUT_VALID : out STD_LOGIC;
-    DONE_OUT : out STD_LOGIC
-  );
-  end component ValueRouterNetworkTest_AddressableRegister_0_9;
   component ValueRouterNetworkTest_Or2_2_2 is
   port (
     A : in STD_LOGIC;
@@ -209,6 +99,156 @@ architecture STRUCTURE of ValueRouterNetworkTest is
     O : out STD_LOGIC
   );
   end component ValueRouterNetworkTest_Or2_5_2;
+  component ValueRouterNetworkTest_AddressableRegister_0_9 is
+  port (
+    CLK : in STD_LOGIC;
+    RST : in STD_LOGIC;
+    PKT_IN : in STD_LOGIC_VECTOR ( 19 downto 0 );
+    PKT_IN_VALID : in STD_LOGIC;
+    VAL_OUT : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    VAL_OUT_VALID : out STD_LOGIC;
+    DONE_OUT : out STD_LOGIC
+  );
+  end component ValueRouterNetworkTest_AddressableRegister_0_9;
+  component ValueRouterNetworkTest_AddressableRegister_0_8 is
+  port (
+    CLK : in STD_LOGIC;
+    RST : in STD_LOGIC;
+    PKT_IN : in STD_LOGIC_VECTOR ( 19 downto 0 );
+    PKT_IN_VALID : in STD_LOGIC;
+    VAL_OUT : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    VAL_OUT_VALID : out STD_LOGIC;
+    DONE_OUT : out STD_LOGIC
+  );
+  end component ValueRouterNetworkTest_AddressableRegister_0_8;
+  component ValueRouterNetworkTest_AddressableRegister_0_7 is
+  port (
+    CLK : in STD_LOGIC;
+    RST : in STD_LOGIC;
+    PKT_IN : in STD_LOGIC_VECTOR ( 19 downto 0 );
+    PKT_IN_VALID : in STD_LOGIC;
+    VAL_OUT : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    VAL_OUT_VALID : out STD_LOGIC;
+    DONE_OUT : out STD_LOGIC
+  );
+  end component ValueRouterNetworkTest_AddressableRegister_0_7;
+  component ValueRouterNetworkTest_AddressableRegister_0_6 is
+  port (
+    CLK : in STD_LOGIC;
+    RST : in STD_LOGIC;
+    PKT_IN : in STD_LOGIC_VECTOR ( 19 downto 0 );
+    PKT_IN_VALID : in STD_LOGIC;
+    VAL_OUT : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    VAL_OUT_VALID : out STD_LOGIC;
+    DONE_OUT : out STD_LOGIC
+  );
+  end component ValueRouterNetworkTest_AddressableRegister_0_6;
+  component ValueRouterNetworkTest_AddressableRegister_0_5 is
+  port (
+    CLK : in STD_LOGIC;
+    RST : in STD_LOGIC;
+    PKT_IN : in STD_LOGIC_VECTOR ( 19 downto 0 );
+    PKT_IN_VALID : in STD_LOGIC;
+    VAL_OUT : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    VAL_OUT_VALID : out STD_LOGIC;
+    DONE_OUT : out STD_LOGIC
+  );
+  end component ValueRouterNetworkTest_AddressableRegister_0_5;
+  component ValueRouterNetworkTest_AddressableRegister_0_4 is
+  port (
+    CLK : in STD_LOGIC;
+    RST : in STD_LOGIC;
+    PKT_IN : in STD_LOGIC_VECTOR ( 19 downto 0 );
+    PKT_IN_VALID : in STD_LOGIC;
+    VAL_OUT : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    VAL_OUT_VALID : out STD_LOGIC;
+    DONE_OUT : out STD_LOGIC
+  );
+  end component ValueRouterNetworkTest_AddressableRegister_0_4;
+  component ValueRouterNetworkTest_AddressableRegister_0_3 is
+  port (
+    CLK : in STD_LOGIC;
+    RST : in STD_LOGIC;
+    PKT_IN : in STD_LOGIC_VECTOR ( 19 downto 0 );
+    PKT_IN_VALID : in STD_LOGIC;
+    VAL_OUT : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    VAL_OUT_VALID : out STD_LOGIC;
+    DONE_OUT : out STD_LOGIC
+  );
+  end component ValueRouterNetworkTest_AddressableRegister_0_3;
+  component ValueRouterNetworkTest_AddressableRegister_0_2 is
+  port (
+    CLK : in STD_LOGIC;
+    RST : in STD_LOGIC;
+    PKT_IN : in STD_LOGIC_VECTOR ( 19 downto 0 );
+    PKT_IN_VALID : in STD_LOGIC;
+    VAL_OUT : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    VAL_OUT_VALID : out STD_LOGIC;
+    DONE_OUT : out STD_LOGIC
+  );
+  end component ValueRouterNetworkTest_AddressableRegister_0_2;
+  component ValueRouterNetworkTest_AddressableRegister_0_1 is
+  port (
+    CLK : in STD_LOGIC;
+    RST : in STD_LOGIC;
+    PKT_IN : in STD_LOGIC_VECTOR ( 30 downto 0 );
+    PKT_IN_VALID : in STD_LOGIC;
+    VAL_OUT : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    VAL_OUT_VALID : out STD_LOGIC;
+    DONE_OUT : out STD_LOGIC
+  );
+  end component ValueRouterNetworkTest_AddressableRegister_0_1;
+  component ValueRouterNetworkTest_AddressableRegister_0_0 is
+  port (
+    CLK : in STD_LOGIC;
+    RST : in STD_LOGIC;
+    PKT_IN : in STD_LOGIC_VECTOR ( 30 downto 0 );
+    PKT_IN_VALID : in STD_LOGIC;
+    VAL_OUT : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    VAL_OUT_VALID : out STD_LOGIC;
+    DONE_OUT : out STD_LOGIC
+  );
+  end component ValueRouterNetworkTest_AddressableRegister_0_0;
+  component ValueRouterNetworkTest_xlconstant_0_0 is
+  port (
+    dout : out STD_LOGIC_VECTOR ( 5 downto 0 )
+  );
+  end component ValueRouterNetworkTest_xlconstant_0_0;
+  component ValueRouterNetworkTest_xlconstant_1_0 is
+  port (
+    dout : out STD_LOGIC_VECTOR ( 5 downto 0 )
+  );
+  end component ValueRouterNetworkTest_xlconstant_1_0;
+  component ValueRouterNetworkTest_xlconstant_2_0 is
+  port (
+    dout : out STD_LOGIC_VECTOR ( 5 downto 0 )
+  );
+  end component ValueRouterNetworkTest_xlconstant_2_0;
+  component ValueRouterNetworkTest_xlconstant_3_0 is
+  port (
+    dout : out STD_LOGIC_VECTOR ( 5 downto 0 )
+  );
+  end component ValueRouterNetworkTest_xlconstant_3_0;
+  component ValueRouterNetworkTest_xlconstant_4_0 is
+  port (
+    dout : out STD_LOGIC_VECTOR ( 0 to 0 )
+  );
+  end component ValueRouterNetworkTest_xlconstant_4_0;
+  component ValueRouterNetworkTest_xlconstant_5_0 is
+  port (
+    dout : out STD_LOGIC_VECTOR ( 4 downto 0 )
+  );
+  end component ValueRouterNetworkTest_xlconstant_5_0;
+  component ValueRouterNetworkTest_xlconstant_6_0 is
+  port (
+    dout : out STD_LOGIC_VECTOR ( 4 downto 0 )
+  );
+  end component ValueRouterNetworkTest_xlconstant_6_0;
+  component ValueRouterNetworkTest_xlconstant_7_0 is
+  port (
+    dout : out STD_LOGIC_VECTOR ( 0 to 0 )
+  );
+  end component ValueRouterNetworkTest_xlconstant_7_0;
   component ValueRouterNetworkTest_TypeRouter0_1 is
   port (
     CLK : in STD_LOGIC;
@@ -217,7 +257,8 @@ architecture STRUCTURE of ValueRouterNetworkTest is
     PKT_OUT_VALID : out STD_LOGIC;
     PKT_OUT : out STD_LOGIC_VECTOR ( 25 downto 0 );
     DONE_IN : in STD_LOGIC;
-    DONE_OUT : out STD_LOGIC
+    DONE_OUT : out STD_LOGIC;
+    ADDR : in STD_LOGIC_VECTOR ( 4 downto 0 )
   );
   end component ValueRouterNetworkTest_TypeRouter0_1;
   component ValueRouterNetworkTest_LayerRouter0_0 is
@@ -228,7 +269,8 @@ architecture STRUCTURE of ValueRouterNetworkTest is
     PKT_OUT_VALID : out STD_LOGIC;
     PKT_OUT : out STD_LOGIC_VECTOR ( 25 downto 0 );
     DONE_IN : in STD_LOGIC;
-    DONE_OUT : out STD_LOGIC
+    DONE_OUT : out STD_LOGIC;
+    ADDR : in STD_LOGIC_VECTOR ( 4 downto 0 )
   );
   end component ValueRouterNetworkTest_LayerRouter0_0;
   component ValueRouterNetworkTest_LayerRouter0_1 is
@@ -239,7 +281,8 @@ architecture STRUCTURE of ValueRouterNetworkTest is
     PKT_OUT_VALID : out STD_LOGIC;
     PKT_OUT : out STD_LOGIC_VECTOR ( 19 downto 0 );
     DONE_IN : in STD_LOGIC;
-    DONE_OUT : out STD_LOGIC
+    DONE_OUT : out STD_LOGIC;
+    ADDR : in STD_LOGIC_VECTOR ( 5 downto 0 )
   );
   end component ValueRouterNetworkTest_LayerRouter0_1;
   component ValueRouterNetworkTest_NeuronRouter0_1 is
@@ -250,7 +293,8 @@ architecture STRUCTURE of ValueRouterNetworkTest is
     PKT_OUT_VALID : out STD_LOGIC;
     PKT_OUT : out STD_LOGIC_VECTOR ( 19 downto 0 );
     DONE_IN : in STD_LOGIC;
-    DONE_OUT : out STD_LOGIC
+    DONE_OUT : out STD_LOGIC;
+    ADDR : in STD_LOGIC_VECTOR ( 5 downto 0 )
   );
   end component ValueRouterNetworkTest_NeuronRouter0_1;
   component ValueRouterNetworkTest_NeuronRouter0_2 is
@@ -261,7 +305,8 @@ architecture STRUCTURE of ValueRouterNetworkTest is
     PKT_OUT_VALID : out STD_LOGIC;
     PKT_OUT : out STD_LOGIC_VECTOR ( 19 downto 0 );
     DONE_IN : in STD_LOGIC;
-    DONE_OUT : out STD_LOGIC
+    DONE_OUT : out STD_LOGIC;
+    ADDR : in STD_LOGIC_VECTOR ( 5 downto 0 )
   );
   end component ValueRouterNetworkTest_NeuronRouter0_2;
   component ValueRouterNetworkTest_NeuronRouter0_0 is
@@ -272,7 +317,8 @@ architecture STRUCTURE of ValueRouterNetworkTest is
     PKT_OUT_VALID : out STD_LOGIC;
     PKT_OUT : out STD_LOGIC_VECTOR ( 19 downto 0 );
     DONE_IN : in STD_LOGIC;
-    DONE_OUT : out STD_LOGIC
+    DONE_OUT : out STD_LOGIC;
+    ADDR : in STD_LOGIC_VECTOR ( 5 downto 0 )
   );
   end component ValueRouterNetworkTest_NeuronRouter0_0;
   component ValueRouterNetworkTest_ValueRouter_0_0 is
@@ -283,7 +329,8 @@ architecture STRUCTURE of ValueRouterNetworkTest is
     PKT_OUT_VALID : out STD_LOGIC;
     PKT_OUT : out STD_LOGIC_VECTOR ( 30 downto 0 );
     DONE_IN : in STD_LOGIC;
-    DONE_OUT : out STD_LOGIC
+    DONE_OUT : out STD_LOGIC;
+    ADDR : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
   end component ValueRouterNetworkTest_ValueRouter_0_0;
   component ValueRouterNetworkTest_TypeRouter0_0 is
@@ -294,7 +341,8 @@ architecture STRUCTURE of ValueRouterNetworkTest is
     PKT_OUT_VALID : out STD_LOGIC;
     PKT_OUT : out STD_LOGIC_VECTOR ( 30 downto 0 );
     DONE_IN : in STD_LOGIC;
-    DONE_OUT : out STD_LOGIC
+    DONE_OUT : out STD_LOGIC;
+    ADDR : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
   end component ValueRouterNetworkTest_TypeRouter0_0;
   signal AddressableRegister_0_DONE_OUT : STD_LOGIC;
@@ -356,6 +404,14 @@ architecture STRUCTURE of ValueRouterNetworkTest is
   signal TypeRouter1_DONE_OUT : STD_LOGIC;
   signal TypeRouter1_PKT_OUT : STD_LOGIC_VECTOR ( 30 downto 0 );
   signal TypeRouter1_PKT_OUT_VALID : STD_LOGIC;
+  signal xlconstant_0_dout : STD_LOGIC_VECTOR ( 5 downto 0 );
+  signal xlconstant_1_dout : STD_LOGIC_VECTOR ( 5 downto 0 );
+  signal xlconstant_2_dout : STD_LOGIC_VECTOR ( 5 downto 0 );
+  signal xlconstant_3_dout : STD_LOGIC_VECTOR ( 5 downto 0 );
+  signal xlconstant_4_dout : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal xlconstant_5_dout : STD_LOGIC_VECTOR ( 4 downto 0 );
+  signal xlconstant_6_dout : STD_LOGIC_VECTOR ( 4 downto 0 );
+  signal xlconstant_7_dout : STD_LOGIC_VECTOR ( 0 to 0 );
   signal NLW_AddressableRegister_0_VAL_OUT_VALID_UNCONNECTED : STD_LOGIC;
   signal NLW_AddressableRegister_1_VAL_OUT_VALID_UNCONNECTED : STD_LOGIC;
   signal NLW_AddressableRegister_2_VAL_OUT_VALID_UNCONNECTED : STD_LOGIC;
@@ -484,6 +540,7 @@ AddressableRegister_9: component ValueRouterNetworkTest_AddressableRegister_0_1
     );
 LayerRouter0: component ValueRouterNetworkTest_TypeRouter0_1
     port map (
+      ADDR(4 downto 0) => xlconstant_5_dout(4 downto 0),
       CLK => CLK_1,
       DONE_IN => Or2_1_O,
       DONE_OUT => LayerRouter0_DONE_OUT,
@@ -494,6 +551,7 @@ LayerRouter0: component ValueRouterNetworkTest_TypeRouter0_1
     );
 LayerRouter1: component ValueRouterNetworkTest_LayerRouter0_0
     port map (
+      ADDR(4 downto 0) => xlconstant_6_dout(4 downto 0),
       CLK => CLK_1,
       DONE_IN => Or2_2_O,
       DONE_OUT => LayerRouter1_DONE_OUT,
@@ -504,6 +562,7 @@ LayerRouter1: component ValueRouterNetworkTest_LayerRouter0_0
     );
 NeuronRouter0: component ValueRouterNetworkTest_LayerRouter0_1
     port map (
+      ADDR(5 downto 0) => xlconstant_0_dout(5 downto 0),
       CLK => CLK_1,
       DONE_IN => Or2_7_O,
       DONE_OUT => NeuronRouter0_DONE_OUT,
@@ -514,6 +573,7 @@ NeuronRouter0: component ValueRouterNetworkTest_LayerRouter0_1
     );
 NeuronRouter1: component ValueRouterNetworkTest_NeuronRouter0_1
     port map (
+      ADDR(5 downto 0) => xlconstant_1_dout(5 downto 0),
       CLK => CLK_1,
       DONE_IN => Or2_6_O,
       DONE_OUT => NeuronRouter2_DONE_OUT,
@@ -524,6 +584,7 @@ NeuronRouter1: component ValueRouterNetworkTest_NeuronRouter0_1
     );
 NeuronRouter2: component ValueRouterNetworkTest_NeuronRouter0_2
     port map (
+      ADDR(5 downto 0) => xlconstant_2_dout(5 downto 0),
       CLK => CLK_1,
       DONE_IN => Or2_5_O,
       DONE_OUT => NeuronRouter3_DONE_OUT,
@@ -534,6 +595,7 @@ NeuronRouter2: component ValueRouterNetworkTest_NeuronRouter0_2
     );
 NeuronRouter3: component ValueRouterNetworkTest_NeuronRouter0_0
     port map (
+      ADDR(5 downto 0) => xlconstant_3_dout(5 downto 0),
       CLK => CLK_1,
       DONE_IN => Or2_8_O,
       DONE_OUT => NeuronRouter1_DONE_OUT,
@@ -598,6 +660,7 @@ Or2_8: component ValueRouterNetworkTest_Or2_5_2
     );
 TypeRouter0: component ValueRouterNetworkTest_ValueRouter_0_0
     port map (
+      ADDR(0) => xlconstant_7_dout(0),
       CLK => CLK_1,
       DONE_IN => Or2_0_O,
       DONE_OUT => TypeRouter0_DONE_OUT,
@@ -608,6 +671,7 @@ TypeRouter0: component ValueRouterNetworkTest_ValueRouter_0_0
     );
 TypeRouter1: component ValueRouterNetworkTest_TypeRouter0_0
     port map (
+      ADDR(0) => xlconstant_4_dout(0),
       CLK => CLK_1,
       DONE_IN => Or2_3_O,
       DONE_OUT => TypeRouter1_DONE_OUT,
@@ -615,5 +679,37 @@ TypeRouter1: component ValueRouterNetworkTest_TypeRouter0_0
       PKT_IN_VALID => PKT_IN_VALID_1,
       PKT_OUT(30 downto 0) => TypeRouter1_PKT_OUT(30 downto 0),
       PKT_OUT_VALID => TypeRouter1_PKT_OUT_VALID
+    );
+xlconstant_0: component ValueRouterNetworkTest_xlconstant_0_0
+    port map (
+      dout(5 downto 0) => xlconstant_0_dout(5 downto 0)
+    );
+xlconstant_1: component ValueRouterNetworkTest_xlconstant_1_0
+    port map (
+      dout(5 downto 0) => xlconstant_1_dout(5 downto 0)
+    );
+xlconstant_2: component ValueRouterNetworkTest_xlconstant_2_0
+    port map (
+      dout(5 downto 0) => xlconstant_2_dout(5 downto 0)
+    );
+xlconstant_3: component ValueRouterNetworkTest_xlconstant_3_0
+    port map (
+      dout(5 downto 0) => xlconstant_3_dout(5 downto 0)
+    );
+xlconstant_4: component ValueRouterNetworkTest_xlconstant_4_0
+    port map (
+      dout(0) => xlconstant_4_dout(0)
+    );
+xlconstant_5: component ValueRouterNetworkTest_xlconstant_5_0
+    port map (
+      dout(4 downto 0) => xlconstant_5_dout(4 downto 0)
+    );
+xlconstant_6: component ValueRouterNetworkTest_xlconstant_6_0
+    port map (
+      dout(4 downto 0) => xlconstant_6_dout(4 downto 0)
+    );
+xlconstant_7: component ValueRouterNetworkTest_xlconstant_7_0
+    port map (
+      dout(0) => xlconstant_7_dout(0)
     );
 end STRUCTURE;

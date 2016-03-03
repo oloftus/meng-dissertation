@@ -74,7 +74,7 @@ begin
         constant stimulusSynapse1Addr : STD_LOGIC_VECTOR (stimulusSynapseWidth - 1 downto 0) := STD_LOGIC_VECTOR(To_Unsigned(16384, 15));
         constant layer1Addr : STD_LOGIC_VECTOR (layerWidth - 1 downto 0) := STD_LOGIC_VECTOR(To_Unsigned(16, layerWidth));
         constant neuron2Addr : STD_LOGIC_VECTOR (neuronWidth - 1 downto 0) := STD_LOGIC_VECTOR(To_Unsigned(33, neuronWidth));
-        constant synapse2Addr : STD_LOGIC_VECTOR (weightSynapseWidth - 1 downto 0) := STD_LOGIC_VECTOR(To_Unsigned(11, weightSynapseWidth));
+        constant synapse2Addr : STD_LOGIC_VECTOR (weightSynapseWidth - 1 downto 0) := STD_LOGIC_VECTOR(To_Unsigned(8, weightSynapseWidth));
         
         constant val1 : STD_LOGIC_VECTOR (15 downto 0) := "1111"&"0000"&"0000"&"0000";
         constant val2 : STD_LOGIC_VECTOR (15 downto 0) := "0000"&"1111"&"0000"&"0000";
@@ -83,28 +83,26 @@ begin
         wait for 200ns;
         sigRst <= '0';
         
+        -- Test stimulus setting
         sigPktIn <= stimulusType & stimulusSynapse1Addr & val1;
         sigPktInValid <= '1';
         
-        wait for 310ns; -- Keep sigPktInValid high until we get a done signal
+        wait until sigDone = '1';
+        sigPktInValid <= '0';
+
         assert sigSyn0Data = val1 report "Test failed: 1";
         assert sigSyn0Valid = '1' report "Test failed: 2";
+
         wait for 200ns;
-        assert sigDone = '1' report "Test failed: 3";
-        wait for 90ns;
-        sigPktInValid <= '0';
-        
-        wait for 200ns;
-        
+
+        -- Test weightus setting
         sigPktIn <= weightType & layer1Addr & neuron2Addr & synapse2Addr & val2;
         sigPktInValid <= '1';
         
-        wait for 710ns;
-        assert sigWeight3Data = val2 report "Test failed: 4";
-        wait for 600ns;
-        assert sigDone = '1' report "Test failed: 5";
-        wait for 90ns;
+        wait until sigDone = '1';
         sigPktInValid <= '0';
+        
+        assert sigWeight3Data = val2 report "Test failed: 3";
         
         wait;
     end process;

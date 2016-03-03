@@ -5,8 +5,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity ValueRouter is
     generic (
         packetInWidth : INTEGER;
-        packetOutWidth : INTEGER;
-        address : INTEGER
+        packetOutWidth : INTEGER
     );
     port (
         CLK : in STD_LOGIC;
@@ -15,7 +14,8 @@ entity ValueRouter is
         PKT_OUT_VALID : out STD_LOGIC;
         PKT_OUT : out STD_LOGIC_VECTOR (packetOutWidth - 1 downto 0);
         DONE_IN : in STD_LOGIC;
-        DONE_OUT : out STD_LOGIC
+        DONE_OUT : out STD_LOGIC;
+        ADDR : in STD_LOGIC_VECTOR (packetInWidth - packetOutWidth - 1 downto 0)
     );
 end ValueRouter;
 
@@ -41,7 +41,7 @@ begin
             end if;
             
             packetDestAddr := PKT_IN(packetInWidth - 1 downto packetInWidth - addressWidth);            
-            if PKT_IN_VALID = '1' and sigValidChange = '1' and sigPacketOutValid = '0' and packetDestAddr = STD_LOGIC_VECTOR(To_Unsigned(address, addressWidth)) then
+            if PKT_IN_VALID = '1' and sigValidChange = '1' and sigPacketOutValid = '0' and packetDestAddr = ADDR then
                 PKT_OUT <= PKT_IN (packetOutWidth - 1 downto 0);
                 sigPacketOutValid <= '1';
                 sigValidChange <= '0';

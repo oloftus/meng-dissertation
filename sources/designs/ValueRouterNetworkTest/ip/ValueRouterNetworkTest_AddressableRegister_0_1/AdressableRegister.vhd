@@ -19,7 +19,7 @@ entity AddressableRegister is
 end AddressableRegister;
 
 architecture Behavioral of AddressableRegister is
-    signal sigDoneOut : STD_LOGIC;
+    signal sigDoneOut : STD_LOGIC := '0';
 begin
     DONE_OUT <= sigDoneOut;
     

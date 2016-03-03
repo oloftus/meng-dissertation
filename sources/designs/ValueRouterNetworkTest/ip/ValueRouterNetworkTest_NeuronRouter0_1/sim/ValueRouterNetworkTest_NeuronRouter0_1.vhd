@@ -47,7 +47,7 @@
 -- DO NOT MODIFY THIS FILE.
 
 -- IP VLNV: oloftus.com:prif:ValueRouter:4.0
--- IP Revision: 2
+-- IP Revision: 4
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
@@ -61,7 +61,8 @@ ENTITY ValueRouterNetworkTest_NeuronRouter0_1 IS
     PKT_OUT_VALID : OUT STD_LOGIC;
     PKT_OUT : OUT STD_LOGIC_VECTOR(19 DOWNTO 0);
     DONE_IN : IN STD_LOGIC;
-    DONE_OUT : OUT STD_LOGIC
+    DONE_OUT : OUT STD_LOGIC;
+    ADDR : IN STD_LOGIC_VECTOR(5 DOWNTO 0)
   );
 END ValueRouterNetworkTest_NeuronRouter0_1;
 
@@ -72,8 +73,7 @@ ARCHITECTURE ValueRouterNetworkTest_NeuronRouter0_1_arch OF ValueRouterNetworkTe
   COMPONENT ValueRouter IS
     GENERIC (
       packetInWidth : INTEGER;
-      packetOutWidth : INTEGER;
-      address : INTEGER
+      packetOutWidth : INTEGER
     );
     PORT (
       CLK : IN STD_LOGIC;
@@ -82,15 +82,15 @@ ARCHITECTURE ValueRouterNetworkTest_NeuronRouter0_1_arch OF ValueRouterNetworkTe
       PKT_OUT_VALID : OUT STD_LOGIC;
       PKT_OUT : OUT STD_LOGIC_VECTOR(19 DOWNTO 0);
       DONE_IN : IN STD_LOGIC;
-      DONE_OUT : OUT STD_LOGIC
+      DONE_OUT : OUT STD_LOGIC;
+      ADDR : IN STD_LOGIC_VECTOR(5 DOWNTO 0)
     );
   END COMPONENT ValueRouter;
 BEGIN
   U0 : ValueRouter
     GENERIC MAP (
       packetInWidth => 26,
-      packetOutWidth => 20,
-      address => 33
+      packetOutWidth => 20
     )
     PORT MAP (
       CLK => CLK,
@@ -99,6 +99,7 @@ BEGIN
       PKT_OUT_VALID => PKT_OUT_VALID,
       PKT_OUT => PKT_OUT,
       DONE_IN => DONE_IN,
-      DONE_OUT => DONE_OUT
+      DONE_OUT => DONE_OUT,
+      ADDR => ADDR
     );
 END ValueRouterNetworkTest_NeuronRouter0_1_arch;
