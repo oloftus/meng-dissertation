@@ -236,14 +236,14 @@
         <xilinx:taxonomy>/BaseIP</xilinx:taxonomy>
       </xilinx:taxonomies>
       <xilinx:displayName>ValueRouter_v1.0</xilinx:displayName>
-      <xilinx:coreRevision>3</xilinx:coreRevision>
+      <xilinx:coreRevision>4</xilinx:coreRevision>
       <xilinx:upgrades>
         <xilinx:canUpgradeFrom>xilinx.com:ip:ValueRouter:1.0</xilinx:canUpgradeFrom>
         <xilinx:canUpgradeFrom>oloftus.com:prif:ValueRouter:1.0</xilinx:canUpgradeFrom>
         <xilinx:canUpgradeFrom>oloftus.com:prif:ValueRouter:2.0</xilinx:canUpgradeFrom>
         <xilinx:canUpgradeFrom>oloftus.com:prif:ValueRouter:3.0</xilinx:canUpgradeFrom>
       </xilinx:upgrades>
-      <xilinx:coreCreationDateTime>2016-02-21T22:46:39Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2016-03-03T20:42:26Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="nopcore"/>
         <xilinx:tag xilinx:name="xilinx.com:ip:ValueRouter:1.0_ARCHIVE_LOCATION">C:/Users/Administrator/Xilinx/sources/src/value_router</xilinx:tag>
