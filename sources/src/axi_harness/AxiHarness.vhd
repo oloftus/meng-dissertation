@@ -74,7 +74,7 @@ architecture arch_imp of axi_harness_v1_0 is
         );
     end component axi_harness_v1_0_S00_AXI;
 
-    signal sigDin0, sigDin1, sigSynOuts, sigDoneOut : STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0);
+    signal sigDin0, sigDin1, sigSynOuts, sigControlOut : STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0);
     signal sigPktIn, sigControlIn, sigDout2, sigDout3 : STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0);
 begin
 
@@ -87,7 +87,7 @@ axi_harness_v1_0_S00_AXI_inst : axi_harness_v1_0_S00_AXI
         DIN0 => sigDin0,
         DIN1 => sigDin1,
         DIN2 => sigSynOuts,
-        DIN3 => sigDoneOut,
+        DIN3 => sigControlOut,
         DOUT0 => sigPktIn,
         DOUT1 => sigControlIn,
         DOUT2 => sigDout2,
@@ -117,23 +117,12 @@ axi_harness_v1_0_S00_AXI_inst : axi_harness_v1_0_S00_AXI
     );
 
     PKT_IN <= sigPktIn;
-    PKT_IN_VALID <= sigControlIn(0);
-    NXT_SYN_OUT <= sigControlIn(1);
+    PKT_IN_VALID <= '1' when sigControlIn(0) = '1' else '0';
+    NXT_SYN_OUT <= '1' when sigControlIn(1) = '1' else '0';
     
-    process (s00_axi_aclk) begin
-        if Rising_Edge(s00_axi_aclk) then
-            if SYN_OUTS_VALID = '1' then
-                sigSynOuts <= SYN_OUTS;
-            end if;
-        end if;
-    end process;
-    
-    process (s00_axi_aclk) begin
-        if Rising_Edge(s00_axi_aclk) then
-            if DONE_OUT = '1' then
-                sigDoneOut <= (0 => '1', others => '0');
-            end if;
-        end if;
-    end process;
+    sigSynOuts <= SYN_OUTS;
+    sigControlOut(31 downto 2) <= (others => '0');
+    sigControlOut(1) <= '1' when SYN_OUTS_VALID = '1' else '0';
+    sigControlOut(0) <= '1' when DONE_OUT = '1' else '0';
 
 end arch_imp;
