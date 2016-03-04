@@ -56,6 +56,10 @@ begin
     end process;
     
     tb: process begin
+        sigNxtSynOut <= '0';
+        sigPktInValid <= '0';
+        sigPktIn <= (others => '0');
+        
         sigRst <= '1';
         wait for 200ns;
         sigRst <= '0';
