@@ -9,11 +9,12 @@ entity axi_harness_v1_0 is
         C_S00_AXI_ADDR_WIDTH : integer := 4
     );
     port (
-        data_out : in STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0); -- From network to PS
-        data_out_valid : in STD_LOGIC; -- From network
-        done_out : in STD_LOGIC; -- From SWRN to PS
-        data_in : out STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0); -- From PS to SWRN
-        data_in_valid : out STD_LOGIC; -- From PS to SWRN
+        SYN_OUTS : in STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0);
+        SYN_OUTS_VALID : in STD_LOGIC;
+        DONE_OUT : in STD_LOGIC;
+        PKT_IN : out STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0);
+        PKT_IN_VALID : out STD_LOGIC;
+        NXT_SYN_OUT : out STD_LOGIC;
 
         s00_axi_aclk : in STD_LOGIC;
         s00_axi_aresetn : in STD_LOGIC;
@@ -46,8 +47,8 @@ architecture arch_imp of axi_harness_v1_0 is
             C_S_AXI_ADDR_WIDTH    : integer    := 4
         );
         port (
-            din0, din1, din2, din3 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH - 1 downto 0);
-            dout0, dout1, dout2, dout3 : out STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH - 1 downto 0);
+            DIN0, DIN1, DIN2, DIN3 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH - 1 downto 0);
+            DOUT0, DOUT1, DOUT2, DOUT3 : out STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH - 1 downto 0);
     
             S_AXI_ACLK : in STD_LOGIC;
             S_AXI_ARESETN : in STD_LOGIC;
@@ -73,8 +74,8 @@ architecture arch_imp of axi_harness_v1_0 is
         );
     end component axi_harness_v1_0_S00_AXI;
 
-    signal sigDin0, sigDin1, sigDataOut, sigDoneOut : STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0);
-    signal sigDataIn, sigDataInValid, sigDout2, sigDout3 : STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0);
+    signal sigDin0, sigDin1, sigSynOuts, sigDoneOut : STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0);
+    signal sigPktIn, sigControlIn, sigDout2, sigDout3 : STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0);
 begin
 
 axi_harness_v1_0_S00_AXI_inst : axi_harness_v1_0_S00_AXI
@@ -83,14 +84,14 @@ axi_harness_v1_0_S00_AXI_inst : axi_harness_v1_0_S00_AXI
         C_S_AXI_ADDR_WIDTH    => C_S00_AXI_ADDR_WIDTH
     )
     port map (
-        din0 => sigDin0,
-        din1 => sigDin1,
-        din2 => sigDataOut,
-        din3 => sigDoneOut,
-        dout0 => sigDataIn,
-        dout1 => sigDataInValid,
-        dout2 => sigDout2,
-        dout3 => sigDout3,
+        DIN0 => sigDin0,
+        DIN1 => sigDin1,
+        DIN2 => sigSynOuts,
+        DIN3 => sigDoneOut,
+        DOUT0 => sigPktIn,
+        DOUT1 => sigControlIn,
+        DOUT2 => sigDout2,
+        DOUT3 => sigDout3,
 
         S_AXI_ACLK => s00_axi_aclk,
         S_AXI_ARESETN => s00_axi_aresetn,
@@ -115,20 +116,21 @@ axi_harness_v1_0_S00_AXI_inst : axi_harness_v1_0_S00_AXI
         S_AXI_RREADY => s00_axi_rready
     );
 
-    data_in <= sigDataIn;
-    data_in_valid <= sigDataInValid(0);
+    PKT_IN <= sigPktIn;
+    PKT_IN_VALID <= sigControlIn(0);
+    NXT_SYN_OUT <= sigControlIn(1);
     
     process (s00_axi_aclk) begin
         if Rising_Edge(s00_axi_aclk) then
-            if data_out_valid = '1' then
-                sigDataOut <= data_out;
+            if SYN_OUTS_VALID = '1' then
+                sigSynOuts <= SYN_OUTS;
             end if;
         end if;
     end process;
     
     process (s00_axi_aclk) begin
         if Rising_Edge(s00_axi_aclk) then
-            if done_out = '1' then
+            if DONE_OUT = '1' then
                 sigDoneOut <= (0 => '1', others => '0');
             end if;
         end if;
