@@ -78,7 +78,7 @@ CMD
 foreach my $nid (0..$NEURONS_PER_LAYER - 1) {
 print $fh <<CMD;
 
-create_bd_cell -type ip -vlnv xilinx.com:ip:Neuron_wrapper:1.0 Neuron_${lid}_${nid}
+create_bd_cell -type ip -vlnv oloftus.com:prif:Neuron_wrapper:1.0 Neuron_${lid}_${nid}
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 Neuron_${lid}_${nid}_Address
 
 CMD
