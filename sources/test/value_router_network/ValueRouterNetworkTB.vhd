@@ -15,22 +15,22 @@ architecture Behavioral of ValueRouterNetworkTB is
         port (
             CLK : in STD_LOGIC;
             PKT_IN_VALID : in STD_LOGIC;
-            PKT_IN : in STD_LOGIC_VECTOR ( 31 downto 0 );
+            PKT_IN : in STD_LOGIC_VECTOR (31 downto 0);
             RST : in STD_LOGIC;
             SYN_0_VALID : out STD_LOGIC;
             SYN_1_VALID : out STD_LOGIC;
-            SYN_0_DATA : out STD_LOGIC_VECTOR ( 15 downto 0 );
-            SYN_1_DATA : out STD_LOGIC_VECTOR ( 15 downto 0 );
-            WEIGHT_0_DATA : out STD_LOGIC_VECTOR ( 15 downto 0 );
-            WEIGHT_1_DATA : out STD_LOGIC_VECTOR ( 15 downto 0 );
-            WEIGHT_2_DATA : out STD_LOGIC_VECTOR ( 15 downto 0 );
-            WEIGHT_3_DATA : out STD_LOGIC_VECTOR ( 15 downto 0 );
-            WEIGHT_4_DATA : out STD_LOGIC_VECTOR ( 15 downto 0 );
-            WEIGHT_5_DATA : out STD_LOGIC_VECTOR ( 15 downto 0 );
-            WEIGHT_6_DATA : out STD_LOGIC_VECTOR ( 15 downto 0 );
-            WEIGHT_7_DATA : out STD_LOGIC_VECTOR ( 15 downto 0 );
+            SYN_0_DATA : out STD_LOGIC_VECTOR (15 downto 0);
+            SYN_1_DATA : out STD_LOGIC_VECTOR (15 downto 0);
+            WEIGHT_0_DATA : out STD_LOGIC_VECTOR (15 downto 0);
+            WEIGHT_1_DATA : out STD_LOGIC_VECTOR (15 downto 0);
+            WEIGHT_2_DATA : out STD_LOGIC_VECTOR (15 downto 0);
+            WEIGHT_3_DATA : out STD_LOGIC_VECTOR (15 downto 0);
+            WEIGHT_4_DATA : out STD_LOGIC_VECTOR (15 downto 0);
+            WEIGHT_5_DATA : out STD_LOGIC_VECTOR (15 downto 0);
+            WEIGHT_6_DATA : out STD_LOGIC_VECTOR (15 downto 0);
+            WEIGHT_7_DATA : out STD_LOGIC_VECTOR (15 downto 0);
             DONE : out STD_LOGIC
-        );
+       );
     end component ValueRouterNetworkTest;
 begin
     uut: ValueRouterNetworkTest
@@ -52,7 +52,7 @@ begin
             WEIGHT_5_DATA => sigWeight5Data,
             WEIGHT_6_DATA => sigWeight6Data,
             WEIGHT_7_DATA => sigWeight7Data
-        );
+       );
         
     clock: process begin
         sigClk <= '0';
@@ -79,6 +79,9 @@ begin
         constant val1 : STD_LOGIC_VECTOR (15 downto 0) := "1111"&"0000"&"0000"&"0000";
         constant val2 : STD_LOGIC_VECTOR (15 downto 0) := "0000"&"1111"&"0000"&"0000";
     begin
+        sigPktInValid <= '0';
+        sigPktIn <= (others => '0');
+        
         sigRst <= '1';
         wait for 200ns;
         sigRst <= '0';
@@ -95,14 +98,14 @@ begin
 
         wait for 200ns;
 
-        -- Test weightus setting
+        -- Test weight setting
         sigPktIn <= weightType & layer1Addr & neuron2Addr & synapse2Addr & val2;
         sigPktInValid <= '1';
         
         wait until sigDone = '1';
         sigPktInValid <= '0';
         
-        assert sigWeight3Data = val2 report "Test failed: 3";
+        assert sigWeight0Data = val2 report "Test failed: 3";
         
         wait;
     end process;

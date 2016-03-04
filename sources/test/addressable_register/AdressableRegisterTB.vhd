@@ -3,13 +3,18 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity AddressableRegisterTB is
+    generic (
+        dataWidth : INTEGER := 16;
+        addressWidth : INTEGER := 4;
+        address : INTEGER := 8
+    );
 end AddressableRegisterTB;
 
 architecture Behavioral of AddressableRegisterTB is
     signal sigClk, sigRst : STD_LOGIC;
     signal sigPktInValid, sigValOutValid, sigDoneOut : STD_LOGIC;
-    signal sigPktIn : STD_LOGIC_VECTOR (19 downto 0);
-    signal sigValOut : STD_LOGIC_VECTOR (15 downto 0);
+    signal sigPktIn : STD_LOGIC_VECTOR (dataWidth + addressWidth - 1 downto 0);
+    signal sigValOut : STD_LOGIC_VECTOR (dataWidth - 1 downto 0);
     
     component AddressableRegister is
         generic (
@@ -29,9 +34,9 @@ architecture Behavioral of AddressableRegisterTB is
 begin
     uut: AddressableRegister
         generic map (
-            dataWidth => 16,
-            addressWidth => 4,
-            address => 8
+            dataWidth => dataWidth,
+            addressWidth => addressWidth,
+            address => address
         )
         port map (
             CLK => sigClk,
@@ -77,10 +82,6 @@ begin
         assert sigValOutValid = '1' report "Test failed: 4";
         
         sigPktInValid <= '0';
-
---        sigValOut
---        sigValOutValid
---        sigDoneOut
 
         wait;
     end process;
