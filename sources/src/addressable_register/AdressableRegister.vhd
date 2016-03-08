@@ -19,8 +19,9 @@ entity AddressableRegister is
 end AddressableRegister;
 
 architecture Behavioral of AddressableRegister is
-    signal sigDoneOut : STD_LOGIC := '0';
+    signal sigValOutValid, sigDoneOut : STD_LOGIC := '0';
 begin
+    VAL_OUT_VALID <= sigValOutValid;
     DONE_OUT <= sigDoneOut;
     
     process (CLK) is
@@ -28,18 +29,26 @@ begin
         variable thisAddress : STD_LOGIC_VECTOR (addressWidth - 1 downto 0);
     begin
         if Rising_Edge(CLK) then
-            packetDestAddr := PKT_IN(dataWidth + addressWidth - 1 downto dataWidth);
-            thisAddress := STD_LOGIC_VECTOR(To_Unsigned(address, addressWidth));
-            
             if RST = '1' then
-                VAL_OUT_VALID <= '0';
+                sigValOutValid <= '0';
                 sigDoneOut <= '0';
-            elsif sigDoneOut = '1' then
-                sigDoneOut <= '0';
-            elsif PKT_IN_VALID = '1' and packetDestAddr = thisAddress then
-                VAL_OUT <= PKT_IN (dataWidth - 1 downto 0);
-                VAL_OUT_VALID <= '1';
-                sigDoneOut <= '1';
+            else
+                packetDestAddr := PKT_IN(dataWidth + addressWidth - 1 downto dataWidth);
+                thisAddress := STD_LOGIC_VECTOR(To_Unsigned(address, addressWidth));
+
+                if PKT_IN_VALID = '1' and packetDestAddr = thisAddress then
+                    VAL_OUT <= PKT_IN (dataWidth - 1 downto 0);
+                    sigValOutValid <= '1';
+                    sigDoneOut <= '1';
+                else
+                    if sigDoneOut = '1' then
+                        sigDoneOut <= '0';
+                    end if;
+                    
+                    if sigValOutValid = '1' then
+                        sigValOutValid <= '0';
+                    end if;
+                end if;
             end if;
         end if;
     end process;
