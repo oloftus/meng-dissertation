@@ -74,8 +74,9 @@ architecture arch_imp of axi_harness_v1_0 is
         );
     end component axi_harness_v1_0_S00_AXI;
 
-    signal sigDin0, sigDin1, sigSynOuts, sigControlOut : STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0);
-    signal sigPktIn, sigControlIn, sigDout2, sigDout3 : STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0);
+    signal sigPktInValid, sigLastPacketInValid, sigNextSynOut, sigLastNextSynOut : STD_LOGIC := '0';
+    signal sigDin0, sigDin1, sigSynOuts, sigControlOut : STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0) := (others => '0');
+    signal sigPktIn, sigControlIn, sigDout2, sigDout3 : STD_LOGIC_VECTOR (C_S00_AXI_DATA_WIDTH - 1 downto 0) := (others => '0');
 begin
 
 axi_harness_v1_0_S00_AXI_inst : axi_harness_v1_0_S00_AXI
@@ -117,12 +118,67 @@ axi_harness_v1_0_S00_AXI_inst : axi_harness_v1_0_S00_AXI
     );
 
     PKT_IN <= sigPktIn;
-    PKT_IN_VALID <= '1' when sigControlIn(0) = '1' else '0';
-    NXT_SYN_OUT <= '1' when sigControlIn(1) = '1' else '0';
+    PKT_IN_VALID <= sigPktInValid;
+    NXT_SYN_OUT <= sigNextSynOut;
     
-    sigSynOuts <= SYN_OUTS;
     sigControlOut(31 downto 2) <= (others => '0');
-    sigControlOut(1) <= '1' when SYN_OUTS_VALID = '1' else '0';
-    sigControlOut(0) <= '1' when DONE_OUT = '1' else '0';
-
+    
+    process (s00_axi_aclk) is
+        variable packetInValid : STD_LOGIC := sigControlIn(0);
+        variable nextSynOut : STD_LOGIC := sigControlIn(1);
+        variable resetSynOutsValid : STD_LOGIC := sigControlIn(2);
+        variable resetDoneOut : STD_LOGIC := sigControlIn(3);
+    begin
+        if Rising_Edge(s00_axi_aclk) then
+            if s00_axi_aresetn = '0' then
+                sigControlOut(1 downto 0) <= (others => '0');
+                sigSynOuts <= (others => '0');
+                sigPktInValid <= '0';
+                sigNextSynOut <= '0';
+                sigLastPacketInValid <= '0';
+                sigLastNextSynOut <= '0';
+            else
+                if sigPktInValid = '0' then
+                    if packetInValid = '1' and sigLastPacketInValid = '0' then
+                        sigPktInValid <= '1';
+                    end if;
+                else
+                    sigPktInValid <= '0';
+                end if;
+                
+                sigLastPacketInValid <= packetInValid;
+                
+                
+                if sigNextSynOut = '0' then
+                    if nextSynOut = '1' and sigLastNextSynOut = '0' then
+                        sigNextSynOut <= '1';
+                    end if;
+                else
+                    sigNextSynOut <= '0';
+                    sigSynOuts <= SYN_OUTS;
+                end if;
+                
+                sigLastNextSynOut <= nextSynOut;
+                
+                
+                if resetDoneOut = '0' then
+                    if DONE_OUT = '1' then
+                        sigControlOut(0) <= '1';
+                    end if;
+                else
+                    sigControlOut(0) <= '0';
+                end if;
+                
+                
+                if resetSynOutsValid = '0' then
+                    if SYN_OUTS_VALID = '1' then
+                        sigControlOut(1) <= '1';
+                    end if;
+                else
+                    sigControlOut(1) <= '0';
+                end if;
+            end if;
+        end if;
+    end process;
+    
 end arch_imp;
