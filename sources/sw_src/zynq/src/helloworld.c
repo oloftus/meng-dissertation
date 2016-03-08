@@ -48,7 +48,7 @@ int main()
       pktTypes[0] | layerAddresses[1] | neuronAddresses[1] | synapseAddresses[1] | 0x0 << SIGN_POS | 0x0 << INTEGER_POS | 0x10 // 0.125
     };
 
-    u32 stimuli[NUM_STIMULI + 2] = {
+    u32 stimuli[NUM_STIMULI] = {
       pktTypes[1] | synapseAddresses[0] | 0x0 << SIGN_POS | 0x3 << INTEGER_POS  | 0x0, // 3
       pktTypes[1] | synapseAddresses[1] | 0x0 << SIGN_POS | 0x1 << INTEGER_POS | 0x0 // 1
     };
