@@ -32,7 +32,9 @@ architecture Behavioral of NetworkTB is
     
     constant expected1 : UNSIGNED (15 downto 0) := "0" & "00000000" & "1010011"; -- 0.650390625
     constant expected2 : UNSIGNED (15 downto 0) := "0" & "00000000" & "1001001"; -- 0.5751953125
-
+    constant expected3 : UNSIGNED (15 downto 0) := "0" & "00000000" & "1010110"; -- 0.5751953125
+    constant expected4 : UNSIGNED (15 downto 0) := "0" & "00000000" & "1001010"; -- 0.5751953125
+    
     signal sigClk, sigRst, sigPktInValid, sigNxtSynOut, sigDoneOut, sigSynOutsReady : STD_LOGIC;
     signal sigPktIn, sigSynOuts : STD_LOGIC_VECTOR (31 downto 0);
 begin
@@ -134,11 +136,11 @@ begin
         wait for 200ns;
         sigPktInValid <= '0';
         
-        -- Set stimuli --------------------------
-        
         wait until sigDoneOut = '1';
         wait until sigDoneOut = '0';
         wait for 100ns;
+        
+        -- Test the network works
 
         sigPktInValid <= '1';
         sigPktIn <= stimulusType & blank & synapseAddresses(0) & "0" & "00000011" & "0000000"; -- 3
@@ -155,11 +157,38 @@ begin
         sigPktInValid <= '0';
 
         wait until sigSynOutsReady = '1';
+        
         sigNxtSynOut <= '1';
         wait for 210ns;
         assert sigSynOuts = STD_LOGIC_VECTOR(Resize(expected1, 32)) report "Test failed: 1";
         wait for 200ns;
         assert sigSynOuts = STD_LOGIC_VECTOR(Resize(expected2, 32)) report "Test failed: 2"; 
+        sigNxtSynOut <= '0';
+        
+        -- Test the network works again
+
+        sigPktInValid <= '1';
+        sigPktIn <= stimulusType & blank & synapseAddresses(0) & "0" & "00000110" & "0000000"; -- 6
+        wait for 200ns;
+        sigPktInValid <= '0';
+
+        wait until sigDoneOut = '1';
+        wait until sigDoneOut = '0';
+        wait for 100ns;
+
+        sigPktInValid <= '1';
+        sigPktIn <= stimulusType & blank & synapseAddresses(1) & "0" & "00000010" & "0000000"; -- 2
+        wait for 200ns;
+        sigPktInValid <= '0';
+
+        wait until sigSynOutsReady = '1';
+
+        sigNxtSynOut <= '1';
+        wait for 210ns;
+        assert sigSynOuts = STD_LOGIC_VECTOR(Resize(expected3, 32)) report "Test failed: 3";
+        wait for 200ns;
+        assert sigSynOuts = STD_LOGIC_VECTOR(Resize(expected4, 32)) report "Test failed: 4"; 
+        sigNxtSynOut <= '0';
         
         wait;
     end process;
