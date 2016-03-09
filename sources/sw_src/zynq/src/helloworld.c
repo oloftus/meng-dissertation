@@ -86,6 +86,9 @@ int main()
 
 
     // Retrieve the output values
+	Xil_Out32(CTRL_IN_REG, CTRL_IN_NXT_SYN_OUT);
+	Xil_Out32(CTRL_IN_REG, 0x0);
+
 	for (i = 0; i < NUM_STIMULI; i++) {
 		Xil_Out32(CTRL_IN_REG, CTRL_IN_NXT_SYN_OUT);
 		Xil_Out32(CTRL_IN_REG, 0x0);
