@@ -47,9 +47,9 @@ CMD
 # Create static components
 print $fh <<CMD;
 
-create_bd_cell -type ip -vlnv oloftus.com:prif:ValueRouter:4.0 TypeRouter_Stimulus
+create_bd_cell -type ip -vlnv oloftus.com:prif:ValueRouter:5.0 TypeRouter_Stimulus
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 TypeRouter_Stimulus_Address
-create_bd_cell -type ip -vlnv oloftus.com:prif:ValueRouter:4.0 TypeRouter_Weight
+create_bd_cell -type ip -vlnv oloftus.com:prif:ValueRouter:5.0 TypeRouter_Weight
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 TypeRouter_Weight_Address
 create_bd_cell -type ip -vlnv oloftus.com:prif:OrN:1.0 PktRcvd_Layers
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 PktRcvdConcat_Layers
@@ -67,7 +67,7 @@ CMD
 foreach my $lid (0..$NUM_LAYERS - 1) {
 print $fh <<CMD;
 
-create_bd_cell -type ip -vlnv oloftus.com:prif:ValueRouter:4.0 LayerRouter_${lid}
+create_bd_cell -type ip -vlnv oloftus.com:prif:ValueRouter:5.0 LayerRouter_${lid}
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 LayerRouter_${lid}_Address
 create_bd_cell -type ip -vlnv oloftus.com:prif:OrN:1.0 PktRcvd_Layer_${lid}
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 PktRcvdConcat_Layer_${lid}
@@ -78,7 +78,7 @@ CMD
 foreach my $nid (0..$NEURONS_PER_LAYER - 1) {
 print $fh <<CMD;
 
-create_bd_cell -type ip -vlnv oloftus.com:prif:Neuron_wrapper:1.0 Neuron_${lid}_${nid}
+create_bd_cell -type ip -vlnv oloftus.com:prif:Neuron_wrapper:2.0 Neuron_${lid}_${nid}
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 Neuron_${lid}_${nid}_Address
 
 CMD
@@ -88,7 +88,7 @@ CMD
 foreach my $id (0..$NEURONS_PER_LAYER - 1) {
 print $fh <<CMD;
 
-create_bd_cell -type ip -vlnv oloftus.com:prif:AddressableRegister:1.0 StimulusRegister_${id}
+create_bd_cell -type ip -vlnv oloftus.com:prif:AddressableRegister:2.0 StimulusRegister_${id}
 
 CMD
 }
@@ -147,6 +147,7 @@ CMD
 print $fh <<CMD;
 
 connect_bd_net [get_bd_ports CLK] [get_bd_pins TypeRouter_Weight/CLK]
+connect_bd_net [get_bd_ports RST] [get_bd_pins TypeRouter_Weight/RST]
 connect_bd_net [get_bd_ports PKT_IN_VALID] [get_bd_pins TypeRouter_Weight/PKT_IN_VALID]
 connect_bd_net [get_bd_ports PKT_IN] [get_bd_pins TypeRouter_Weight/PKT_IN]
 connect_bd_net [get_bd_pins TypeRouter_Weight/DONE_IN] [get_bd_pins PktRcvd_Layers/DOUT]
@@ -154,6 +155,7 @@ connect_bd_net [get_bd_pins TypeRouter_Weight/DONE_OUT] [get_bd_pins PktRcvdConc
 connect_bd_net [get_bd_pins TypeRouter_Weight_Address/dout] [get_bd_pins TypeRouter_Weight/ADDR]
 
 connect_bd_net [get_bd_ports CLK] [get_bd_pins TypeRouter_Stimulus/CLK]
+connect_bd_net [get_bd_ports RST] [get_bd_pins TypeRouter_Stimulus/RST]
 connect_bd_net [get_bd_ports PKT_IN_VALID] [get_bd_pins TypeRouter_Stimulus/PKT_IN_VALID]
 connect_bd_net [get_bd_ports PKT_IN] [get_bd_pins TypeRouter_Stimulus/PKT_IN]
 connect_bd_net [get_bd_pins TypeRouter_Stimulus/DONE_IN] [get_bd_pins PktRcvd_StimulusRegisters/DOUT]
@@ -195,6 +197,7 @@ connect_bd_net [get_bd_pins StimulusRegister_${lid}/DONE_OUT] [get_bd_pins PktRc
 connect_bd_net [get_bd_pins TypeRouter_Weight/PKT_OUT_VALID] [get_bd_pins LayerRouter_${lid}/PKT_IN_VALID]
 connect_bd_net [get_bd_pins TypeRouter_Weight/PKT_OUT] [get_bd_pins LayerRouter_${lid}/PKT_IN]
 connect_bd_net [get_bd_ports CLK] [get_bd_pins LayerRouter_${lid}/CLK]
+connect_bd_net [get_bd_ports RST] [get_bd_pins LayerRouter_${lid}/RST]
 connect_bd_net [get_bd_pins PktRcvdConcat_Layer_${lid}/dout] [get_bd_pins PktRcvd_Layer_${lid}/DIN]
 connect_bd_net [get_bd_pins PktRcvd_Layer_${lid}/DOUT] [get_bd_pins LayerRouter_${lid}/DONE_IN]
 connect_bd_net [get_bd_pins LayerRouter_${lid}_Address/dout] [get_bd_pins LayerRouter_${lid}/ADDR]

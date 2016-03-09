@@ -50,7 +50,7 @@ CMD
 
 # Create static components
 print $fh <<CMD;
-create_bd_cell -type ip -vlnv oloftus.com:prif:ValueRouter:4.0 NeuronRouter
+create_bd_cell -type ip -vlnv oloftus.com:prif:ValueRouter:5.0 NeuronRouter
 create_bd_cell -type ip -vlnv oloftus.com:prif:AndN:1.0 MultiplierEnable
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 MultiplierEnableConcat
 create_bd_cell -type ip -vlnv oloftus.com:prif:OrN:1.0 DoneOut
@@ -66,7 +66,7 @@ foreach my $id (0..$NEURONS_PER_LAYER - 1) {
 print $fh <<CMD;
 
 create_bd_cell -type ip -vlnv oloftus.com:prif:Synapse:1.0 Synapse_${id}
-create_bd_cell -type ip -vlnv oloftus.com:prif:AddressableRegister:1.0 WeightRegister_${id}
+create_bd_cell -type ip -vlnv oloftus.com:prif:AddressableRegister:2.0 WeightRegister_${id}
 create_bd_cell -type ip -vlnv xilinx.com:ip:mult_gen:12.0 Multiplier_${id}
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice:1.0 MultiplierSlicer_${id}
 
@@ -110,6 +110,7 @@ print $fh <<CMD;
 connect_bd_net [get_bd_ports CLK] [get_bd_pins ValidSetter/CLK]
 connect_bd_net [get_bd_ports CLK] [get_bd_pins SumJunction/CLK]
 connect_bd_net [get_bd_ports CLK] [get_bd_pins NeuronRouter/CLK]
+connect_bd_net [get_bd_ports RST] [get_bd_pins NeuronRouter/RST]
 connect_bd_net [get_bd_ports RST] [get_bd_pins ValidSetter/RST]
 connect_bd_net [get_bd_pins MultiplierEnable/DOUT] [get_bd_pins ValidSetter/SYN_IN_VALID]
 connect_bd_net [get_bd_pins MultiplierEnableConcat/dout] [get_bd_pins MultiplierEnable/DIN]
