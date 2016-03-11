@@ -9,7 +9,7 @@ entity ValueRouterTB is
 end ValueRouterTB;
 
 architecture Behavioral of ValueRouterTB is
-    signal sigClk : STD_LOGIC;
+    signal sigClk, sigRst : STD_LOGIC;
     signal sigPktInValid, sigPktOutValid, sigDoneIn, sigDoneOut : STD_LOGIC;
     signal sigPktIn : STD_LOGIC_VECTOR (packetInWidth - 1 downto 0);
     signal sigPktOut : STD_LOGIC_VECTOR (packetOutWidth - 1 downto 0);
@@ -63,6 +63,10 @@ begin
         constant pktOut1 : STD_LOGIC_VECTOR (packetOutWidth - 1 downto 0) := "11111111"&"00000000";
         constant pktOut2 : STD_LOGIC_VECTOR (packetOutWidth - 1 downto 0) := "00000000"&"11111111";
     begin
+        sigRst <= '1';
+        wait for 200ns;
+        sigRst <= '0';
+
         sigAddr <= addrBits;
         sigDoneIn <= '0';
         

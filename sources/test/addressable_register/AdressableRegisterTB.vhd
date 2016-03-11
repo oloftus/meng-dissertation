@@ -66,21 +66,33 @@ begin
         wait for 200ns;
         sigRst <= '0';
 
+        -- Test correctly addressed packets are received correctly
         sigPktIn <= "1000"&val1;
         sigPktInValid <= '1';
-        wait for 200ns;
+        
+        wait for 110ns;
         assert sigValOut = val1 report "Test failed: 1";
         assert sigValOutValid = '1' report "Test failed: 2";
+        assert sigDoneOut = '1' report "Test failed: 3";
         
+        wait for 90ns;
         sigPktInValid <= '0';
-        wait for 200ns;
         
+        wait for 110ns;
+        assert sigValOutValid = '0' report "Test failed: 4";
+        assert sigDoneOut = '0' report "Test failed: 5";
+        
+        wait for 90ns;
+        
+        -- Test correctly addressed packets are received correctly
         sigPktIn <= "0100"&val2;
         sigPktInValid <= '1';
-        wait for 200ns;
-        assert sigValOut = val1 report "Test failed: 3";
-        assert sigValOutValid = '1' report "Test failed: 4";
         
+        wait for 100ns;
+        assert sigValOut = val1 report "Test failed: 6";
+        assert sigValOutValid = '0' report "Test failed: 7";
+        
+        wait for 100ns;
         sigPktInValid <= '0';
 
         wait;
