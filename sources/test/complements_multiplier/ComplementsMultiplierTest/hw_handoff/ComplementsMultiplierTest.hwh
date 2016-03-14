@@ -1,136 +1,33 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Mon Mar 14 20:16:23 2016" VIVADOVERSION="2014.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Mon Mar 14 21:26:01 2016" VIVADOVERSION="2014.2">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z010" NAME="ComplementsMultiplierTest_imp" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
   <EXTERNALPORTS>
     <PORT CLKFREQUENCY="100000000" DIR="I" NAME="CLK" SIGIS="clk" SIGNAME="External_Ports_CLK">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="mult_gen_0" PORT="CLK"/>
+        <CONNECTION INSTANCE="Multiplier" PORT="CLK"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="I" NAME="A" SIGIS="data" SIGNAME="External_Ports_A">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="Complements2To1_2_1" PORT="TWOS"/>
+        <CONNECTION INSTANCE="Multiplier_Complements2To1_1" PORT="TWOS"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="I" NAME="B" SIGIS="data" SIGNAME="External_Ports_B">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="Complements2To1_2_0" PORT="TWOS"/>
+        <CONNECTION INSTANCE="Multiplier_Complements2To1_0" PORT="TWOS"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" NAME="P" SIGIS="data" SIGNAME="Complements1To2_0_TWOS">
+    <PORT DIR="O" NAME="P" SIGIS="data" SIGNAME="Multiplier_Complements1To2_TWOS">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="Complements1To2_0" PORT="TWOS"/>
+        <CONNECTION INSTANCE="Multiplier_Complements1To2" PORT="TWOS"/>
       </CONNECTIONS>
     </PORT>
   </EXTERNALPORTS>
 
   <MODULES>
-    <MODULE FULLNAME="/Complements1To2_0" HWVERSION="1.0" INSTANCE="Complements1To2_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Complements1To2" VLNV="oloftus.com:prif:Complements1To2:1.0">
-      <DOCUMENTS/>
-      <PARAMETERS>
-        <PARAMETER NAME="width" VALUE="32"/>
-        <PARAMETER NAME="Component_Name" VALUE="ComplementsMultiplierTest_Complements1To2_0_0"/>
-        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
-      </PARAMETERS>
-      <PORTS>
-        <PORT DIR="I" NAME="ONES" SIGIS="undef" SIGNAME="mult_gen_0_P">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="mult_gen_0" PORT="P"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" NAME="SIGN" SIGIS="undef" SIGNAME="Xor2_0_O">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="Xor2_0" PORT="O"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="TWOS" SIGIS="undef" SIGNAME="Complements1To2_0_TWOS">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="P"/>
-          </CONNECTIONS>
-        </PORT>
-      </PORTS>
-      <BUSINTERFACES/>
-    </MODULE>
-    <MODULE FULLNAME="/Complements2To1_2_0" HWVERSION="1.0" INSTANCE="Complements2To1_2_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Complements2To1_2" VLNV="oloftus.com:prif:Complements2To1_2:1.0">
-      <DOCUMENTS/>
-      <PARAMETERS>
-        <PARAMETER NAME="width" VALUE="16"/>
-        <PARAMETER NAME="Component_Name" VALUE="ComplementsMultiplierTest_Complements2To1_2_0_3"/>
-        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
-      </PARAMETERS>
-      <PORTS>
-        <PORT DIR="I" NAME="TWOS" SIGIS="undef" SIGNAME="External_Ports_B">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="B"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="ONES" SIGIS="undef" SIGNAME="Complements2To1_2_0_ONES">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="mult_gen_0" PORT="B"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="SIGN" SIGIS="undef" SIGNAME="Complements2To1_2_0_SIGN">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="Xor2_0" PORT="B"/>
-          </CONNECTIONS>
-        </PORT>
-      </PORTS>
-      <BUSINTERFACES/>
-    </MODULE>
-    <MODULE FULLNAME="/Complements2To1_2_1" HWVERSION="1.0" INSTANCE="Complements2To1_2_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Complements2To1_2" VLNV="oloftus.com:prif:Complements2To1_2:1.0">
-      <DOCUMENTS/>
-      <PARAMETERS>
-        <PARAMETER NAME="width" VALUE="16"/>
-        <PARAMETER NAME="Component_Name" VALUE="ComplementsMultiplierTest_Complements2To1_2_1_1"/>
-        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
-      </PARAMETERS>
-      <PORTS>
-        <PORT DIR="I" NAME="TWOS" SIGIS="undef" SIGNAME="External_Ports_A">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="A"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="ONES" SIGIS="undef" SIGNAME="Complements2To1_2_1_ONES">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="mult_gen_0" PORT="A"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="SIGN" SIGIS="undef" SIGNAME="Complements2To1_2_1_SIGN">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="Xor2_0" PORT="A"/>
-          </CONNECTIONS>
-        </PORT>
-      </PORTS>
-      <BUSINTERFACES/>
-    </MODULE>
-    <MODULE FULLNAME="/Xor2_0" HWVERSION="1.0" INSTANCE="Xor2_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Xor2" VLNV="oloftus.com:prif:Xor2:1.0">
-      <DOCUMENTS/>
-      <PARAMETERS>
-        <PARAMETER NAME="Component_Name" VALUE="ComplementsMultiplierTest_Xor2_0_0"/>
-        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
-      </PARAMETERS>
-      <PORTS>
-        <PORT DIR="I" NAME="A" SIGIS="undef" SIGNAME="Complements2To1_2_1_SIGN">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="Complements2To1_2_1" PORT="SIGN"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" NAME="B" SIGIS="undef" SIGNAME="Complements2To1_2_0_SIGN">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="Complements2To1_2_0" PORT="SIGN"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="O" SIGIS="undef" SIGNAME="Xor2_0_O">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="Complements1To2_0" PORT="SIGN"/>
-          </CONNECTIONS>
-        </PORT>
-      </PORTS>
-      <BUSINTERFACES/>
-    </MODULE>
-    <MODULE FULLNAME="/mult_gen_0" HWVERSION="12.0" INSTANCE="mult_gen_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="mult_gen" VLNV="xilinx.com:ip:mult_gen:12.0">
+    <MODULE FULLNAME="/Multiplier" HWVERSION="12.0" INSTANCE="Multiplier" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="mult_gen" VLNV="xilinx.com:ip:mult_gen:12.0">
       <DOCUMENTS>
         <DOCUMENT SOURCE="http://www.xilinx.com/cgi-bin/docs/ipdoc?c=mult_gen;v=v12_0;d=pg108-mult-gen.pdf"/>
       </DOCUMENTS>
@@ -156,7 +53,7 @@
         <PARAMETER NAME="C_ROUND_OUTPUT" VALUE="0"/>
         <PARAMETER NAME="C_ROUND_PT" VALUE="0"/>
         <PARAMETER NAME="InternalUser" VALUE="0"/>
-        <PARAMETER NAME="Component_Name" VALUE="ComplementsMultiplierTest_mult_gen_0_0"/>
+        <PARAMETER NAME="Component_Name" VALUE="ComplementsMultiplierTest_Multiplier_2"/>
         <PARAMETER NAME="MultType" VALUE="Parallel_Multiplier"/>
         <PARAMETER NAME="PortAType" VALUE="Signed"/>
         <PARAMETER NAME="PortAWidth" VALUE="16"/>
@@ -184,19 +81,122 @@
             <CONNECTION INSTANCE="External_Ports" PORT="CLK"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="A" SIGIS="data" SIGNAME="Complements2To1_2_1_ONES">
+        <PORT DIR="I" NAME="A" SIGIS="data" SIGNAME="Multiplier_Complements2To1_1_ONES">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="Complements2To1_2_1" PORT="ONES"/>
+            <CONNECTION INSTANCE="Multiplier_Complements2To1_1" PORT="ONES"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="B" SIGIS="data" SIGNAME="Complements2To1_2_0_ONES">
+        <PORT DIR="I" NAME="B" SIGIS="data" SIGNAME="Multiplier_Complements2To1_0_ONES">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="Complements2To1_2_0" PORT="ONES"/>
+            <CONNECTION INSTANCE="Multiplier_Complements2To1_0" PORT="ONES"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="P" SIGIS="data" SIGNAME="mult_gen_0_P">
+        <PORT DIR="O" NAME="P" SIGIS="data" SIGNAME="Multiplier_P">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="Complements1To2_0" PORT="ONES"/>
+            <CONNECTION INSTANCE="Multiplier_Complements1To2" PORT="ONES"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Multiplier_Complements1To2" HWVERSION="1.0" INSTANCE="Multiplier_Complements1To2" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Complements1To2" VLNV="oloftus.com:prif:Complements1To2:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="width" VALUE="32"/>
+        <PARAMETER NAME="Component_Name" VALUE="ComplementsMultiplierTest_Multiplier_Complements1To2_2"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="SIGN" SIGIS="undef" SIGNAME="Multiplier_Xor2_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Multiplier_Xor2" PORT="O"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="ONES" SIGIS="undef" SIGNAME="Multiplier_P">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Multiplier" PORT="P"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="TWOS" SIGIS="undef" SIGNAME="Multiplier_Complements1To2_TWOS">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="P"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Multiplier_Complements2To1_0" HWVERSION="1.0" INSTANCE="Multiplier_Complements2To1_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Complements2To1" VLNV="oloftus.com:prif:Complements2To1:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="width" VALUE="16"/>
+        <PARAMETER NAME="Component_Name" VALUE="ComplementsMultiplierTest_Multiplier_Complements2To1_0_3"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="TWOS" SIGIS="undef" SIGNAME="External_Ports_B">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="B"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="ONES" SIGIS="undef" SIGNAME="Multiplier_Complements2To1_0_ONES">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Multiplier" PORT="B"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="SIGN" SIGIS="undef" SIGNAME="Multiplier_Complements2To1_0_SIGN">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Multiplier_Xor2" PORT="B"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Multiplier_Complements2To1_1" HWVERSION="1.0" INSTANCE="Multiplier_Complements2To1_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Complements2To1" VLNV="oloftus.com:prif:Complements2To1:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="width" VALUE="16"/>
+        <PARAMETER NAME="Component_Name" VALUE="ComplementsMultiplierTest_Multiplier_Complements2To1_1_3"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="TWOS" SIGIS="undef" SIGNAME="External_Ports_A">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="A"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="ONES" SIGIS="undef" SIGNAME="Multiplier_Complements2To1_1_ONES">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Multiplier" PORT="A"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="SIGN" SIGIS="undef" SIGNAME="Multiplier_Complements2To1_1_SIGN">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Multiplier_Xor2" PORT="A"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/Multiplier_Xor2" HWVERSION="1.0" INSTANCE="Multiplier_Xor2" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Xor2" VLNV="oloftus.com:prif:Xor2:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="ComplementsMultiplierTest_Multiplier_Xor2_3"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="A" SIGIS="undef" SIGNAME="Multiplier_Complements2To1_1_SIGN">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Multiplier_Complements2To1_1" PORT="SIGN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="B" SIGIS="undef" SIGNAME="Multiplier_Complements2To1_0_SIGN">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Multiplier_Complements2To1_0" PORT="SIGN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="O" SIGIS="undef" SIGNAME="Multiplier_Xor2_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Multiplier_Complements1To2" PORT="SIGN"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>

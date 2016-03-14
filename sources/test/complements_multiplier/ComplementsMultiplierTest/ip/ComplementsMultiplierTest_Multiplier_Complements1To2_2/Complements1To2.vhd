@@ -19,5 +19,5 @@ architecture Behavioral of Complements1To2 is
     signal twosUnsigned : UNSIGNED (width - 1 downto 0);
 begin
     twosUnsigned <= max - UNSIGNED(ONES) + 1;
-    TWOS <= STD_LOGIC_VECTOR(twosUnsigned) when SIGN = '1' else ONES;
+    TWOS <= STD_LOGIC_VECTOR(twosUnsigned) when SIGN = '1' else '0' & ONES;
 end Behavioral;

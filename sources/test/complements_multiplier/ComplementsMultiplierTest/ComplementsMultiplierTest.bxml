@@ -2,50 +2,50 @@
 <Root MajorVersion="0" MinorVersion="29">
   <CompositeFile CompositeFileTopName="ComplementsMultiplierTest" CanBeSetAsTop="true" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="STALE"/>
-    <Generation Name="IMPLEMENTATION" State="STALE"/>
+    <Generation Name="SYNTHESIS" State="GENERATED"/>
+    <Generation Name="IMPLEMENTATION" State="GENERATED"/>
     <Generation Name="SIMULATION" State="GENERATED"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
-      <File Name="ip\ComplementsMultiplierTest_mult_gen_0_0\ComplementsMultiplierTest_mult_gen_0_0.xci" Type="IP">
-        <Instance HierarchyPath="mult_gen_0"/>
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
-      </File>
-      <File Name="ip\ComplementsMultiplierTest_Xor2_0_0\ComplementsMultiplierTest_Xor2_0_0.xci" Type="IP">
-        <Instance HierarchyPath="Xor2_0"/>
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
-      </File>
-      <File Name="ip\ComplementsMultiplierTest_Complements1To2_0_0\ComplementsMultiplierTest_Complements1To2_0_0.xci" Type="IP">
-        <Instance HierarchyPath="Complements1To2_0"/>
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
-      </File>
       <File Name="hdl\ComplementsMultiplierTest.vhd" Type="VHDL">
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
         <UsedIn Val="SIMULATION"/>
       </File>
-      <File Name="ip\ComplementsMultiplierTest_Complements2To1_2_0_3\ComplementsMultiplierTest_Complements2To1_2_0_3.xci" Type="IP">
-        <Instance HierarchyPath="Complements2To1_2_0"/>
+      <File Name="ip\ComplementsMultiplierTest_Multiplier_2\ComplementsMultiplierTest_Multiplier_2.xci" Type="IP">
+        <Instance HierarchyPath="Multiplier"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
         <UsedIn Val="IMPLEMENTATION"/>
         <UsedIn Val="SIMULATION"/>
       </File>
-      <File Name="ip\ComplementsMultiplierTest_Complements2To1_2_1_1\ComplementsMultiplierTest_Complements2To1_2_1_1.xci" Type="IP">
-        <Instance HierarchyPath="Complements2To1_2_1"/>
+      <File Name="ip\ComplementsMultiplierTest_Multiplier_Complements1To2_2\ComplementsMultiplierTest_Multiplier_Complements1To2_2.xci" Type="IP">
+        <Instance HierarchyPath="Multiplier_Complements1To2"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\ComplementsMultiplierTest_Multiplier_Complements2To1_0_3\ComplementsMultiplierTest_Multiplier_Complements2To1_0_3.xci" Type="IP">
+        <Instance HierarchyPath="Multiplier_Complements2To1_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\ComplementsMultiplierTest_Multiplier_Complements2To1_1_3\ComplementsMultiplierTest_Multiplier_Complements2To1_1_3.xci" Type="IP">
+        <Instance HierarchyPath="Multiplier_Complements2To1_1"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\ComplementsMultiplierTest_Multiplier_Xor2_3\ComplementsMultiplierTest_Multiplier_Xor2_3.xci" Type="IP">
+        <Instance HierarchyPath="Multiplier_Xor2"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
