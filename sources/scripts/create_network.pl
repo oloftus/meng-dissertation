@@ -8,8 +8,10 @@ require "params.pl";
 our $NUM_LAYERS;
 our $NEURONS_PER_LAYER;
 our $NUM_INPUTS;
-our $INTEGER_PRECISION;
-our $FRACTION_PRECISION;
+our $VAL_INTEGER_PRECISION;
+our $VAL_FRACTION_PRECISION;
+our $WEIGHT_INTEGER_PRECISION;
+our $WEIGHT_FRACTION_PRECISION;
 our $AXI_BUS_WIDTH;
 our $PKT_TYPE_ADDR_WIDTH;
 our $PKT_LAYER_ADDR_WIDTH;
@@ -20,6 +22,7 @@ our $WEIGHT_TYPE;
 our $NEURON_LATENCY;
 
 our $valueWidth;
+our $weightWidth;
 our $layerOutPacketWidth;
 our $typeOutPacketWidth;
 our $networkInPacketWidth;
@@ -27,6 +30,10 @@ our $pktStimulusAddrWidth;
 
 if ($networkInPacketWidth > $AXI_BUS_WIDTH) {
     die "Packet parameters exceeed AXI bus width";
+}
+
+if ($weightWidth > $valueWidth) {
+    die "Weight width is greater than value width";
 }
 
 open my $fh, ">", "create_network.tcl";

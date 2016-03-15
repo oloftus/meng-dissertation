@@ -6,19 +6,24 @@ entity AddressableRegister is
     generic (
         dataWidth : INTEGER;
         addressWidth : INTEGER;
-        address : INTEGER
+        address : INTEGER;
+        padHighWidth : INTEGER := 0;
+        padLowWidth : INTEGER := 0
     );
     port (
         CLK, RST : in STD_LOGIC;
         PKT_IN : in STD_LOGIC_VECTOR (addressWidth + dataWidth - 1 downto 0);
         PKT_IN_VALID : in STD_LOGIC;
-        VAL_OUT : out STD_LOGIC_VECTOR (dataWidth - 1 downto 0);
+        VAL_OUT : out STD_LOGIC_VECTOR (dataWidth + padHighWidth + padLowWidth - 1 downto 0);
         VAL_OUT_VALID : out STD_LOGIC;
         DONE_OUT : out STD_LOGIC
     );
 end AddressableRegister;
 
 architecture Behavioral of AddressableRegister is
+    constant padHigh : STD_LOGIC_VECTOR (padHighWidth - 1 downto 0) := (others => '0');
+    constant padLow : STD_LOGIC_VECTOR (padLowWidth - 1 downto 0) := (others => '0');
+
     signal sigValOutValid, sigDoneOut : STD_LOGIC := '0';
 begin
     VAL_OUT_VALID <= sigValOutValid;
@@ -37,7 +42,7 @@ begin
                 thisAddress := STD_LOGIC_VECTOR(To_Unsigned(address, addressWidth));
 
                 if PKT_IN_VALID = '1' and packetDestAddr = thisAddress then
-                    VAL_OUT <= PKT_IN (dataWidth - 1 downto 0);
+                    VAL_OUT <= padHigh & PKT_IN(dataWidth - 1 downto 0) & padLow;
                     sigValOutValid <= '1';
                     sigDoneOut <= '1';
                 else

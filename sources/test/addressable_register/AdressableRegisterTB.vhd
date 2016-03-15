@@ -6,33 +6,38 @@ entity AddressableRegisterTB is
     generic (
         dataWidth : INTEGER := 16;
         addressWidth : INTEGER := 4;
-        address : INTEGER := 8
+        address : INTEGER := 8;
+        padHighWidth : INTEGER := 4;
+        padLowWidth : INTEGER := 3
     );
 end AddressableRegisterTB;
 
 architecture Behavioral of AddressableRegisterTB is
     signal sigClk, sigRst : STD_LOGIC;
-    signal sigPktInValid, sigValOutValid, sigDoneOut : STD_LOGIC;
+    signal sigPktInValid, sigValOutValid1, sigDoneOut1, sigValOutValid2, sigDoneOut2 : STD_LOGIC;
     signal sigPktIn : STD_LOGIC_VECTOR (dataWidth + addressWidth - 1 downto 0);
-    signal sigValOut : STD_LOGIC_VECTOR (dataWidth - 1 downto 0);
+    signal sigValOut1 : STD_LOGIC_VECTOR (dataWidth - 1 downto 0);
+    signal sigValOut2 : STD_LOGIC_VECTOR (dataWidth + padHighWidth + padLowWidth - 1 downto 0);
     
     component AddressableRegister is
         generic (
             dataWidth : INTEGER;
             addressWidth : INTEGER;
-            address : INTEGER
+            address : INTEGER;
+            padHighWidth : INTEGER := 0;
+            padLowWidth : INTEGER := 0
         );
         port (
             CLK, RST : in STD_LOGIC;
             PKT_IN : in STD_LOGIC_VECTOR (addressWidth + dataWidth - 1 downto 0);
             PKT_IN_VALID : in STD_LOGIC;
-            VAL_OUT : out STD_LOGIC_VECTOR (dataWidth - 1 downto 0);
+            VAL_OUT : out STD_LOGIC_VECTOR (dataWidth + padHighWidth + padLowWidth - 1 downto 0);
             VAL_OUT_VALID : out STD_LOGIC;
             DONE_OUT : out STD_LOGIC
         );
     end component;
 begin
-    uut: AddressableRegister
+    uut1: AddressableRegister
         generic map (
             dataWidth => dataWidth,
             addressWidth => addressWidth,
@@ -43,9 +48,27 @@ begin
             RST => sigRst,
             PKT_IN => sigPktIn,
             PKT_IN_VALID => sigPktInValid,
-            VAL_OUT => sigValOut,
-            VAL_OUT_VALID => sigValOutValid,
-            DONE_OUT => sigDoneOut
+            VAL_OUT => sigValOut1,
+            VAL_OUT_VALID => sigValOutValid1,
+            DONE_OUT => sigDoneOut1
+        );
+    
+    uut2: AddressableRegister
+        generic map (
+            dataWidth => dataWidth,
+            addressWidth => addressWidth,
+            address => address,
+            padHighWidth => padHighWidth,
+            padLowWidth => padLowWidth
+        )
+        port map (
+            CLK => sigClk,
+            RST => sigRst,
+            PKT_IN => sigPktIn,
+            PKT_IN_VALID => sigPktInValid,
+            VAL_OUT => sigValOut2,
+            VAL_OUT_VALID => sigValOutValid2,
+            DONE_OUT => sigDoneOut2
         );
     
     clock: process begin
@@ -58,6 +81,8 @@ begin
     tb: process is
         constant val1 : STD_LOGIC_VECTOR(15 downto 0) := "00000000"&"11111111";
         constant val2 : STD_LOGIC_VECTOR(15 downto 0) := "11111111"&"00000000";
+        constant correctAddr : STD_LOGIC_VECTOR(3 downto 0) := "1000";
+        constant incorrectAddr : STD_LOGIC_VECTOR(3 downto 0) := "0100";
     begin
         sigPktIn <= (others => '0');
         sigPktInValid <= '0';
@@ -67,32 +92,43 @@ begin
         sigRst <= '0';
 
         -- Test correctly addressed packets are received correctly
-        sigPktIn <= "1000"&val1;
+        sigPktIn <= correctAddr & val1;
         sigPktInValid <= '1';
         
         wait for 110ns;
-        assert sigValOut = val1 report "Test failed: 1";
-        assert sigValOutValid = '1' report "Test failed: 2";
-        assert sigDoneOut = '1' report "Test failed: 3";
+        assert sigValOut1 = val1 report "Test failed: 1";
+        assert sigValOutValid1 = '1' report "Test failed: 2";
+        assert sigDoneOut1 = '1' report "Test failed: 3";
         
         wait for 90ns;
         sigPktInValid <= '0';
         
         wait for 110ns;
-        assert sigValOutValid = '0' report "Test failed: 4";
-        assert sigDoneOut = '0' report "Test failed: 5";
-        
+        assert sigValOutValid1 = '0' report "Test failed: 4";
+        assert sigDoneOut1 = '0' report "Test failed: 5";
         wait for 90ns;
         
-        -- Test correctly addressed packets are received correctly
-        sigPktIn <= "0100"&val2;
+        -- Test incorrectly addressed packets are rejected correctly
+        sigPktIn <= incorrectAddr & val2;
         sigPktInValid <= '1';
         
-        wait for 100ns;
-        assert sigValOut = val1 report "Test failed: 6";
-        assert sigValOutValid = '0' report "Test failed: 7";
+        wait for 110ns;
+        assert sigValOut1 = val1 report "Test failed: 6";
+        assert sigValOutValid1 = '0' report "Test failed: 7";
         
-        wait for 100ns;
+        wait for 90ns;
+        sigPktInValid <= '0';
+
+        wait for 200ns;        
+        
+        -- Test values are padded correctly
+        sigPktIn <= correctAddr & val1;
+        sigPktInValid <= '1';
+        
+        wait for 110ns;
+        assert sigValOut2 = "0000" & val1 & "000" report "Test failed: 8";
+        
+        wait for 90ns;
         sigPktInValid <= '0';
 
         wait;

@@ -1,9 +1,12 @@
 $NUM_LAYERS = 3;
 $NEURONS_PER_LAYER = 3;
 $NUM_INPUTS = 2;
-$INTEGER_PRECISION = 8;
-$FRACTION_PRECISION = 7;
-$AXI_BUS_WIDTH = 32;
+
+$VAL_INTEGER_PRECISION = 8;
+$VAL_FRACTION_PRECISION = 7;
+$WEIGHT_INTEGER_PRECISION = 6;
+$WEIGHT_FRACTION_PRECISION = 5;
+
 $PKT_TYPE_ADDR_WIDTH = 1;
 $PKT_LAYER_ADDR_WIDTH = 5;
 $PKT_NEURON_ADDR_WIDTH = 6;
@@ -11,9 +14,13 @@ $PKT_SYNAPSE_ADDR_WIDTH = 4;
 $STIMULUS_TYPE = 1;
 $WEIGHT_TYPE = 0;
 
-$valueWidth = 1 + $INTEGER_PRECISION + $FRACTION_PRECISION; # Sign bit
-$neuronOutPacketWidth = $PKT_SYNAPSE_ADDR_WIDTH + $valueWidth;
+$AXI_BUS_WIDTH = 32;
+
+$weightWidth = 1 + $WEIGHT_INTEGER_PRECISION + $WEIGHT_FRACTION_PRECISION
+$neuronOutPacketWidth = $PKT_SYNAPSE_ADDR_WIDTH + $weightWidth;
 $layerOutPacketWidth = $PKT_NEURON_ADDR_WIDTH + $neuronOutPacketWidth;
 $typeOutPacketWidth = $PKT_LAYER_ADDR_WIDTH + $layerOutPacketWidth;
 $networkInPacketWidth = $PKT_TYPE_ADDR_WIDTH + $typeOutPacketWidth;
+
+$valueWidth = 1 + $VAL_INTEGER_PRECISION + $VAL_FRACTION_PRECISION; # Sign bit
 $pktStimulusAddrWidth = $AXI_BUS_WIDTH - $valueWidth - 1;

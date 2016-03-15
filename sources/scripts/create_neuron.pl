@@ -8,8 +8,10 @@ require "params.pl";
 our $NEURONS_PER_LAYER;
 our $NUM_LAYERS;
 our $NUM_INPUTS;
-our $INTEGER_PRECISION;
-our $FRACTION_PRECISION;
+our $VAL_INTEGER_PRECISION;
+our $VAL_FRACTION_PRECISION;
+our $WEIGHT_INTEGER_PRECISION;
+our $WEIGHT_FRACTION_PRECISION;
 our $AXI_BUS_WIDTH;
 our $PKT_TYPE_ADDR_WIDTH;
 our $PKT_LAYER_ADDR_WIDTH;
@@ -19,6 +21,7 @@ our $STIMULUS_TYPE;
 our $WEIGHT_TYPE;
 
 our $valueWidth;
+our $weightWidth;
 our $neuronOutPacketWidth;
 our $layerOutPacketWidth;
 
@@ -78,8 +81,8 @@ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice:1.0 MultiplierSlicer_${id}
 
 create_bd_cell -type ip -vlnv xilinx.com:ip:mult_gen:12.0 Multiplier_${id}
 create_bd_cell -type ip -vlnv oloftus.com:prif:Complements1To2:1.0 Multiplier_${id}_Complements1To2
-create_bd_cell -type ip -vlnv oloftus.com:prif:Complements2To1:1.0 Multiplier_${id}_Complements2To1_0
-create_bd_cell -type ip -vlnv oloftus.com:prif:Complements2To1:1.0 Multiplier_${id}_Complements2To1_1
+create_bd_cell -type ip -vlnv oloftus.com:prif:Complements2To1:1.0 Multiplier_${id}_Complements2To1_B
+create_bd_cell -type ip -vlnv oloftus.com:prif:Complements2To1:1.0 Multiplier_${id}_Complements2To1_A
 create_bd_cell -type ip -vlnv oloftus.com:prif:Xor2:1.0 Multiplier_${id}_Xor2
 
 CMD
@@ -94,13 +97,13 @@ print $fh <<CMD;
 set_property -dict [list CONFIG.packetInWidth {$layerOutPacketWidth} CONFIG.packetOutWidth {$neuronOutPacketWidth}] [get_bd_cells NeuronRouter]
 set_property -dict [list CONFIG.latency {$neuronLatency}] [get_bd_cells ValidSetter]
 set_property -dict [list CONFIG.inputWidth {$valueWidth} CONFIG.numInputs {@{[$numSynapses + 1]}}] [get_bd_cells SumJunction]
-set_property -dict [list CONFIG.integerPrecision {$INTEGER_PRECISION} CONFIG.fractionPrecision {$FRACTION_PRECISION}] [get_bd_cells Plan]
+set_property -dict [list CONFIG.integerPrecision {$VAL_INTEGER_PRECISION} CONFIG.fractionPrecision {$VAL_FRACTION_PRECISION}] [get_bd_cells Plan]
 set_property -dict [list CONFIG.n {$numSynapses}] [get_bd_cells MultiplierEnable]
 set_property -dict [list CONFIG.NUM_PORTS {$numSynapses}] [get_bd_cells MultiplierEnableConcat]
 set_property -dict [list CONFIG.n {@{[$numSynapses + 1]}}] [get_bd_cells DoneOut]
 set_property -dict [list CONFIG.NUM_PORTS {@{[$numSynapses + 1]}}] [get_bd_cells DoneOutConcat]
 set_property -dict [list CONFIG.NUM_PORTS {@{[$numSynapses + 1]}} @$sumJunctionConcatInputs] [get_bd_cells SumJunctionConcat]
-set_property -dict [list CONFIG.address {0} CONFIG.addressWidth {$PKT_SYNAPSE_ADDR_WIDTH} CONFIG.dataWidth {$valueWidth}] [get_bd_cells BiasRegister]
+set_property -dict [list CONFIG.address {0} CONFIG.addressWidth {$PKT_SYNAPSE_ADDR_WIDTH} CONFIG.dataWidth {$weightWidth} CONFIG.padHighWidth {@{[$VAL_INTEGER_PRECISION - $WEIGHT_INTEGER_PRECISION]}} CONFIG.padLowWidth {@{[$VAL_FRACTION_PRECISION - $WEIGHT_FRACTION_PRECISION]}}] [get_bd_cells BiasRegister]
 
 CMD
 
@@ -109,12 +112,12 @@ foreach my $id (0..$numSynapses - 1) {
 print $fh <<CMD;
 
 set_property -dict [list CONFIG.size {$valueWidth}] [get_bd_cells Synapse_${id}]
-set_property -dict [list CONFIG.address {@{[$id + 1]}} CONFIG.addressWidth {$PKT_SYNAPSE_ADDR_WIDTH} CONFIG.dataWidth {$valueWidth}] [get_bd_cells WeightRegister_${id}]
-set_property -dict [list CONFIG.DIN_FROM {@{[$FRACTION_PRECISION + $valueWidth - 1]}} CONFIG.DIN_TO {${FRACTION_PRECISION}}] [get_bd_cells MultiplierSlicer_${id}]
-set_property -dict [list CONFIG.PortAWidth.VALUE_SRC USER CONFIG.PortBWidth.VALUE_SRC USER CONFIG.PortAWidth {$valueWidth} CONFIG.PortBWidth {$valueWidth} CONFIG.PortAType.VALUE_SRC USER CONFIG.PortBType.VALUE_SRC USER CONFIG.PortAType {Signed} CONFIG.PortBType {Signed} CONFIG.ClockEnable {true}] [get_bd_cells Multiplier_${id}]
+set_property -dict [list CONFIG.address {@{[$id + 1]}} CONFIG.addressWidth {$PKT_SYNAPSE_ADDR_WIDTH} CONFIG.dataWidth {$weightWidth}] [get_bd_cells WeightRegister_${id}]
+set_property -dict [list CONFIG.DIN_FROM {@{[$WEIGHT_FRACTION_PRECISION + $valueWidth - 1]}} CONFIG.DIN_TO {${WEIGHT_FRACTION_PRECISION}}] [get_bd_cells MultiplierSlicer_${id}]
+set_property -dict [list CONFIG.PortAWidth.VALUE_SRC USER CONFIG.PortBWidth.VALUE_SRC USER CONFIG.PortAWidth {$valueWidth} CONFIG.PortBWidth {$weightWidth} CONFIG.PortAType.VALUE_SRC USER CONFIG.PortBType.VALUE_SRC USER CONFIG.PortAType {Signed} CONFIG.PortBType {Signed} CONFIG.ClockEnable {true} CONFIG.Use_Custom_Output_Width {true} CONFIG.OutputWidthHigh {@{[$valueWidth + $weightWidth]}}] [get_bd_cells Multiplier_${id}]
 set_property -dict [list CONFIG.width {@{[2 * $valueWidth]}}] [get_bd_cells Multiplier_${id}_Complements1To2]
-set_property -dict [list CONFIG.width {$valueWidth}] [get_bd_cells Multiplier_${id}_Complements2To1_0]
-set_property -dict [list CONFIG.width {$valueWidth}] [get_bd_cells Multiplier_${id}_Complements2To1_1]
+set_property -dict [list CONFIG.width {$weightWidth}] [get_bd_cells Multiplier_${id}_Complements2To1_B]
+set_property -dict [list CONFIG.width {$valueWidth}] [get_bd_cells Multiplier_${id}_Complements2To1_A]
 
 CMD
 }
@@ -166,17 +169,17 @@ connect_bd_net [get_bd_ports SYN_${id}_VALID] [get_bd_pins Synapse_${id}/SYN_IN_
 connect_bd_net [get_bd_ports SYN_${id}_DIN] [get_bd_pins Synapse_${id}/SYN_IN]
 connect_bd_net [get_bd_pins ValidSetter/SYN_IN_CLR] [get_bd_pins Synapse_${id}/CLR]
 connect_bd_net [get_bd_pins Multiplier_${id}/CE] [get_bd_pins MultiplierEnable/DOUT]
-connect_bd_net [get_bd_pins Synapse_${id}/SYN_OUT] [get_bd_pins Multiplier_${id}_Complements2To1_1/TWOS]
-connect_bd_net [get_bd_pins WeightRegister_${id}/VAL_OUT] [get_bd_pins Multiplier_${id}_Complements2To1_0/TWOS]
+connect_bd_net [get_bd_pins Synapse_${id}/SYN_OUT] [get_bd_pins Multiplier_${id}_Complements2To1_A/TWOS]
+connect_bd_net [get_bd_pins WeightRegister_${id}/VAL_OUT] [get_bd_pins Multiplier_${id}_Complements2To1_B/TWOS]
 connect_bd_net [get_bd_pins Multiplier_${id}_Complements1To2/TWOS] [get_bd_pins MultiplierSlicer_${id}/Din]
-connect_bd_net [get_bd_pins Multiplier_${id}_Complements2To1_0/ONES] [get_bd_pins Multiplier_${id}/B]
-connect_bd_net [get_bd_pins Multiplier_${id}_Complements2To1_0/SIGN] [get_bd_pins Multiplier_${id}_Xor2/B]
-connect_bd_net [get_bd_pins Multiplier_${id}_Complements2To1_1/ONES] [get_bd_pins Multiplier_${id}/A]
-connect_bd_net [get_bd_pins Multiplier_${id}_Complements2To1_1/SIGN] [get_bd_pins Multiplier_${id}_Xor2/A]
+connect_bd_net [get_bd_pins Multiplier_${id}_Complements2To1_B/ONES] [get_bd_pins Multiplier_${id}/B]
+connect_bd_net [get_bd_pins Multiplier_${id}_Complements2To1_B/SIGN] [get_bd_pins Multiplier_${id}_Xor2/B]
+connect_bd_net [get_bd_pins Multiplier_${id}_Complements2To1_A/ONES] [get_bd_pins Multiplier_${id}/A]
+connect_bd_net [get_bd_pins Multiplier_${id}_Complements2To1_A/SIGN] [get_bd_pins Multiplier_${id}_Xor2/A]
 connect_bd_net [get_bd_pins Multiplier_${id}_Complements1To2/SIGN] [get_bd_pins Multiplier_${id}_Xor2/O]
 connect_bd_net [get_bd_pins Multiplier_${id}_Complements1To2/ONES] [get_bd_pins Multiplier_${id}/P]
 
-group_bd_cells MultiplierWrapper_${id} [get_bd_cells Multiplier_${id}] [get_bd_cells Multiplier_${id}_Complements1To2] [get_bd_cells Multiplier_${id}_Complements2To1_1] [get_bd_cells Multiplier_${id}_Xor2] [get_bd_cells Multiplier_${id}_Complements2To1_0]
+group_bd_cells MultiplierWrapper_${id} [get_bd_cells Multiplier_${id}] [get_bd_cells Multiplier_${id}_Complements1To2] [get_bd_cells Multiplier_${id}_Complements2To1_A] [get_bd_cells Multiplier_${id}_Xor2] [get_bd_cells Multiplier_${id}_Complements2To1_B] [get_bd_cells MultiplierSlicer_${id}]
 
 CMD
 }
