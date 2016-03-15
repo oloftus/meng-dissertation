@@ -48,9 +48,9 @@ CMD
 # Create static components
 print $fh <<CMD;
 
-create_bd_cell -type ip -vlnv oloftus.com:prif:ValueRouter:5.0 TypeRouter_Stimulus
+create_bd_cell -type ip -vlnv oloftus.com:prif:ValueRouter:1.0 TypeRouter_Stimulus
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 TypeRouter_Stimulus_Address
-create_bd_cell -type ip -vlnv oloftus.com:prif:ValueRouter:5.0 TypeRouter_Weight
+create_bd_cell -type ip -vlnv oloftus.com:prif:ValueRouter:1.0 TypeRouter_Weight
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 TypeRouter_Weight_Address
 create_bd_cell -type ip -vlnv oloftus.com:prif:OrN:1.0 PktRcvd_Layers
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 PktRcvdConcat_Layers
@@ -68,7 +68,7 @@ CMD
 foreach my $lid (0..$NUM_LAYERS - 1) {
 print $fh <<CMD;
 
-create_bd_cell -type ip -vlnv oloftus.com:prif:ValueRouter:5.0 LayerRouter_${lid}
+create_bd_cell -type ip -vlnv oloftus.com:prif:ValueRouter:1.0 LayerRouter_${lid}
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 LayerRouter_${lid}_Address
 create_bd_cell -type ip -vlnv oloftus.com:prif:OrN:1.0 PktRcvd_Layer_${lid}
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 PktRcvdConcat_Layer_${lid}
@@ -89,7 +89,7 @@ CMD
 foreach my $id (0..$NUM_INPUTS - 1) {
 print $fh <<CMD;
 
-create_bd_cell -type ip -vlnv oloftus.com:prif:AddressableRegister:2.0 StimulusRegister_${id}
+create_bd_cell -type ip -vlnv oloftus.com:prif:AddressableRegister:1.0 StimulusRegister_${id}
 
 CMD
 }

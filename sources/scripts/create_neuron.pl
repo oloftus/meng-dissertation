@@ -55,7 +55,7 @@ CMD
 # Create static components
 print $fh <<CMD;
 
-create_bd_cell -type ip -vlnv oloftus.com:prif:ValueRouter:5.0 NeuronRouter
+create_bd_cell -type ip -vlnv oloftus.com:prif:ValueRouter:1.0 NeuronRouter
 create_bd_cell -type ip -vlnv oloftus.com:prif:AndN:1.0 MultiplierEnable
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 MultiplierEnableConcat
 create_bd_cell -type ip -vlnv oloftus.com:prif:OrN:1.0 DoneOut
@@ -64,7 +64,7 @@ create_bd_cell -type ip -vlnv oloftus.com:prif:SumJunction:1.0 SumJunction
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 SumJunctionConcat
 create_bd_cell -type ip -vlnv oloftus.com:prif:ValidSetter:1.0 ValidSetter
 create_bd_cell -type ip -vlnv oloftus.com:prif:Plan:1.0 Plan
-create_bd_cell -type ip -vlnv oloftus.com:prif:AddressableRegister:2.0 BiasRegister
+create_bd_cell -type ip -vlnv oloftus.com:prif:AddressableRegister:1.0 BiasRegister
 
 CMD
 
@@ -73,7 +73,7 @@ foreach my $id (0..$numSynapses - 1) {
 print $fh <<CMD;
 
 create_bd_cell -type ip -vlnv oloftus.com:prif:Synapse:1.0 Synapse_${id}
-create_bd_cell -type ip -vlnv oloftus.com:prif:AddressableRegister:2.0 WeightRegister_${id}
+create_bd_cell -type ip -vlnv oloftus.com:prif:AddressableRegister:1.0 WeightRegister_${id}
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice:1.0 MultiplierSlicer_${id}
 
 create_bd_cell -type ip -vlnv xilinx.com:ip:mult_gen:12.0 Multiplier_${id}
