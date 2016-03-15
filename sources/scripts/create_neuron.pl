@@ -21,10 +21,10 @@ our $WEIGHT_TYPE;
 our $valueWidth;
 our $neuronOutPacketWidth;
 our $layerOutPacketWidth;
-our $neuronLatency;
 
 foreach my $mode ("hidden_neuron", "input_neuron") {
 my $numSynapses = $mode =~ "^hidden" ? $NEURONS_PER_LAYER : $NUM_INPUTS;
+my $neuronLatency = $numSynapses + 1;
 
 open my $fh, ">", "create_".($mode =~ "^hidden" ? "hidden" : "input")."_neuron.tcl" or die "Couldn't open file"."\n";
 
