@@ -50,6 +50,7 @@ CMD
 
 # Create static components
 print $fh <<CMD;
+
 create_bd_cell -type ip -vlnv oloftus.com:prif:ValueRouter:5.0 NeuronRouter
 create_bd_cell -type ip -vlnv oloftus.com:prif:AndN:1.0 MultiplierEnable
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 MultiplierEnableConcat
@@ -59,6 +60,8 @@ create_bd_cell -type ip -vlnv oloftus.com:prif:SumJunction:1.0 SumJunction
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 SumJunctionConcat
 create_bd_cell -type ip -vlnv oloftus.com:prif:ValidSetter:1.0 ValidSetter
 create_bd_cell -type ip -vlnv oloftus.com:prif:Plan:1.0 Plan
+create_bd_cell -type ip -vlnv oloftus.com:prif:AddressableRegister:2.0 BiasRegister
+
 CMD
 
 # Create synapses
@@ -80,20 +83,20 @@ CMD
 
 # Configure (semi-) static components
 my $sumJunctionConcatInputs = [];
-for my $id (0..$NEURONS_PER_LAYER - 1) { push $sumJunctionConcatInputs, "CONFIG.IN${id}_WIDTH {$valueWidth}" };
+for my $id (0..$NEURONS_PER_LAYER) { push $sumJunctionConcatInputs, "CONFIG.IN${id}_WIDTH {$valueWidth}" };
 
 print $fh <<CMD;
 
 set_property -dict [list CONFIG.packetInWidth {$layerOutPacketWidth} CONFIG.packetOutWidth {$neuronOutPacketWidth}] [get_bd_cells NeuronRouter]
 set_property -dict [list CONFIG.latency {$neuronLatency}] [get_bd_cells ValidSetter]
-set_property -dict [list CONFIG.inputWidth {$valueWidth}] [get_bd_cells SumJunction]
-set_property -dict [list CONFIG.numInputs {$NEURONS_PER_LAYER}] [get_bd_cells SumJunction]
+set_property -dict [list CONFIG.inputWidth {$valueWidth} CONFIG.numInputs {@{[$NEURONS_PER_LAYER + 1]}}] [get_bd_cells SumJunction]
 set_property -dict [list CONFIG.integerPrecision {$INTEGER_PRECISION} CONFIG.fractionPrecision {$FRACTION_PRECISION}] [get_bd_cells Plan]
 set_property -dict [list CONFIG.n {$NEURONS_PER_LAYER}] [get_bd_cells MultiplierEnable]
 set_property -dict [list CONFIG.NUM_PORTS {$NEURONS_PER_LAYER}] [get_bd_cells MultiplierEnableConcat]
-set_property -dict [list CONFIG.n {$NEURONS_PER_LAYER}] [get_bd_cells DoneOut]
-set_property -dict [list CONFIG.NUM_PORTS {$NEURONS_PER_LAYER}] [get_bd_cells DoneOutConcat]
-set_property -dict [list CONFIG.NUM_PORTS {$NEURONS_PER_LAYER} @$sumJunctionConcatInputs] [get_bd_cells SumJunctionConcat]
+set_property -dict [list CONFIG.n {@{[$NEURONS_PER_LAYER + 1]}}] [get_bd_cells DoneOut]
+set_property -dict [list CONFIG.NUM_PORTS {@{[$NEURONS_PER_LAYER + 1]}}] [get_bd_cells DoneOutConcat]
+set_property -dict [list CONFIG.NUM_PORTS {@{[$NEURONS_PER_LAYER + 1]}} @$sumJunctionConcatInputs] [get_bd_cells SumJunctionConcat]
+set_property -dict [list CONFIG.address {0} CONFIG.addressWidth {$PKT_SYNAPSE_ADDR_WIDTH} CONFIG.dataWidth {$valueWidth}] [get_bd_cells BiasRegister]
 
 CMD
 
@@ -102,7 +105,7 @@ foreach my $id (0..$NEURONS_PER_LAYER - 1) {
 print $fh <<CMD;
 
 set_property -dict [list CONFIG.size {$valueWidth}] [get_bd_cells Synapse_${id}]
-set_property -dict [list CONFIG.address {${id}} CONFIG.addressWidth {$PKT_SYNAPSE_ADDR_WIDTH} CONFIG.dataWidth {$valueWidth}] [get_bd_cells WeightRegister_${id}]
+set_property -dict [list CONFIG.address {@{[$id + 1]}} CONFIG.addressWidth {$PKT_SYNAPSE_ADDR_WIDTH} CONFIG.dataWidth {$valueWidth}] [get_bd_cells WeightRegister_${id}]
 set_property -dict [list CONFIG.DIN_FROM {@{[$FRACTION_PRECISION + $valueWidth - 1]}} CONFIG.DIN_TO {${FRACTION_PRECISION}}] [get_bd_cells MultiplierSlicer_${id}]
 
 set_property -dict [list CONFIG.PortAWidth.VALUE_SRC USER CONFIG.PortBWidth.VALUE_SRC USER CONFIG.PortAWidth {$valueWidth} CONFIG.PortBWidth {$valueWidth} CONFIG.PortAType.VALUE_SRC USER CONFIG.PortBType.VALUE_SRC USER CONFIG.PortAType {Signed} CONFIG.PortBType {Signed} CONFIG.ClockEnable {true}] [get_bd_cells Multiplier_${id}]
@@ -133,6 +136,12 @@ connect_bd_net [get_bd_ports SYN_OUT_VALID] [get_bd_pins ValidSetter/SYN_OUT_VAL
 connect_bd_net [get_bd_ports PKT_IN_VALID] [get_bd_pins NeuronRouter/PKT_IN_VALID]
 connect_bd_net [get_bd_ports PKT_IN] [get_bd_pins NeuronRouter/PKT_IN]
 connect_bd_net [get_bd_ports NEURON_ADDR] [get_bd_pins NeuronRouter/ADDR]
+connect_bd_net [get_bd_ports CLK] [get_bd_pins BiasRegister/CLK]
+connect_bd_net [get_bd_ports RST] [get_bd_pins BiasRegister/RST]
+connect_bd_net [get_bd_pins NeuronRouter/PKT_OUT] [get_bd_pins BiasRegister/PKT_IN]
+connect_bd_net [get_bd_pins NeuronRouter/PKT_OUT_VALID] [get_bd_pins BiasRegister/PKT_IN_VALID]
+connect_bd_net [get_bd_pins BiasRegister/VAL_OUT] [get_bd_pins SumJunctionConcat/In0]
+connect_bd_net [get_bd_pins BiasRegister/DONE_OUT] [get_bd_pins DoneOutConcat/In0]
 
 CMD
 
@@ -142,14 +151,14 @@ print $fh <<CMD;
 
 connect_bd_net [get_bd_ports CLK] [get_bd_pins WeightRegister_${id}/CLK]
 connect_bd_net [get_bd_ports RST] [get_bd_pins WeightRegister_${id}/RST]
-connect_bd_net [get_bd_pins DoneOutConcat/In${id}] [get_bd_pins WeightRegister_${id}/DONE_OUT]
+connect_bd_net [get_bd_pins WeightRegister_${id}/DONE_OUT] [get_bd_pins DoneOutConcat/In@{[$id + 1]}]
 connect_bd_net [get_bd_pins NeuronRouter/PKT_OUT] [get_bd_pins WeightRegister_${id}/PKT_IN]
 connect_bd_net [get_bd_pins NeuronRouter/PKT_OUT_VALID] [get_bd_pins WeightRegister_${id}/PKT_IN_VALID]
 connect_bd_net [get_bd_ports CLK] [get_bd_pins Synapse_${id}/CLK]
 connect_bd_net [get_bd_ports RST] [get_bd_pins Synapse_${id}/RST]
 connect_bd_net [get_bd_pins Synapse_${id}/SYN_OUT_VALID] [get_bd_pins MultiplierEnableConcat/In${id}]
 connect_bd_net [get_bd_ports CLK] [get_bd_pins Multiplier_${id}/CLK]
-connect_bd_net [get_bd_pins MultiplierSlicer_${id}/Dout] [get_bd_pins SumJunctionConcat/In${id}]
+connect_bd_net [get_bd_pins MultiplierSlicer_${id}/Dout] [get_bd_pins SumJunctionConcat/In@{[$id + 1]}]
 connect_bd_net [get_bd_ports SYN_${id}_VALID] [get_bd_pins Synapse_${id}/SYN_IN_VALID]
 connect_bd_net [get_bd_ports SYN_${id}_DIN] [get_bd_pins Synapse_${id}/SYN_IN]
 connect_bd_net [get_bd_pins ValidSetter/SYN_IN_CLR] [get_bd_pins Synapse_${id}/CLR]
@@ -164,7 +173,7 @@ connect_bd_net [get_bd_pins Multiplier_${id}_Complements2To1_1/SIGN] [get_bd_pin
 connect_bd_net [get_bd_pins Multiplier_${id}_Complements1To2/SIGN] [get_bd_pins Multiplier_${id}_Xor2/O]
 connect_bd_net [get_bd_pins Multiplier_${id}_Complements1To2/ONES] [get_bd_pins Multiplier_${id}/P]
 
-group_bd_cells mult_${id} [get_bd_cells Multiplier_${id}] [get_bd_cells Multiplier_${id}_Complements1To2] [get_bd_cells Multiplier_${id}_Complements2To1_1] [get_bd_cells Multiplier_${id}_Xor2] [get_bd_cells Multiplier_${id}_Complements2To1_0]
+group_bd_cells MultiplierWrapper_${id} [get_bd_cells Multiplier_${id}] [get_bd_cells Multiplier_${id}_Complements1To2] [get_bd_cells Multiplier_${id}_Complements2To1_1] [get_bd_cells Multiplier_${id}_Xor2] [get_bd_cells Multiplier_${id}_Complements2To1_0]
 
 CMD
 }
