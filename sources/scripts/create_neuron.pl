@@ -7,6 +7,7 @@ require "params.pl";
 
 our $NEURONS_PER_LAYER;
 our $NUM_LAYERS;
+our $NUM_INPUTS;
 our $INTEGER_PRECISION;
 our $FRACTION_PRECISION;
 our $AXI_BUS_WIDTH;
@@ -22,7 +23,10 @@ our $neuronOutPacketWidth;
 our $layerOutPacketWidth;
 our $neuronLatency;
 
-open my $fh, ">", "create_neuron.tcl";
+foreach my $mode ("hidden_neuron", "input_neuron") {
+my $numSynapses = $mode =~ "^hidden" ? $NEURONS_PER_LAYER : $NUM_INPUTS;
+
+open my $fh, ">", "create_".($mode =~ "^hidden" ? "hidden" : "input")."_neuron.tcl" or die "Couldn't open file"."\n";
 
 # Create static ports
 print $fh <<CMD;
@@ -39,7 +43,7 @@ create_bd_port -dir O DONE_OUT
 CMD
 
 # Create input ports for each synapse
-foreach my $id (0..$NEURONS_PER_LAYER - 1) {
+foreach my $id (0..$numSynapses - 1) {
 print $fh <<CMD;
 
 create_bd_port -dir I SYN_${id}_VALID
@@ -65,7 +69,7 @@ create_bd_cell -type ip -vlnv oloftus.com:prif:AddressableRegister:2.0 BiasRegis
 CMD
 
 # Create synapses
-foreach my $id (0..$NEURONS_PER_LAYER - 1) {
+foreach my $id (0..$numSynapses - 1) {
 print $fh <<CMD;
 
 create_bd_cell -type ip -vlnv oloftus.com:prif:Synapse:1.0 Synapse_${id}
@@ -83,31 +87,30 @@ CMD
 
 # Configure (semi-) static components
 my $sumJunctionConcatInputs = [];
-for my $id (0..$NEURONS_PER_LAYER) { push $sumJunctionConcatInputs, "CONFIG.IN${id}_WIDTH {$valueWidth}" };
+for my $id (0..$numSynapses) { push $sumJunctionConcatInputs, "CONFIG.IN${id}_WIDTH {$valueWidth}" };
 
 print $fh <<CMD;
 
 set_property -dict [list CONFIG.packetInWidth {$layerOutPacketWidth} CONFIG.packetOutWidth {$neuronOutPacketWidth}] [get_bd_cells NeuronRouter]
 set_property -dict [list CONFIG.latency {$neuronLatency}] [get_bd_cells ValidSetter]
-set_property -dict [list CONFIG.inputWidth {$valueWidth} CONFIG.numInputs {@{[$NEURONS_PER_LAYER + 1]}}] [get_bd_cells SumJunction]
+set_property -dict [list CONFIG.inputWidth {$valueWidth} CONFIG.numInputs {@{[$numSynapses + 1]}}] [get_bd_cells SumJunction]
 set_property -dict [list CONFIG.integerPrecision {$INTEGER_PRECISION} CONFIG.fractionPrecision {$FRACTION_PRECISION}] [get_bd_cells Plan]
-set_property -dict [list CONFIG.n {$NEURONS_PER_LAYER}] [get_bd_cells MultiplierEnable]
-set_property -dict [list CONFIG.NUM_PORTS {$NEURONS_PER_LAYER}] [get_bd_cells MultiplierEnableConcat]
-set_property -dict [list CONFIG.n {@{[$NEURONS_PER_LAYER + 1]}}] [get_bd_cells DoneOut]
-set_property -dict [list CONFIG.NUM_PORTS {@{[$NEURONS_PER_LAYER + 1]}}] [get_bd_cells DoneOutConcat]
-set_property -dict [list CONFIG.NUM_PORTS {@{[$NEURONS_PER_LAYER + 1]}} @$sumJunctionConcatInputs] [get_bd_cells SumJunctionConcat]
+set_property -dict [list CONFIG.n {$numSynapses}] [get_bd_cells MultiplierEnable]
+set_property -dict [list CONFIG.NUM_PORTS {$numSynapses}] [get_bd_cells MultiplierEnableConcat]
+set_property -dict [list CONFIG.n {@{[$numSynapses + 1]}}] [get_bd_cells DoneOut]
+set_property -dict [list CONFIG.NUM_PORTS {@{[$numSynapses + 1]}}] [get_bd_cells DoneOutConcat]
+set_property -dict [list CONFIG.NUM_PORTS {@{[$numSynapses + 1]}} @$sumJunctionConcatInputs] [get_bd_cells SumJunctionConcat]
 set_property -dict [list CONFIG.address {0} CONFIG.addressWidth {$PKT_SYNAPSE_ADDR_WIDTH} CONFIG.dataWidth {$valueWidth}] [get_bd_cells BiasRegister]
 
 CMD
 
-# Configure neurons
-foreach my $id (0..$NEURONS_PER_LAYER - 1) {
+# Configure synapses
+foreach my $id (0..$numSynapses - 1) {
 print $fh <<CMD;
 
 set_property -dict [list CONFIG.size {$valueWidth}] [get_bd_cells Synapse_${id}]
 set_property -dict [list CONFIG.address {@{[$id + 1]}} CONFIG.addressWidth {$PKT_SYNAPSE_ADDR_WIDTH} CONFIG.dataWidth {$valueWidth}] [get_bd_cells WeightRegister_${id}]
 set_property -dict [list CONFIG.DIN_FROM {@{[$FRACTION_PRECISION + $valueWidth - 1]}} CONFIG.DIN_TO {${FRACTION_PRECISION}}] [get_bd_cells MultiplierSlicer_${id}]
-
 set_property -dict [list CONFIG.PortAWidth.VALUE_SRC USER CONFIG.PortBWidth.VALUE_SRC USER CONFIG.PortAWidth {$valueWidth} CONFIG.PortBWidth {$valueWidth} CONFIG.PortAType.VALUE_SRC USER CONFIG.PortBType.VALUE_SRC USER CONFIG.PortAType {Signed} CONFIG.PortBType {Signed} CONFIG.ClockEnable {true}] [get_bd_cells Multiplier_${id}]
 set_property -dict [list CONFIG.width {@{[2 * $valueWidth]}}] [get_bd_cells Multiplier_${id}_Complements1To2]
 set_property -dict [list CONFIG.width {$valueWidth}] [get_bd_cells Multiplier_${id}_Complements2To1_0]
@@ -145,8 +148,8 @@ connect_bd_net [get_bd_pins BiasRegister/DONE_OUT] [get_bd_pins DoneOutConcat/In
 
 CMD
 
-# Wire up neurons
-foreach my $id (0..$NEURONS_PER_LAYER - 1) {
+# Wire up synapses
+foreach my $id (0..$numSynapses - 1) {
 print $fh <<CMD;
 
 connect_bd_net [get_bd_ports CLK] [get_bd_pins WeightRegister_${id}/CLK]
@@ -184,3 +187,4 @@ print $fh <<CMD;
 regenerate_bd_layout
 
 CMD
+}
