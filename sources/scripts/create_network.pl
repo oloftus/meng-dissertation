@@ -12,29 +12,24 @@ our $VAL_INTEGER_PRECISION;
 our $VAL_FRACTION_PRECISION;
 our $WEIGHT_INTEGER_PRECISION;
 our $WEIGHT_FRACTION_PRECISION;
-our $AXI_BUS_WIDTH;
 our $PKT_TYPE_ADDR_WIDTH;
 our $PKT_LAYER_ADDR_WIDTH;
 our $PKT_NEURON_ADDR_WIDTH;
 our $PKT_SYNAPSE_ADDR_WIDTH;
+our $PKT_STIMULUS_REG_ADDR_WIDTH;
 our $STIMULUS_TYPE;
 our $WEIGHT_TYPE;
 our $NEURON_LATENCY;
+our $AXI_BUS_WIDTH;
 
 our $valueWidth;
 our $weightWidth;
 our $layerOutPacketWidth;
-our $typeOutPacketWidth;
-our $networkInPacketWidth;
-our $pktStimulusAddrWidth;
-
-if ($networkInPacketWidth > $AXI_BUS_WIDTH) {
-    die "Packet parameters exceeed AXI bus width";
-}
-
-if ($weightWidth > $valueWidth) {
-    die "Weight width is greater than value width";
-}
+our $weightTypeOutPacketWidth;
+our $stimulusTypeOutPacketWidth;
+our $pktStimulusTypeAddrWidth;
+our $pktWeightTypeAddrWidth;
+our $largestPacketWidth;
 
 open my $fh, ">", "create_network.tcl";
 
@@ -43,7 +38,7 @@ print $fh <<CMD;
 
 create_bd_port -dir I -type clk CLK
 create_bd_port -dir I -type rst RST
-create_bd_port -dir I -from @{[$networkInPacketWidth - 1]} -to 0 -type data PKT_IN
+create_bd_port -dir I -from @{[$AXI_BUS_WIDTH - 1]} -to 0 -type data PKT_IN
 create_bd_port -dir I PKT_IN_VALID
 create_bd_port -dir I NXT_SYN_OUT
 create_bd_port -dir O DONE_OUT
@@ -55,6 +50,7 @@ CMD
 # Create static components
 print $fh <<CMD;
 
+create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice:1.0 PacketInSlicer
 create_bd_cell -type ip -vlnv oloftus.com:prif:ValueRouter:1.0 TypeRouter_Stimulus
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 TypeRouter_Stimulus_Address
 create_bd_cell -type ip -vlnv oloftus.com:prif:ValueRouter:1.0 TypeRouter_Weight
@@ -107,10 +103,14 @@ for my $id (0..$NEURONS_PER_LAYER - 1) { push $synOutConcatInputs, "CONFIG.IN${i
 # Configure static components
 print $fh <<CMD;
 
-set_property -dict [list CONFIG.packetOutWidth {${typeOutPacketWidth}} CONFIG.packetInWidth {${networkInPacketWidth}}] [get_bd_cells TypeRouter_Stimulus]
-set_property -dict [list CONFIG.CONST_VAL {${STIMULUS_TYPE}}] [get_bd_cells TypeRouter_Stimulus_Address]
-set_property -dict [list CONFIG.packetOutWidth {${typeOutPacketWidth}} CONFIG.packetInWidth {${networkInPacketWidth}}] [get_bd_cells TypeRouter_Weight]
-set_property -dict [list CONFIG.CONST_VAL {$WEIGHT_TYPE}] [get_bd_cells TypeRouter_Weight_Address]
+set_property -dict [list CONFIG.DIN_WIDTH {32} CONFIG.DIN_TO {0} CONFIG.DIN_FROM {@{[$largestPacketWidth - 1]}}] [get_bd_cells PacketInSlicer]
+
+set_property -dict [list CONFIG.packetOutWidth {${stimulusTypeOutPacketWidth}} CONFIG.packetInWidth {${largestPacketWidth}}] [get_bd_cells TypeRouter_Stimulus]
+set_property -dict [list CONFIG.CONST_WIDTH {${pktStimulusTypeAddrWidth}} CONFIG.CONST_VAL {@{[$STIMULUS_TYPE << ($pktStimulusTypeAddrWidth - $PKT_TYPE_ADDR_WIDTH)]}}] [get_bd_cells TypeRouter_Stimulus_Address]
+
+set_property -dict [list CONFIG.packetOutWidth {${weightTypeOutPacketWidth}} CONFIG.packetInWidth {${largestPacketWidth}}] [get_bd_cells TypeRouter_Weight]
+set_property -dict [list CONFIG.CONST_WIDTH {${pktWeightTypeAddrWidth}} CONFIG.CONST_VAL {@{[$STIMULUS_TYPE << ($pktWeightTypeAddrWidth - $PKT_TYPE_ADDR_WIDTH)]}}] [get_bd_cells TypeRouter_Weight_Address]
+
 set_property -dict [list CONFIG.n {${NUM_LAYERS}}] [get_bd_cells PktRcvd_Layers]
 set_property -dict [list CONFIG.NUM_PORTS {${NUM_LAYERS}}] [get_bd_cells PktRcvdConcat_Layers]
 set_property -dict [list CONFIG.n {${NUM_INPUTS}}] [get_bd_cells PktRcvd_StimulusRegisters]
@@ -126,7 +126,7 @@ CMD
 foreach my $lid (0..$NUM_LAYERS - 1) {
 print $fh <<CMD;
 
-set_property -dict [list CONFIG.packetOutWidth {${layerOutPacketWidth}} CONFIG.packetInWidth {${typeOutPacketWidth}}] [get_bd_cells LayerRouter_${lid}]
+set_property -dict [list CONFIG.packetOutWidth {${layerOutPacketWidth}} CONFIG.packetInWidth {${weightTypeOutPacketWidth}}] [get_bd_cells LayerRouter_${lid}]
 set_property -dict [list CONFIG.CONST_WIDTH {${PKT_LAYER_ADDR_WIDTH}} CONFIG.CONST_VAL {${lid}}] [get_bd_cells LayerRouter_${lid}_Address]
 set_property -dict [list CONFIG.n {${NUM_LAYERS}}] [get_bd_cells PktRcvd_Layer_${lid}]
 set_property -dict [list CONFIG.NUM_PORTS {${NEURONS_PER_LAYER}}] [get_bd_cells PktRcvdConcat_Layer_${lid}]
@@ -146,7 +146,7 @@ CMD
 foreach my $id (0..$NUM_INPUTS - 1) {
 print $fh <<CMD;
 
-set_property -dict [list CONFIG.address {${id}} CONFIG.addressWidth {${pktStimulusAddrWidth}} CONFIG.dataWidth {${valueWidth}}] [get_bd_cells StimulusRegister_${id}]
+set_property -dict [list CONFIG.address {${id}} CONFIG.addressWidth {${PKT_STIMULUS_REG_ADDR_WIDTH}} CONFIG.dataWidth {${valueWidth}}] [get_bd_cells StimulusRegister_${id}]
 
 CMD
 }
@@ -154,10 +154,12 @@ CMD
 # Wire up static components
 print $fh <<CMD;
 
+connect_bd_net [get_bd_ports PKT_IN] [get_bd_pins PacketInSlicer/Din]
+
 connect_bd_net [get_bd_ports CLK] [get_bd_pins TypeRouter_Weight/CLK]
 connect_bd_net [get_bd_ports RST] [get_bd_pins TypeRouter_Weight/RST]
 connect_bd_net [get_bd_ports PKT_IN_VALID] [get_bd_pins TypeRouter_Weight/PKT_IN_VALID]
-connect_bd_net [get_bd_ports PKT_IN] [get_bd_pins TypeRouter_Weight/PKT_IN]
+connect_bd_net [get_bd_pins PacketInSlicer/Dout] [get_bd_pins TypeRouter_Weight/PKT_IN]
 connect_bd_net [get_bd_pins TypeRouter_Weight/DONE_IN] [get_bd_pins PktRcvd_Layers/DOUT]
 connect_bd_net [get_bd_pins TypeRouter_Weight/DONE_OUT] [get_bd_pins PktRcvdConcat/In0]
 connect_bd_net [get_bd_pins TypeRouter_Weight_Address/dout] [get_bd_pins TypeRouter_Weight/ADDR]
@@ -165,7 +167,7 @@ connect_bd_net [get_bd_pins TypeRouter_Weight_Address/dout] [get_bd_pins TypeRou
 connect_bd_net [get_bd_ports CLK] [get_bd_pins TypeRouter_Stimulus/CLK]
 connect_bd_net [get_bd_ports RST] [get_bd_pins TypeRouter_Stimulus/RST]
 connect_bd_net [get_bd_ports PKT_IN_VALID] [get_bd_pins TypeRouter_Stimulus/PKT_IN_VALID]
-connect_bd_net [get_bd_ports PKT_IN] [get_bd_pins TypeRouter_Stimulus/PKT_IN]
+connect_bd_net [get_bd_pins PacketInSlicer/Dout] [get_bd_pins TypeRouter_Stimulus/PKT_IN]
 connect_bd_net [get_bd_pins TypeRouter_Stimulus/DONE_IN] [get_bd_pins PktRcvd_StimulusRegisters/DOUT]
 connect_bd_net [get_bd_pins TypeRouter_Stimulus/DONE_OUT] [get_bd_pins PktRcvdConcat/In1]
 connect_bd_net [get_bd_pins TypeRouter_Stimulus_Address/dout] [get_bd_pins TypeRouter_Stimulus/ADDR]
