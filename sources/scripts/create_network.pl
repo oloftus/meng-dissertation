@@ -128,7 +128,7 @@ print $fh <<CMD;
 
 set_property -dict [list CONFIG.packetOutWidth {${layerOutPacketWidth}} CONFIG.packetInWidth {${weightTypeOutPacketWidth}}] [get_bd_cells LayerRouter_${lid}]
 set_property -dict [list CONFIG.CONST_WIDTH {${PKT_LAYER_ADDR_WIDTH}} CONFIG.CONST_VAL {${lid}}] [get_bd_cells LayerRouter_${lid}_Address]
-set_property -dict [list CONFIG.n {${NUM_LAYERS}}] [get_bd_cells PktRcvd_Layer_${lid}]
+set_property -dict [list CONFIG.n {${NEURONS_PER_LAYER}}] [get_bd_cells PktRcvd_Layer_${lid}]
 set_property -dict [list CONFIG.NUM_PORTS {${NEURONS_PER_LAYER}}] [get_bd_cells PktRcvdConcat_Layer_${lid}]
 
 CMD
