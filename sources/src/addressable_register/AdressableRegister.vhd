@@ -32,6 +32,9 @@ begin
     process (CLK) is
         variable packetDestAddr : STD_LOGIC_VECTOR (addressWidth - 1 downto 0);
         variable thisAddress : STD_LOGIC_VECTOR (addressWidth - 1 downto 0);
+        
+        variable inter1 : STD_LOGIC_VECTOR (dataWidth + padHighWidth - 1 downto 0);
+        variable inter2 : STD_LOGIC_VECTOR (dataWidth + padHighWidth + padLowWidth - 1 downto 0);
     begin
         if Rising_Edge(CLK) then
             if RST = '1' then
@@ -42,7 +45,20 @@ begin
                 thisAddress := STD_LOGIC_VECTOR(To_Unsigned(address, addressWidth));
 
                 if PKT_IN_VALID = '1' and packetDestAddr = thisAddress then
-                    VAL_OUT <= padHigh & PKT_IN(dataWidth - 1 downto 0) & padLow;
+                    if padHighWidth > 0 then
+                        inter1 := padHigh & PKT_IN(dataWidth - 1 downto 0);
+                    else
+                        inter1 := PKT_IN(dataWidth + padHighWidth - 1 downto 0);
+                    end if;
+                    
+                    if padLowWidth > 0 then
+                        inter2 := inter1 & padLow;
+                    else
+                        inter2 := inter1(dataWidth + padHighWidth - 1 downto 0 - padLowWidth);
+                    end if;
+                
+                    VAL_OUT <= inter2;
+                    
                     sigValOutValid <= '1';
                     sigDoneOut <= '1';
                 else

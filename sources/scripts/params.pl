@@ -34,8 +34,4 @@ if ($largestPacketWidth > $AXI_BUS_WIDTH) {
     die "Packet parameters exceeed AXI bus width";
 }
 
-if ($weightWidth > $valueWidth) {
-    die "Weight width is greater than value width";
-}
-
 1
