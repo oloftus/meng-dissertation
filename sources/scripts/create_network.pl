@@ -30,6 +30,7 @@ our $stimulusTypeOutPacketWidth;
 our $pktStimulusTypeAddrWidth;
 our $pktWeightTypeAddrWidth;
 our $largestPacketWidth;
+our $transferWidth;
 
 open my $fh, ">", "create_network.tcl";
 

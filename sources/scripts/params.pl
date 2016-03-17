@@ -21,6 +21,7 @@ $AXI_BUS_WIDTH = 32;
 
 $weightWidth = 1 + $WEIGHT_INTEGER_PRECISION + $WEIGHT_FRACTION_PRECISION; # Sign bit
 $valueWidth = 1 + $VAL_INTEGER_PRECISION + $VAL_FRACTION_PRECISION;
+$transferWidth = 1 + $VAL_FRACTION_PRECISION;
 
 $neuronOutPacketWidth = $PKT_SYNAPSE_ADDR_WIDTH + $weightWidth;
 $layerOutPacketWidth = $PKT_NEURON_ADDR_WIDTH + $neuronOutPacketWidth;
