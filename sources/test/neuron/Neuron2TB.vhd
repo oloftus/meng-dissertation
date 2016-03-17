@@ -25,7 +25,7 @@ entity Neuron2TB is
 end Neuron2TB;
 
 architecture Behavioral of Neuron2TB is
-    component HiddenNeuron_Test is
+    component Neuron is
         port (
             CLK : in STD_LOGIC;
             RST : in STD_LOGIC;
@@ -40,7 +40,7 @@ architecture Behavioral of Neuron2TB is
             SYN_OUT : out STD_LOGIC_VECTOR (7 downto 0);
             DONE_OUT : out STD_LOGIC
         );
-    end component HiddenNeuron_Test;
+    end component Neuron;
         
     signal sigClk, sigRst, sigPktInValid, sigSyn0Valid, sigSyn1Valid, sigSynOutValid, sigDoneOut : STD_LOGIC;
     signal sigPktIn : STD_LOGIC_VECTOR (21 downto 0);
@@ -49,7 +49,7 @@ architecture Behavioral of Neuron2TB is
     
     constant neuronAddr : STD_LOGIC_VECTOR (2 downto 0) := "001";
 begin
-    uut: HiddenNeuron_Test
+    uut: Neuron
       port map (
         CLK => sigClk,
         RST => sigRst,
