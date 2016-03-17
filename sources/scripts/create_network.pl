@@ -110,7 +110,7 @@ set_property -dict [list CONFIG.packetOutWidth {${stimulusTypeOutPacketWidth}} C
 set_property -dict [list CONFIG.CONST_WIDTH {${pktStimulusTypeAddrWidth}} CONFIG.CONST_VAL {@{[$STIMULUS_TYPE << ($pktStimulusTypeAddrWidth - $PKT_TYPE_ADDR_WIDTH)]}}] [get_bd_cells TypeRouter_Stimulus_Address]
 
 set_property -dict [list CONFIG.packetOutWidth {${weightTypeOutPacketWidth}} CONFIG.packetInWidth {${largestPacketWidth}}] [get_bd_cells TypeRouter_Weight]
-set_property -dict [list CONFIG.CONST_WIDTH {${pktWeightTypeAddrWidth}} CONFIG.CONST_VAL {@{[$STIMULUS_TYPE << ($pktWeightTypeAddrWidth - $PKT_TYPE_ADDR_WIDTH)]}}] [get_bd_cells TypeRouter_Weight_Address]
+set_property -dict [list CONFIG.CONST_WIDTH {${pktWeightTypeAddrWidth}} CONFIG.CONST_VAL {@{[$WEIGHT_TYPE << ($pktWeightTypeAddrWidth - $PKT_TYPE_ADDR_WIDTH)]}}] [get_bd_cells TypeRouter_Weight_Address]
 
 set_property -dict [list CONFIG.n {${NUM_LAYERS}}] [get_bd_cells PktRcvd_Layers]
 set_property -dict [list CONFIG.NUM_PORTS {${NUM_LAYERS}}] [get_bd_cells PktRcvdConcat_Layers]
