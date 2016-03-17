@@ -70,25 +70,6 @@
         </spirit:portMaps>
         <spirit:parameters/>
       </spirit:busInterface>
-      <spirit:busInterface>
-        <spirit:name>DATA.P</spirit:name>
-        <spirit:displayName>Data</spirit:displayName>
-        <spirit:description>Data</spirit:description>
-        <spirit:busType spirit:library="signal" spirit:name="data" spirit:vendor="xilinx.com" spirit:version="1.0"/>
-        <spirit:abstractionType spirit:library="signal" spirit:name="data_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
-        <spirit:slave/>
-        <spirit:portMaps>
-          <spirit:portMap>
-            <spirit:logicalPort>
-              <spirit:name>DATA</spirit:name>
-            </spirit:logicalPort>
-            <spirit:physicalPort>
-              <spirit:name>P</spirit:name>
-            </spirit:physicalPort>
-          </spirit:portMap>
-        </spirit:portMaps>
-        <spirit:parameters/>
-      </spirit:busInterface>
     </spirit:busInterfaces>
     <spirit:model>
       <spirit:views>
@@ -110,7 +91,7 @@
           <spirit:wire>
             <spirit:direction>in</spirit:direction>
             <spirit:vector>
-              <spirit:left>15</spirit:left>
+              <spirit:left>8</spirit:left>
               <spirit:right>0</spirit:right>
             </spirit:vector>
           </spirit:wire>
@@ -120,7 +101,7 @@
           <spirit:wire>
             <spirit:direction>in</spirit:direction>
             <spirit:vector>
-              <spirit:left>15</spirit:left>
+              <spirit:left>16</spirit:left>
               <spirit:right>0</spirit:right>
             </spirit:vector>
           </spirit:wire>
@@ -130,7 +111,7 @@
           <spirit:wire>
             <spirit:direction>out</spirit:direction>
             <spirit:vector>
-              <spirit:left>31</spirit:left>
+              <spirit:left>8</spirit:left>
               <spirit:right>0</spirit:right>
             </spirit:vector>
           </spirit:wire>
@@ -151,10 +132,27 @@
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">ComplementsMultiplierTest_Multiplier_2</spirit:configurableElementValue>
           <spirit:configurableElementValue spirit:referenceId="PortAType">Signed</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="PortAWidth">16</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="PortAWidth">8</spirit:configurableElementValue>
           <spirit:configurableElementValue spirit:referenceId="PortBType">Signed</spirit:configurableElementValue>
           <spirit:configurableElementValue spirit:referenceId="PortBWidth">16</spirit:configurableElementValue>
           <spirit:configurableElementValue spirit:referenceId="Use_Custom_Output_Width">true</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>Multiplier_Xor2</spirit:instanceName>
+        <spirit:componentRef spirit:library="prif" spirit:name="Xor2" spirit:vendor="oloftus.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">ComplementsMultiplierTest_Multiplier_Xor2_3</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>xlslice_0</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlslice" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">ComplementsMultiplierTest_xlslice_0_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DIN_TO">8</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DIN_FROM">15</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DIN_WIDTH">24</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
@@ -162,7 +160,7 @@
         <spirit:componentRef spirit:library="prif" spirit:name="Complements1To2" spirit:vendor="oloftus.com" spirit:version="1.0"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">ComplementsMultiplierTest_Multiplier_Complements1To2_2</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="width">32</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="width">8</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
@@ -178,37 +176,15 @@
         <spirit:componentRef spirit:library="prif" spirit:name="Complements2To1" spirit:vendor="oloftus.com" spirit:version="1.0"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">ComplementsMultiplierTest_Multiplier_Complements2To1_1_3</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="width">16</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>Multiplier_Xor2</spirit:instanceName>
-        <spirit:componentRef spirit:library="prif" spirit:name="Xor2" spirit:vendor="oloftus.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">ComplementsMultiplierTest_Multiplier_Xor2_3</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="width">8</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
     </spirit:componentInstances>
     <spirit:adHocConnections>
       <spirit:adHocConnection>
-        <spirit:name>A_1</spirit:name>
-        <spirit:externalPortReference spirit:portRef="A"/>
-        <spirit:internalPortReference spirit:componentRef="Multiplier_Complements2To1_1" spirit:portRef="TWOS"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>B_1</spirit:name>
-        <spirit:externalPortReference spirit:portRef="B"/>
-        <spirit:internalPortReference spirit:componentRef="Multiplier_Complements2To1_0" spirit:portRef="TWOS"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
         <spirit:name>CLK_1</spirit:name>
         <spirit:externalPortReference spirit:portRef="CLK"/>
         <spirit:internalPortReference spirit:componentRef="Multiplier" spirit:portRef="CLK"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>Multiplier_Complements1To2_TWOS</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="Multiplier_Complements1To2" spirit:portRef="TWOS"/>
-        <spirit:externalPortReference spirit:portRef="P"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>Multiplier_Complements2To1_0_ONES</spirit:name>
@@ -231,14 +207,34 @@
         <spirit:internalPortReference spirit:componentRef="Multiplier_Xor2" spirit:portRef="A"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
+        <spirit:name>Multiplier_P</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="Multiplier" spirit:portRef="P"/>
+        <spirit:internalPortReference spirit:componentRef="xlslice_0" spirit:portRef="Din"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>xlslice_0_Dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="xlslice_0" spirit:portRef="Dout"/>
+        <spirit:internalPortReference spirit:componentRef="Multiplier_Complements1To2" spirit:portRef="ONES"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
         <spirit:name>Multiplier_Xor2_O</spirit:name>
         <spirit:internalPortReference spirit:componentRef="Multiplier_Xor2" spirit:portRef="O"/>
         <spirit:internalPortReference spirit:componentRef="Multiplier_Complements1To2" spirit:portRef="SIGN"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
-        <spirit:name>Multiplier_P</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="Multiplier" spirit:portRef="P"/>
-        <spirit:internalPortReference spirit:componentRef="Multiplier_Complements1To2" spirit:portRef="ONES"/>
+        <spirit:name>B_1</spirit:name>
+        <spirit:externalPortReference spirit:portRef="B"/>
+        <spirit:internalPortReference spirit:componentRef="Multiplier_Complements2To1_0" spirit:portRef="TWOS"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>A_1</spirit:name>
+        <spirit:externalPortReference spirit:portRef="A"/>
+        <spirit:internalPortReference spirit:componentRef="Multiplier_Complements2To1_1" spirit:portRef="TWOS"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>Multiplier_Complements1To2_TWOS</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="Multiplier_Complements1To2" spirit:portRef="TWOS"/>
+        <spirit:externalPortReference spirit:portRef="P"/>
       </spirit:adHocConnection>
     </spirit:adHocConnections>
   </spirit:design>

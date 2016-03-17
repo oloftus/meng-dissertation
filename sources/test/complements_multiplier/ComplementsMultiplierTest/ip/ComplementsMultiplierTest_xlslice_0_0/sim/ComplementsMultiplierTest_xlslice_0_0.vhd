@@ -46,47 +46,47 @@
 -- 
 -- DO NOT MODIFY THIS FILE.
 
--- IP VLNV: oloftus.com:prif:Complements2To1:1.0
--- IP Revision: 1
+-- IP VLNV: xilinx.com:ip:xlslice:1.0
+-- IP Revision: -1
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY ComplementsMultiplierTest_Multiplier_Complements2To1_0_3 IS
+LIBRARY work;
+USE work.xlslice;
+
+ENTITY ComplementsMultiplierTest_xlslice_0_0 IS
   PORT (
-    TWOS : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-    ONES : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-    SIGN : OUT STD_LOGIC
+    Din : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+    Dout : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
   );
-END ComplementsMultiplierTest_Multiplier_Complements2To1_0_3;
+END ComplementsMultiplierTest_xlslice_0_0;
 
-ARCHITECTURE ComplementsMultiplierTest_Multiplier_Complements2To1_0_3_arch OF ComplementsMultiplierTest_Multiplier_Complements2To1_0_3 IS
+ARCHITECTURE ComplementsMultiplierTest_xlslice_0_0_arch OF ComplementsMultiplierTest_xlslice_0_0 IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings : string;
-  ATTRIBUTE DowngradeIPIdentifiedWarnings OF ComplementsMultiplierTest_Multiplier_Complements2To1_0_3_arch: ARCHITECTURE IS "yes";
+  ATTRIBUTE DowngradeIPIdentifiedWarnings OF ComplementsMultiplierTest_xlslice_0_0_arch: ARCHITECTURE IS "yes";
 
-  COMPONENT Complements2To1_2 IS
+  COMPONENT xlslice IS
     GENERIC (
-      width : INTEGER
+      DIN_WIDTH : INTEGER;
+      DIN_FROM : INTEGER;
+      DIN_TO : INTEGER
     );
     PORT (
-      TWOS : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-      ONES : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-      SIGN : OUT STD_LOGIC
+      Din : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+      Dout : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
     );
-  END COMPONENT Complements2To1_2;
-  ATTRIBUTE X_CORE_INFO : STRING;
-  ATTRIBUTE X_CORE_INFO OF ComplementsMultiplierTest_Multiplier_Complements2To1_0_3_arch: ARCHITECTURE IS "Complements2To1_2,Vivado 2014.2";
-  ATTRIBUTE CHECK_LICENSE_TYPE : STRING;
-  ATTRIBUTE CHECK_LICENSE_TYPE OF ComplementsMultiplierTest_Multiplier_Complements2To1_0_3_arch : ARCHITECTURE IS "ComplementsMultiplierTest_Multiplier_Complements2To1_0_3,Complements2To1_2,{}";
+  END COMPONENT xlslice;
 BEGIN
-  U0 : Complements2To1_2
+  U0 : xlslice
     GENERIC MAP (
-      width => 16
+      DIN_WIDTH => 24,
+      DIN_FROM => 15,
+      DIN_TO => 8
     )
     PORT MAP (
-      TWOS => TWOS,
-      ONES => ONES,
-      SIGN => SIGN
+      Din => Din,
+      Dout => Dout
     );
-END ComplementsMultiplierTest_Multiplier_Complements2To1_0_3_arch;
+END ComplementsMultiplierTest_xlslice_0_0_arch;

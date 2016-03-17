@@ -47,7 +47,7 @@
 -- DO NOT MODIFY THIS FILE.
 
 -- IP VLNV: oloftus.com:prif:Complements2To1:1.0
--- IP Revision: 1
+-- IP Revision: 3
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
@@ -55,8 +55,8 @@ USE ieee.numeric_std.ALL;
 
 ENTITY ComplementsMultiplierTest_Multiplier_Complements2To1_1_3 IS
   PORT (
-    TWOS : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-    ONES : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+    TWOS : IN STD_LOGIC_VECTOR(8 DOWNTO 0);
+    ONES : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
     SIGN : OUT STD_LOGIC
   );
 END ComplementsMultiplierTest_Multiplier_Complements2To1_1_3;
@@ -70,15 +70,15 @@ ARCHITECTURE ComplementsMultiplierTest_Multiplier_Complements2To1_1_3_arch OF Co
       width : INTEGER
     );
     PORT (
-      TWOS : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-      ONES : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+      TWOS : IN STD_LOGIC_VECTOR(8 DOWNTO 0);
+      ONES : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
       SIGN : OUT STD_LOGIC
     );
   END COMPONENT Complements2To1_2;
 BEGIN
   U0 : Complements2To1_2
     GENERIC MAP (
-      width => 16
+      width => 8
     )
     PORT MAP (
       TWOS => TWOS,

@@ -59,9 +59,9 @@ USE mult_gen_v12_0.mult_gen_v12_0;
 ENTITY ComplementsMultiplierTest_Multiplier_2 IS
   PORT (
     CLK : IN STD_LOGIC;
-    A : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+    A : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
     B : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-    P : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+    P : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
   );
 END ComplementsMultiplierTest_Multiplier_2;
 
@@ -94,11 +94,11 @@ ARCHITECTURE ComplementsMultiplierTest_Multiplier_2_arch OF ComplementsMultiplie
     );
     PORT (
       CLK : IN STD_LOGIC;
-      A : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+      A : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
       B : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
       CE : IN STD_LOGIC;
       SCLR : IN STD_LOGIC;
-      P : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+      P : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
     );
   END COMPONENT mult_gen_v12_0;
   ATTRIBUTE X_INTERFACE_INFO : STRING;
@@ -116,11 +116,11 @@ BEGIN
       C_HAS_CE => 0,
       C_HAS_SCLR => 0,
       C_LATENCY => 1,
-      C_A_WIDTH => 16,
+      C_A_WIDTH => 8,
       C_A_TYPE => 0,
       C_B_WIDTH => 16,
       C_B_TYPE => 0,
-      C_OUT_HIGH => 31,
+      C_OUT_HIGH => 23,
       C_OUT_LOW => 0,
       C_MULT_TYPE => 0,
       C_CE_OVERRIDES_SCLR => 0,

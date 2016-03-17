@@ -3,5 +3,5 @@
 # to match the target frequencies.
 # This constraints file is not used in normal top-down synthesis.
 
-create_clock -name CLK -period 100 [get_ports CLK]
+create_clock -name CLK -period 10 [get_ports CLK]
 set_property HD.CLK_SRC BUFGCTRL_X0Y0 [get_ports CLK]
