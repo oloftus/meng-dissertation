@@ -132,6 +132,25 @@ begin
         wait until sigSynOutValid = '0';
         wait for 100ns;
         
+        -- Change synaptic input 2 (test -ve numbers)
+        sigSyn0Din <= "0"&"0001"&"0000000"; -- 1
+        sigSyn0Valid <= '1';
+        wait for 200ns;
+        sigSyn0Valid <= '0';
+
+        sigSyn1Din <= "1"&"1111"&"1010110"; -- -0.330096159 (-0.328125)
+        sigSyn1Valid <= '1';        
+        wait for 200ns;
+        sigSyn1Valid <= '0';
+
+        -- Assertions
+        wait until sigSynOutValid = '1';
+        wait for 10ns;
+        assert sigSynOut = "0"&"0000"&"1111001" report "Test failed: 2"; -- 0.951546711 (0.945313)
+
+        wait until sigSynOutValid = '0';
+        wait for 100ns;
+
         wait;
     end process;
 end Behavioral;
