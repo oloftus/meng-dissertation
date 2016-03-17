@@ -25,7 +25,7 @@ entity Neuron2TB is
 end Neuron2TB;
 
 architecture Behavioral of Neuron2TB is
-    component Neuron is
+    component HiddenNeuron_Test is
         port (
             CLK : in STD_LOGIC;
             RST : in STD_LOGIC;
@@ -33,23 +33,23 @@ architecture Behavioral of Neuron2TB is
             PKT_IN : in STD_LOGIC_VECTOR (21 downto 0); -- 3+3+1+4+11
             NEURON_ADDR : in STD_LOGIC_VECTOR (2 downto 0); -- 3
             SYN_0_VALID : in STD_LOGIC;
-            SYN_0_DIN : in STD_LOGIC_VECTOR (11 downto 0); -- 1+4+7
+            SYN_0_DIN : in STD_LOGIC_VECTOR (7 downto 0); -- 1+7
             SYN_1_VALID : in STD_LOGIC;
-            SYN_1_DIN : in STD_LOGIC_VECTOR (11 downto 0);
+            SYN_1_DIN : in STD_LOGIC_VECTOR (7 downto 0);
             SYN_OUT_VALID : out STD_LOGIC;
-            SYN_OUT : out STD_LOGIC_VECTOR (11 downto 0);
+            SYN_OUT : out STD_LOGIC_VECTOR (7 downto 0);
             DONE_OUT : out STD_LOGIC
         );
-    end component Neuron;
+    end component HiddenNeuron_Test;
         
     signal sigClk, sigRst, sigPktInValid, sigSyn0Valid, sigSyn1Valid, sigSynOutValid, sigDoneOut : STD_LOGIC;
     signal sigPktIn : STD_LOGIC_VECTOR (21 downto 0);
-    signal sigSyn0Din, sigSyn1Din, sigSynOut : STD_LOGIC_VECTOR (11 downto 0);
+    signal sigSyn0Din, sigSyn1Din, sigSynOut : STD_LOGIC_VECTOR (7 downto 0);
     signal sigNeuronAddr : STD_LOGIC_VECTOR (2 downto 0);
     
     constant neuronAddr : STD_LOGIC_VECTOR (2 downto 0) := "001";
 begin
-    uut: Neuron
+    uut: HiddenNeuron_Test
       port map (
         CLK => sigClk,
         RST => sigRst,
@@ -82,6 +82,7 @@ begin
         sigSyn1Valid <= '0';
         sigPktInValid <= '0';
         
+        -- Test for +ve numbers
         -- Bias
         sigPktInValid <= '1';
         sigPktIn <= neuronAddr & "000" & "0"&"0001"&"01010101010" ;-- 1.3331 <neuron_addr>.<synapse_addr>.<sign>.<int>.<frac>.<pad>
@@ -113,44 +114,55 @@ begin
         wait for 100ns;
 
         -- Synaptic input 1
-        sigSyn0Din <= "0"&"0001"&"0000000"; -- 1
+        sigSyn0Din <= "1"&"0000000"; -- 1
         sigSyn0Valid <= '1';
         wait for 200ns;
         sigSyn0Valid <= '0';
         
         -- Synaptic input 2
-        sigSyn1Din <= "0"&"0000"&"0101010"; -- 0.330096159 (0.328125)
-        sigSyn1Valid <= '1';        
+        sigSyn1Din <= "0"&"0101010"; -- 0.330096159 (0.328125)
+        sigSyn1Valid <= '1';
         wait for 200ns;
         sigSyn1Valid <= '0';
 
         -- Assertions
         wait until sigSynOutValid = '1';
         wait for 10ns;
-        assert sigSynOut = "0"&"0000"&"1111110" report "Test failed: 1"; -- 0.985928289 (0.984375)
-        
+        assert sigSynOut = "0"&"1111110" report "Test failed: 1"; -- 0.985928289 (0.984375)
+
         wait until sigSynOutValid = '0';
         wait for 100ns;
-        
-        -- Change synaptic input 2 (test -ve numbers)
-        sigSyn0Din <= "0"&"0001"&"0000000"; -- 1
+
+        -- Test for -ve numbers
+        -- Weight 2
+        sigPktInValid <= '1';
+        sigPktIn <= neuronAddr & "010" & "1"&"1110"&"01010101100"; -- -1.6665
+        wait for 200ns;
+        sigPktInValid <= '0';
+
+        wait until sigDoneOut = '1';
+        wait until sigDoneOut = '0';
+        wait for 100ns;
+
+        -- Synaptic input 1
+        sigSyn0Din <= "1"&"0000000"; -- 1
         sigSyn0Valid <= '1';
         wait for 200ns;
         sigSyn0Valid <= '0';
-
-        sigSyn1Din <= "1"&"1111"&"1010110"; -- -0.330096159 (-0.328125)
-        sigSyn1Valid <= '1';        
+        
+        -- Synaptic input 2
+        sigSyn1Din <= "0"&"0101010"; -- 0.330096159 (0.328125)
+        sigSyn1Valid <= '1';
         wait for 200ns;
         sigSyn1Valid <= '0';
 
         -- Assertions
         wait until sigSynOutValid = '1';
         wait for 10ns;
-        assert sigSynOut = "0"&"0000"&"1111001" report "Test failed: 2"; -- 0.951546711 (0.945313)
+        assert sigSynOut = "0"&"1111001" report "Test failed: 2"; -- 0.951649365 (0.945313)
 
         wait until sigSynOutValid = '0';
         wait for 100ns;
-
         wait;
     end process;
 end Behavioral;
