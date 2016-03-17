@@ -21,11 +21,11 @@ use IEEE.NUMERIC_STD.ALL;
 
 -- Test vectors came from "Experiment 1 test.xlsx"
 
-entity Neuron2TB is
-end Neuron2TB;
+entity NeuronTB is
+end NeuronTB;
 
-architecture Behavioral of Neuron2TB is
     component Neuron is
+architecture Behavioral of NeuronTB is
         port (
             CLK : in STD_LOGIC;
             RST : in STD_LOGIC;

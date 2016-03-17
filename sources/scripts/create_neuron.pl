@@ -101,7 +101,7 @@ set_property -dict [list CONFIG.NUM_PORTS {@{[$numSynapses + 1]}}] [get_bd_cells
 set_property -dict [list CONFIG.NUM_PORTS {@{[$numSynapses + 1]}} @$sumJunctionConcatInputs] [get_bd_cells SumJunctionConcat]
 set_property -dict [list CONFIG.address {0} CONFIG.addressWidth {$PKT_SYNAPSE_ADDR_WIDTH} CONFIG.dataWidth {$weightWidth} CONFIG.padHighWidth {@{[$VAL_INTEGER_PRECISION - $WEIGHT_INTEGER_PRECISION]}} CONFIG.padLowWidth {@{[$VAL_FRACTION_PRECISION - $WEIGHT_FRACTION_PRECISION]}}] [get_bd_cells BiasRegister]
 set_property -dict [list CONFIG.integerPrecision {$VAL_INTEGER_PRECISION} CONFIG.fractionPrecision {$VAL_FRACTION_PRECISION}] [get_bd_cells Plan]
-set_property -dict [list CONFIG.DIN_WIDTH {@{[$VAL_INTEGER_PRECISION + $VAL_FRACTION_PRECISION]}} CONFIG.DIN_FROM {@{[$transferWidth - 1]}} CONFIG.DIN_TO {0}] [get_bd_cells PlanSlicer]
+set_property -dict [list CONFIG.DIN_WIDTH {${valueWidth}} CONFIG.DIN_FROM {@{[$transferWidth - 1]}} CONFIG.DIN_TO {0}] [get_bd_cells PlanSlicer]
 
 CMD
 

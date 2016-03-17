@@ -99,7 +99,7 @@ CMD
 }
 
 my $synOutConcatInputs = [];
-for my $id (0..$NEURONS_PER_LAYER - 1) { push $synOutConcatInputs, "CONFIG.IN${id}_WIDTH {$valueWidth}" };
+for my $id (0..$NEURONS_PER_LAYER - 1) { push $synOutConcatInputs, "CONFIG.IN${id}_WIDTH {$transferWidth}" };
 
 # Configure static components
 print $fh <<CMD;
@@ -119,7 +119,7 @@ set_property -dict [list CONFIG.NUM_PORTS {${NUM_INPUTS}}] [get_bd_cells PktRcvd
 set_property -dict [list CONFIG.n {2}] [get_bd_cells PktRcvd]
 set_property -dict [list CONFIG.NUM_PORTS {${NEURONS_PER_LAYER}}] [get_bd_cells SynOutValidConcat]
 set_property -dict [list CONFIG.NUM_PORTS {${NEURONS_PER_LAYER}} @$synOutConcatInputs] [get_bd_cells SynOutConcat]
-set_property -dict [list CONFIG.numInputs {${NEURONS_PER_LAYER}} CONFIG.dinWidth {$valueWidth} CONFIG.doutWidth {@{[$AXI_BUS_WIDTH]}}] [get_bd_cells SynOutBuffer]
+set_property -dict [list CONFIG.numInputs {${NEURONS_PER_LAYER}} CONFIG.dinWidth {$transferWidth} CONFIG.doutWidth {@{[$AXI_BUS_WIDTH]}}] [get_bd_cells SynOutBuffer]
 
 CMD
 
@@ -147,7 +147,7 @@ CMD
 foreach my $id (0..$NUM_INPUTS - 1) {
 print $fh <<CMD;
 
-set_property -dict [list CONFIG.address {${id}} CONFIG.addressWidth {${PKT_STIMULUS_REG_ADDR_WIDTH}} CONFIG.dataWidth {${valueWidth}}] [get_bd_cells StimulusRegister_${id}]
+set_property -dict [list CONFIG.address {${id}} CONFIG.addressWidth {${PKT_STIMULUS_REG_ADDR_WIDTH}} CONFIG.dataWidth {${transferWidth}}] [get_bd_cells StimulusRegister_${id}]
 
 CMD
 }
