@@ -27,7 +27,7 @@ our $layerOutPacketWidth;
 
 foreach my $mode ("hidden_neuron", "input_neuron") {
 my $numSynapses = $mode =~ "^hidden" ? $NEURONS_PER_LAYER : $NUM_INPUTS;
-my $neuronLatency = $numSynapses + 1;
+my $neuronLatency = $numSynapses + 2;
 
 open my $fh, ">", "create_".($mode =~ "^hidden" ? "hidden" : "input")."_neuron.tcl" or die "Couldn't open file"."\n";
 
@@ -113,11 +113,11 @@ print $fh <<CMD;
 
 set_property -dict [list CONFIG.size {$valueWidth}] [get_bd_cells Synapse_${id}]
 set_property -dict [list CONFIG.address {@{[$id + 1]}} CONFIG.addressWidth {$PKT_SYNAPSE_ADDR_WIDTH} CONFIG.dataWidth {$weightWidth}] [get_bd_cells WeightRegister_${id}]
-set_property -dict [list CONFIG.DIN_WIDTH {@{[$valueWidth + $weightWidth]}} CONFIG.DIN_FROM {@{[$WEIGHT_FRACTION_PRECISION + $valueWidth - 1]}} CONFIG.DIN_TO {${WEIGHT_FRACTION_PRECISION}}] [get_bd_cells MultiplierSlicer_${id}]
-set_property -dict [list CONFIG.PortAWidth.VALUE_SRC USER CONFIG.PortBWidth.VALUE_SRC USER CONFIG.PortAWidth {$valueWidth} CONFIG.PortBWidth {$weightWidth} CONFIG.PortAType.VALUE_SRC USER CONFIG.PortBType.VALUE_SRC USER CONFIG.PortAType {Signed} CONFIG.PortBType {Signed} CONFIG.ClockEnable {true} CONFIG.Use_Custom_Output_Width {true} CONFIG.OutputWidthHigh {@{[$valueWidth + $weightWidth - 1]}}] [get_bd_cells Multiplier_${id}]
-set_property -dict [list CONFIG.width {${valueWidth}}] [get_bd_cells Multiplier_${id}_Complements1To2]
-set_property -dict [list CONFIG.width {$weightWidth}] [get_bd_cells Multiplier_${id}_Complements2To1_B]
-set_property -dict [list CONFIG.width {$valueWidth}] [get_bd_cells Multiplier_${id}_Complements2To1_A]
+set_property -dict [list CONFIG.DIN_WIDTH {@{[$valueWidth - 1 + $weightWidth - 1]}} CONFIG.DIN_FROM {@{[$WEIGHT_FRACTION_PRECISION + $valueWidth - 1 - 1]}} CONFIG.DIN_TO {${WEIGHT_FRACTION_PRECISION}}] [get_bd_cells MultiplierSlicer_${id}]
+set_property -dict [list CONFIG.PortAWidth.VALUE_SRC USER CONFIG.PortBWidth.VALUE_SRC USER CONFIG.PortAWidth {@{[$valueWidth - 1]}} CONFIG.PortBWidth {@{[$weightWidth - 1]}} CONFIG.PortAType.VALUE_SRC USER CONFIG.PortBType.VALUE_SRC USER CONFIG.PortAType {Signed} CONFIG.PortBType {Signed} CONFIG.ClockEnable {true} CONFIG.Use_Custom_Output_Width {true} CONFIG.OutputWidthHigh {@{[$valueWidth - 1 + $weightWidth - 1 - 1]}}] [get_bd_cells Multiplier_${id}]
+set_property -dict [list CONFIG.width {@{[$valueWidth - 1]}}] [get_bd_cells Multiplier_${id}_Complements1To2]
+set_property -dict [list CONFIG.width {@{[$weightWidth - 1]}}] [get_bd_cells Multiplier_${id}_Complements2To1_B]
+set_property -dict [list CONFIG.width {@{[$valueWidth - 1]}}] [get_bd_cells Multiplier_${id}_Complements2To1_A]
 
 CMD
 }
