@@ -4,14 +4,19 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity PlanTB is
     generic (
-        integerPrecision : INTEGER := 5;
-        fractionPrecision : INTEGER := 5
+        integerPrecision1 : INTEGER := 5;
+        fractionPrecision1 : INTEGER := 5;
+        integerPrecision2 : INTEGER := 2;
+        fractionPrecision2 : INTEGER := 2
     );
 end PlanTB;
 
 architecture Behavioral of PlanTB is
-    signal sigX : STD_LOGIC_VECTOR (integerPrecision + fractionPrecision downto 0);
-    signal sigY : STD_LOGIC_VECTOR (integerPrecision + fractionPrecision downto 0);
+    signal sigX1 : STD_LOGIC_VECTOR (integerPrecision1 + fractionPrecision1 downto 0);
+    signal sigY1 : STD_LOGIC_VECTOR (integerPrecision1 + fractionPrecision1 downto 0);
+    
+    signal sigX2 : STD_LOGIC_VECTOR (integerPrecision2 + fractionPrecision2 downto 0);
+    signal sigY2 : STD_LOGIC_VECTOR (integerPrecision2 + fractionPrecision2 downto 0);
 
     component Plan is
         generic (
@@ -25,53 +30,69 @@ architecture Behavioral of PlanTB is
     end component;
 begin
 
-    uut: Plan
+    uut1: Plan
         generic map (
-            integerPrecision => integerPrecision,
-            fractionPrecision => fractionPrecision
+            integerPrecision => integerPrecision1,
+            fractionPrecision => fractionPrecision1
         )
         port map (
-            X => sigX,
-            Y => sigY
+            X => sigX1,
+            Y => sigY1
+        );
+
+    uut2: Plan
+        generic map (
+            integerPrecision => integerPrecision2,
+            fractionPrecision => fractionPrecision2
+        )
+        port map (
+            X => sigX2,
+            Y => sigY2
         );
     
     tb: process begin
-        sigX <= "1"&"11000"&"00000"; -- -8
+        -- Test normal operation
+        sigX1 <= "1"&"11000"&"00000"; -- -8
         wait for 100ns;
-        assert sigY = "0"&"00000"&"00000" report "Test failed: 1";
+        assert sigY1 = "0"&"00000"&"00000" report "Test failed: 1";
         
-        sigX <= "1"&"11010"&"00000"; -- -6
+        sigX1 <= "1"&"11010"&"00000"; -- -6
         wait for 100ns;
-        assert sigY = "0"&"00000"&"00000" report "Test failed: 2";
+        assert sigY1 = "0"&"00000"&"00000" report "Test failed: 2";
 
-        sigX <= "1"&"11100"&"00000"; -- -4
+        sigX1 <= "1"&"11100"&"00000"; -- -4
         wait for 100ns;
-        assert sigY = "0"&"00000"&"00001" report "Test failed: 3";
+        assert sigY1 = "0"&"00000"&"00001" report "Test failed: 3";
 
-        sigX <= "1"&"11110"&"00000"; -- -2
+        sigX1 <= "1"&"11110"&"00000"; -- -2
         wait for 100ns;
-        assert sigY = "0"&"00000"&"00100" report "Test failed: 4";
+        assert sigY1 = "0"&"00000"&"00100" report "Test failed: 4";
 
-        sigX <= "0"&"00000"&"00000"; -- 0
+        sigX1 <= "0"&"00000"&"00000"; -- 0
         wait for 100ns;
-        assert sigY = "0"&"00000"&"10000" report "Test failed: 5";
+        assert sigY1 = "0"&"00000"&"10000" report "Test failed: 5";
 
-        sigX <= "0"&"00010"&"00000"; -- 2
+        sigX1 <= "0"&"00010"&"00000"; -- 2
         wait for 100ns;
-        assert sigY = "0"&"00000"&"11100" report "Test failed: 6";
+        assert sigY1 = "0"&"00000"&"11100" report "Test failed: 6";
 
-        sigX <= "0"&"00100"&"00000"; -- 4
+        sigX1 <= "0"&"00100"&"00000"; -- 4
         wait for 100ns;
-        assert sigY = "0"&"00000"&"11111" report "Test failed: 7";
+        assert sigY1 = "0"&"00000"&"11111" report "Test failed: 7";
 
-        sigX <= "0"&"00110"&"00000"; -- 6
+        sigX1 <= "0"&"00110"&"00000"; -- 6
         wait for 100ns;
-        assert sigY = "0"&"00001"&"00000" report "Test failed: 8";
+        assert sigY1 = "0"&"00001"&"00000" report "Test failed: 8";
 
-        sigX <= "0"&"01000"&"00000"; -- 8
+        sigX1 <= "0"&"01000"&"00000"; -- 8
         wait for 100ns;
-        assert sigY = "0"&"00001"&"00000" report "Test failed: 9";
+        assert sigY1 = "0"&"00001"&"00000" report "Test failed: 9";
         
+        -- Test when integer and fraction part is trimmed
+        sigX2 <= "0"&"10"&"00"; -- 2
+        wait for 100ns;
+        assert sigY2 = "0"&"00"&"11" report "Test failed: 10";
+
         wait;
     end process;
 end Behavioral;
