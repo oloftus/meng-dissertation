@@ -7,7 +7,9 @@ entity PlanTB is
         integerPrecision1 : INTEGER := 5;
         fractionPrecision1 : INTEGER := 5;
         integerPrecision2 : INTEGER := 2;
-        fractionPrecision2 : INTEGER := 2
+        fractionPrecision2 : INTEGER := 2;
+        integerPrecision3 : INTEGER := 4;
+        fractionPrecision3 : INTEGER := 7
     );
 end PlanTB;
 
@@ -17,6 +19,9 @@ architecture Behavioral of PlanTB is
     
     signal sigX2 : STD_LOGIC_VECTOR (integerPrecision2 + fractionPrecision2 downto 0);
     signal sigY2 : STD_LOGIC_VECTOR (integerPrecision2 + fractionPrecision2 downto 0);
+    
+    signal sigX3 : STD_LOGIC_VECTOR (integerPrecision3 + fractionPrecision3 downto 0);
+    signal sigY3 : STD_LOGIC_VECTOR (integerPrecision3 + fractionPrecision3 downto 0);
 
     component Plan is
         generic (
@@ -49,6 +54,16 @@ begin
             X => sigX2,
             Y => sigY2
         );
+
+    uut3: Plan
+            generic map (
+                integerPrecision => integerPrecision3,
+                fractionPrecision => fractionPrecision3
+            )
+            port map (
+                X => sigX3,
+                Y => sigY3
+            );
     
     tb: process begin
         -- Test normal operation
@@ -92,6 +107,15 @@ begin
         sigX2 <= "0"&"10"&"00"; -- 2
         wait for 100ns;
         assert sigY2 = "0"&"00"&"11" report "Test failed: 10";
+        
+        -- Test with decimals
+        sigX3 <= "1"&"1101"&"0100010"; -- -2.736662327
+        wait for 100ns;
+        assert sigY3 = "0"&"0000"&"0001010" report "Test failed: 11"; -- 0.070729302
+
+        sigX3 <= "0"&"0010"&"1011110"; -- 2.736662327
+        wait for 100ns;
+        assert sigY3 = "0"&"0000"&"1110110" report "Test failed: 12"; -- 0.92927069771875
 
         wait;
     end process;
