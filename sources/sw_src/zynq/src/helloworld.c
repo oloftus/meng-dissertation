@@ -40,7 +40,9 @@
 #define NEURON_ADDR_POS (SYNAPSE_ADDR_POS + PKT_SYNAPSE_ADDR_WIDTH)
 #define LAYER_ADDR_POS (NEURON_ADDR_POS + PKT_NEURON_ADDR_WIDTH)
 #define TYPE_ADDR_POS (LAYER_ADDR_POS + PKT_LAYER_ADDR_WIDTH)
-#define STIMULUS_POS (VAL_INTEGER_PRECISION + VAL_FRACTION_PRECISION)
+
+#define STIMULUS_INTEGER_POS VAL_FRACTION_PRECISION
+#define STIMULUS_ADDR_POS (1 + STIMULUS_INTEGER_POS)
 
 // NUM_LAYERS * <Number of biases per layer> + <Weights in first layer> + <Weights in subsequent layers>
 #define NUM_WEIGHTS (NUM_LAYERS * NEURONS_PER_LAYER + NUM_INPUTS * NEURONS_PER_LAYER + (NUM_LAYERS - 1) * (NEURONS_PER_LAYER * NEURONS_PER_LAYER))
@@ -49,20 +51,20 @@ int main()
 {
     init_platform();
 
-	u32 pktTypes[2] = { 0 , 1 << TYPE_ADDR_POS }; // Weight: 0; Stimulus: 1
-	u32 layerAddresses[2] = { 0, 0x1 << LAYER_ADDR_POS };
-	u32 neuronAddresses[2] = { 0, 0x1 << NEURON_ADDR_POS };
-	u32 synapseAddresses[2] = { 0, 0x1 << SYNAPSE_ADDR_POS };
-	u32 stimulusAddresses[3] = { 0, 0x1 << STIMULUS_POS, 0x2 << STIMULUS_POS };
+	u32 pktTypes[2] = { 0, 1 << TYPE_ADDR_POS }; // Weight: 0; Stimulus: 1
+	u32 layerAddresses[NUM_LAYERS] = { 0, 1 << LAYER_ADDR_POS };
+	u32 neuronAddresses[NEURONS_PER_LAYER] = { 0, 1 << NEURON_ADDR_POS, 2 << NEURON_ADDR_POS, 3 << NEURON_ADDR_POS, 4 << NEURON_ADDR_POS };
+	u32 synapseAddresses[NEURONS_PER_LAYER + 1] = { 0, 1 << SYNAPSE_ADDR_POS, 2 << SYNAPSE_ADDR_POS, 3 << SYNAPSE_ADDR_POS, 4 << SYNAPSE_ADDR_POS, 5 << SYNAPSE_ADDR_POS };
+	u32 stimulusAddresses[NUM_INPUTS] = { 0, 1 << STIMULUS_ADDR_POS, 2 << STIMULUS_ADDR_POS };
 
 	u32 weights[NUM_WEIGHTS] = {
 		// Input layer
 		// Biases
-		pktTypes[0] | layerAddresses[0] | neuronAddresses[0] | synapseAddresses[0] | 0x20 << WEIGHT_INTEGER_POS | 0x0,
-		pktTypes[0] | layerAddresses[0] | neuronAddresses[1] | synapseAddresses[0] | 0x35 << WEIGHT_INTEGER_POS | 0x2d3,
-		pktTypes[0] | layerAddresses[0] | neuronAddresses[2] | synapseAddresses[0] | 0x3f << WEIGHT_INTEGER_POS | 0x47,
-		pktTypes[0] | layerAddresses[0] | neuronAddresses[3] | synapseAddresses[0] | 0x3c << WEIGHT_INTEGER_POS | 0x318,
-		pktTypes[0] | layerAddresses[0] | neuronAddresses[4] | synapseAddresses[0] | 0x0 << WEIGHT_INTEGER_POS | 0x14,
+		pktTypes[0] | layerAddresses[0] | neuronAddresses[0] | synapseAddresses[0] | 0x0 << WEIGHT_INTEGER_POS | 0x0, // Approximation
+		pktTypes[0] | layerAddresses[0] | neuronAddresses[1] | synapseAddresses[0] | 0x15 << WEIGHT_INTEGER_POS | 0x2d8,
+		pktTypes[0] | layerAddresses[0] | neuronAddresses[2] | synapseAddresses[0] | 0x1f << WEIGHT_INTEGER_POS | 0x48,
+		pktTypes[0] | layerAddresses[0] | neuronAddresses[3] | synapseAddresses[0] | 0x1c << WEIGHT_INTEGER_POS | 0x318,
+		pktTypes[0] | layerAddresses[0] | neuronAddresses[4] | synapseAddresses[0] | 0x0 << WEIGHT_INTEGER_POS | 0x18,
 
 		// Weights
 		pktTypes[0] | layerAddresses[0] | neuronAddresses[0] | synapseAddresses[1] | 0x3 << WEIGHT_INTEGER_POS | 0x11c,
@@ -87,11 +89,11 @@ int main()
 
 		// Layer 2
 		// Bias
-		pktTypes[0] | layerAddresses[1] | neuronAddresses[0] | synapseAddresses[0] | 0x39 << WEIGHT_INTEGER_POS | 0x3f3,
-		pktTypes[0] | layerAddresses[1] | neuronAddresses[1] | synapseAddresses[0] | 0x3c << WEIGHT_INTEGER_POS | 0x2d1,
-		pktTypes[0] | layerAddresses[1] | neuronAddresses[2] | synapseAddresses[0] | 0x3c << WEIGHT_INTEGER_POS | 0x103,
-		pktTypes[0] | layerAddresses[1] | neuronAddresses[3] | synapseAddresses[0] | 0x3 << WEIGHT_INTEGER_POS | 0xf4,
-		pktTypes[0] | layerAddresses[1] | neuronAddresses[4] | synapseAddresses[0] | 0x34 << WEIGHT_INTEGER_POS | 0x1ef,
+		pktTypes[0] | layerAddresses[1] | neuronAddresses[0] | synapseAddresses[0] | 0x19 << WEIGHT_INTEGER_POS | 0x3f8,
+		pktTypes[0] | layerAddresses[1] | neuronAddresses[1] | synapseAddresses[0] | 0x1c << WEIGHT_INTEGER_POS | 0x2d8,
+		pktTypes[0] | layerAddresses[1] | neuronAddresses[2] | synapseAddresses[0] | 0x1c << WEIGHT_INTEGER_POS | 0x108,
+		pktTypes[0] | layerAddresses[1] | neuronAddresses[3] | synapseAddresses[0] | 0x3 << WEIGHT_INTEGER_POS | 0xf8,
+		pktTypes[0] | layerAddresses[1] | neuronAddresses[4] | synapseAddresses[0] | 0x14 << WEIGHT_INTEGER_POS | 0x1f0,
 
 		// Weights
 		pktTypes[0] | layerAddresses[1] | neuronAddresses[0] | synapseAddresses[1] | 0x6 << WEIGHT_INTEGER_POS | 0x18,
@@ -127,50 +129,47 @@ int main()
 
 	u32 stimuli[NUM_STIMULI][NUM_INPUTS] = {
 		{
-			pktTypes[1] | stimulusAddresses[0] | 0x1 << WEIGHT_INTEGER_POS | 0x0,
-			pktTypes[1] | stimulusAddresses[1] | 0x0 << WEIGHT_INTEGER_POS | 0x0,
-			pktTypes[1] | stimulusAddresses[2] | 0x0 << WEIGHT_INTEGER_POS | 0x0
+			pktTypes[1] | stimulusAddresses[0] | 0x1 << STIMULUS_INTEGER_POS,
+			pktTypes[1] | stimulusAddresses[1] | 0x0 << STIMULUS_INTEGER_POS,
+			pktTypes[1] | stimulusAddresses[2] | 0x0 << STIMULUS_INTEGER_POS
 		},
 		{
-			pktTypes[1] | stimulusAddresses[0] | 0x0 << WEIGHT_INTEGER_POS | 0x0,
-			pktTypes[1] | stimulusAddresses[1] | 0x1 << WEIGHT_INTEGER_POS | 0x0,
-			pktTypes[1] | stimulusAddresses[2] | 0x0 << WEIGHT_INTEGER_POS | 0x0
+			pktTypes[1] | stimulusAddresses[0] | 0x0 << STIMULUS_INTEGER_POS,
+			pktTypes[1] | stimulusAddresses[1] | 0x1 << STIMULUS_INTEGER_POS,
+			pktTypes[1] | stimulusAddresses[2] | 0x0 << STIMULUS_INTEGER_POS
 		},
 		{
-			pktTypes[1] | stimulusAddresses[0] | 0x1 << WEIGHT_INTEGER_POS | 0x0,
-			pktTypes[1] | stimulusAddresses[1] | 0x1 << WEIGHT_INTEGER_POS | 0x0,
-			pktTypes[1] | stimulusAddresses[2] | 0x0 << WEIGHT_INTEGER_POS | 0x0
+			pktTypes[1] | stimulusAddresses[0] | 0x1 << STIMULUS_INTEGER_POS,
+			pktTypes[1] | stimulusAddresses[1] | 0x1 << STIMULUS_INTEGER_POS,
+			pktTypes[1] | stimulusAddresses[2] | 0x0 << STIMULUS_INTEGER_POS
 		},
 		{
-			pktTypes[1] | stimulusAddresses[0] | 0x0 << WEIGHT_INTEGER_POS | 0x0,
-			pktTypes[1] | stimulusAddresses[1] | 0x0 << WEIGHT_INTEGER_POS | 0x0,
-			pktTypes[1] | stimulusAddresses[2] | 0x1 << WEIGHT_INTEGER_POS | 0x0
+			pktTypes[1] | stimulusAddresses[0] | 0x0 << STIMULUS_INTEGER_POS,
+			pktTypes[1] | stimulusAddresses[1] | 0x0 << STIMULUS_INTEGER_POS,
+			pktTypes[1] | stimulusAddresses[2] | 0x1 << STIMULUS_INTEGER_POS
 		},
 		{
-			pktTypes[1] | stimulusAddresses[0] | 0x1 << WEIGHT_INTEGER_POS | 0x0,
-			pktTypes[1] | stimulusAddresses[1] | 0x0 << WEIGHT_INTEGER_POS | 0x0,
-			pktTypes[1] | stimulusAddresses[2] | 0x1 << WEIGHT_INTEGER_POS | 0x0
+			pktTypes[1] | stimulusAddresses[0] | 0x1 << STIMULUS_INTEGER_POS,
+			pktTypes[1] | stimulusAddresses[1] | 0x0 << STIMULUS_INTEGER_POS,
+			pktTypes[1] | stimulusAddresses[2] | 0x1 << STIMULUS_INTEGER_POS
 		},
 		{
-			pktTypes[1] | stimulusAddresses[0] | 0x0 << WEIGHT_INTEGER_POS | 0x0,
-			pktTypes[1] | stimulusAddresses[1] | 0x1 << WEIGHT_INTEGER_POS | 0x0,
-			pktTypes[1] | stimulusAddresses[2] | 0x1 << WEIGHT_INTEGER_POS | 0x0
+			pktTypes[1] | stimulusAddresses[0] | 0x0 << STIMULUS_INTEGER_POS,
+			pktTypes[1] | stimulusAddresses[1] | 0x1 << STIMULUS_INTEGER_POS,
+			pktTypes[1] | stimulusAddresses[2] | 0x1 << STIMULUS_INTEGER_POS
 		},
 		{
-			pktTypes[1] | stimulusAddresses[0] | 0x1 << WEIGHT_INTEGER_POS | 0x0,
-			pktTypes[1] | stimulusAddresses[1] | 0x1 << WEIGHT_INTEGER_POS | 0x0,
-			pktTypes[1] | stimulusAddresses[2] | 0x1 << WEIGHT_INTEGER_POS | 0x0
+			pktTypes[1] | stimulusAddresses[0] | 0x1 << STIMULUS_INTEGER_POS,
+			pktTypes[1] | stimulusAddresses[1] | 0x1 << STIMULUS_INTEGER_POS,
+			pktTypes[1] | stimulusAddresses[2] | 0x1 << STIMULUS_INTEGER_POS
 		}
 	};
-
-
 
     // Reset things (REMOVE WHEN THE PROGRAM IS STABLE)
     Xil_Out32(CTRL_IN_REG, CTRL_IN_RST_SYN_OUTS_READY);
     Xil_Out32(CTRL_IN_REG, CTRL_IN_RST_PKT_RCVD);
 
-
-	u32 i, j;
+	u32 i, j, k;
 
 	// Set weights
 	for (i = 0; i < NUM_WEIGHTS; i++) {
@@ -181,8 +180,8 @@ int main()
 	    Xil_Out32(CTRL_IN_REG, CTRL_IN_RST_PKT_RCVD); // Reset the PKT_RCVD signal
 	}
 
-	// Set stimuli
 	for (i = 0; i < NUM_STIMULI; i++) {
+		// Set stimuli
 		for (j = 0; j < NUM_INPUTS; j++) {
 			Xil_Out32(PKT_IN_REG, stimuli[i][j]);
 			Xil_Out32(CTRL_IN_REG, CTRL_IN_PKT_IN_VALID);
@@ -190,25 +189,26 @@ int main()
 			while((Xil_In32(CTRL_OUT_REG) & CTRL_OUT_PKT_RCVD) != CTRL_OUT_PKT_RCVD) {}
 			Xil_Out32(CTRL_IN_REG, CTRL_IN_RST_PKT_RCVD);
 		}
-	}
 
+		// Wait until the network has finished processing
+		while ((Xil_In32(CTRL_OUT_REG) & CTRL_OUT_SYN_OUTS_READY) != CTRL_OUT_SYN_OUTS_READY) { }
+		Xil_Out32(CTRL_IN_REG, CTRL_IN_RST_SYN_OUTS_READY); // Reset the SYN_OUTS_READY signal
 
-    // Wait until the network has finished processing
-	while ((Xil_In32(CTRL_OUT_REG) & CTRL_OUT_SYN_OUTS_READY) != CTRL_OUT_SYN_OUTS_READY) { }
-    Xil_Out32(CTRL_IN_REG, CTRL_IN_RST_SYN_OUTS_READY); // Reset the SYN_OUTS_READY signal
-
-
-    // Retrieve the output values
-	Xil_Out32(CTRL_IN_REG, CTRL_IN_NXT_SYN_OUT);
-	Xil_Out32(CTRL_IN_REG, 0x0);
-
-	for (i = 0; i < NEURONS_PER_LAYER; i++) {
+		// Retrieve the output values
 		Xil_Out32(CTRL_IN_REG, CTRL_IN_NXT_SYN_OUT);
 		Xil_Out32(CTRL_IN_REG, 0x0);
-		u32 result = Xil_In32(SYN_OUTS_REG);
-		xil_printf("SYN_OUTS_REG %D: %X \r\n", i, result);
-	}
 
+		xil_printf("Stimulus %d \n", i);
+
+		for (k = 0; k < NEURONS_PER_LAYER; k++) {
+			Xil_Out32(CTRL_IN_REG, CTRL_IN_NXT_SYN_OUT);
+			Xil_Out32(CTRL_IN_REG, 0x0);
+			u32 result = Xil_In32(SYN_OUTS_REG);
+			xil_printf("SYN_OUTS_REG %D: %X \n", k, result);
+		}
+
+		xil_printf("\n");
+	}
 
     return 0;
 }
