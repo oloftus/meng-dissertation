@@ -6,6 +6,8 @@ use warnings;
 my $INT_FP_WIDTH = 5;
 my $FRACT_FP_WIDTH = 10;
 my $FORMAT = 'x'; # b/x
+my $PAD_HIGH = 0;
+my $PAD_LOW = 0;
 
 open my $fh, "<", "weights.txt" or die "Couldn't open file";
 
@@ -60,11 +62,13 @@ while (<$fh>) {
   my $num_dec = bin2dec($num_str) + 1;
   $num_dec = sprintf("%0@{[1 + $INT_FP_WIDTH + $FRACT_FP_WIDTH]}b", $num_dec);
   $int_str = substr($num_dec, 0, length($int_str));
-  $frac_str = substr($num_dec, length($int_str), length($frac_str ));
+  $frac_str = substr($num_dec, length($int_str), length($frac_str));
   
   if ($FORMAT eq 'x') {
-    print sprintf("0x%x", bin2dec($int_str)), ".";
-    print sprintf("0x%x", bin2dec($frac_str)), "\n";
+    my $low = do {my $x=""; for (1..$PAD_LOW) {$x.="0"}; $x};
+    my $high= do {my $x=""; for (1..$PAD_HIGH) {$x.="0"}; $x};
+    print sprintf("0x%x", bin2dec($high.$int_str)), ".";
+    print sprintf("0x%x", bin2dec($frac_str.$low)), "\n";
   }
   else {
     print $int_str, ".", $frac_str, "\n";
