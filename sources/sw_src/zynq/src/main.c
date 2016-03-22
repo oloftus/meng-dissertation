@@ -169,7 +169,7 @@ int main()
     Xil_Out32(CTRL_IN_REG, CTRL_IN_RST_SYN_OUTS_READY);
     Xil_Out32(CTRL_IN_REG, CTRL_IN_RST_PKT_RCVD);
 
-	u32 i, j, k;
+	u32 i, j;
 
 	// Set weights
 	for (i = 0; i < NUM_WEIGHTS; i++) {
@@ -198,13 +198,11 @@ int main()
 		Xil_Out32(CTRL_IN_REG, CTRL_IN_NXT_SYN_OUT);
 		Xil_Out32(CTRL_IN_REG, 0x0);
 
-		xil_printf("Stimulus %d \n", i);
-
-		for (k = 0; k < NEURONS_PER_LAYER; k++) {
+		for (j = 0; j < NEURONS_PER_LAYER; j++) {
 			Xil_Out32(CTRL_IN_REG, CTRL_IN_NXT_SYN_OUT);
 			Xil_Out32(CTRL_IN_REG, 0x0);
 			u32 result = Xil_In32(SYN_OUTS_REG);
-			xil_printf("SYN_OUTS_REG %D: %X \n", k, result);
+			xil_printf("Stimulus %d, Output %D: 0x%x \n", i, j, result);
 		}
 
 		xil_printf("\n");
