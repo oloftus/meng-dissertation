@@ -34,10 +34,6 @@ our $pktWeightTypeAddrWidth;
 our $largestPacketWidth;
 our $transferWidth;
 
-if (not $HAS_SWRN) {
-  require "weights.pl";
-}
-
 open my $fh, ">", "create_network.tcl";
 
 # Create static ports

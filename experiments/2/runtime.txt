@@ -1,0 +1,1 @@
+Synthesis + Implementation + Bitstream generation: 30 minutes
