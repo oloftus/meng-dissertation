@@ -1,6 +1,6 @@
 # Layer 1
-# Bias
-2048
+# Bias (bias 0 is approximated from 2048 to 0)
+0
 2779
 3977
 3683
