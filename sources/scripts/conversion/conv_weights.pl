@@ -5,7 +5,7 @@ use warnings;
 
 my $INT_FP_WIDTH = 5;
 my $FRACT_FP_WIDTH = 10;
-my $FORMAT = 'x'; # b/x
+my $FORMAT = 'd'; # b/x/d
 my $PAD_HIGH = 0;
 my $PAD_LOW = 0;
 
@@ -69,6 +69,11 @@ while (<$fh>) {
     my $high= do {my $x=""; for (1..$PAD_HIGH) {$x.="0"}; $x};
     print sprintf("0x%x", bin2dec($high.$int_str)), ".";
     print sprintf("0x%x", bin2dec($frac_str.$low)), "\n";
+  }
+  elsif ($FORMAT eq 'd') {
+    my $low = do {my $x=""; for (1..$PAD_LOW) {$x.="0"}; $x};
+    my $high= do {my $x=""; for (1..$PAD_HIGH) {$x.="0"}; $x};
+    print sprintf("%d", bin2dec($high.$int_str.$frac_str.$low)), "\n";
   }
   else {
     print $int_str, ".", $frac_str, "\n";

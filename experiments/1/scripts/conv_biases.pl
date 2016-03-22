@@ -3,13 +3,13 @@
 use strict;
 use warnings;
 
-my $INT_FP_WIDTH = 5;
-my $FRACT_FP_WIDTH = 10;
+my $INT_FP_WIDTH = 4;
+my $FRACT_FP_WIDTH = 7;
 my $FORMAT = 'x'; # b/x
-my $PAD_HIGH = 0;
-my $PAD_LOW = 0;
+my $PAD_HIGH = 1;
+my $PAD_LOW = 3;
 
-open my $fh, "<", "weights.txt" or die "Couldn't open file";
+open my $fh, "<", "biases.txt" or die "Couldn't open file";
 
 sub bin2dec {
   return unpack("N", pack("B32", substr("0" x 32 . shift, -32)));
