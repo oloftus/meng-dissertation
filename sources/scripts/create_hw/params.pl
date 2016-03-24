@@ -1,6 +1,7 @@
 use List::Util qw[max];
 
-$HAS_SWRN = 0;
+$HAS_SWRN = 0; # Create the SWRN?
+$USE_MULTS = 1; # LUTs or MULTs for multipliers
 
 $NUM_LAYERS = 2;
 $NEURONS_PER_LAYER = 5;

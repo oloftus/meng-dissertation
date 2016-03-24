@@ -20,6 +20,7 @@ our $PKT_SYNAPSE_ADDR_WIDTH;
 our $STIMULUS_TYPE;
 our $WEIGHT_TYPE;
 our $HAS_SWRN;
+our $USE_MULTS;
 our $WEIGHTS;
 
 our $valueWidth;
@@ -164,7 +165,7 @@ print $fh <<CMD;
 
 set_property -dict [list CONFIG.size {${transferWidth}}] [get_bd_cells Synapse_${id}]
 set_property -dict [list CONFIG.DIN_WIDTH {@{[$transferWidth + $weightWidth]}} CONFIG.DIN_FROM {@{[$WEIGHT_FRACTION_PRECISION + $valueWidth - 1]}} CONFIG.DIN_TO {${WEIGHT_FRACTION_PRECISION}}] [get_bd_cells MultiplierSlicer_${id}]
-set_property -dict [list CONFIG.PortAWidth.VALUE_SRC USER CONFIG.PortBWidth.VALUE_SRC USER CONFIG.PortAWidth {${transferWidth}} CONFIG.PortBWidth {${weightWidth}} CONFIG.PortAType.VALUE_SRC USER CONFIG.PortBType.VALUE_SRC USER CONFIG.PortAType {Unsigned} CONFIG.PortBType {Signed} CONFIG.ClockEnable {true} CONFIG.Use_Custom_Output_Width {true} CONFIG.OutputWidthHigh {@{[$transferWidth + $weightWidth - 1]}}] [get_bd_cells Multiplier_${id}]
+set_property -dict [list CONFIG.Multiplier_Construction {@{[$USE_MULTS ? "Use_Mults" : "Use_LUTs"]}} CONFIG.PortAWidth.VALUE_SRC USER CONFIG.PortBWidth.VALUE_SRC USER CONFIG.PortAWidth {${transferWidth}} CONFIG.PortBWidth {${weightWidth}} CONFIG.PortAType.VALUE_SRC USER CONFIG.PortBType.VALUE_SRC USER CONFIG.PortAType {Unsigned} CONFIG.PortBType {Signed} CONFIG.ClockEnable {true} CONFIG.Use_Custom_Output_Width {true} CONFIG.OutputWidthHigh {@{[$transferWidth + $weightWidth - 1]}}] [get_bd_cells Multiplier_${id}]
 
 CMD
 }

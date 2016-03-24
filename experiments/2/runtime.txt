@@ -1,6 +1,0 @@
-Synthesis + Implementation + Bitstream generation
-ANN System: 30 minutes
-
-Synthesis + Implementation
-Hidden neuron: 21 minutes
-Network: 22 minutes
