@@ -24,8 +24,8 @@ use IEEE.NUMERIC_STD.ALL;
 entity NeuronTB is
 end NeuronTB;
 
-    component Neuron is
 architecture Behavioral of NeuronTB is
+    component Neuron is
         port (
             CLK : in STD_LOGIC;
             RST : in STD_LOGIC;
