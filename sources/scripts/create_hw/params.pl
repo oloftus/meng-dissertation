@@ -1,7 +1,8 @@
 use List::Util qw[max];
 
-$HAS_SWRN = 0; # Create the SWRN?
+$HAS_SWRN = 1; # Create the SWRN?
 $USE_MULTS = 1; # LUTs or MULTs for multipliers
+$CCB = 1;
 
 $NUM_LAYERS = 2;
 $NEURONS_PER_LAYER = 5;
@@ -22,9 +23,15 @@ $WEIGHT_TYPE = 0;
 
 $AXI_BUS_WIDTH = 32;
 
+$transferWidth = 1 + $VAL_FRACTION_PRECISION;
+
+if ($CCB) {
+  $transferWidth = 1;
+  ($WEIGHT_INTEGER_PRECISION, $WEIGHT_FRACTION_PRECISION) = ($VAL_INTEGER_PRECISION, $VAL_FRACTION_PRECISION);
+}
+
 $weightWidth = 1 + $WEIGHT_INTEGER_PRECISION + $WEIGHT_FRACTION_PRECISION; # Sign bit
 $valueWidth = 1 + $VAL_INTEGER_PRECISION + $VAL_FRACTION_PRECISION;
-$transferWidth = 1 + $VAL_FRACTION_PRECISION;
 
 $neuronOutPacketWidth = $PKT_SYNAPSE_ADDR_WIDTH + $weightWidth;
 $layerOutPacketWidth = $PKT_NEURON_ADDR_WIDTH + $neuronOutPacketWidth;
