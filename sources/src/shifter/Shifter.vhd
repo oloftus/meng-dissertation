@@ -23,20 +23,20 @@ architecture Behavioral of Shifter is
     signal sigDout2 : STD_LOGIC_VECTOR (valueWidth - 1 downto 0);
     signal sigDin : STD_LOGIC_VECTOR (valueWidth - 1 downto 0);
     signal sigShiftDirection, sigShiftSign, sigDinSign : STD_LOGIC; -- sign = 1 means negative
-    signal shiftVal : UNSIGNED (shiftWidth - 2 downto 0);
+    signal shiftVal : UNSIGNED (shiftWidth - 3 downto 0);
 begin
-    sigShiftSign <= '1' when SHIFT(shiftWidth) = '1' else '0';
-    sigShiftDirection <= SHIFT(shiftWidth - 1); -- 1 means shift right
+    sigShiftSign <= SHIFT(shiftWidth - 1);
+    sigShiftDirection <= SHIFT(shiftWidth - 2); -- 1 means shift right
+    shiftVal <= UNSIGNED(SHIFT(shiftWidth - 3 downto 0));
     sigDinSign <= '1' when DIN(transferWidth - 1) = '1' else '0';
-    shiftVal <= UNSIGNED(SHIFT(shiftWidth - 2 downto 0));
     
     sigDin <= zeros & DIN;
     sigDout1 <= Shift_Left(UNSIGNED(sigDin), To_Integer(shiftVal)) when sigShiftDirection = '0'
         else Shift_Right(UNSIGNED(sigDin), To_Integer(shiftVal));
     
     process (sigDout1) is
-        constant maxShift : UNSIGNED (shiftWidth - 2 downto 0) := (others => '1');
-        constant padding : INTEGER := valueWidth - transferWidth;
+        constant maxShift : UNSIGNED (shiftWidth - 3 downto 0) := (others => '1');
+        constant padding : INTEGER := valueWidth - transferWidth - 1;
         variable mask : UNSIGNED (valueWidth - 1 downto 0) := (others => '1');
     begin
         -- If you're shifting a -ve number to the right, then left-pad with 1's not 0's
