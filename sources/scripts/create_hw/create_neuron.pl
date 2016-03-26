@@ -23,6 +23,7 @@ our $HAS_SWRN;
 our $USE_MULTS;
 our $WEIGHTS;
 our $CCB;
+our $PO2;
 
 our $valueWidth;
 our $weightWidth;
@@ -140,6 +141,13 @@ create_bd_cell -type ip -vlnv oloftus.com:prif:BlankMux:1.0 WeightMux_${id}
 
 CMD
 }
+elsif ($PO2) {
+print $fh <<CMD;
+
+create_bd_cell -type ip -vlnv oloftus.com:prif:Shifter:1.0 Shifter_${id}
+
+CMD
+}
 else {
 print $fh <<CMD;
 
@@ -213,6 +221,13 @@ if ($CCB) {
 print $fh <<CMD;
 
 set_property -dict [list CONFIG.width {${valueWidth}}] [get_bd_cells WeightMux_${id}]
+
+CMD
+}
+elsif ($PO2) {
+print $fh <<CMD;
+
+set_property -dict [list CONFIG.transferWidth {${transferWidth}} CONFIG.valueWidth {${valueWidth}} CONFIG.shiftWidth {${weightWidth}}] [get_bd_cells Shifter_${id}]
 
 CMD
 }
@@ -305,6 +320,13 @@ connect_bd_net [get_bd_pins WeightRegister_${id}/VAL_OUT] [get_bd_pins WeightMux
 
 CMD
 }
+elsif ($PO2) {
+print $fh <<CMD;
+
+connect_bd_net [get_bd_pins WeightRegister_${id}/VAL_OUT] [get_bd_pins Shifter_${id}/SHIFT]
+
+CMD
+}
 else {
 print $fh <<CMD;
 
@@ -331,6 +353,13 @@ connect_bd_net [get_bd_ports SYN_${id}_WEIGHT] [get_bd_pins WeightMux_${id}/DIN]
 
 CMD
 }
+elsif ($PO2) {
+print $fh <<CMD;
+
+connect_bd_net [get_bd_ports SYN_${id}_WEIGHT] [get_bd_pins Shifter_${id}/SHIFT]
+
+CMD
+}
 else {
 print $fh <<CMD;
 
@@ -344,6 +373,14 @@ print $fh <<CMD;
 
 connect_bd_net [get_bd_pins Synapse_${id}/SYN_OUT] [get_bd_pins WeightMux_${id}/SEL]
 connect_bd_net [get_bd_pins WeightMux_${id}/DOUT] [get_bd_pins SumJunctionConcat/In@{[$id + 1]}]
+
+CMD
+}
+elsif ($PO2) {
+print $fh <<CMD;
+
+connect_bd_net [get_bd_pins Synapse_${id}/SYN_OUT] [get_bd_pins Shifter_${id}/DIN]
+connect_bd_net [get_bd_pins Shifter_${id}/DOUT] [get_bd_pins SumJunctionConcat/In@{[$id + 1]}]
 
 CMD
 }
