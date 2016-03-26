@@ -9,7 +9,7 @@ entity Shifter is
         valueWidth : INTEGER
     );
     port (
-        SHIFT : in STD_LOGIC_VECTOR (shiftWidth downto 0);
+        SHIFT : in STD_LOGIC_VECTOR (valueWidth - 1 downto 0); -- Only the first 0..shiftWidth bits are used 
         DIN : in STD_LOGIC_VECTOR (transferWidth - 1 downto 0);
         DOUT : out STD_LOGIC_VECTOR (valueWidth - 1 downto 0)
     );
