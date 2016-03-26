@@ -50,7 +50,7 @@ begin
         sigShift <= "101"; -- -3
         sigDin <= "11000";
         wait for 10ns;
-        assert sigDout = "000000011" report "Test failed: 2";
+        assert sigDout = "111100011" report "Test failed: 2";
         
         wait;    
     end process;
