@@ -27,6 +27,7 @@ our $PO2;
 
 our $valueWidth;
 our $weightWidth;
+our $shiftWidth;
 our $neuronOutPacketWidth;
 our $layerOutPacketWidth;
 our $transferWidth;
@@ -227,7 +228,7 @@ CMD
 elsif ($PO2) {
 print $fh <<CMD;
 
-set_property -dict [list CONFIG.transferWidth {${transferWidth}} CONFIG.valueWidth {${valueWidth}} CONFIG.shiftWidth {${weightWidth}}] [get_bd_cells Shifter_${id}]
+set_property -dict [list CONFIG.weightWidth {${weightWidth}} CONFIG.transferWidth {${transferWidth}} CONFIG.valueWidth {${valueWidth}} CONFIG.shiftWidth {${shiftWidth}}] [get_bd_cells Shifter_${id}]
 
 CMD
 }
