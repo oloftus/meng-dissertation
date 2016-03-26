@@ -17,13 +17,13 @@ architecture Behavioral of ShifterTB is
             valueWidth : INTEGER
         );
         port (
-            SHIFT : in STD_LOGIC_VECTOR (shiftWidth - 1 downto 0);
+            SHIFT : in STD_LOGIC_VECTOR (shiftWidth downto 0);
             DIN : in STD_LOGIC_VECTOR (transferWidth - 1 downto 0);
             DOUT : out STD_LOGIC_VECTOR (valueWidth - 1 downto 0)
         );
     end component;
     
-    signal sigShift : STD_LOGIC_VECTOR (shiftWidth - 1 downto 0);
+    signal sigShift : STD_LOGIC_VECTOR (shiftWidth downto 0);
     signal sigDin : STD_LOGIC_VECTOR (transferWidth - 1 downto 0);
     signal sigDout : STD_LOGIC_VECTOR (valueWidth - 1 downto 0);
 begin
@@ -40,18 +40,32 @@ begin
         );
 
     tb: process begin
-        sigShift <= "011"; -- 3
-        sigDin <= "00011";
+        sigShift <= "0011"; -- << 3 (* 8)
+        sigDin <= "00011"; -- 3
         wait for 10ns;
-        assert sigDout = "000011000" report "Test failed: 1";
+        assert sigDout = "000011000" report "Test failed: 1"; -- 24
+
+        wait for 190ns;
+    
+        sigShift <= "1011"; -- << 3 * -1 (* -8)
+        sigDin <= "00011"; -- 3
+        wait for 10ns;
+        assert sigDout = "111101000" report "Test failed: 2"; -- -24
+        
+        wait for 190ns;
+        
+        sigShift <= "0111"; -- >> 3 (* 1/8)
+        sigDin <= "11000"; -- -8
+        wait for 10ns;
+        assert sigDout = "111111111" report "Test failed: 3"; -- -1
 
         wait for 190ns;
         
-        sigShift <= "101"; -- -3
-        sigDin <= "11000";
+        sigShift <= "1111"; -- >> 3 * -1 (* -1/8)
+        sigDin <= "11000"; -- -8
         wait for 10ns;
-        assert sigDout = "111100011" report "Test failed: 2";
-        
+        assert sigDout = "000000001" report "Test failed: 4"; -- 1
+
         wait;    
     end process;
 end Behavioral;
