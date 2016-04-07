@@ -7,7 +7,7 @@
 #include "addresses.h"
 #include "stimuli.h"
 
-#if CCB == 0 & PO2 == 0
+#if CCB == 0 && PO2 == 0
 #include "weights.h"
 #endif
 

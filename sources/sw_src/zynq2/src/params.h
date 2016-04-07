@@ -4,7 +4,7 @@
 /***** Editable parameters *****/
 #define HAS_SWRN 1
 #define CCB 0
-#define PO2 1
+#define PO2 0
 
 #define NUM_LAYERS 2
 #define NEURONS_PER_LAYER 5

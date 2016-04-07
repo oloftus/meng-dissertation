@@ -5,4 +5,5 @@ top_prj
 xsdk_workspace/
 sources/designs/
 bd_archive/
+sources/sw_src/zynq2/Debug/
 *.lnk
