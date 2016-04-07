@@ -1,7 +1,7 @@
 use List::Util qw[max];
 
 $HAS_SWRN = 1; # Create the SWRN?
-$USE_MULTS = 1; # LUTs or MULTs for multipliers
+$USE_MULTS = 0; # LUTs or MULTs for multipliers
 $CCB = 0; # Use CCB's MUX with rounding?
 $PO2 = 0; # Use powers of 2 weights and shifting?
 
@@ -15,8 +15,8 @@ $NUM_INPUTS = 3;
 
 $VAL_INTEGER_PRECISION = 4;
 $VAL_FRACTION_PRECISION = 5;
-$WEIGHT_INTEGER_PRECISION = 4;
-$WEIGHT_FRACTION_PRECISION = 7;
+$WEIGHT_INTEGER_PRECISION = 5;
+$WEIGHT_FRACTION_PRECISION = 10;
 my $SHIFT_WIDTH = 3; # 4 = 11 len(101) = 2 # 7 = 111 len(111) = 3 max(3,2)=3 PO2 ONLY
 
 $PKT_TYPE_ADDR_WIDTH = 1;

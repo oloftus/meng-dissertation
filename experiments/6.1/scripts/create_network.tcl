@@ -108,16 +108,16 @@ create_bd_cell -type ip -vlnv oloftus.com:prif:AddressableRegister:1.0 StimulusR
 create_bd_cell -type ip -vlnv oloftus.com:prif:AddressableRegister:1.0 StimulusRegister_2
 
 
-set_property -dict [list CONFIG.packetOutWidth {20} CONFIG.packetInWidth {21}] [get_bd_cells TypeRouter_Weight]
+set_property -dict [list CONFIG.packetOutWidth {24} CONFIG.packetInWidth {25}] [get_bd_cells TypeRouter_Weight]
 set_property -dict [list CONFIG.CONST_WIDTH {1} CONFIG.CONST_VAL {0}] [get_bd_cells TypeRouter_Weight_Address]
 set_property -dict [list CONFIG.n {2}] [get_bd_cells PktRcvd_Layers]
 set_property -dict [list CONFIG.NUM_PORTS {2}] [get_bd_cells PktRcvdConcat_Layers]
 set_property -dict [list CONFIG.n {2}] [get_bd_cells PktRcvd]
 
 
-set_property -dict [list CONFIG.DIN_WIDTH {32} CONFIG.DIN_TO {0} CONFIG.DIN_FROM {20}] [get_bd_cells PacketInSlicer]
-set_property -dict [list CONFIG.packetOutWidth {8} CONFIG.packetInWidth {21}] [get_bd_cells TypeRouter_Stimulus]
-set_property -dict [list CONFIG.CONST_WIDTH {13} CONFIG.CONST_VAL {4096}] [get_bd_cells TypeRouter_Stimulus_Address]
+set_property -dict [list CONFIG.DIN_WIDTH {32} CONFIG.DIN_TO {0} CONFIG.DIN_FROM {24}] [get_bd_cells PacketInSlicer]
+set_property -dict [list CONFIG.packetOutWidth {8} CONFIG.packetInWidth {25}] [get_bd_cells TypeRouter_Stimulus]
+set_property -dict [list CONFIG.CONST_WIDTH {17} CONFIG.CONST_VAL {65536}] [get_bd_cells TypeRouter_Stimulus_Address]
 set_property -dict [list CONFIG.n {3}] [get_bd_cells PktRcvd_StimulusRegisters]
 set_property -dict [list CONFIG.NUM_PORTS {3}] [get_bd_cells PktRcvdConcat_StimulusRegisters]
 set_property -dict [list CONFIG.NUM_PORTS {5}] [get_bd_cells SynOutValidConcat]
@@ -125,7 +125,7 @@ set_property -dict [list CONFIG.NUM_PORTS {5} CONFIG.IN0_WIDTH {6} CONFIG.IN1_WI
 set_property -dict [list CONFIG.numInputs {5} CONFIG.dinWidth {6} CONFIG.doutWidth {32}] [get_bd_cells SynOutBuffer]
 
 
-set_property -dict [list CONFIG.packetOutWidth {18} CONFIG.packetInWidth {20}] [get_bd_cells LayerRouter_0]
+set_property -dict [list CONFIG.packetOutWidth {22} CONFIG.packetInWidth {24}] [get_bd_cells LayerRouter_0]
 set_property -dict [list CONFIG.CONST_WIDTH {2} CONFIG.CONST_VAL {0}] [get_bd_cells LayerRouter_0_Address]
 set_property -dict [list CONFIG.n {5}] [get_bd_cells PktRcvd_Layer_0]
 set_property -dict [list CONFIG.NUM_PORTS {5}] [get_bd_cells PktRcvdConcat_Layer_0]
@@ -146,7 +146,7 @@ set_property -dict [list CONFIG.CONST_WIDTH {3} CONFIG.CONST_VAL {3}] [get_bd_ce
 set_property -dict [list CONFIG.CONST_WIDTH {3} CONFIG.CONST_VAL {4}] [get_bd_cells Neuron_0_4_Address]
 
 
-set_property -dict [list CONFIG.packetOutWidth {18} CONFIG.packetInWidth {20}] [get_bd_cells LayerRouter_1]
+set_property -dict [list CONFIG.packetOutWidth {22} CONFIG.packetInWidth {24}] [get_bd_cells LayerRouter_1]
 set_property -dict [list CONFIG.CONST_WIDTH {2} CONFIG.CONST_VAL {1}] [get_bd_cells LayerRouter_1_Address]
 set_property -dict [list CONFIG.n {5}] [get_bd_cells PktRcvd_Layer_1]
 set_property -dict [list CONFIG.NUM_PORTS {5}] [get_bd_cells PktRcvdConcat_Layer_1]

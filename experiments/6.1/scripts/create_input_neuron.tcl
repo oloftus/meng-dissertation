@@ -1,5 +1,5 @@
 
-create_bd_port -dir I -from 17 -to 0 -type data PKT_IN
+create_bd_port -dir I -from 21 -to 0 -type data PKT_IN
 create_bd_port -dir I PKT_IN_VALID
 create_bd_port -dir I -from 2 -to 0 -type data NEURON_ADDR
 create_bd_port -dir O DONE_OUT
@@ -70,10 +70,10 @@ create_bd_cell -type ip -vlnv xilinx.com:ip:mult_gen:12.0 Multiplier_2
 create_bd_cell -type ip -vlnv oloftus.com:prif:Synapse:1.0 Synapse_2
 
 
-set_property -dict [list CONFIG.packetInWidth {18} CONFIG.packetOutWidth {15}] [get_bd_cells NeuronRouter]
+set_property -dict [list CONFIG.packetInWidth {22} CONFIG.packetOutWidth {19}] [get_bd_cells NeuronRouter]
 set_property -dict [list CONFIG.n {4}] [get_bd_cells DoneOut]
 set_property -dict [list CONFIG.NUM_PORTS {4}] [get_bd_cells DoneOutConcat]
-set_property -dict [list CONFIG.address {0} CONFIG.addressWidth {3} CONFIG.dataWidth {12} CONFIG.padHighWidth {0} CONFIG.padLowWidth {-2}] [get_bd_cells BiasRegister]
+set_property -dict [list CONFIG.address {0} CONFIG.addressWidth {3} CONFIG.dataWidth {16} CONFIG.padHighWidth {-1} CONFIG.padLowWidth {-5}] [get_bd_cells BiasRegister]
 
 
 set_property -dict [list CONFIG.DIN_WIDTH {10} CONFIG.DIN_FROM {5} CONFIG.DIN_TO {0}] [get_bd_cells PlanSlicer]
@@ -87,31 +87,31 @@ set_property -dict [list CONFIG.NUM_PORTS {4} CONFIG.IN0_WIDTH {10} CONFIG.IN1_W
 set_property -dict [list CONFIG.integerPrecision {4} CONFIG.fractionPrecision {5}] [get_bd_cells Plan]
 
 
-set_property -dict [list CONFIG.address {1} CONFIG.addressWidth {3} CONFIG.dataWidth {12}] [get_bd_cells WeightRegister_0]
+set_property -dict [list CONFIG.address {1} CONFIG.addressWidth {3} CONFIG.dataWidth {16}] [get_bd_cells WeightRegister_0]
 
 
-set_property -dict [list CONFIG.DIN_WIDTH {18} CONFIG.DIN_FROM {16} CONFIG.DIN_TO {7}] [get_bd_cells MultiplierSlicer_0]
-set_property -dict [list CONFIG.Multiplier_Construction {Use_Mults} CONFIG.PortAWidth.VALUE_SRC USER CONFIG.PortBWidth.VALUE_SRC USER CONFIG.PortAWidth {6} CONFIG.PortBWidth {12} CONFIG.PortAType.VALUE_SRC USER CONFIG.PortBType.VALUE_SRC USER CONFIG.PortAType {Unsigned} CONFIG.PortBType {Signed} CONFIG.ClockEnable {true} CONFIG.Use_Custom_Output_Width {true} CONFIG.OutputWidthHigh {17}] [get_bd_cells Multiplier_0]
+set_property -dict [list CONFIG.DIN_WIDTH {22} CONFIG.DIN_FROM {19} CONFIG.DIN_TO {10}] [get_bd_cells MultiplierSlicer_0]
+set_property -dict [list CONFIG.Multiplier_Construction {Use_LUTs} CONFIG.PortAWidth.VALUE_SRC USER CONFIG.PortBWidth.VALUE_SRC USER CONFIG.PortAWidth {6} CONFIG.PortBWidth {16} CONFIG.PortAType.VALUE_SRC USER CONFIG.PortBType.VALUE_SRC USER CONFIG.PortAType {Unsigned} CONFIG.PortBType {Signed} CONFIG.ClockEnable {true} CONFIG.Use_Custom_Output_Width {true} CONFIG.OutputWidthHigh {21}] [get_bd_cells Multiplier_0]
 
 
 set_property -dict [list CONFIG.size {6}] [get_bd_cells Synapse_0]
 
 
-set_property -dict [list CONFIG.address {2} CONFIG.addressWidth {3} CONFIG.dataWidth {12}] [get_bd_cells WeightRegister_1]
+set_property -dict [list CONFIG.address {2} CONFIG.addressWidth {3} CONFIG.dataWidth {16}] [get_bd_cells WeightRegister_1]
 
 
-set_property -dict [list CONFIG.DIN_WIDTH {18} CONFIG.DIN_FROM {16} CONFIG.DIN_TO {7}] [get_bd_cells MultiplierSlicer_1]
-set_property -dict [list CONFIG.Multiplier_Construction {Use_Mults} CONFIG.PortAWidth.VALUE_SRC USER CONFIG.PortBWidth.VALUE_SRC USER CONFIG.PortAWidth {6} CONFIG.PortBWidth {12} CONFIG.PortAType.VALUE_SRC USER CONFIG.PortBType.VALUE_SRC USER CONFIG.PortAType {Unsigned} CONFIG.PortBType {Signed} CONFIG.ClockEnable {true} CONFIG.Use_Custom_Output_Width {true} CONFIG.OutputWidthHigh {17}] [get_bd_cells Multiplier_1]
+set_property -dict [list CONFIG.DIN_WIDTH {22} CONFIG.DIN_FROM {19} CONFIG.DIN_TO {10}] [get_bd_cells MultiplierSlicer_1]
+set_property -dict [list CONFIG.Multiplier_Construction {Use_LUTs} CONFIG.PortAWidth.VALUE_SRC USER CONFIG.PortBWidth.VALUE_SRC USER CONFIG.PortAWidth {6} CONFIG.PortBWidth {16} CONFIG.PortAType.VALUE_SRC USER CONFIG.PortBType.VALUE_SRC USER CONFIG.PortAType {Unsigned} CONFIG.PortBType {Signed} CONFIG.ClockEnable {true} CONFIG.Use_Custom_Output_Width {true} CONFIG.OutputWidthHigh {21}] [get_bd_cells Multiplier_1]
 
 
 set_property -dict [list CONFIG.size {6}] [get_bd_cells Synapse_1]
 
 
-set_property -dict [list CONFIG.address {3} CONFIG.addressWidth {3} CONFIG.dataWidth {12}] [get_bd_cells WeightRegister_2]
+set_property -dict [list CONFIG.address {3} CONFIG.addressWidth {3} CONFIG.dataWidth {16}] [get_bd_cells WeightRegister_2]
 
 
-set_property -dict [list CONFIG.DIN_WIDTH {18} CONFIG.DIN_FROM {16} CONFIG.DIN_TO {7}] [get_bd_cells MultiplierSlicer_2]
-set_property -dict [list CONFIG.Multiplier_Construction {Use_Mults} CONFIG.PortAWidth.VALUE_SRC USER CONFIG.PortBWidth.VALUE_SRC USER CONFIG.PortAWidth {6} CONFIG.PortBWidth {12} CONFIG.PortAType.VALUE_SRC USER CONFIG.PortBType.VALUE_SRC USER CONFIG.PortAType {Unsigned} CONFIG.PortBType {Signed} CONFIG.ClockEnable {true} CONFIG.Use_Custom_Output_Width {true} CONFIG.OutputWidthHigh {17}] [get_bd_cells Multiplier_2]
+set_property -dict [list CONFIG.DIN_WIDTH {22} CONFIG.DIN_FROM {19} CONFIG.DIN_TO {10}] [get_bd_cells MultiplierSlicer_2]
+set_property -dict [list CONFIG.Multiplier_Construction {Use_LUTs} CONFIG.PortAWidth.VALUE_SRC USER CONFIG.PortBWidth.VALUE_SRC USER CONFIG.PortAWidth {6} CONFIG.PortBWidth {16} CONFIG.PortAType.VALUE_SRC USER CONFIG.PortBType.VALUE_SRC USER CONFIG.PortAType {Unsigned} CONFIG.PortBType {Signed} CONFIG.ClockEnable {true} CONFIG.Use_Custom_Output_Width {true} CONFIG.OutputWidthHigh {21}] [get_bd_cells Multiplier_2]
 
 
 set_property -dict [list CONFIG.size {6}] [get_bd_cells Synapse_2]
